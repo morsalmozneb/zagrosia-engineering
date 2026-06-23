@@ -79,21 +79,21 @@ export function HeroSection() {
             {/* 35 YEARS */}
             <span className="text-[#FCFCFC] text-[14px] font-light tracking-[0.22em]">35 YEARS</span>
 
-            {/* P.ENG rows */}
-            <div className="mt-[5px] space-y-[4px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            {/* P.ENG rows — no gap from 35 YEARS */}
+            <div className="mt-[2px] space-y-[3px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>P.ENG BC</p>
               <p>P.ENG ALBERTA</p>
               <p>P.ENG SASK</p>
             </div>
 
-            {/* M.Sc. rows */}
-            <div className="mt-[8px] space-y-[4px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            {/* M.Sc. rows — no gap from P.ENG */}
+            <div className="mt-[3px] space-y-[3px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>M.Sc. STRUCTURAL</p>
               <p>EGBC COMPLIANT</p>
             </div>
 
-            {/* Push description and buttons to bottom */}
-            <div className="mt-auto space-y-3 mb-5">
+            {/* Description — small fixed gap from credentials */}
+            <div className="mt-4 space-y-3">
               <p className="text-[#FCFCFC] text-[12px] font-mono leading-[1.75] tracking-[0.04em]">
                 Engineering Excellence · Intelligent Structural Design · Seismic Expertise · AI-Driven Innovation
               </p>
@@ -102,8 +102,8 @@ export function HeroSection() {
               </p>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex gap-3">
+            {/* CTA Buttons — pushed to bottom */}
+            <div className="mt-auto pt-4 flex gap-3">
               <a href="/projects" className="flex-1 bg-[#FCFCFC] text-[#2D2D2D] font-medium py-3 px-5 rounded-full text-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]">
                 View Projects
               </a>
