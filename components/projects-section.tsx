@@ -89,17 +89,20 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" className="relative overflow-hidden bg-[#132647] text-white lg:overflow-visible">
-      <Image
-        src="/images/projects-rectangle-55.png"
-        alt=""
-        fill
-        className="object-cover"
-        aria-hidden="true"
-      />
+      <div className="lg:block hidden">
+        <Image
+          src="/images/projects-rectangle-55.png"
+          alt=""
+          fill
+          className="object-cover"
+          aria-hidden="true"
+        />
+      </div>
 
       {/* ── MOBILE: building header + carousel ── */}
       <div className="lg:hidden">
-        <div className="relative h-[255px] w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden" style={{ height: "200px" }}>
+          {/* Building photo */}
           <Image
             src="/images/projects-building-top.png"
             alt="Projects architectural background"
@@ -107,44 +110,37 @@ export function ProjectsSection() {
             className="object-cover object-top"
             priority
           />
+          {/* Full gradient overlay — fades into section bg */}
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(180deg, rgba(13,44,96,0.18) 0%, rgba(19,38,71,0.52) 34%, rgba(19,38,71,0.84) 68%, rgba(19,38,71,0.98) 100%)",
+              background: "linear-gradient(180deg, rgba(19,38,71,0.49) 0%, rgba(19,38,71,1) 100%)",
             }}
           />
-          <div
-            className="absolute inset-x-0 bottom-0 h-[88px]"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(19,38,71,0) 0%, rgba(19,38,71,0.34) 34%, rgba(19,38,71,0.74) 68%, rgba(19,38,71,0.96) 100%)",
-            }}
-          />
-          <div className="absolute inset-x-0 top-0 h-[22px] bg-white" />
-          <div className="relative z-10 px-8 pb-6 pt-12">
-            <h2 className="zag-heading text-[23px] leading-none text-white">PROJECTS</h2>
-            <div className="relative mt-7 max-w-[292px]">
-              <p className="text-[11px] leading-[1.46] tracking-[0.18em] text-white/90">
-                Hover over any project for detailed
-                <br />
-                technical data, HUD overlay with
-                <br />
-                structural system, codes, loads and
-                <br />
-                materials.
-              </p>
-              <div className="absolute right-0 top-[28px] h-[14px] w-[165px] bg-black/35" />
-            </div>
+          {/* Text content */}
+          <div className="relative z-10 px-8 pt-12">
+            <h2 className="zag-heading leading-none text-white" style={{ fontSize: "20px" }}>PROJECTS</h2>
+            <p className="mt-5 leading-[1.56] tracking-[0.18em] text-white/90" style={{ fontSize: "12px" }}>
+              Hover over any project for detailed technical data, HUD overlay with structural system, codes, loads and materials.
+            </p>
           </div>
         </div>
 
-        <div className="relative -mt-[2px] pb-0 pt-1">
+        <div className="-mt-[2px] pb-0 pt-1">
+          {/* Top gradient */}
+          <div className="relative">
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[56px]"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(19,38,71,0.92) 0%, rgba(19,38,71,0.62) 52%, rgba(19,38,71,0) 100%)",
+              }}
+            />
+          {/* Bottom gradient — covers the clip line at the bottom of the embla container */}
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[56px]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[80px]"
             style={{
-              background:
-                "linear-gradient(180deg, rgba(19,38,71,0.92) 0%, rgba(19,38,71,0.62) 52%, rgba(19,38,71,0) 100%)",
+              background: "linear-gradient(180deg, rgba(19,38,71,0) 0%, rgba(19,38,71,1) 100%)",
             }}
           />
           <div className="overflow-hidden px-[2px]" ref={emblaRef}>
@@ -154,34 +150,39 @@ export function ProjectsSection() {
                 return (
                   <div
                     key={project.id}
-                    className={`relative min-w-0 flex-[0_0_74%] pl-[14px] transition-all duration-300 ease-out ${
+                    className={`relative min-w-0 flex-[0_0_269px] pl-[14px] transition-all duration-300 ease-out ${
                       isActive ? "z-20 pt-0" : "z-10 pt-4"
                     }`}
                   >
                     <article
-                      className={`overflow-hidden rounded-[6px] bg-[#fcfcfc] text-[#2d2d2d] transition-all duration-300 ease-out ${
+                      className={`overflow-hidden rounded-[20px] bg-[#fcfcfc] text-[#2d2d2d] transition-all duration-300 ease-out ${
                         isActive
                           ? "scale-100 shadow-[0_24px_44px_rgba(0,0,0,0.24)] opacity-100"
                           : "scale-[0.925] shadow-[0_12px_24px_rgba(0,0,0,0.12)] opacity-90"
                       }`}
+                      style={{ height: "457px" }}
                     >
-                      <div className="relative h-[254px] w-full">
+                      <div className="relative w-full" style={{ height: "205px" }}>
                         <Image src={project.image} alt={project.title.replace(/\n/g, " ")} fill className="object-cover" />
                       </div>
                       <div className="px-4 pb-4 pt-3">
-                        <h3 className="whitespace-pre-line text-[12px] leading-[1.25] tracking-[0.16em] text-[#3a3a3a]">{project.title}</h3>
-                        <p className="mt-3 max-w-[244px] text-[11px] leading-[1.42] tracking-[0.11em] text-[#5a5a5a]">{project.description}</p>
+                        <h3 className="whitespace-pre-line leading-[1.25] tracking-[0.16em] text-[#3a3a3a]" style={{ fontSize: "14px" }}>{project.title}</h3>
+                        <p className="mt-3 leading-[1.42] tracking-[0.11em] text-[#5a5a5a]" style={{ fontSize: "12px" }}>{project.description}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
                           {project.tags.map((tag) => (
-                            <span key={tag} className="rounded-full border border-[#aab4c2] px-[9px] py-[3px] text-[9px] leading-none tracking-[0.12em] text-[#6b7380]">{tag}</span>
+                            <span key={tag} className="rounded-full border border-[#aab4c2] px-[9px] py-[3px] leading-none tracking-[0.12em] text-[#6b7380]" style={{ fontSize: "8px" }}>{tag}</span>
                           ))}
                         </div>
-                        <div className="mt-4 flex items-center gap-1.5 text-[10px] tracking-[0.12em] text-[#6e7684]">
+                        <div className="mt-4 flex items-center gap-1.5 tracking-[0.12em] text-[#6e7684]" style={{ fontSize: "10px" }}>
                           <MapPin size={12} strokeWidth={1.8} />
                           <span>{project.location}</span>
                         </div>
-                        <div className="mt-5">
-                          <a href="/projects" className="zag-outline-button min-h-[46px] w-[138px] whitespace-nowrap border-[#4e5665] px-0 text-[10px] tracking-[0.16em] text-[#384150] transition-colors hover:bg-[#384150] hover:text-white">
+                        <div className="mt-4">
+                          <a
+                            href="/projects"
+                            className="inline-flex items-center justify-center rounded-full border border-[#4e5665] text-[#384150] tracking-[0.06em] transition-colors hover:bg-[#384150] hover:text-white"
+                            style={{ fontSize: "9.5px", width: "100px", height: "30px" }}
+                          >
                             View Project
                           </a>
                         </div>
@@ -192,6 +193,7 @@ export function ProjectsSection() {
               })}
             </div>
           </div>
+          </div>{/* end relative wrapper */}
 
           <div className="mt-11 flex justify-center gap-[8px]">
             {projects.map((_, index) => (
@@ -204,16 +206,12 @@ export function ProjectsSection() {
             ))}
           </div>
 
-          <div className="relative mt-8 h-[148px] w-full overflow-hidden">
-            <div className="pointer-events-none absolute inset-x-0 top-[-26px] z-10 h-[52px]" style={{ background: "linear-gradient(180deg, rgba(19,38,71,0) 0%, rgba(19,38,71,0.45) 36%, rgba(19,38,71,0.9) 68%, rgba(19,38,71,1) 100%)" }} />
-            <Image src="/images/projects-rectangle-54.png" alt="" fill className="object-cover" aria-hidden="true" />
-            <div className="absolute inset-x-0 top-0 h-[52px]" style={{ background: "linear-gradient(180deg, rgba(19,38,71,0.88) 0%, rgba(19,38,71,0.42) 52%, rgba(19,38,71,0) 100%)" }} />
-            <div className="absolute inset-x-0 top-9 flex justify-center">
-              <a href="/projects" className="zag-outline-button min-h-[50px] w-[170px] whitespace-nowrap border-white px-0 text-[10px] tracking-[0.2em] text-white transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white">
-                View All Projects
-              </a>
-            </div>
+          <div className="mt-8 flex justify-center pb-10">
+            <a href="/projects" className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]" style={{ fontSize: "9.5px", width: "142px", height: "40px" }}>
+              View All Projects
+            </a>
           </div>
+
         </div>
       </div>
 

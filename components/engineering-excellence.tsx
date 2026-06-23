@@ -2,71 +2,61 @@ import Image from "next/image"
 
 export function EngineeringExcellence() {
   return (
-    <section className="bg-[#fcfcfc] px-6 pt-10 pb-12 lg:px-0 lg:pt-0 lg:pb-0">
+    <section className="bg-[#fcfcfc] px-6 pt-10 pb-0 lg:px-0 lg:pt-0 lg:pb-0 lg:mb-0 mb-8">
 
-      {/* ── MOBILE layout (unchanged) ── */}
-      <div className="relative min-h-[650px] overflow-hidden lg:hidden">
-        <div className="max-w-[170px]">
-          <h2 className="zag-heading mb-6 text-[24px] leading-[1.22] text-[#2d2d2d]">
+      {/* ── MOBILE layout ── */}
+      <div className="relative h-[427px] overflow-hidden lg:hidden">
+
+        {/* Text content */}
+        <div className="max-w-[175px]">
+          <h2 className="zag-heading mb-5 leading-[1.22] text-[#2d2d2d]" style={{ fontSize: "20px" }}>
             ENGINEERING
             <br />
             EXCELLENCE
             <br />
             REDEFINED
           </h2>
-
-          <p className="max-w-[170px] text-[11px] leading-[1.56] tracking-[0.18em] text-[#3a3a3a]">
-            Seyed Hassan Mozneb
-            brings 35+ years of
-            structural engineering
-            expertise, combining
-            traditional engineering
-            excellence with modern
-            AI-driven workflows.
-            Specializing in seismic
-            assessments, building
-            rehabilitation, industrial
-            racking systems, and
-            specialty structural
-            reviews, his work is
-            guided by BCBC, NBCC,
-            and EGBC standards.
+          <p className="leading-[1.56] tracking-[0.12em] text-[#3a3a3a]" style={{ fontSize: "12px" }}>
+            Seyed Hassan Mozneb brings 35+ years of structural engineering expertise, combining traditional engineering excellence with modern AI-driven workflows. Specializing in seismic assessments, building rehabilitation, industrial racking systems, and specialty structural reviews, his work is guided by BCBC, NBCC, and EGBC standards.
           </p>
         </div>
 
-        <div className="absolute right-[-58px] top-[-6px] w-[282px]">
-          <div className="relative h-[620px] w-full">
+        {/* Photo + line */}
+        <div className="absolute right-[-10px] top-[-20px] w-[165px]">
+          <div className="relative h-[400px] w-full">
             <Image
-              src="/images/homayoun-pic.png"
+              src="/images/homayoun-pic-mobile.png"
               alt="Seyed Hassan Mozneb"
               fill
-              className="object-contain object-top object-right"
+              className="object-contain object-bottom object-center"
             />
+          </div>
+          {/* Line sticking to bottom of photo */}
+          <div className="h-[2px] bg-black -mt-[5px] ml-[3px]" style={{ width: "200px" }} />
+          {/* Stats — same offset and width as line */}
+          <div className="flex justify-between mt-3 ml-[3px] pr-[40px] text-[#2d2d2d]" style={{ width: "200px" }}>
+            <div>
+              <p className="font-semibold tracking-[0.08em]" style={{ fontSize: "14px" }}>35+</p>
+              <p className="mt-1 tracking-[0.18em] text-[#4a4a4a]" style={{ fontSize: "10px" }}>Experience</p>
+            </div>
+            <div>
+              <p className="font-semibold tracking-[0.08em]" style={{ fontSize: "14px" }}>200+</p>
+              <p className="mt-1 tracking-[0.18em] text-[#4a4a4a]" style={{ fontSize: "10px" }}>Projects</p>
+            </div>
           </div>
         </div>
 
-        <div className="absolute left-0 top-[500px]">
+        {/* CTA button */}
+        <div className="absolute left-0 top-[387px]">
           <a
             href="/about"
-            className="zag-outline-button w-[164px] border-[#2d2d2d] px-0 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
-            Learn more
+            Learn More
           </a>
         </div>
 
-        <div className="absolute right-[-12px] top-[430px] w-[252px] text-[#2d2d2d]">
-          <div className="w-full border-t border-[#2d2d2d]" />
-          <div className="flex pt-4">
-            <div className="flex-1">
-              <p className="text-[18px] font-semibold tracking-[0.08em]">35+</p>
-              <p className="mt-1 text-[11px] tracking-[0.18em] text-[#4a4a4a]">Experience</p>
-            </div>
-            <div className="flex-1">
-              <p className="text-[18px] font-semibold tracking-[0.08em]">200+</p>
-              <p className="mt-1 text-[11px] tracking-[0.18em] text-[#4a4a4a]">Projects</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ── DESKTOP layout ── */}

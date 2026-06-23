@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { HeroSection } from "@/components/hero-section"
 import { EngineeringSolutions } from "@/components/engineering-solutions"
 import { AIAutomationLab } from "@/components/ai-automation-lab"
@@ -11,6 +12,18 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-[390px] overflow-hidden bg-[#fcfcfc] shadow-[0_0_0_1px_rgba(13,44,96,0.05)] lg:max-w-none lg:overflow-visible lg:shadow-none">
       <HeroSection />
+
+      {/* Mobile-only building photo section */}
+      <div className="lg:hidden relative w-full bg-black" style={{ height: "466px" }}>
+        <Image
+          src="/images/architectural-building.png"
+          alt="Architectural building"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
       <div className="below-hero-content">
         <EngineeringSolutions />
         <AIAutomationLab />

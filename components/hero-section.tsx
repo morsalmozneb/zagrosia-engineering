@@ -15,7 +15,7 @@ export function HeroSection() {
         disablePictureInPicture
         disableRemotePlayback
         className="hero-video hero-bg video-wrapper absolute top-0 left-0 right-0 h-screen w-full object-cover lg:-top-[140px] lg:bottom-auto lg:h-[1060px]"
-        style={{ objectPosition: "50% 0%" }}
+        style={{ objectPosition: "70% 0%" }}
       >
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
       </video>
@@ -53,13 +53,13 @@ export function HeroSection() {
       <div className="lg:hidden relative z-30 flex flex-col min-h-screen">
 
         {/* Content area — grows above the building */}
-        <div className="flex flex-1 flex-col pl-10 pr-6 pt-28">
+        <div className="flex flex-1 flex-col pl-5 pr-6 pt-28">
 
           {/* Heading */}
-          <div className="mb-3">
-            <h1 className="font-sans font-bold tracking-tight">
-              <span className="block text-[#2D2D2D] text-[32px] leading-[1.08]">STRUCTURAL</span>
-              <span className="block text-[#2D2D2D] text-[32px] leading-[1.05] mt-1">ENGINEERING</span>
+          <div className="mb-[20px]">
+            <h1 className="font-sans tracking-tight">
+              <span className="block text-[#EFEFEF] text-[32px] leading-[1.08] font-extrabold">STRUCTURAL</span>
+              <span className="block text-[#2D2D2D] text-[32px] leading-[1.05] mt-1 font-extrabold">ENGINEERING</span>
             </h1>
             <p className="text-[#FCFCFC]/70 text-[14px] tracking-[0.38em] mt-3 font-light">
               INTELLIGENCE
@@ -80,58 +80,40 @@ export function HeroSection() {
             <span className="text-[#FCFCFC] text-[14px] font-light tracking-[0.22em]">35 YEARS</span>
 
             {/* P.ENG rows — no gap from 35 YEARS */}
-            <div className="mt-[2px] space-y-[3px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[50px] space-y-[10px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>P.ENG BC</p>
               <p>P.ENG ALBERTA</p>
               <p>P.ENG SASK</p>
             </div>
 
             {/* M.Sc. rows — no gap from P.ENG */}
-            <div className="mt-[3px] space-y-[3px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[90px] space-y-[10px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>M.Sc. STRUCTURAL</p>
               <p>EGBC COMPLIANT</p>
             </div>
 
             {/* Description — small fixed gap from credentials */}
-            <div className="mt-4 space-y-3">
-              <p className="text-[#FCFCFC] text-[12px] font-mono leading-[1.75] tracking-[0.04em]">
+            <div className="mt-[40px]" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <p className="text-[#FCFCFC] font-mono leading-[1.75] tracking-[0.04em]" style={{ fontSize: "12px" }}>
                 Engineering Excellence · Intelligent Structural Design · Seismic Expertise · AI-Driven Innovation
               </p>
-              <p className="text-[#FCFCFC]/78 text-[12px] font-sans leading-[1.72] tracking-[0.04em]">
+              <p className="text-[#FCFCFC]/78 font-sans leading-[1.72] tracking-[0.04em]" style={{ fontSize: "12px" }}>
                 Bridging structural engineering with advanced automation and modern digital workflows.
               </p>
             </div>
 
             {/* CTA Buttons — pushed to bottom */}
             <div className="mt-auto pt-4 flex gap-3">
-              <a href="/projects" className="flex-1 bg-[#FCFCFC] text-[#2D2D2D] font-medium py-3 px-5 rounded-full text-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]">
+              <a href="/projects" className="w-[119px] h-[40px] bg-[#FCFCFC] text-[#2D2D2D] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]">
                 View Projects
               </a>
-              <a href="/contact" className="flex-1 border border-[#FCFCFC] text-[#FCFCFC] font-medium py-3 px-5 rounded-full text-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em] text-[9.5px]">
+              <a href="/contact" className="w-[119px] h-[40px] border border-[#FCFCFC] text-[#FCFCFC] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em] text-[9.5px]">
                 Contact Us
               </a>
             </div>
           </div>
         </div>
 
-        {/* Building image — just the tip visible at bottom of viewport */}
-        <div className="relative w-full flex-shrink-0 bg-black" style={{ height: "70px" }}>
-          <div
-            className="absolute inset-x-0 top-0 h-[40px] z-10 pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%)" }}
-          />
-          <Image
-            src="/images/architectural-building.png"
-            alt="Modern architectural building"
-            fill
-            className="object-cover object-top"
-            priority
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,1) 100%)" }}
-          />
-        </div>
       </div>
 
       {/* ══════════════════════════════════════════

@@ -52,7 +52,7 @@ export function EngineeringSolutions() {
           />
 
           {/* Heading */}
-          <h2 className="zag-heading mb-5 text-[30px] uppercase leading-[1.1] lg:text-[32px] lg:leading-[1.1]">
+          <h2 className="zag-heading mb-5 font-normal uppercase leading-[1.1] lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
             <span className="text-[#2D2D2D]">ENGINEERING</span>
             <br />
             <span className="text-[#2D2D2D]">SOLUTIONS</span>
@@ -70,34 +70,33 @@ export function EngineeringSolutions() {
               return (
                 <div key={service.id}>
                   {isOpen ? (
-                    <div className="rounded-[20px] p-px" style={{ background: GRADIENT_BORDER }}>
+                    <div className="rounded-[20px] lg:p-px" style={{ background: GRADIENT_BORDER }}>
                       <div
-                        className="rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                        className="rounded-[20px] lg:rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                         style={{
-                          boxShadow: "0 4px 19.6px rgba(0, 0, 0, 0.34)",
+                          boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                           backdropFilter: "blur(61.5px)",
                           WebkitBackdropFilter: "blur(61.5px)",
-                          backgroundColor: "rgba(252, 252, 252, 0.9)",
+                          backgroundColor: "#FCFCFC",
                         }}
                       >
                         <button
                           className="flex w-full items-start justify-between"
                           onClick={() => setOpenId(0)}
                         >
-                          <span className="flex-1 pr-2 text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D] lg:text-[24px]">
+                          <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D] lg:text-[24px]">
                             {service.id}. {service.title}
                           </span>
-                          <div className="flex flex-shrink-0 items-start gap-2">
-                            {service.image && (
-                              <div className="relative h-[64px] w-[64px] overflow-hidden rounded-[8px] lg:hidden">
-                                <Image src={service.image} alt={service.title} fill className="object-cover" />
-                              </div>
-                            )}
-                            <MinusCircle size={22} strokeWidth={2} className="mt-[2px] text-[#2D2D2D]" />
-                          </div>
+                          <MinusCircle size={22} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
                         </button>
 
-                        <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                        {service.image && (
+                          <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:hidden">
+                            <Image src={service.image} alt={service.title} fill className="object-cover" />
+                          </div>
+                        )}
+
+                        <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D] lg:text-[16px]" style={{ fontSize: "12px" }}>
                           {service.intro}
                         </p>
 
@@ -120,7 +119,7 @@ export function EngineeringSolutions() {
                         {service.tags.length > 0 && (
                           <div className="mt-4 flex flex-wrap gap-[6px]">
                             {service.tags.map((tag) => (
-                              <span key={tag} className="rounded-full bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white" style={{ fontSize: "14px" }}>
+                              <span key={tag} className="rounded-full bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
                                 {tag}
                               </span>
                             ))}
@@ -149,7 +148,8 @@ export function EngineeringSolutions() {
           <div className="mt-7">
             <a
               href="/services"
-              className="inline-flex h-[44px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-8 tracking-[0.14em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white" style={{ fontSize: "14px" }}
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.14em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white lg:h-[44px] lg:px-8 lg:text-[14px]"
+              style={{ fontSize: "9.5px", width: "119px", height: "40px" }}
             >
               Learn More
             </a>
@@ -158,7 +158,7 @@ export function EngineeringSolutions() {
       </div>
 
       {/* BOTTOM: Building image — floats right, no box */}
-      <div className="flex justify-end overflow-hidden lg:pr-[0px]">
+      <div className="flex justify-end overflow-hidden lg:pr-[0px] -mt-10">
         <Image
           src="/images/curved-building.png"
           alt="Modern curved architectural building"

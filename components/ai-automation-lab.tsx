@@ -5,7 +5,7 @@ export function AIAutomationLab() {
 
       {/* Heading */}
       <div className="mb-8">
-        <h2 className="zag-heading text-[22px] leading-[1.18] lg:text-[32px] lg:leading-[1.1]">
+        <h2 className="zag-heading leading-[1.18] lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
           AI &
           <br />
           AUTOMATION
@@ -15,37 +15,39 @@ export function AIAutomationLab() {
       </div>
 
       {/* Description */}
-      <p className="mb-10 text-[11px] leading-[1.65] tracking-[0.1em] text-white/78 lg:text-[16px]">
+      <p className="mb-10 leading-[1.65] tracking-[0.1em] text-white/78 lg:text-[16px]" style={{ fontSize: "12px" }}>
         Where structural engineering meets artificial intelligence. Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
       </p>
 
       {/* Stats */}
       <div className="mb-10 flex items-start justify-between">
         <div>
-          <p className="text-[22px] font-semibold tracking-[0.08em] text-white lg:text-[32px]">500+</p>
-          <p className="mt-1 text-[11px] lg:text-[24px] tracking-[0.18em] text-white/78">Videos</p>
+          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>500+</p>
+          <p className="mt-1 tracking-[0.18em] text-white/78 lg:text-[24px]" style={{ fontSize: "14px" }}>Videos</p>
         </div>
         <div>
-          <p className="text-[22px] font-semibold tracking-[0.08em] text-white lg:text-[32px]">150+</p>
-          <p className="mt-1 text-[11px] lg:text-[24px] tracking-[0.18em] text-white/78">Subjects</p>
+          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>150+</p>
+          <p className="mt-1 tracking-[0.18em] text-white/78 lg:text-[24px]" style={{ fontSize: "14px" }}>Subjects</p>
         </div>
         <div>
-          <p className="text-[22px] font-semibold tracking-[0.08em] text-white lg:text-[32px]">200+</p>
-          <p className="mt-1 text-[11px] tracking-[0.18em] text-white/78">Views</p>
+          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>200+</p>
+          <p className="mt-1 tracking-[0.18em] text-white/78" style={{ fontSize: "14px" }}>Views</p>
         </div>
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3">
+      <div className="flex justify-between">
         <a
           href="/contact"
-          className="zag-outline-button whitespace-nowrap border-white px-6 tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white lg:px-8" style={{ fontSize: "14px" }}
+          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] lg:h-[44px] lg:px-8 lg:text-[14px]"
+          style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
         >
           Request a Service
         </a>
         <a
           href="/ai-lab"
-          className="zag-outline-button whitespace-nowrap border-white px-6 tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white lg:px-8" style={{ fontSize: "14px" }}
+          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] lg:h-[44px] lg:px-8 lg:text-[14px]"
+          style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
         >
           Learn More
         </a>

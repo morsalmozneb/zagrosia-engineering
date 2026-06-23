@@ -41,14 +41,14 @@ export function EGBCExamPrep() {
         return (
           <div key={feature.id}>
             {isOpen ? (
-              <div className="rounded-[20px] p-px" style={{ background: GRADIENT_BORDER }}>
+              <div className="rounded-[20px] lg:p-px" style={{ background: GRADIENT_BORDER }}>
                 <div
-                  className="rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                  className="rounded-[20px] lg:rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                   style={{
-                    boxShadow: "0 4px 19.6px rgba(0, 0, 0, 0.34)",
+                    boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                     backdropFilter: "blur(61.5px)",
                     WebkitBackdropFilter: "blur(61.5px)",
-                    backgroundColor: "rgba(252, 252, 252, 0.9)",
+                    backgroundColor: "#FCFCFC",
                   }}
                 >
                   <button
@@ -60,7 +60,7 @@ export function EGBCExamPrep() {
                     </span>
                     <MinusCircle size={22} strokeWidth={2} className="flex-shrink-0 text-[#2d2d2d]" />
                   </button>
-                  <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#4f4f4f]" style={{ fontSize: "16px" }}>
+                  <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#4f4f4f] lg:text-[16px]" style={{ fontSize: "12px" }}>
                     {feature.description}
                   </p>
                 </div>
@@ -88,7 +88,7 @@ export function EGBCExamPrep() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden px-8 pt-10 pb-0">
-        <h2 className="zag-heading mb-8 text-[22px] leading-[1.24] text-[#2d2d2d]">
+        <h2 className="zag-heading mb-8 leading-[1.24] text-[#2d2d2d]" style={{ fontSize: "20px" }}>
           PASS THE EGBC EXAM.
           <br />
           THE SMART WAY.
@@ -96,32 +96,37 @@ export function EGBCExamPrep() {
 
         {accordion}
 
-        <p className="mt-9 max-w-[304px] text-[11px] leading-[1.48] tracking-[0.17em] text-[#3f3f3f]">
+        <p className="mt-9 max-w-[304px] leading-[1.48] tracking-[0.17em] text-[#3f3f3f]" style={{ fontSize: "12px" }}>
           {"Canada's most comprehensive EGBC National Professional Practice Examination prep platform. Built by a practicing P.Eng. with 35 years of real-world experience — designed for internationally trained engineers building their Canadian career"}
         </p>
 
-        <div className="mb-6 mt-8 flex gap-3">
+        <div className="mb-6 mt-8 flex justify-center gap-[15px]">
           <a
             href="/academy"
-            className="zag-outline-button min-h-[48px] flex-1 whitespace-nowrap border-[#2d2d2d] px-0 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Join Wait list
           </a>
           <a
             href="/academy"
-            className="zag-outline-button min-h-[48px] flex-1 whitespace-nowrap border-[#2d2d2d] px-0 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Learn More
           </a>
         </div>
 
-        <div className="relative -mx-8 h-[245px] w-[calc(100%+4rem)] overflow-hidden">
+        <div className="relative -mx-8 h-[245px] w-[calc(100%+4rem)] overflow-hidden -mt-[30px]">
           <Image
             src="/images/pic-10.png"
             alt="Architectural building for EGBC section"
             fill
             className="object-cover object-bottom"
           />
+        </div>
+        <div className="flex justify-center">
+          <div className="h-[2px] bg-black -ml-[50px]" style={{ width: "400px" }} />
         </div>
       </div>
 
