@@ -30,6 +30,8 @@ function ContactPill({
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex h-[28px] w-full items-center gap-[7px] rounded-full bg-[#94B8DC] px-3 text-[9px] font-medium tracking-[0.08em] text-[#FCFCFC]"
     >
       <span className="flex h-[17px] w-[17px] flex-shrink-0 items-center justify-center rounded-full bg-[#5290BF] text-[#FCFCFC]">

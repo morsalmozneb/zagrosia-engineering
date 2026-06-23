@@ -137,6 +137,8 @@ function AboutTeamCtaButton({
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex h-[36px] flex-1 items-center justify-center gap-[8px] rounded-[115px] bg-[#94B8DC] px-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC] transition-colors hover:bg-[#7fa8d3]"
     >
       <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
