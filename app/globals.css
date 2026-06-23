@@ -1,0 +1,307 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.145 0.02 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0.02 250);
+  --primary: oklch(0.145 0.02 250);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.145 0.02 250);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.55 0.15 250);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.55 0.15 250);
+  --radius: 0.5rem;
+  
+  /* Custom Zagrosia colors */
+  --navy: oklch(0.18 0.03 250);
+  --navy-light: oklch(0.25 0.04 250);
+  --blue-accent: oklch(0.55 0.2 250);
+  --zag-heading: "Momo Trust Sans", var(--font-inter), sans-serif;
+  --zag-body: var(--font-inter), "Inter", sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--zag-body);
+  --font-mono: 'JetBrains Mono', 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Custom colors for Tailwind */
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-blue-accent: var(--blue-accent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--zag-body);
+  background: #eff2f9;
+  overflow-x: hidden;
+}
+
+button, a, [role="button"] {
+  cursor: pointer !important;
+}
+
+.zag-heading {
+  font-family: var(--zag-heading);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.zag-body-copy {
+  font-family: var(--zag-body);
+  letter-spacing: 0.16em;
+}
+
+.zag-outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid currentColor;
+  border-radius: 9999px;
+  padding: 0 1.75rem;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: none;
+}
+
+.zag-dark-fade {
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.55) 55%, #000 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navy-light);
+  border-radius: 2px;
+}
+
+.zag-team-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #0052a5 rgba(45, 45, 45, 0.12);
+}
+
+.zag-team-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.zag-team-scroll::-webkit-scrollbar-track {
+  background: #e8edf4;
+  border-radius: 9999px;
+}
+
+.zag-team-scroll::-webkit-scrollbar-thumb {
+  background: #0052a5;
+  border-radius: 9999px;
+}
+
+.blog-article {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.blog-article::-webkit-scrollbar {
+  display: none;
+}
+
+.blog-scroll-visible {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #0052A5 #E8EDF4;
+}
+
+.blog-scroll-visible::-webkit-scrollbar {
+  width: 6px;
+}
+
+.blog-scroll-visible::-webkit-scrollbar-track {
+  background: #E8EDF4;
+  border-radius: 9999px;
+}
+
+.blog-scroll-visible::-webkit-scrollbar-thumb {
+  background: #0052A5;
+  border-radius: 9999px;
+}
+
+#page-content {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --desktop-grid-max: 1280px;
+    --desktop-grid-columns: 12;
+    --desktop-grid-gap: 16px;
+    --desktop-grid-column-width: calc((var(--desktop-grid-max) - (11 * var(--desktop-grid-gap))) / var(--desktop-grid-columns));
+    --desktop-grid-frame-offset: max(0px, calc((100vw - var(--desktop-grid-max)) / 2));
+    --desktop-grid-content-start: calc(var(--desktop-grid-frame-offset) + (2 * var(--desktop-grid-column-width)) + (2 * var(--desktop-grid-gap)));
+    --desktop-grid-content-span: calc((8 * var(--desktop-grid-column-width)) + (7 * var(--desktop-grid-gap)));
+  }
+
+  .zag-desktop-frame {
+    width: min(100%, var(--desktop-grid-max));
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+
+  .zag-desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--desktop-grid-columns), minmax(0, 1fr));
+    column-gap: var(--desktop-grid-gap);
+  }
+
+  .zag-desktop-content-pad {
+    box-sizing: border-box;
+    padding-left: var(--desktop-grid-content-start);
+    padding-right: var(--desktop-grid-content-start);
+  }
+
+  .zag-desktop-content-start {
+    margin-left: var(--desktop-grid-content-start);
+    margin-right: auto;
+  }
+
+  .zag-desktop-content-width {
+    width: min(100%, var(--desktop-grid-content-span));
+  }
+
+  .zag-desktop-sidebar-anchor {
+    left: calc(var(--desktop-grid-frame-offset) + var(--desktop-grid-column-width) - 64px) !important;
+  }
+
+  .zag-desktop-card-border {
+    background: linear-gradient(135deg, rgba(45, 45, 45, 1) 0%, rgba(45, 45, 45, 0.56) 26%, rgba(147, 147, 147, 0.22) 100%);
+  }
+}
+
+/* ─── TYPOGRAPHY OVERRIDES ─── */
+@media (min-width: 1024px) {
+
+  /* 1. Home hero: widen description block (was max-w-[420px]) */
+  .pt-\[154px\] .max-w-\[420px\] {
+    max-width: 680px !important;
+  }
+
+  /* 2. Home hero: Engineering Excellence paragraph */
+  .pt-\[154px\] p.font-mono {
+    font-size: 18px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* 3. Home hero: Bridging structural paragraph (p only, not h1) */
+  .pt-\[154px\] p.font-sans {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* 4. Services open accordion — heading span (first = title, not minus icon) */
+  .backdrop-blur-\[30px\] button > span:first-child {
+    font-size: 20px !important;
+  }
+
+  /* 5. Services closed accordion bar — heading span */
+  .h-\[44px\].w-full > span:first-child {
+    font-size: 20px !important;
+  }
+
+  /* 6. Services open accordion — body paragraphs */
+  .backdrop-blur-\[30px\] > p {
+    font-size: 18px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* 7. Services open accordion — bullet list items */
+  .backdrop-blur-\[30px\] li {
+    font-size: 16px !important;
+  }
+
+  /* ── Home page EngineeringSolutions component ── */
+
+  /* Intro description paragraph (has whitespace-nowrap at 11px — fix both) */
+  .sidebar-content p.whitespace-nowrap {
+    font-size: 18px !important;
+    white-space: normal !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Open card title span */
+  .p-px .rounded-\[4px\] button > span:first-child {
+    font-size: 20px !important;
+  }
+
+  /* Open card body paragraphs (body text + What We Offer label) */
+  .p-px .rounded-\[4px\] > p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Open card bullet items */
+  .p-px .rounded-\[4px\] li {
+    font-size: 16px !important;
+  }
+
+  /* Closed accordion bar title */
+  .h-\[28px\].w-full span.font-medium {
+    font-size: 16px !important;
+  }
+}
