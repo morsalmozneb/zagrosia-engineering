@@ -14,7 +14,7 @@ export function HeroSection() {
         preload="auto"
         disablePictureInPicture
         disableRemotePlayback
-        className="hero-video hero-bg video-wrapper absolute inset-0 h-full w-full object-cover lg:inset-x-0 lg:-top-[140px] lg:bottom-auto lg:h-[1060px]"
+        className="hero-video hero-bg video-wrapper absolute top-0 left-0 right-0 h-screen w-full object-cover lg:-top-[140px] lg:bottom-auto lg:h-[1060px]"
         style={{ objectPosition: "50% 0%" }}
       >
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
@@ -54,15 +54,22 @@ export function HeroSection() {
 
         <div className="mb-10">
           <h1 className="font-sans font-bold tracking-tight">
-            <span className="block text-[#FCFCFC] text-[42px] leading-[1.08]">STRUCTURAL</span>
-            <span className="block text-[#9eaab6] text-[42px] leading-[1.05] mt-1">ENGINEERING</span>
+            <span className="block text-[#2D2D2D] text-[42px] leading-[1.08]">STRUCTURAL</span>
+            <span className="block text-[#2D2D2D] text-[42px] leading-[1.05] mt-1">ENGINEERING</span>
           </h1>
-          <p className="text-[#FCFCFC] text-[11px] tracking-[0.38em] mt-5 font-light">
+          <p className="text-[#2D2D2D] text-[11px] tracking-[0.38em] mt-5 font-light">
             INTELLIGENCE
           </p>
         </div>
 
-        <div className="mb-10">
+        <div className="mb-10 relative pl-8">
+          <div
+            className="absolute left-0 top-0 w-px pointer-events-none"
+            style={{
+              height: "100%",
+              background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
+            }}
+          />
           <span className="text-[#FCFCFC] text-xl font-light tracking-[0.22em]">35 YEARS</span>
           <div className="mt-6 space-y-[10px] text-[#FCFCFC] text-[12px] tracking-[0.24em] font-sans">
             <p>P.ENG BC</p>

@@ -13,6 +13,7 @@ const services = [
   {
     id: 1,
     title: "Structural Design",
+    image: "/images/services-building.png",
     intro: "Bridging structural engineering with advanced automation and modern digital workflows.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
@@ -24,11 +25,11 @@ const services = [
     ],
     tags,
   },
-  { id: 2, title: "Seismic Assessment", intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.", bullets: [], tags: [] },
-  { id: 3, title: "Building Rehabilitation", intro: "Expert structural upgrades and rehabilitation for aging and distressed buildings.", bullets: [], tags: [] },
-  { id: 4, title: "Heavy Racking", intro: "Industrial racking systems design, engineering review, and seismic compliance for warehouses and distribution centres.", bullets: [], tags: [] },
-  { id: 5, title: "Building Envelope", intro: "Building envelope assessments and structural integration for moisture, performance, and longevity.", bullets: [], tags: [] },
-  { id: 6, title: "Specialty Reviews", intro: "Specialized structural reviews, peer reviews, and engineering consultations for unique and complex projects.", bullets: [], tags: [] },
+  { id: 2, title: "Seismic Assessment", image: "/images/seismic-crane.jpg", intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.", bullets: [], tags: [] },
+  { id: 3, title: "Building Rehabilitation", image: "/images/about-milestones-building.png", intro: "Expert structural upgrades and rehabilitation for aging and distressed buildings.", bullets: [], tags: [] },
+  { id: 4, title: "Heavy Racking", image: "/images/industrial-racking.jpg", intro: "Industrial racking systems design, engineering review, and seismic compliance for warehouses and distribution centres.", bullets: [], tags: [] },
+  { id: 5, title: "Building Envelope", image: "/images/glass-building.jpg", intro: "Building envelope assessments and structural integration for moisture, performance, and longevity.", bullets: [], tags: [] },
+  { id: 6, title: "Specialty Reviews", image: "/images/about-core-values-building.png", intro: "Specialized structural reviews, peer reviews, and engineering consultations for unique and complex projects.", bullets: [], tags: [] },
 ]
 
 export function EngineeringSolutions() {
@@ -58,7 +59,7 @@ export function EngineeringSolutions() {
           </h2>
 
           {/* Description */}
-          <p className="mb-7 leading-[1.75] tracking-[0.04em] text-[#2D2D2D]" style={{ fontSize: "18px", lineHeight: 1.65 }}>
+          <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.04em] text-[#2D2D2D] lg:text-[18px]" style={{ lineHeight: 1.65 }}>
             From new structural design to complex rehabilitation, every engagement backed by 35+ years of expertise.
           </p>
 
@@ -80,13 +81,20 @@ export function EngineeringSolutions() {
                         }}
                       >
                         <button
-                          className="flex w-full items-center justify-between"
+                          className="flex w-full items-start justify-between"
                           onClick={() => setOpenId(0)}
                         >
-                          <span className="font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "24px" }}>
+                          <span className="flex-1 pr-2 text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D] lg:text-[24px]">
                             {service.id}. {service.title}
                           </span>
-                          <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />
+                          <div className="flex flex-shrink-0 items-start gap-2">
+                            {service.image && (
+                              <div className="relative h-[64px] w-[64px] overflow-hidden rounded-[8px] lg:hidden">
+                                <Image src={service.image} alt={service.title} fill className="object-cover" />
+                              </div>
+                            )}
+                            <MinusCircle size={22} strokeWidth={2} className="mt-[2px] text-[#2D2D2D]" />
+                          </div>
                         </button>
 
                         <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
@@ -126,7 +134,7 @@ export function EngineeringSolutions() {
                       style={{ background: CLOSED_FILL }}
                       onClick={() => setOpenId(service.id)}
                     >
-                      <span className="font-medium tracking-[0.1em] text-white" style={{ fontSize: "24px" }}>
+                      <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
                         {service.id}. {service.title}
                       </span>
                       <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
@@ -150,13 +158,13 @@ export function EngineeringSolutions() {
       </div>
 
       {/* BOTTOM: Building image — floats right, no box */}
-      <div className="flex justify-end lg:pr-[0px]">
+      <div className="flex justify-end overflow-hidden lg:pr-[0px]">
         <Image
           src="/images/curved-building.png"
           alt="Modern curved architectural building"
           width={1200}
           height={600}
-          className="object-contain"
+          className="w-full object-contain lg:w-auto"
           priority
         />
       </div>

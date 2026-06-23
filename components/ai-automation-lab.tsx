@@ -6,11 +6,11 @@ export function AIAutomationLab() {
       {/* Heading */}
       <div className="mb-8">
         <h2 className="zag-heading text-[22px] leading-[1.18] lg:text-[32px] lg:leading-[1.1]">
-          AI
+          AI &
           <br />
-          &
+          AUTOMATION
           <br />
-          AUTOMATION LAB
+          LAB
         </h2>
       </div>
 
@@ -30,8 +30,8 @@ export function AIAutomationLab() {
           <p className="mt-1 text-[11px] lg:text-[24px] tracking-[0.18em] text-white/78">Subjects</p>
         </div>
         <div>
-          <p className="text-[22px] font-semibold tracking-[0.08em] text-white lg:text-[32px]">150+</p>
-          <p className="mt-1 text-[11px] tracking-[0.18em] text-white/78">Subjects</p>
+          <p className="text-[22px] font-semibold tracking-[0.08em] text-white lg:text-[32px]">200+</p>
+          <p className="mt-1 text-[11px] tracking-[0.18em] text-white/78">Views</p>
         </div>
       </div>
 

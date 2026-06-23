@@ -19,8 +19,8 @@ export function ServicesCTASection() {
 
         <a
           href="/contact"
-          className="inline-flex h-[48px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-8 font-normal tracking-[0.1em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white" style={{ fontSize: "14px" }}
-          style={{ fontFamily: "'Inter', sans-serif" }}
+          className="inline-flex h-[48px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-8 font-normal tracking-[0.1em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+          style={{ fontSize: "14px", fontFamily: "'Inter', sans-serif" }}
         >
           Request a Service
         </a>

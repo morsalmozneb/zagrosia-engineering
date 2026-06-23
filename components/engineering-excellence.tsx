@@ -5,7 +5,7 @@ export function EngineeringExcellence() {
     <section className="bg-[#fcfcfc] px-6 pt-10 pb-12 lg:px-0 lg:pt-0 lg:pb-0">
 
       {/* ── MOBILE layout (unchanged) ── */}
-      <div className="relative min-h-[650px] lg:hidden">
+      <div className="relative min-h-[650px] overflow-hidden lg:hidden">
         <div className="max-w-[170px]">
           <h2 className="zag-heading mb-6 text-[24px] leading-[1.22] text-[#2d2d2d]">
             ENGINEERING

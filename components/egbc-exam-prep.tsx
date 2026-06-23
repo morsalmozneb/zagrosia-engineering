@@ -55,7 +55,7 @@ export function EGBCExamPrep() {
                     className="flex w-full items-center justify-between"
                     onClick={() => setOpenId(0)}
                   >
-                    <span className="font-semibold tracking-[0.1em] text-[#2d2d2d]" style={{ fontSize: "24px" }}>
+                    <span className="text-[14px] font-semibold tracking-[0.1em] text-[#2d2d2d] lg:text-[24px]">
                       {feature.title}
                     </span>
                     <MinusCircle size={22} strokeWidth={2} className="flex-shrink-0 text-[#2d2d2d]" />
@@ -71,7 +71,7 @@ export function EGBCExamPrep() {
                 style={{ background: CLOSED_FILL }}
                 onClick={() => setOpenId(feature.id)}
               >
-                <span className="font-medium tracking-[0.1em] text-white" style={{ fontSize: "24px" }}>
+                <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
                   {feature.title}
                 </span>
                 <PlusCircle size={20} strokeWidth={2} className="flex-shrink-0 text-white" />
