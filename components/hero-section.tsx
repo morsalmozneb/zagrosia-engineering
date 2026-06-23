@@ -48,66 +48,89 @@ export function HeroSection() {
       </div>
 
       {/* ════════════════════════════════════
-          MOBILE CONTENT  (unchanged)
+          MOBILE CONTENT
       ════════════════════════════════════ */}
-      <div className="lg:hidden relative z-30 flex flex-col min-h-screen pl-10 pr-6 pt-28 pb-10">
+      <div className="lg:hidden relative z-30 flex flex-col min-h-screen">
 
-        <div className="mb-10">
-          <h1 className="font-sans font-bold tracking-tight">
-            <span className="block text-[#2D2D2D] text-[42px] leading-[1.08]">STRUCTURAL</span>
-            <span className="block text-[#2D2D2D] text-[42px] leading-[1.05] mt-1">ENGINEERING</span>
-          </h1>
-          <p className="text-[#2D2D2D] text-[11px] tracking-[0.38em] mt-5 font-light">
-            INTELLIGENCE
-          </p>
+        {/* Content area — grows above the building */}
+        <div className="flex flex-1 flex-col pl-10 pr-6 pt-28">
+
+          {/* Heading */}
+          <div className="mb-6">
+            <h1 className="font-sans font-bold tracking-tight">
+              <span className="block text-[#EFEFEF] text-[32px] leading-[1.08]">STRUCTURAL</span>
+              <span className="block text-[#2D2D2D] text-[32px] leading-[1.05] mt-1">ENGINEERING</span>
+            </h1>
+            <p className="text-[#FCFCFC]/70 text-[14px] tracking-[0.38em] mt-4 font-light">
+              INTELLIGENCE
+            </p>
+          </div>
+
+          {/* Line + credentials + description + buttons — single wrapper so line spans everything */}
+          <div className="relative pl-8 flex-1 flex flex-col pb-6">
+            <div
+              className="absolute left-0 top-0 w-px pointer-events-none"
+              style={{
+                height: "100%",
+                background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 60%, rgba(252,252,252,0) 100%)",
+              }}
+            />
+
+            {/* 35 YEARS */}
+            <span className="text-[#FCFCFC] text-[14px] font-light tracking-[0.22em]">35 YEARS</span>
+
+            {/* P.ENG rows */}
+            <div className="mt-3 space-y-[6px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+              <p>P.ENG BC</p>
+              <p>P.ENG ALBERTA</p>
+              <p>P.ENG SASK</p>
+            </div>
+
+            {/* M.Sc. rows */}
+            <div className="mt-3 space-y-[6px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+              <p>M.Sc. STRUCTURAL</p>
+              <p>EGBC COMPLIANT</p>
+            </div>
+
+            {/* Push description and buttons to bottom */}
+            <div className="mt-auto space-y-3 mb-5">
+              <p className="text-[#FCFCFC] text-[12px] font-mono leading-[1.75] tracking-[0.04em]">
+                Engineering Excellence · Intelligent Structural Design · Seismic Expertise · AI-Driven Innovation
+              </p>
+              <p className="text-[#FCFCFC]/78 text-[12px] font-sans leading-[1.72] tracking-[0.04em]">
+                Bridging structural engineering with advanced automation and modern digital workflows.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex gap-3">
+              <a href="/projects" className="flex-1 bg-[#FCFCFC] text-[#2D2D2D] font-medium py-3 px-5 rounded-full text-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]">
+                View Projects
+              </a>
+              <a href="/contact" className="flex-1 border border-[#FCFCFC] text-[#FCFCFC] font-medium py-3 px-5 rounded-full text-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em] text-[9.5px]">
+                Contact Us
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div className="mb-10 relative pl-8">
+        {/* Building image — pinned at bottom, visible in first viewport */}
+        <div className="relative w-full flex-shrink-0 bg-black" style={{ height: "240px" }}>
           <div
-            className="absolute left-0 top-0 w-px pointer-events-none"
-            style={{
-              height: "100%",
-              background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
-            }}
+            className="absolute inset-x-0 top-0 h-[80px] z-10 pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)" }}
           />
-          <span className="text-[#FCFCFC] text-xl font-light tracking-[0.22em]">35 YEARS</span>
-          <div className="mt-6 space-y-[10px] text-[#FCFCFC] text-[12px] tracking-[0.24em] font-sans">
-            <p>P.ENG BC</p>
-            <p>P.ENG ALBERTA</p>
-            <p>P.ENG SASK</p>
-          </div>
-          <div className="mt-6 space-y-[10px] text-[#FCFCFC] text-[12px] tracking-[0.24em] font-sans">
-            <p>M.Sc. STRUCTURAL</p>
-            <p>EGBC COMPLIANT</p>
-          </div>
-        </div>
-
-        <div className="mt-auto mb-8 space-y-4">
-          <p className="text-[#FCFCFC] text-[11px] font-mono leading-[1.75] tracking-[0.04em]">
-            Engineering Excellence · Intelligent Structural Design · Seismic Expertise · AI-Driven Innovation
-          </p>
-          <p className="text-[#FCFCFC]/78 text-[11px] font-sans leading-[1.72] tracking-[0.04em]">
-            Bridging structural engineering with advanced automation and modern digital workflows.
-          </p>
-        </div>
-
-        <div className="flex gap-3">
-          <a href="/projects" className="flex-1 bg-[#FCFCFC] text-[#2D2D2D] font-medium py-3 px-5 rounded-full text-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em]">
-            View Projects
-          </a>
-          <a href="/contact" className="flex-1 border border-[#FCFCFC] text-[#FCFCFC] text-[11px] font-medium py-3 px-5 rounded-full text-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em]">
-            Contact Us
-          </a>
-        </div>
-      </div>
-
-      {/* ── MOBILE: building image below content ── */}
-      <div className="lg:hidden relative w-full bg-black">
-        <div className="absolute inset-x-0 top-0 h-[90px] z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)' }} />
-        <div className="relative w-full h-[420px]">
-          <Image src="/images/architectural-building.png" alt="Modern architectural building" fill className="object-cover object-top" priority />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,1) 100%)' }} />
+          <Image
+            src="/images/architectural-building.png"
+            alt="Modern architectural building"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,1) 100%)" }}
+          />
         </div>
       </div>
 

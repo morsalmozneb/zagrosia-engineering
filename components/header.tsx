@@ -26,7 +26,7 @@ export function Header() {
   }, [isOpen])
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 px-6 py-5 lg:py-8" style={{ paddingLeft: "calc(var(--desktop-grid-content-start, 0px) + 4px)" }}>
+    <header className="absolute top-0 left-0 right-0 z-50 px-6 py-5 lg:py-8" style={{ paddingLeft: "max(40px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}>
       <div className={`${isOpen ? "invisible" : "flex"} items-center justify-between`}>
         <Link href="/" aria-label="Go to homepage">
           <Image
