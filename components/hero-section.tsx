@@ -56,12 +56,12 @@ export function HeroSection() {
         <div className="flex flex-1 flex-col pl-10 pr-6 pt-28">
 
           {/* Heading */}
-          <div className="mb-6">
+          <div className="mb-3">
             <h1 className="font-sans font-bold tracking-tight">
-              <span className="block text-[#EFEFEF] text-[32px] leading-[1.08]">STRUCTURAL</span>
+              <span className="block text-[#2D2D2D] text-[32px] leading-[1.08]">STRUCTURAL</span>
               <span className="block text-[#2D2D2D] text-[32px] leading-[1.05] mt-1">ENGINEERING</span>
             </h1>
-            <p className="text-[#FCFCFC]/70 text-[14px] tracking-[0.38em] mt-4 font-light">
+            <p className="text-[#FCFCFC]/70 text-[14px] tracking-[0.38em] mt-3 font-light">
               INTELLIGENCE
             </p>
           </div>
@@ -80,14 +80,14 @@ export function HeroSection() {
             <span className="text-[#FCFCFC] text-[14px] font-light tracking-[0.22em]">35 YEARS</span>
 
             {/* P.ENG rows */}
-            <div className="mt-3 space-y-[6px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[5px] space-y-[4px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>P.ENG BC</p>
               <p>P.ENG ALBERTA</p>
               <p>P.ENG SASK</p>
             </div>
 
             {/* M.Sc. rows */}
-            <div className="mt-3 space-y-[6px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[8px] space-y-[4px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
               <p>M.Sc. STRUCTURAL</p>
               <p>EGBC COMPLIANT</p>
             </div>
@@ -114,11 +114,11 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Building image — pinned at bottom, visible in first viewport */}
-        <div className="relative w-full flex-shrink-0 bg-black" style={{ height: "240px" }}>
+        {/* Building image — just the tip visible at bottom of viewport */}
+        <div className="relative w-full flex-shrink-0 bg-black" style={{ height: "70px" }}>
           <div
-            className="absolute inset-x-0 top-0 h-[80px] z-10 pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)" }}
+            className="absolute inset-x-0 top-0 h-[40px] z-10 pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%)" }}
           />
           <Image
             src="/images/architectural-building.png"
