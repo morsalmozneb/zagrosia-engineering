@@ -52,7 +52,7 @@ export function EngineeringSolutions() {
           />
 
           {/* Heading */}
-          <h2 className="zag-heading mb-5 font-normal uppercase leading-[1.1] lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
+          <h2 className="zag-heading mb-5 font-medium uppercase leading-[1.1] lg:font-normal lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
             <span className="text-[#2D2D2D]">ENGINEERING</span>
             <br />
             <span className="text-[#2D2D2D]">SOLUTIONS</span>

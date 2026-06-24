@@ -5,7 +5,7 @@ export function AIAutomationLab() {
 
       {/* Heading */}
       <div className="mb-8">
-        <h2 className="zag-heading leading-[1.18] lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
+        <h2 className="zag-heading font-medium leading-[1.18] lg:font-normal lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
           AI &
           <br />
           AUTOMATION

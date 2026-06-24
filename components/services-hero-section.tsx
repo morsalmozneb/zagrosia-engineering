@@ -13,6 +13,7 @@ const services = [
   {
     id: 1,
     title: "Structural Design",
+    image: "/images/services-building.png",
     intro: "Bridging structural engineering with advanced automation and modern digital workflows.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
@@ -24,11 +25,11 @@ const services = [
     ],
     tags,
   },
-  { id: 2, title: "Seismic Assessment", intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.", bullets: [], tags: [] },
-  { id: 3, title: "Building Rehabilitation", intro: "Expert structural upgrades and rehabilitation for aging and distressed buildings.", bullets: [], tags: [] },
-  { id: 4, title: "Heavy Racking", intro: "Industrial racking systems design, engineering review, and seismic compliance for warehouses and distribution centres.", bullets: [], tags: [] },
-  { id: 5, title: "Building Envelope", intro: "Building envelope assessments and structural integration for moisture, performance, and longevity.", bullets: [], tags: [] },
-  { id: 6, title: "Specialty Reviews", intro: "Specialized structural reviews, peer reviews, and engineering consultations for unique and complex projects.", bullets: [], tags: [] },
+  { id: 2, title: "Seismic Assessment", image: "/images/seismic-crane.jpg", intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.", bullets: [], tags: [] },
+  { id: 3, title: "Building Rehabilitation", image: "/images/about-milestones-building.png", intro: "Expert structural upgrades and rehabilitation for aging and distressed buildings.", bullets: [], tags: [] },
+  { id: 4, title: "Heavy Racking", image: "/images/industrial-racking.jpg", intro: "Industrial racking systems design, engineering review, and seismic compliance for warehouses and distribution centres.", bullets: [], tags: [] },
+  { id: 5, title: "Building Envelope", image: "/images/glass-building.jpg", intro: "Building envelope assessments and structural integration for moisture, performance, and longevity.", bullets: [], tags: [] },
+  { id: 6, title: "Specialty Reviews", image: "/images/about-core-values-building.png", intro: "Specialized structural reviews, peer reviews, and engineering consultations for unique and complex projects.", bullets: [], tags: [] },
 ]
 
 export function ServicesHeroSection() {
@@ -36,23 +37,23 @@ export function ServicesHeroSection() {
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="lg:hidden px-6 pb-10 pt-[88px]">
+      <div className="lg:hidden px-6 pb-10 pt-24">
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
+          CORE SERVICES
+        </p>
+
         <div className="relative pl-5">
           <div
-            className="absolute left-0 top-0 w-[1.5px]"
+            className="absolute left-0 top-[8px] w-[1.5px]"
             style={{
-              height: "100%",
+              height: "calc(100% - 8px)",
               background:
                 "linear-gradient(to bottom, rgba(45,45,45,1) 0%, rgba(45,45,45,0.8) 30%, rgba(45,45,45,0.4) 65%, rgba(45,45,45,0) 100%)",
             }}
           />
 
-          <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
-            CORE SERVICES
-          </p>
-
           <h1
-            className="mb-5 text-[30px] font-black uppercase leading-[1.1] tracking-[0.04em]"
+            className="mb-5 text-[24px] font-black uppercase leading-[1.1] tracking-[0.04em]"
             style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
           >
             <span className="text-[#2D2D2D]">ENGINEERING</span>
@@ -60,7 +61,7 @@ export function ServicesHeroSection() {
             <span className="text-[#0052A5]">SOLUTIONS</span>
           </h1>
 
-          <p className="mb-7 text-[11px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+          <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
             From new structural design to complex rehabilitation, every engagement backed by 35+ years of expertise.
           </p>
 
@@ -70,30 +71,41 @@ export function ServicesHeroSection() {
               return (
                 <div key={service.id}>
                   {isOpen ? (
-                    <div className="rounded-[20px] p-px" style={{ background: GRADIENT_BORDER }}>
-                      <div className="rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3">
-                        <button className="flex w-full items-center justify-between" onClick={() => setOpenId(0)}>
-                          <span className="text-[12px] font-semibold tracking-[0.1em] text-[#2D2D2D]">
+                    <div className="rounded-[20px] lg:p-px" style={{ background: GRADIENT_BORDER }}>
+                      <div
+                        className="rounded-[20px] lg:rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                        style={{
+                          boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+                          backdropFilter: "blur(61.5px)",
+                          WebkitBackdropFilter: "blur(61.5px)",
+                          backgroundColor: "#FCFCFC",
+                        }}
+                      >
+                        <button className="flex w-full items-start justify-between" onClick={() => setOpenId(0)}>
+                          <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D]">
                             {service.id}. {service.title}
                           </span>
-                          <span className="text-[18px] font-light leading-none text-[#2D2D2D]">−</span>
+                          <MinusCircle size={22} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
                         </button>
 
-                        <p className="mt-3 text-[11px] leading-[1.7] tracking-[0.06em] text-[#2D2D2D]">
+                        {service.image && (
+                          <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:hidden">
+                            <Image src={service.image} alt={service.title} fill className="object-cover" />
+                          </div>
+                        )}
+
+                        <p className="mt-3 text-[12px] leading-[1.7] tracking-[0.06em] text-[#2D2D2D]">
                           {service.intro}
                         </p>
 
                         {service.bullets.length > 0 && (
                           <>
-                            <p className="mt-4 text-[11px] font-semibold tracking-[0.1em] text-[#2D2D2D]">
+                            <p className="mt-4 font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                               What We Offer
                             </p>
                             <ul className="mt-2 space-y-[5px]">
                               {service.bullets.map((b) => (
-                                <li
-                                  key={b}
-                                  className="flex items-start gap-2 text-[10px] leading-[1.65] tracking-[0.06em] text-[#2D2D2D]"
-                                >
+                                <li key={b} className="flex items-start gap-2 leading-[1.65] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
                                   <span className="mt-[3px] text-[8px]">•</span>
                                   <span>{b}</span>
                                 </li>
@@ -105,10 +117,7 @@ export function ServicesHeroSection() {
                         {service.tags.length > 0 && (
                           <div className="mt-4 flex flex-wrap gap-[6px]">
                             {service.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="rounded-full bg-[#0052A5] px-3 py-[4px] text-[9px] font-medium tracking-[0.06em] text-white"
-                              >
+                              <span key={tag} className="rounded-full bg-[#0052A5] px-3 py-[4px] text-[9px] font-medium tracking-[0.06em] text-white">
                                 {tag}
                               </span>
                             ))}
@@ -118,14 +127,14 @@ export function ServicesHeroSection() {
                     </div>
                   ) : (
                     <button
-                      className="flex h-[28px] w-full items-center justify-between rounded-[20px] px-3 transition-all hover:opacity-80 hover:scale-[1.005]"
+                      className="flex h-[28px] w-full items-center justify-between rounded-[20px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
                       style={{ background: CLOSED_FILL }}
                       onClick={() => setOpenId(service.id)}
                     >
-                      <span className="text-[11px] font-medium tracking-[0.1em] text-white">
+                      <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
                         {service.id}. {service.title}
                       </span>
-                      <span className="text-[14px] font-light leading-none text-white">+</span>
+                      <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
                     </button>
                   )}
                 </div>
@@ -134,13 +143,14 @@ export function ServicesHeroSection() {
           </div>
         </div>
 
-        <div className="relative -mx-6 mt-8 h-[420px] overflow-hidden">
-          <Image
-            src="/images/services-building.png"
+        <div className="-mx-6 overflow-visible" style={{ marginTop: "-4px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/services-building-mobile.png"
             alt="Teal glass building"
-            fill
-            className="object-cover object-left-bottom"
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
+          <div style={{ width: "360px", height: "2px", backgroundColor: "#000000" }} />
         </div>
       </div>
 

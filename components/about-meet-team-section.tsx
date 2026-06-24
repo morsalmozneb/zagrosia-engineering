@@ -1,19 +1,21 @@
+"use client"
+
 import Image from "next/image"
+import { useRef, useState, useEffect, useCallback } from "react"
 import type { ReactNode } from "react"
 
 function LinkedInIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[11px] w-[11px] fill-current">
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1h.02C3.87 1 4.98 2.12 4.98 3.5ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.05c.53-1.01 1.83-2.07 3.77-2.07 4.03 0 4.77 2.65 4.77 6.1V24h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.59 0-2.99 2.02-2.99 4.11V24h-4V8Z" />
+    <svg width="11" height="10" viewBox="0 0 17 15" fill="none" aria-hidden="true">
+      <path d="M3.56768 1.66741C3.56745 2.10941 3.37928 2.53322 3.04458 2.84561C2.70987 3.158 2.25605 3.33337 1.78295 3.33315C1.30984 3.33293 0.856212 3.15713 0.521844 2.84443C0.187476 2.53173 -0.000236329 2.10774 2.23302e-07 1.66574C0.000236775 1.22374 0.188403 0.799926 0.523106 0.487539C0.857808 0.175152 1.31163 -0.000220793 1.78473 2.08623e-07C2.25784 0.00022121 2.71147 0.176018 3.04584 0.488718C3.3802 0.801417 3.56792 1.2254 3.56768 1.66741ZM3.6212 4.56725H0.0535154V15H3.6212V4.56725ZM9.25813 4.56725H5.70829V15H9.22246V9.5253C9.22246 6.47547 13.4769 6.19216 13.4769 9.5253V15H17V8.39203C17 3.25065 10.703 3.44231 9.22246 5.96717L9.25813 4.56725Z" fill="currentColor"/>
     </svg>
   )
 }
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[11px] w-[11px] fill-none stroke-current stroke-[1.8]">
-      <path d="M3 6.75h18v10.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.25V6.75Z" />
-      <path d="m4.5 8.25 7.5 6 7.5-6" />
+    <svg width="11" height="9" viewBox="0 0 20 16" fill="none" aria-hidden="true">
+      <path d="M2 16C1.45 16 0.979333 15.8043 0.588 15.413C0.196667 15.0217 0.000666667 14.5507 0 14V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196666 1.45067 0.000666667 2 0H18C18.55 0 19.021 0.196 19.413 0.588C19.805 0.98 20.0007 1.45067 20 2V14C20 14.55 19.8043 15.021 19.413 15.413C19.0217 15.805 18.5507 16.0007 18 16H2ZM10 9L18 4V2L10 7L2 2V4L10 9Z" fill="currentColor"/>
     </svg>
   )
 }
@@ -32,9 +34,10 @@ function ContactPill({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-[28px] w-full items-center gap-[7px] rounded-full bg-[#94B8DC] px-3 text-[9px] font-medium tracking-[0.08em] text-[#FCFCFC]"
+      className="flex items-center gap-[5px] rounded-full bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
+      style={{ width: "75px", height: "20px" }}
     >
-      <span className="flex h-[17px] w-[17px] flex-shrink-0 items-center justify-center rounded-full bg-[#5290BF] text-[#FCFCFC]">
+      <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
         {icon}
       </span>
       <span>{label}</span>
@@ -105,79 +108,123 @@ const team: TeamMember[] = [
   },
 ]
 
+const SCROLL_H = 120
+
+function ScrollableText({ text }: { text: string }) {
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [thumbHeight, setThumbHeight] = useState(0)
+  const [thumbTop, setThumbTop] = useState(0)
+
+  const update = useCallback(() => {
+    const el = contentRef.current
+    if (!el) return
+    const ratio = el.clientHeight / el.scrollHeight
+    const th = Math.max(20, SCROLL_H * ratio)
+    setThumbHeight(th)
+    setThumbTop((el.scrollTop / (el.scrollHeight - el.clientHeight)) * (SCROLL_H - th) || 0)
+  }, [])
+
+  useEffect(() => { update() }, [update])
+
+  return (
+    <div className="mt-3 flex gap-2" style={{ height: `${SCROLL_H}px` }}>
+      {/* Content — native scrollbar hidden */}
+      <div
+        ref={contentRef}
+        className="flex-1 overflow-y-scroll"
+        style={{ scrollbarWidth: "none" } as React.CSSProperties}
+        onScroll={update}
+      >
+        <p className="leading-[1.7] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+          {text}
+        </p>
+      </div>
+      {/* Always-visible custom scrollbar */}
+      <div className="relative flex-shrink-0" style={{ width: "4px", height: `${SCROLL_H}px`, backgroundColor: "#e8edf4", borderRadius: "9999px" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: `${thumbTop}px`,
+            width: "4px",
+            height: `${thumbHeight}px`,
+            backgroundColor: "#0052A5",
+            borderRadius: "9999px",
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div
-      className="rounded-[20px] p-px"
+    <article
+      className="rounded-[20px] p-4"
       style={{
-        background:
-          "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)",
+        backgroundColor: "#FCFCFC",
+        boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+        backdropFilter: "blur(61.5px)",
+        WebkitBackdropFilter: "blur(61.5px)",
       }}
     >
-      <article className="rounded-[19px] bg-[#FCFCFC] p-4">
+      {/* TOP ROW: image left, stats right */}
+      <div className="flex items-start gap-4">
 
-        {/* TOP ROW: image left, stats right */}
-        <div className="flex items-start gap-4">
-
-          {/* Portrait */}
-          <div
-            className="relative flex-shrink-0 overflow-hidden rounded-[5px]"
-            style={{ width: 170, height: 200 }}
-          >
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              className="object-cover object-top"
-            />
-          </div>
-
-          {/* Right column */}
-          <div className="flex flex-1 flex-col gap-0 pt-3">
-            {/* Experience */}
-            <div>
-              <p className="text-[22px] font-semibold leading-none tracking-[0.06em] text-[#2D2D2D]">
-                {member.experience}
-              </p>
-              <p className="mt-[4px] text-[9px] font-normal tracking-[0.18em] text-[#2D2D2D]">
-                Experience
-              </p>
-            </div>
-
-            {/* Degrees */}
-            <div className="mt-4 space-y-[4px]">
-              {member.degrees.map((deg) => (
-                <p
-                  key={deg}
-                  className="text-[17px] font-semibold leading-none tracking-[0.08em] text-[#2D2D2D]"
-                >
-                  {deg}
-                </p>
-              ))}
-            </div>
-
-            {/* Pills */}
-            <div className="mt-4 space-y-[7px]">
-              <ContactPill href={member.linkedIn} label="LinkedIn" icon={<LinkedInIcon />} />
-              <ContactPill href={member.email} label="Email" icon={<MailIcon />} />
-            </div>
-          </div>
+        {/* Portrait */}
+        <div
+          className="relative flex-shrink-0 overflow-hidden rounded-[5px]"
+          style={{ width: 170, height: 200 }}
+        >
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover object-top"
+          />
         </div>
 
-        {/* Name */}
-        <h3 className="mt-4 text-[13px] font-bold uppercase leading-none tracking-[0.16em] text-[#2D2D2D]">
-          {member.name}
-        </h3>
+        {/* Right column */}
+        <div className="flex flex-1 flex-col gap-0 pt-3">
+          {/* Experience */}
+          <div>
+            <p className="font-semibold leading-none tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
+              {member.experience}
+            </p>
+            <p className="mt-[4px] font-normal tracking-[0.18em] text-[#2D2D2D]" style={{ fontSize: "10px" }}>
+              Experience
+            </p>
+          </div>
 
-        {/* Scrollable description */}
-        <div className="zag-team-scroll mt-3 h-[120px] overflow-y-scroll pr-3">
-          <p className="text-[11px] leading-[1.7] tracking-[0.12em] text-[#2D2D2D]">
-            {member.description}
-          </p>
+          {/* Degrees */}
+          <div className="mt-4 space-y-[4px]">
+            {member.degrees.map((deg) => (
+              <p
+                key={deg}
+                className="font-semibold leading-none tracking-[0.08em] text-[#2D2D2D]"
+                style={{ fontSize: "14px" }}
+              >
+                {deg}
+              </p>
+            ))}
+          </div>
+
+          {/* Pills */}
+          <div className="mt-4 space-y-[7px]">
+            <ContactPill href={member.linkedIn} label="LinkedIn" icon={<LinkedInIcon />} />
+            <ContactPill href={member.email} label="Email" icon={<MailIcon />} />
+          </div>
         </div>
+      </div>
 
-      </article>
-    </div>
+      {/* Name */}
+      <h3 className="mt-4 font-semibold uppercase leading-none tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+        {member.name}
+      </h3>
+
+      {/* Scrollable description */}
+      <ScrollableText text={member.description} />
+
+    </article>
   )
 }
 
@@ -186,8 +233,8 @@ export function AboutMeetTeamSection() {
     <section className="bg-[#FCFCFC] px-5 pb-14 pt-10 text-[#2D2D2D]">
       {/* Heading */}
       <h2
-        className="mb-7 text-[22px] font-light uppercase leading-none tracking-[0.18em] text-[#2D2D2D]"
-        style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+        className="mb-7 uppercase leading-none tracking-[0.18em] text-[#2D2D2D]"
+        style={{ fontSize: "20px", fontWeight: 600 }}
       >
         MEET OUR TEAM
       </h2>

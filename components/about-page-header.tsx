@@ -3,20 +3,22 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const menuItems = [
-  { label: "HOME", href: "/" },
-  { label: "ABOUT", href: "/about" },
-  { label: "SERVICES", href: "/services" },
-  { label: "PROJECTS", href: "/projects" },
-  { label: "AI LAB", href: "/ai-lab" },
-  { label: "ACADEMY", href: "/academy" },
-  { label: "BLOG", href: "/blog" },
-  { label: "CONTACT", href: "/contact", active: true },
+  { label: "HOME",     href: "/",         icon: "/icons/icon-home.svg"     },
+  { label: "ABOUT",    href: "/about",    icon: "/icons/icon-about.svg"    },
+  { label: "SERVICES", href: "/services", icon: "/icons/icon-services.svg" },
+  { label: "PROJECTS", href: "/projects", icon: "/icons/icon-projects.svg" },
+  { label: "AI LAB",   href: "/ai-lab",   icon: "/icons/icon-ailab.svg"    },
+  { label: "ACADEMY",  href: "/academy",  icon: "/icons/icon-academy.svg"  },
+  { label: "BLOG",     href: "/blog",     icon: "/icons/icon-blog.svg"     },
+  { label: "CONTACT",  href: "/contact",  icon: "/icons/icon-contact.svg"  },
 ]
 
 export function AboutPageHeader() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : ""
@@ -26,7 +28,7 @@ export function AboutPageHeader() {
   }, [isOpen])
 
   return (
-    <header className="hero-content absolute inset-x-0 top-0 z-50 px-6 py-5 lg:py-8" style={{ paddingLeft: "calc(var(--desktop-grid-content-start, 0px) + 4px)" }}>
+    <header className="hero-content absolute inset-x-0 top-0 z-50 px-6 py-5 lg:py-8" style={{ paddingLeft: "max(24px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}>
       <div className={`${isOpen ? "invisible" : "flex"} items-center justify-between`}>
         <Link href="/" aria-label="Go to homepage">
           <Image
@@ -86,21 +88,35 @@ export function AboutPageHeader() {
             </button>
           </div>
 
-          <nav className="flex flex-1 items-start justify-center px-8 pt-24">
-            <ul className="flex flex-col items-center gap-8">
-              {menuItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className={`zag-heading text-[16px] leading-none ${
-                      item.active ? "text-[#0052A5]" : "text-[#2D2D2D]"
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+          <nav className="flex flex-1 items-start justify-center px-8 pt-20">
+            <ul className="flex flex-col gap-7">
+              {menuItems.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className={`zag-heading flex items-center gap-4 text-[16px] leading-none transition-all ${
+                        isActive ? "text-[#0052A5]" : "text-[#2D2D2D]"
+                      }`}
+                      style={isActive ? {
+                        backgroundColor: "rgba(0,82,165,0.09)",
+                        borderRadius: "10px",
+                        padding: "8px 16px 8px 12px",
+                        boxShadow: "inset 0 0 0 1px rgba(0,82,165,0.18)",
+                        fontWeight: 850,
+                      } : { padding: "8px 16px 8px 12px" }}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <span className="flex items-center justify-center" style={{ width: 20, height: 20, flexShrink: 0 }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={item.icon} alt="" style={{ width: isActive ? 22 : 20, height: isActive ? 22 : 20, objectFit: "contain", filter: isActive ? "brightness(0) saturate(100%) invert(21%) sepia(94%) saturate(1200%) hue-rotate(202deg) brightness(90%)" : "none" }} />
+                      </span>
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </nav>
         </div>

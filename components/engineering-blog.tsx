@@ -69,7 +69,7 @@ export function EngineeringBlog() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden px-8 pt-8">
-        <h2 className="zag-heading mb-5 leading-none text-[#2d2d2d]" style={{ fontSize: "20px" }}>ENGINEERING BLOG</h2>
+        <h2 className="zag-heading mb-5 font-medium leading-none text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>ENGINEERING BLOG</h2>
         <p className="mb-8 max-w-[292px] leading-[1.5] tracking-[0.17em] text-[#2d2d2d]" style={{ fontSize: "12px" }}>
           Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
         </p>

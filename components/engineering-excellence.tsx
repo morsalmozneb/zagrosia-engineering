@@ -9,7 +9,7 @@ export function EngineeringExcellence() {
 
         {/* Text content */}
         <div className="max-w-[175px]">
-          <h2 className="zag-heading mb-5 leading-[1.22] text-[#2d2d2d]" style={{ fontSize: "20px" }}>
+          <h2 className="zag-heading mb-5 font-medium leading-[1.22] text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>
             ENGINEERING
             <br />
             EXCELLENCE

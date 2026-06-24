@@ -88,7 +88,7 @@ export function EGBCExamPrep() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden px-8 pt-10 pb-0">
-        <h2 className="zag-heading mb-8 leading-[1.24] text-[#2d2d2d]" style={{ fontSize: "20px" }}>
+        <h2 className="zag-heading mb-8 font-medium leading-[1.24] text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>
           PASS THE EGBC EXAM.
           <br />
           THE SMART WAY.

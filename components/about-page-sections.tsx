@@ -31,7 +31,7 @@ export function AboutHeroSection() {
         </h1>
 
         <div className="mt-6 max-w-[292px] space-y-4">
-          <p className="text-[11px] leading-[1.48] tracking-[0.14em] text-[#2D2D2D]">
+          <p className="leading-[1.48] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
             With over 35 years of structural
             engineering expertise, Zagrosia
             Engineering combines trusted
@@ -39,7 +39,7 @@ export function AboutHeroSection() {
             driven workflows.
           </p>
 
-          <p className="max-w-[302px] text-[11px] leading-[1.44] tracking-[0.14em] text-[#2D2D2D]">
+          <p className="max-w-[302px] leading-[1.44] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
             Led by <span className="font-semibold">Seyed Hassan Mozneb</span>, M.Sc.,
             P.Eng., the company specializes in
             seismic assessments, structural
@@ -52,7 +52,7 @@ export function AboutHeroSection() {
         </div>
       </div>
 
-      <div className="relative -mx-6 mt-6 h-[208px] w-[calc(100%+3rem)] overflow-hidden">
+      <div className="relative -mx-6 -mt-[19px] h-[208px] w-[calc(100%+3rem)] overflow-hidden">
         <Image
           src="/images/about-bridge.png"
           alt="Bridge structure"
@@ -84,44 +84,45 @@ export function AboutProfileSection() {
         }}
       />
 
-      <div className="relative pt-10">
-        {/* Photo + stats row — fixed height so line sits directly below */}
-        <div className="relative h-[300px]">
-          {/* Photo: upper-body crop, anchored top-left */}
-          <div className="absolute top-0 left-0 h-[300px] w-[190px]">
-            <Image
-              src="/images/homayoun-pic.png"
-              alt="Seyed Hassan Mozneb"
-              fill
-              className="object-cover object-top"
-            />
+      <div className="relative pt-2">
+        {/* Photo + stats row */}
+        <div className="flex items-center gap-4">
+          {/* Photo + line: left side, shifted up */}
+          <div className="flex-shrink-0 -mt-[45px]">
+            <div className="relative overflow-hidden -ml-[40px]" style={{ width: "220px", height: "320px" }}>
+              <Image
+                src="/images/homayoun-pic-mobile.png"
+                alt="Seyed Hassan Mozneb"
+                fill
+                className="object-contain object-bottom"
+              />
+            </div>
+            <div className="h-[2px] bg-[#FCFCFC] -ml-[40px]" style={{ width: "300px" }} />
           </div>
 
-          {/* Stats: right side, vertically centered */}
-          <div className="relative z-10 ml-auto flex h-[300px] w-[130px] flex-col justify-center gap-8 text-left">
+          {/* Stats: right side, stacked vertically */}
+          <div className="flex flex-col justify-center gap-[15px] pb-4 -ml-[70px]">
             <div>
-              <p className="text-[18px] font-semibold tracking-[0.08em] text-[#FCFCFC]">35+</p>
-              <p className="mt-1 text-[11px] tracking-[0.15em] text-[#FCFCFC]">Experience</p>
+              <p className="font-semibold tracking-[0.08em] text-[#FCFCFC]" style={{ fontSize: "24px" }}>35+</p>
+              <p className="mt-1 tracking-[0.15em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Experience</p>
             </div>
             <div>
-              <p className="text-[18px] font-semibold tracking-[0.08em] text-[#FCFCFC]">200+</p>
-              <p className="mt-1 text-[11px] tracking-[0.15em] text-[#FCFCFC]">Projects</p>
+              <p className="font-semibold tracking-[0.08em] text-[#FCFCFC]" style={{ fontSize: "24px" }}>200+</p>
+              <p className="mt-1 tracking-[0.15em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Projects</p>
             </div>
             <div>
-              <p className="text-[18px] font-semibold tracking-[0.08em] text-[#FCFCFC]">8+</p>
-              <p className="mt-1 text-[11px] tracking-[0.15em] text-[#FCFCFC]">Canada</p>
+              <p className="font-semibold tracking-[0.08em] text-[#FCFCFC]" style={{ fontSize: "24px" }}>8+</p>
+              <p className="mt-1 tracking-[0.15em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Canada</p>
             </div>
           </div>
         </div>
 
-        {/* Divider line — sits directly below photo row */}
-        <div className="border-t border-[#FCFCFC]/75" />
 
-        {/* Education + certs — aligned under stats (right half), matching desktop layout */}
-        <div className="pt-6 ml-[48%]">
+        {/* Education + Certifications */}
+        <div className="pt-4">
           <div className="mb-7">
-            <h2 className="zag-heading mb-4 text-[18px] leading-none text-[#FCFCFC]">EDUCATION</h2>
-            <ul className="space-y-3 text-[11px] tracking-[0.14em] text-[#FCFCFC]">
+            <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "18px", fontWeight: 600 }}>EDUCATION</h2>
+            <ul className="space-y-3 tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>
               {education.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -129,26 +130,28 @@ export function AboutProfileSection() {
           </div>
 
           <div>
-            <h2 className="zag-heading mb-4 text-[18px] leading-none text-[#FCFCFC]">CERTIFICATIONS</h2>
-            <ul className="space-y-3 text-[11px] leading-[1.34] tracking-[0.14em] text-[#FCFCFC]">
+            <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "18px", fontWeight: 600 }}>CERTIFICATIONS</h2>
+            <ul className="space-y-3 leading-[1.34] tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>
               {certifications.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex justify-start gap-[15px]">
             <a
               href="/files/resume-homayoun.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="zag-outline-button min-h-[44px] flex-1 whitespace-nowrap border-[#FCFCFC] px-0 text-[9px] tracking-[0.16em] text-[#FCFCFC] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]"
+              className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               View Resume
             </a>
             <a
               href="/contact"
-              className="zag-outline-button min-h-[44px] flex-1 whitespace-nowrap border-[#FCFCFC] px-0 text-[9px] tracking-[0.16em] text-[#FCFCFC] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]"
+              className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Contact
             </a>
@@ -162,7 +165,7 @@ export function AboutProfileSection() {
 export function AboutMissionVisionSection() {
   return (
     <section className="bg-[#FCFCFC] px-6 pb-14 pt-10 text-[#2D2D2D]">
-      <h2 className="zag-heading text-[22px] leading-[1.22] text-[#2D2D2D]">
+      <h2 className="zag-heading leading-[1.22] text-[#2D2D2D]" style={{ fontSize: "20px", fontWeight: 600 }}>
         OUR MISSION
         <br />
         &
@@ -172,89 +175,91 @@ export function AboutMissionVisionSection() {
 
       <div className="mt-7 flex items-stretch gap-8">
         <div
-          className="w-[calc(50%-1rem)] flex-1 rounded-[20px] p-px"
+          className="w-[calc(50%-1rem)] flex-1 px-4 py-4"
           style={{
-            background:
-              "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.58) 22%, rgba(147,147,147,0.22) 100%)",
+            borderRadius: "20px",
+            backgroundColor: "rgba(252,252,252,0.4)",
+            boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+            backdropFilter: "blur(61.5px)",
+            WebkitBackdropFilter: "blur(61.5px)",
           }}
         >
-          <div className="h-full rounded-[19px] bg-[#FCFCFC] px-4 py-4">
-            <p className="text-[11px] leading-[1.35] tracking-[0.15em] text-[#2D2D2D]">
-              For over 35
-              <br />
-              years, We has
-              <br />
-              delivered
-              <br />
-              intelligent
-              <br />
-              structural
-              <br />
-              engineering
-              <br />
-              solutions with
-              <br />
-              precision,
-              <br />
-              innovation, and
-              <br />
-              deep industry
-              <br />
-              expertise,
-              <br />
-              combining
-              <br />
-              trusted
-              <br />
-              engineering
-              <br />
-              practices with
-              <br />
-              modern AI-
-              <br />
-              driven
-              <br />
-              workflows.
-            </p>
-          </div>
+          <p className="leading-[1.35] tracking-[0.15em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+            For over 35
+            <br />
+            years, We has
+            <br />
+            delivered
+            <br />
+            intelligent
+            <br />
+            structural
+            <br />
+            engineering
+            <br />
+            solutions with
+            <br />
+            precision,
+            <br />
+            innovation, and
+            <br />
+            deep industry
+            <br />
+            expertise,
+            <br />
+            combining
+            <br />
+            trusted
+            <br />
+            engineering
+            <br />
+            practices with
+            <br />
+            modern AI-
+            <br />
+            driven
+            <br />
+            workflows.
+          </p>
         </div>
 
         <div
-          className="w-[calc(50%-1rem)] flex-1 rounded-[20px] p-px"
+          className="w-[calc(50%-1rem)] flex-1 px-4 py-4"
           style={{
-            background:
-              "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.58) 22%, rgba(147,147,147,0.22) 100%)",
+            borderRadius: "20px",
+            backgroundColor: "rgba(252,252,252,0.4)",
+            boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+            backdropFilter: "blur(61.5px)",
+            WebkitBackdropFilter: "blur(61.5px)",
           }}
         >
-          <div className="h-full rounded-[19px] bg-[#FCFCFC] px-4 py-4">
-            <p className="text-[11px] leading-[1.35] tracking-[0.15em] text-[#2D2D2D]">
-              To become
-              <br />
-              Western
-              <br />
-              Canada&apos;s
-              <br />
-              leading
-              <br />
-              structural
-              <br />
-              engineering
-              <br />
-              firm through
-              <br />
-              innovation,
-              <br />
-              technical
-              <br />
-              excellence, and
-              <br />
-              the future of
-              <br />
-              engineering
-              <br />
-              technology.
-            </p>
-          </div>
+          <p className="leading-[1.35] tracking-[0.15em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+            To become
+            <br />
+            Western
+            <br />
+            Canada&apos;s
+            <br />
+            leading
+            <br />
+            structural
+            <br />
+            engineering
+            <br />
+            firm through
+            <br />
+            innovation,
+            <br />
+            technical
+            <br />
+            excellence, and
+            <br />
+            the future of
+            <br />
+            engineering
+            <br />
+            technology.
+          </p>
         </div>
       </div>
     </section>
@@ -282,7 +287,7 @@ const coreValues = [
 export function AboutCoreValuesSection() {
   return (
     <section className="relative overflow-hidden bg-[#000000] text-[#FCFCFC]">
-      <div className="relative h-[320px] w-full overflow-hidden">
+      <div className="relative h-[400px] w-full overflow-hidden bg-[#FCFCFC] lg:bg-transparent">
         <Image
           src="/images/about-core-values-building.png"
           alt="Core values architectural building"
@@ -309,7 +314,7 @@ export function AboutCoreValuesSection() {
             }}
           />
 
-          <h2 className="zag-heading text-[22px] leading-[1.14] text-[#FCFCFC]">
+          <h2 className="zag-heading leading-[1.14] text-[#FCFCFC]" style={{ fontSize: "20px", fontWeight: 600 }}>
             OUR CORE
             <br />
             VALUES
@@ -319,20 +324,21 @@ export function AboutCoreValuesSection() {
             {coreValues.map((value) => (
               <div
                 key={value.title}
-                className="rounded-[20px] p-px"
+                className="px-4 py-4"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.84) 28%, rgba(155,155,155,0.58) 79%, rgba(155,155,155,0.36) 100%)",
+                  borderRadius: "20px",
+                  backgroundColor: "#010101",
+                  boxShadow: "0px 1px 15.1px 0px rgba(255,255,255,0.68)",
+                  backdropFilter: "blur(61.5px)",
+                  WebkitBackdropFilter: "blur(61.5px)",
                 }}
               >
-                <div className="rounded-[19px] bg-black/70 px-4 py-4">
-                  <h3 className="text-[12px] font-semibold tracking-[0.14em] text-[#FCFCFC]">
-                    {value.title}
-                  </h3>
-                  <p className="mt-3 max-w-[290px] text-[11px] leading-[1.36] tracking-[0.14em] text-[#FCFCFC]">
-                    {value.description}
-                  </p>
-                </div>
+                <h3 className="tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "16px", fontWeight: 450 }}>
+                  {value.title}
+                </h3>
+                <p className="mt-3 max-w-[290px] leading-[1.36] tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>
+                  {value.description}
+                </p>
               </div>
             ))}
           </div>

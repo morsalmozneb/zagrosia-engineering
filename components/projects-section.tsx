@@ -119,7 +119,7 @@ export function ProjectsSection() {
           />
           {/* Text content */}
           <div className="relative z-10 px-8 pt-12">
-            <h2 className="zag-heading leading-none text-white" style={{ fontSize: "20px" }}>PROJECTS</h2>
+            <h2 className="zag-heading font-medium leading-none text-white lg:font-normal" style={{ fontSize: "20px" }}>PROJECTS</h2>
             <p className="mt-5 leading-[1.56] tracking-[0.18em] text-white/90" style={{ fontSize: "12px" }}>
               Hover over any project for detailed technical data, HUD overlay with structural system, codes, loads and materials.
             </p>
