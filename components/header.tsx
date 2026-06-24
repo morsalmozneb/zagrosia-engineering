@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+const WAVE_COLOR = "#C5DEF5"
 
 const menuItems = [
   { label: "HOME",     href: "/",         icon: "/icons/icon-home.svg"     },
@@ -29,47 +30,63 @@ export function Header() {
   }, [isOpen])
 
   return (
-    <header
-      className="fixed top-4 z-50 px-4 py-3 lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none lg:backdrop-blur-none lg:px-6 lg:py-8"
-      style={{
-        left: "16px",
-        right: "16px",
-        borderRadius: "20px",
-        backgroundColor: "rgba(252,252,252,0.92)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-        border: "1px solid rgba(0,82,165,0.12)",
-        boxShadow: "0 4px 24px rgba(13,44,96,0.13), 0 1px 6px rgba(13,44,96,0.07)",
-      } as React.CSSProperties}
-    >
-      <div className={`${isOpen ? "invisible" : "flex"} items-center justify-between`}>
+    <header className="fixed top-3 z-50 lg:absolute lg:top-0 lg:left-0 lg:right-0" style={{ left: "23px", right: "23px" }}>
+
+      {/* ── MOBILE: floating box ── */}
+      <div
+        className="lg:hidden"
+        style={{
+          borderRadius: "20px",
+          backgroundColor: "rgba(148,184,220,0.5)",
+          boxShadow: "0px 4px 19.6px 0px rgba(148,184,220,0.34)",
+          backdropFilter: "blur(61.5px)",
+          WebkitBackdropFilter: "blur(61.5px)",
+        }}
+      >
+        <div
+          className={`${isOpen ? "invisible" : "flex"} items-center justify-between px-5`}
+          style={{ height: "45px" }}
+        >
+          <Link href="/" aria-label="Go to homepage" className="flex items-center">
+            <Image
+              src="/images/zagrosia-logo.svg"
+              alt="Zagrosia Engineering Inc."
+              width={148}
+              height={36}
+              className="h-auto w-[136px]" style={{ marginTop: "10px" }}
+              priority
+            />
+          </Link>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex flex-col items-center justify-center gap-[5px] p-1"
+            aria-label="Toggle menu"
+          >
+            <span className="h-[1.5px] w-6 rounded-full bg-[#0052A5]" />
+            <span className="h-[1.5px] w-6 rounded-full bg-[#0052A5]" />
+            <span className="h-[1.5px] w-6 rounded-full bg-[#0052A5]" />
+          </button>
+        </div>
+      </div>
+
+      {/* ── DESKTOP: original transparent absolute header ── */}
+      <div
+        className="hidden lg:flex items-center justify-between px-6 py-8"
+        style={{ paddingLeft: "max(20px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}
+      >
         <Link href="/" aria-label="Go to homepage">
           <Image
             src="/images/zagrosia-logo.svg"
             alt="Zagrosia Engineering Inc."
             width={148}
             height={36}
-            className="h-auto w-[120px]"
+            className="h-auto w-[136px] drop-shadow-lg"
             priority
           />
         </Link>
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 flex flex-col gap-[6px] lg:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? (
-            <span className="text-[#2D2D2D] text-2xl font-light">&times;</span>
-          ) : (
-            <>
-              <span className="w-6 h-[2px] bg-[#2D2D2D]" />
-              <span className="w-6 h-[2px] bg-[#2D2D2D]" />
-            </>
-          )}
-        </button>
       </div>
 
+      {/* ── Menu overlay ── */}
       <div
         className={`fixed left-0 top-0 z-[100] h-screen w-screen bg-[#FCFCFC] transition-all duration-300 ease-out ${
           isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
@@ -91,7 +108,6 @@ export function Header() {
                 priority
               />
             </Link>
-
             <button
               onClick={() => setIsOpen(false)}
               className="px-1 py-0 text-[36px] font-light leading-none text-[#2D2D2D]"
