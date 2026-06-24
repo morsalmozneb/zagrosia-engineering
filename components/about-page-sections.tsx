@@ -16,7 +16,7 @@ export function AboutHeroSection() {
         />
 
         <h1
-          className="text-[24px] leading-[1.02] text-[#2D2D2D]"
+          className="text-[24px] leading-[1.25] text-[#2D2D2D]"
           style={{
             fontFamily: 'var(--zag-heading)',
             fontWeight: 900,

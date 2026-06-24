@@ -20,6 +20,41 @@ Foundation design sees notable changes as well, particularly for sites with liqu
 
 const paragraphs = articleContent.split("\n\n")
 
+function MobileArticleScroll({ content }: { content: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [thumbTop, setThumbTop] = useState(0)
+  const thumbHeight = 35
+
+  function handleScroll() {
+    const el = ref.current
+    if (!el) return
+    const scrollable = el.scrollHeight - el.clientHeight
+    if (scrollable <= 0) return
+    setThumbTop((el.scrollTop / scrollable) * (100 - thumbHeight))
+  }
+
+  return (
+    <div className="flex gap-2">
+      <div className="relative w-[3px] flex-shrink-0 self-stretch rounded-full bg-[#E8EDF4]">
+        <div
+          className="absolute left-0 right-0 rounded-full bg-[#0052A5]"
+          style={{ top: `${thumbTop}%`, height: `${thumbHeight}%`, transition: "top 0.05s linear" }}
+        />
+      </div>
+      <div
+        ref={ref}
+        onScroll={handleScroll}
+        className="max-h-[200px] flex-1 overflow-y-auto pr-1 text-[10px] leading-[1.75] tracking-[0.05em] text-[#4A4A4A]"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+      >
+        {content.split("\n\n").map((para, i) => (
+          <p key={i} className={i > 0 ? "mt-3" : ""}>{para}</p>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function ScrollableArticle({ content }: { content: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const [thumbTop, setThumbTop] = useState(0)
@@ -45,7 +80,7 @@ function ScrollableArticle({ content }: { content: string }) {
         ref={ref}
         onScroll={handleScroll}
         className="blog-article max-h-[280px] flex-1 overflow-y-auto leading-[1.78] tracking-[0.06em] text-[#4A4A4A]"
-        style={{ fontSize: "16px" }}
+        style={{ fontSize: "16px", scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
         {content.split("\n\n").map((para, i) => (
           <p key={i} className={i > 0 ? "mt-4" : ""}>{para}</p>
@@ -133,146 +168,148 @@ With focused preparation over six to eight weeks, most candidates can pass on th
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="lg:hidden px-6 pb-14 pt-[88px]">
-        <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
-          INSIGHTS
-        </p>
+      <div className="lg:hidden px-5 pb-14 pt-24">
 
-        <h1
-          className="mb-5 text-[30px] font-black uppercase leading-[1.05] tracking-[0.04em]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          <span className="text-[#2D2D2D]">ENGINEERING</span>
-          <br />
-          <span className="text-[#0052A5]">BLOG</span>
-        </h1>
+        {/* Label */}
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INSIGHTS</p>
 
-        <p className="mb-8 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Insights, technical breakdowns, and industry updates from the Zagrosia Engineering team.
-        </p>
+        {/* Vertical line + heading + body */}
+        <div className="relative pl-[12px]">
+          <div
+            className="absolute left-0 top-[8px] w-px"
+            style={{
+              height: "calc(100% - 8px)",
+              background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
+            }}
+          />
+          <h1
+            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            <span className="text-[#2D2D2D]">ENGINEERING</span>
+            <br />
+            <span className="text-[#0052A5]">BLOG</span>
+          </h1>
+          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Insights, technical breakdowns, and industry updates from the Zagrosia Engineering team.
+          </p>
+        </div>
 
-        <div className="mb-[10px] rounded-[6px] p-px" style={{ background: GRAD_BORDER }}>
-          <div className="rounded-[5px] bg-[#FCFCFC] p-4">
+        {/* Mobile blog cards — interactive, matches desktop layout */}
+        {desktopArticles.map((article, index) => {
+          const isOpen = openCards.has(index)
+          return (
+            <div
+              key={index}
+              className="mb-[10px] rounded-[20px] bg-[#FCFCFC] p-4"
+              style={{
+                boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+                backdropFilter: "blur(61.5px)",
+                WebkitBackdropFilter: "blur(61.5px)",
+              }}
+            >
+              {/* Closed state */}
+              {!isOpen && (
+                <div className="flex items-start gap-3">
+                  <div className="flex-1 min-w-0">
+                    <span className="mb-2 inline-block rounded-full border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
+                      {article.category}
+                    </span>
+                    <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
+                      {article.title}
+                    </h2>
+                    <p className="mb-2 text-[9px] tracking-[0.08em] text-[#0052A5]">
+                      {article.date} · {article.readTime}
+                    </p>
+                    <p className="text-[10px] leading-[1.6] tracking-[0.04em] text-[#666]">
+                      {article.summary}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setOpenCards(prev => { const next = new Set(prev); next.add(index); return next })}
+                      className="flex h-[28px] w-[28px] items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                      aria-label="Expand article"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                        <path d="M7 2V12M2 7H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                    <div className="relative h-[90px] w-[80px] overflow-hidden rounded-[10px]">
+                      <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
+                    </div>
+                  </div>
+                </div>
+              )}
 
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <span className="mb-2 inline-block rounded-full border border-[#0052A5] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#0052A5]">
-                  Seismic
-                </span>
-                <h2 className="mb-2 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
-                  BCBC 2024 Seismic Requirements: What Every Structural Engineer Needs to Know
-                </h2>
-                <p className="text-[9px] tracking-[0.08em] text-[#888888]">
-                  May 2026 · 8 min read
-                </p>
-              </div>
-              <div className="relative h-[110px] w-[100px] flex-shrink-0 overflow-hidden rounded-[4px]">
-                <Image
-                  src="/images/Blog-pic-1.png"
-                  alt="BCBC 2024 Seismic Requirements"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
+              {/* Open state */}
+              {isOpen && (
+                <>
+                  <div className="flex items-start justify-between gap-3 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <span className="mb-2 inline-block rounded-full border border-[#0052A5] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#0052A5]">
+                        {article.category}
+                      </span>
+                      <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
+                        {article.title}
+                      </h2>
+                      <p className="text-[9px] tracking-[0.08em] text-[#0052A5]">
+                        {article.date} · {article.readTime}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setOpenCards(prev => { const next = new Set(prev); next.delete(index); return next })}
+                      className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                      aria-label="Collapse article"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                        <path d="M2 7H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="my-3 h-px w-full bg-[#E0E0E0]" />
+                  <div className="mb-3 relative h-[160px] w-full overflow-hidden rounded-[12px]">
+                    <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
+                  </div>
+                  <MobileArticleScroll content={article.content} />
+                </>
+              )}
             </div>
+          )
+        })}
 
-            <div className="my-4 h-px w-full bg-[#E0E0E0]" />
-
-            <div className="flex gap-2">
-              <div className="relative w-[4px] flex-shrink-0 self-stretch rounded-full bg-[#E8EDF4]">
-                <div
-                  className="absolute left-0 right-0 rounded-full bg-[#0052A5] transition-none"
-                  style={{ top: `${thumbTop}%`, height: `${thumbHeight}%` }}
-                />
-              </div>
-
-              <div
-                ref={scrollRef}
-                onScroll={handleScroll}
-                className="blog-article h-[180px] flex-1 overflow-y-scroll pr-1 text-[10px] leading-[1.75] tracking-[0.05em] text-[#4A4A4A]"
-              >
-                {paragraphs.map((para, i) => (
-                  <p key={i} className={i > 0 ? "mt-3" : ""}>
-                    {para}
-                  </p>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <a
-                href="/blog"
-                className="inline-flex h-[38px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-6 tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
-              >
-                Read Article
-              </a>
-            </div>
+        {/* Mobile CTA */}
+        <div className="mt-10">
+          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+          <h2
+            className="mb-6 uppercase leading-[1.45] tracking-[0.12em] text-[#2D2D2D]"
+            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            THINK WE SHOULD COVER MORE TOPICS?
+          </h2>
+          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Have a subject or category you'd like us to write about? We'd love to hear from you.
+          </p>
+          <div className="flex gap-[15px]">
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Contact Us
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Get In Touch
+            </a>
           </div>
         </div>
 
-        <div className="mb-[10px] rounded-[6px] p-px" style={{ background: COMPACT_GRAD_BORDER }}>
-          <div className="rounded-[5px] bg-[#FCFCFC] p-4">
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <span className="mb-2 inline-block rounded-full border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
-                  Technology
-                </span>
-                <h2 className="mb-2 text-[11px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
-                  How Python is Transforming Structural Engineering Practice
-                </h2>
-                <p className="mb-3 text-[9px] tracking-[0.08em] text-[#888888]">
-                  Apr 2026 · 6 min read
-                </p>
-                <a
-                  href="/blog"
-                  className="inline-flex h-[32px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-4 tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
-                >
-                  Read
-                </a>
-              </div>
-              <div className="relative h-[120px] w-[90px] flex-shrink-0 overflow-hidden rounded-[4px]">
-                <Image
-                  src="/images/Blog-pic-2.png"
-                  alt="Python in Structural Engineering"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-[6px] p-px" style={{ background: COMPACT_GRAD_BORDER }}>
-          <div className="rounded-[5px] bg-[#FCFCFC] p-4">
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <span className="mb-2 inline-block rounded-full border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
-                  EGBC
-                </span>
-                <h2 className="mb-2 text-[11px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
-                  Top 5 Strategies for Passing the EGBC NPPE Exam
-                </h2>
-                <p className="mb-3 text-[9px] tracking-[0.08em] text-[#888888]">
-                  Mar 2026 · 5 min read
-                </p>
-                <a
-                  href="/blog"
-                  className="inline-flex h-[32px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-4 tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
-                >
-                  Read
-                </a>
-              </div>
-              <div className="relative h-[120px] w-[90px] flex-shrink-0 overflow-hidden rounded-[4px]">
-                <Image
-                  src="/images/Blog-pic-3.png"
-                  alt="EGBC NPPE Exam Strategies"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="sidebar-content hidden lg:block">

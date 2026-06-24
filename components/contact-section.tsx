@@ -61,26 +61,40 @@ export function ContactSection() {
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="lg:hidden px-6 pb-14 pt-[88px]">
+      <div className="lg:hidden px-5 pb-14 pt-24">
 
-        <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
-          GET IN TOUCH
-        </p>
+        {/* Label */}
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
 
-        <h1
-          className="mb-5 text-[30px] font-black uppercase leading-[1.05] tracking-[0.04em]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+        {/* Vertical line + heading + body */}
+        <div className="relative pl-[12px] mb-8">
+          <div
+            className="absolute left-0 top-[8px] w-px"
+            style={{
+              height: "calc(100% - 8px)",
+              background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
+            }}
+          />
+          <h1
+            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            <span className="text-[#2D2D2D]">START YOUR</span>
+            <br />
+            <span className="text-[#0052A5]">PROJECT TODAY</span>
+          </h1>
+          <p className="text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
+          </p>
+        </div>
+
+        <div className="mb-10 rounded-[20px] bg-[#FCFCFC] px-5 py-5"
+          style={{
+            boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+            backdropFilter: "blur(61.5px)",
+            WebkitBackdropFilter: "blur(61.5px)",
+          }}
         >
-          <span className="text-[#2D2D2D]">START YOUR</span>
-          <br />
-          <span className="text-[#0052A5]">PROJECT TODAY</span>
-        </h1>
-
-        <p className="mb-8 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we're ready. Let's build something exceptional.
-        </p>
-
-        <div className="mb-12 rounded-[20px] border border-[#E0E0E0] bg-white px-5 py-5 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
 
         {/* Your Name */}
         <div className="mb-4">
@@ -174,25 +188,20 @@ export function ContactSection() {
         </button>
         </div>
 
-        <h2
-          className="mb-5 text-[22px] font-black uppercase leading-[1.1] tracking-[0.05em] text-[#2D2D2D]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          CONTACT INFO
-        </h2>
+        <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">CONTACT INFO</p>
 
-        <div className="space-y-3">
+        <div className="space-y-[8px]">
           {contactItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="flex items-center gap-4 rounded-[6px] bg-[#0052A5] px-5 py-4 transition-colors hover:bg-[#94B8DC]"
+              className="flex items-center gap-4 rounded-[20px] bg-[#0052A5] px-5 py-4 transition-colors hover:bg-[#003f82]"
             >
-              <div className="flex h-[38px] w-[38px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
+              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                 {item.icon}
               </div>
               <div>
-                <p className="text-[11px] font-bold tracking-[0.1em] text-white">{item.label}</p>
+                <p className="text-[11px] font-semibold tracking-[0.1em] text-white">{item.label}</p>
                 <p className="text-[10px] tracking-[0.07em] text-white/80">{item.value}</p>
               </div>
             </a>
@@ -318,7 +327,7 @@ export function ContactSection() {
           {/* Contact Info */}
           <div>
             <h2
-              className="mb-5 text-[20px] font-bold uppercase leading-[1.02] tracking-[0.14em] text-[#2D2D2D]"
+              className="mb-5 text-[20px] font-bold uppercase leading-[1.25] tracking-[0.14em] text-[#2D2D2D]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
             >
               CONTACT INFO

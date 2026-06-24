@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const CARD_GRADIENT = "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.2) 30%, rgba(20,20,20,0.75) 60%, rgba(20,20,20,0.97) 100%)"
+const CARD_GRADIENT = "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 35%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.88) 100%)"
 const DESKTOP_CARD_GRADIENT = "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)"
 const DESKTOP_CARD_SHADOW = "0 4px 19.6px 0 rgba(0,0,0,0.34)"
 
@@ -57,6 +57,29 @@ const smallTools: ToolCard[] = [
     titleLines: ["DRAWING INDEX", "GENERATOR"],
   },
 ]
+
+function MobilePlayBadge({ size = 48 }: { size?: number }) {
+  return (
+    <div
+      className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: "rgba(245,236,236,0.72)",
+        backdropFilter: "blur(6px)",
+      }}
+    >
+      <div
+        className="ml-[3px] h-0 w-0"
+        style={{
+          borderTop: `${size * 0.22}px solid transparent`,
+          borderBottom: `${size * 0.22}px solid transparent`,
+          borderLeft: `${size * 0.32}px solid #494242`,
+        }}
+      />
+    </div>
+  )
+}
 
 function DesktopPlayBadge() {
   return (
@@ -123,93 +146,99 @@ function DesktopToolCard({
 export function AILabSection() {
   return (
     <>
-      <section className="bg-[#FCFCFC] lg:hidden px-6 pb-0 pt-[88px]">
+      <section className="bg-[#FCFCFC] lg:hidden px-5 pb-0 pt-24">
 
         {/* Label */}
-        <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
-          INNOVATION
-        </p>
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INNOVATION</p>
 
-        {/* Heading */}
-        <h1
-          className="mb-5 text-[30px] font-black uppercase leading-[1.05] tracking-[0.04em]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
-          <br />
-          <span className="text-[#0052A5]">LAB</span>
-        </h1>
-
-        {/* Body paragraphs */}
-        <p className="mb-3 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Where structural engineering meets artificial intelligence.
-        </p>
-        <p className="mb-3 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
-        </p>
-        <p className="mb-7 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Click any tool below to watch a demo clip.
-        </p>
-
-        {/* Hero image — overflows right intentionally */}
-        <div className="relative -mr-6 h-[220px] overflow-hidden">
-          <Image
-            src="/images/AI-lab-pic-1.png"
-            alt="Industrial engineering facility"
-            fill
-            className="object-cover object-left-bottom"
+        {/* Vertical line + heading + body */}
+        <div className="relative pl-[12px]">
+          <div
+            className="absolute left-0 top-[8px] w-px"
+            style={{
+              height: "calc(100% - 8px)",
+              background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
+            }}
           />
+
+          {/* Heading */}
+          <h1
+            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
+            <br />
+            <span className="text-[#0052A5]">LAB</span>
+          </h1>
+
+          {/* Body */}
+          <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Where structural engineering meets artificial intelligence.
+          </p>
+          <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
+          </p>
+          <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Click any tool below to watch a demo clip.
+          </p>
         </div>
 
-        {/* Thin black divider line below image */}
-        <div className="h-px w-full bg-[#000000]" />
+        {/* Hero image + divider — shifted up */}
+        <div className="-mt-[60px]">
+          <div className="flex justify-end -mr-5">
+            <Image
+              src="/images/AI-lab-pic-mobile.png"
+              alt="Industrial engineering facility"
+              width={293}
+              height={298}
+              className="h-[298px] w-[300px]"
+            />
+          </div>
+          <div className="h-[2px] w-[330px] bg-[#000000] ml-[45px]" />
+        </div>
       </section>
 
-      <section className="bg-[#FCFCFC] lg:hidden px-6 pb-12 pt-8">
+      <section className="bg-[#FCFCFC] lg:hidden px-5 pb-12 pt-8">
 
         {/* Section heading */}
         <h2
-          className="mb-3 text-[26px] font-black uppercase leading-[1.05] tracking-[0.04em] text-[#2D2D2D]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          className="mb-[10px] uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+          style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
         >
-          ENGINEERING
-          <br />
-          SOFTWARE
-          <br />
-          TOOLS
+          ENGINEERING SOFTWARE TOOLS
         </h2>
 
         {/* Subtext */}
-        <p className="mb-7 text-[11px] leading-[1.7] tracking-[0.07em] text-[#2D2D2D]">
+        <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
           Click any tool to watch a 1–1.5 min demo.
         </p>
 
         {/* Large feature cards */}
         <div className="space-y-5">
           {largeTools.map((tool) => (
-            <div key={tool.id} className="relative h-[220px] overflow-hidden rounded-[5px]">
+            <div key={tool.id} className="relative h-[220px] overflow-hidden rounded-[20px]" style={{ boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}>
               <Image
                 src={tool.image}
                 alt={tool.title}
                 fill
                 className="object-cover object-center"
               />
-              {/* Gradient overlay */}
               <div className="absolute inset-0" style={{ background: CARD_GRADIENT }} />
-              {/* Text — sits on its own solid dark base */}
+              <MobilePlayBadge size={48} />
               <div
                 className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-10"
-                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,1) 40%)" }}
+                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,0.85) 40%)" }}
               >
-                <h3 className="mb-1 text-[13px] font-semibold leading-tight tracking-[0.06em] text-white">
+                <h3 className="mb-1 text-[14px] font-semibold leading-tight tracking-[0.08em] text-white uppercase">
                   {tool.title}
                 </h3>
-                <p className="mb-3 text-[10px] leading-[1.6] tracking-[0.04em] text-white/90">
+                <p className="mb-3 text-[10px] leading-[1.65] tracking-[0.06em] text-white/85">
                   {tool.description}
                 </p>
                 <a
                   href="#"
-                  className="inline-flex h-[34px] items-center rounded-full border border-white bg-transparent px-5 tracking-[0.1em] text-white" style={{ fontSize: "14px" }}
+                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                  style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                 >
                   Watch Demo
                 </a>
@@ -221,26 +250,26 @@ export function AILabSection() {
         {/* 2-column small cards grid */}
         <div className="mt-5 grid grid-cols-2 gap-4">
           {smallTools.map((tool) => (
-            <div key={tool.id} className="relative overflow-hidden rounded-[5px]" style={{ height: 175 }}>
+            <div key={tool.id} className="relative overflow-hidden rounded-[20px]" style={{ height: 175, boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}>
               <Image
                 src={tool.image}
                 alt={tool.title}
                 fill
                 className="object-cover object-center"
               />
-              {/* Gradient overlay */}
               <div className="absolute inset-0" style={{ background: CARD_GRADIENT }} />
-              {/* Text */}
+              <MobilePlayBadge size={36} />
               <div
                 className="absolute bottom-0 left-0 right-0 px-3 pb-3 pt-8"
-                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,1) 45%)" }}
+                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,0.85) 45%)" }}
               >
-                <h3 className="mb-2 text-[11px] font-semibold leading-tight tracking-[0.05em] text-white">
+                <h3 className="mb-2 text-[11px] font-semibold leading-tight tracking-[0.06em] text-white uppercase">
                   {tool.title}
                 </h3>
                 <a
                   href="#"
-                  className="inline-flex h-[28px] items-center rounded-full border border-white bg-transparent px-3 text-[9px] tracking-[0.08em] text-white"
+                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                  style={{ fontSize: "9px", width: "90px", height: "26px" }}
                 >
                   Watch Demo
                 </a>
@@ -249,6 +278,36 @@ export function AILabSection() {
           ))}
         </div>
 
+      </section>
+
+      {/* Mobile CTA */}
+      <section className="bg-[#FCFCFC] lg:hidden px-5 pb-14 pt-10">
+        <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+        <h2
+          className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+          style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+        >
+          HAVE QUESTIONS ABOUT OUR AI TOOLS?
+        </h2>
+        <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+          We'd love to show you how our automation tools can transform your workflow. Get in touch with us.
+        </p>
+        <div className="flex justify-start gap-[15px]">
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+          >
+            Contact Us
+          </a>
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+          >
+            Get In Touch
+          </a>
+        </div>
       </section>
 
       <section className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">

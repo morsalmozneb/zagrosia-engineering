@@ -41,27 +41,51 @@ const servicesItems = [
 const projects = [
   {
     id: 1,
-    image: "/images/Project-page-1.png",
-    location: "Vancouver, BC",
-    title: "Office tower renovation",
+    image: "/images/Project-Card-1.png",
+    location: "Burnaby, BC",
+    title: "OFFICE TOWER RENOVATION",
     description:
       "Structural retrofit and seismic strengthening for a multi-story commercial office tower to improve performance, safety, and compliance with current building standards.",
   },
   {
     id: 2,
-    image: "/images/Project-page-2.png",
+    image: "/images/Project-Card-2.png",
     location: "Calgary, AB",
-    title: "Contemporary Custom Residence",
+    title: "CONTEMPORARY CUSTOM RESIDENCE",
     description:
       "Full structural engineering for a luxury contemporary residence featuring open-concept layouts, cantilevered elements, and large-span architectural glazing systems.",
   },
   {
     id: 3,
-    image: "/images/Project-page-3.png",
-    location: "Saskatoon, SK",
-    title: "Industrial Manufacturing Facility",
+    image: "/images/Project-Card-3.png",
+    location: "Burnaby, BC",
+    title: "FIRE & FREEZE FORT MCMURRAY",
     description:
       "Advanced structural engineering for a large-scale industrial facility with crane supports, equipment foundations, and reinforced steel systems.",
+  },
+  {
+    id: 4,
+    image: "/images/Project-Card-4.png",
+    location: "Burnaby, BC",
+    title: "144-UNIT TOWNHOUSE",
+    description:
+      "Comprehensive structural design for a large-scale townhouse complex, including foundation systems, shear walls, and gravity load analysis.",
+  },
+  {
+    id: 5,
+    image: "/images/Project-Card-5.png",
+    location: "Calgary, AB",
+    title: "STRATA — STONE VENEER REMEDIATION",
+    description:
+      "Structural assessment and remediation design for deteriorating stone veneer cladding on a multi-unit strata building.",
+  },
+  {
+    id: 6,
+    image: "/images/Project-Card-6.png",
+    location: "Saskatoon, SK",
+    title: "CLOVERDALE REC CENTRE",
+    description:
+      "Structural engineering for a community recreation centre, including long-span roof systems, gymnasium framing, and seismic design.",
   },
 ]
 
@@ -349,6 +373,7 @@ export function ProjectsHeroSection() {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [selectedExpertise, setSelectedExpertise] = useState<string | null>(null)
   const [selectedService, setSelectedService] = useState<string | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   function closeAll() {
     setFilterPanelOpen(false)
@@ -360,13 +385,24 @@ export function ProjectsHeroSection() {
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="lg:hidden px-6 pb-10 pt-[88px]">
-        <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
+      <div className="lg:hidden px-5 pb-14 pt-24">
+        {/* Label */}
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
           PORTFOLIO
         </p>
 
+        {/* Heading + body + stats with vertical line */}
+        <div className="relative pl-[12px]">
+          <div
+            className="absolute left-0 top-[8px] w-px"
+            style={{
+              height: "calc(100% - 8px)",
+              background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
+            }}
+          />
+
         <h1
-          className="mb-5 text-[32px] font-black uppercase leading-[1.05] tracking-[0.04em]"
+          className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
           style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
         >
           <span className="text-[#2D2D2D]">CANADIAN</span>
@@ -374,11 +410,13 @@ export function ProjectsHeroSection() {
           <span className="text-[#0052A5]">PROJECTS</span>
         </h1>
 
-        <p className="mb-7 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Hover over any project for detailed technical data, HUD overlay with structural system, codes, loads and materials.
+        {/* Body */}
+        <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+          Explore our portfolio of structural engineering projects across Western Canada — from high-rise retrofits to custom residences and industrial facilities.
         </p>
 
-        <div className="mb-7 flex items-start gap-0">
+        {/* Stats */}
+        <div className="mb-8 flex items-start">
           <div className="flex-1">
             <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">200+</p>
             <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Projects</p>
@@ -392,89 +430,116 @@ export function ProjectsHeroSection() {
             <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Provinces</p>
           </div>
         </div>
+        </div>{/* end vertical line wrapper */}
 
+        {/* Filter toggle */}
         <button
-          className="mb-5 p-1"
+          className="mb-5 flex items-center gap-[8px]"
           onClick={() => setFilterPanelOpen(!filterPanelOpen)}
           aria-label="Toggle filters"
         >
           <FilterIcon />
+          <span className="text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">FILTER</span>
         </button>
 
         {filterPanelOpen && (
-        <div className="mb-8 border border-[#DEDEDE] rounded-[5px] overflow-hidden">
+          <div className="mb-8 overflow-hidden rounded-[10px] border border-[#DEDEDE]">
+            <div>
+              <button
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+                onClick={() => { setExpertiseOpen(!expertiseOpen); setServicesOpen(false) }}
+              >
+                <span className="text-[11px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Expertise</span>
+                <ChevronDown open={expertiseOpen} />
+              </button>
+              {expertiseOpen && (
+                <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
+                  {expertiseItems.map((item) => (
+                    <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
+                      <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          <div>
-            <button
-              className="flex w-full items-center justify-between px-4 py-3 text-left"
-              onClick={() => { setExpertiseOpen(!expertiseOpen); setServicesOpen(false) }}
-            >
-              <span className="text-[11px] tracking-[0.1em] text-[#2D2D2D]">Expertise</span>
-              <ChevronDown open={expertiseOpen} />
-            </button>
-            {expertiseOpen && (
-              <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
-                {expertiseItems.map((item) => (
-                  <div
-                    key={item}
-                    className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0"
-                  >
-                    <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="border-t border-[#DEDEDE]">
+              <button
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+                onClick={() => { setServicesOpen(!servicesOpen); setExpertiseOpen(false) }}
+              >
+                <span className="text-[11px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Services</span>
+                <ChevronDown open={servicesOpen} />
+              </button>
+              {servicesOpen && (
+                <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
+                  {servicesItems.map((item) => (
+                    <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
+                      <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="border-t border-[#DEDEDE]">
+              <button
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+                onClick={closeAll}
+              >
+                <span className="text-[11px] tracking-[0.10em] text-[#2D2D2D]">Clear Filters</span>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M1 1l8 8M9 1l-8 8" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
           </div>
-
-          <div className="border-t border-[#DEDEDE]">
-            <button
-              className="flex w-full items-center justify-between px-4 py-3 text-left"
-              onClick={() => { setServicesOpen(!servicesOpen); setExpertiseOpen(false) }}
-            >
-              <span className="text-[11px] tracking-[0.1em] text-[#2D2D2D]">Services</span>
-              <ChevronDown open={servicesOpen} />
-            </button>
-            {servicesOpen && (
-              <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
-                {servicesItems.map((item) => (
-                  <div
-                    key={item}
-                    className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0"
-                  >
-                    <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="border-t border-[#DEDEDE]">
-            <button
-              className="flex w-full items-center justify-between px-4 py-3 text-left"
-              onClick={closeAll}
-            >
-              <span className="text-[11px] tracking-[0.1em] text-[#2D2D2D]">Clear Filters</span>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <path d="M1 1l8 8M9 1l-8 8" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
-
-        </div>
         )}
 
-        <div className="space-y-6">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="rounded-[5px] p-px"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)",
-              }}
-            >
-            <div className="relative overflow-hidden rounded-[4px]">
-              <div className="relative h-[380px] w-full">
+        {/*
+          4-card converging stack with prev + active + next×2:
+
+          prev  (pos=-1): top=0,   z=20 → shows top 70px (image) before active covers it
+          active (pos=0): top=70,  z=30 → full 380px card
+          next  (pos=+1): top=140, z=20 → bottom 70px peeks below active (active bottom=450, next bottom=520)
+          next+1(pos=+2): top=180, z=10 → bottom 40px peeks below next (next bottom=520, next+1 bottom=560)
+
+          Container height: 560px
+        */}
+        <div className="relative mt-[16px]" style={{ height: "600px" }}>
+          {projects.map((project, index) => {
+            const pos = index - activeIndex
+            if (pos < -1 || pos > 1) return null
+            const isActive = pos === 0
+
+            //          pos: -1     0      +1     +2
+            const tops     = [0,    80,    200,   180]
+            const widths   = ["92%","100%","88%", "84%"]
+            const lefts    = ["4%", "0%",  "6%",  "8%"]
+            const zIndexes = [20,   30,    20,    10]
+            const opacities= [0.60, 1,     0.75,  0.45]
+
+            // shift index by 1 to account for pos=-1
+            const i = pos + 1
+
+            return (
+              <div
+                key={project.id}
+                onClick={() => !isActive && setActiveIndex(index)}
+                className="absolute overflow-hidden rounded-[20px] transition-all duration-500"
+                style={{
+                  top:      `${tops[i]}px`,
+                  left:     lefts[i],
+                  width:    widths[i],
+                  height:   "380px",
+                  zIndex:   zIndexes[i],
+                  opacity:  opacities[i],
+                  boxShadow: isActive
+                    ? "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)"
+                    : "none",
+                  cursor: isActive ? "default" : "pointer",
+                }}
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -485,33 +550,112 @@ export function ProjectsHeroSection() {
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.05) 25%, rgba(20,20,20,0.55) 50%, rgba(20,20,20,0.88) 70%, rgba(20,20,20,1) 100%)",
+                      "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 22%, rgba(20,20,20,0.70) 60%, rgba(20,20,20,1) 100%)",
                   }}
                 />
+                <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
+                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                    <LocationPin />
+                    <span>{project.location}</span>
+                  </div>
+                  <h3
+                    className="uppercase leading-[1.15] tracking-[0.08em] text-white"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      fontFamily: "'Momo Trust Sans', 'Inter', sans-serif",
+                      marginBottom: isActive ? "10px" : "0",
+                    }}
+                  >
+                    {project.title}
+                  </h3>
+                  {isActive && (
+                    <>
+                      <p className="mb-4 leading-[1.65] tracking-[0.06em] text-white/85" style={{ fontSize: "12px" }}>
+                        {project.description}
+                      </p>
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                        style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
+                      >
+                        Learn More
+                      </a>
+                    </>
+                  )}
+                </div>
               </div>
+            )
+          })}
+        </div>
 
-              <div className="absolute bottom-0 left-0 right-0 px-4 pb-5 pt-20"
-                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,1) 40%)" }}
-              >
-                <p className="mb-[6px] text-[9px] tracking-[0.14em] text-white/80">
-                  © {project.location}
-                </p>
-                <h3 className="mb-2 text-[15px] font-semibold leading-tight tracking-[0.06em] text-white">
-                  {project.title}
-                </h3>
-                <p className="mb-4 leading-[1.65] tracking-[0.05em] text-white/90" style={{ fontSize: "14px" }}>
-                  {project.description}
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex h-[36px] items-center rounded-full border border-white bg-transparent px-5 tracking-[0.12em] text-white" style={{ fontSize: "14px" }}
+        {/* Project counter — number strip */}
+        <div className="mt-6">
+          {/* Scrolling number strip */}
+          <div className="flex items-end justify-center overflow-hidden">
+            {[-2, -1, 0, 1, 2].map((offset) => {
+              const idx = activeIndex + offset
+              const abs = Math.abs(offset)
+              if (idx < 0 || idx >= projects.length) {
+                return <div key={offset} style={{ width: abs === 1 ? "44px" : "32px" }} />
+              }
+              return (
+                <button
+                  key={offset}
+                  onClick={() => setActiveIndex(idx)}
+                  className="flex-shrink-0 text-center transition-all duration-500 leading-none"
+                  style={{
+                    width: offset === 0 ? "52px" : abs === 1 ? "44px" : "32px",
+                    fontSize: offset === 0 ? "32px" : abs === 1 ? "17px" : "12px",
+                    fontWeight: offset === 0 ? 900 : 500,
+                    color: offset === 0 ? "#0052A5" : "#2D2D2D",
+                    opacity: offset === 0 ? 1 : abs === 1 ? 0.25 : 0.10,
+                    fontFamily: "'Momo Trust Sans', 'Inter', sans-serif",
+                    letterSpacing: "-0.02em",
+                    paddingBottom: offset === 0 ? "0px" : abs === 1 ? "3px" : "6px",
+                  }}
                 >
-                  Learn More
-                </a>
-              </div>
-            </div>
+                  {String(idx + 1).padStart(2, "0")}
+                </button>
+              )
+            })}
           </div>
-          ))}
+          {/* Thin rule */}
+          <div className="mx-auto mt-3 h-px w-[40px] bg-[#0052A5]/30" />
+          {/* Project name */}
+          <p className="mt-2 text-center text-[11px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">
+            {projects[activeIndex].title}
+          </p>
+        </div>
+
+        {/* Mobile bottom CTA */}
+        <div className="mt-[76px]">
+          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
+          <h2
+            className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            DO YOU WANT TO START YOUR PROJECT?
+          </h2>
+          <p className="mb-8 leading-[1.85] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+            Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
+          </p>
+          <div className="flex justify-start gap-[15px]">
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Request a Service
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Get In Touch
+            </a>
+          </div>
         </div>
       </div>
 

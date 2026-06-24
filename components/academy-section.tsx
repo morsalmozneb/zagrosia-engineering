@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { PlusCircle, MinusCircle } from "lucide-react"
 
 const CLOSED_FILL = "linear-gradient(to right, rgba(45,45,45,1) 0%, rgba(115,115,115,0.22) 100%)"
-const OPEN_CARD_SHADOW = "0 4px 19.6px rgba(0,0,0,0.18)"
+const GRADIENT_BORDER = "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)"
+const OPEN_CARD_SHADOW = "0px 4px 19.6px 0px rgba(0,0,0,0.34)"
 const CLOSED_CARD_SHADOW = "0 4px 19.6px rgba(0,0,0,0.24)"
 
 type AcademyItem = {
@@ -66,86 +68,146 @@ function AcademyToggleIcon({
 
 export function AcademySection() {
   const [openDesktopItemId, setOpenDesktopItemId] = useState(1)
+  const [openMobileItemId, setOpenMobileItemId] = useState(1)
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="px-6 pb-14 pt-[88px] lg:hidden">
-        <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.22em] text-[#2D2D2D]">
-          KNOWLEDGE PLATFORM
-        </p>
+      <div className="px-5 pb-14 pt-24 lg:hidden">
 
-        <h1
-          className="mb-6 text-[28px] font-black uppercase leading-[1.08] tracking-[0.03em]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          <span className="text-[#2D2D2D]">PASS THE EGBC EXAM</span>
-          <br />
-          <span className="text-[#0052A5]">THE SMART WAY.</span>
-        </h1>
+        {/* Label */}
+        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">KNOWLEDGE PLATFORM</p>
 
-        <p className="mb-4 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Canada&apos;s most comprehensive EGBC National Professional Practice Examination prep
-          platform.
-        </p>
-        <p className="mb-8 text-[11px] leading-[1.75] tracking-[0.07em] text-[#2D2D2D]">
-          Built by a practicing P.Eng. with 35 years of real-world experience, designed for
-          internationally trained engineers building their Canadian career.
-        </p>
+        {/* Vertical line + heading + body */}
+        <div className="relative pl-[12px]">
+          <div
+            className="absolute left-0 top-[8px] w-px"
+            style={{
+              height: "calc(100% - 8px)",
+              background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
+            }}
+          />
 
-        <div className="mb-[6px] rounded-[20px] border border-[#D8D8D8] bg-[#FCFCFC] px-4 pb-4 pt-4 shadow-[0_4px_19.6px_rgba(0,0,0,0.12)]">
-          <h3 className="mb-2 text-[13px] font-semibold tracking-[0.1em] text-[#2D2D2D]">
-            Full Curriculum
-          </h3>
+          <h1
+            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            <span className="text-[#2D2D2D]">PASS THE EGBC EXAM</span>
+            <br />
+            <span className="text-[#0052A5]">THE SMART WAY.</span>
+          </h1>
 
-          <p className="mb-5 text-[11px] leading-[1.65] tracking-[0.07em] text-[#2D2D2D]">
-            Ethics, law, professional practice, every EGBC exam topic with Canadian context
+          <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Canada&apos;s most comprehensive EGBC National Professional Practice Examination prep platform.
           </p>
-
-          <div className="flex gap-3">
-            <a
-              href="#"
-              className="flex h-[42px] flex-1 items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
-            >
-              Download Files
-            </a>
-            <a
-              href="#"
-              className="flex h-[42px] flex-1 items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
-            >
-              View Files
-            </a>
-          </div>
+          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Built by a practicing P.Eng. with 35 years of real-world experience, designed for internationally trained engineers building their Canadian career.
+          </p>
         </div>
 
+        {/* Mobile accordion */}
         <div className="space-y-[6px]">
-          {academyItems.slice(1).map((item) => (
-            <div
-              key={item.id}
-              className="flex h-[34px] items-center justify-between rounded-[20px] px-4"
-              style={{ background: CLOSED_FILL }}
-            >
-              <span className="text-[11px] font-medium tracking-[0.1em] text-white">
-                {item.title}
-              </span>
-              <AcademyToggleIcon isOpen={false} light />
-            </div>
-          ))}
+          {academyItems.map((item) => {
+            const isOpen = openMobileItemId === item.id
+            return (
+              <div key={item.id}>
+                {isOpen ? (
+                  <div
+                    className="rounded-[20px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                    style={{
+                      boxShadow: OPEN_CARD_SHADOW,
+                      backdropFilter: "blur(61.5px)",
+                      WebkitBackdropFilter: "blur(61.5px)",
+                    }}
+                  >
+                    <button className="flex w-full items-start justify-between" onClick={() => setOpenMobileItemId(0)}>
+                      <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.08em] text-[#2D2D2D]">
+                        {item.title}
+                      </span>
+                      <MinusCircle size={20} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
+                    </button>
+                    <p className="mt-3 text-[12px] leading-[1.65] tracking-[0.06em] text-[#2D2D2D]">
+                      {item.description}
+                    </p>
+                    {item.actions && (
+                      <div className="mt-4 flex gap-3">
+                        {item.actions.map((action) => (
+                          <a
+                            key={action}
+                            href="#"
+                            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                            style={{ fontSize: "8px", height: "28px", width: "100px" }}
+                          >
+                            {action}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    className="flex h-[28px] w-full items-center justify-between rounded-[20px] px-3 transition-opacity hover:opacity-90"
+                    style={{ background: CLOSED_FILL }}
+                    onClick={() => setOpenMobileItemId(item.id)}
+                  >
+                    <span className="text-[11px] font-medium tracking-[0.1em] text-white">
+                      {item.title}
+                    </span>
+                    <PlusCircle size={20} strokeWidth={2} className="flex-shrink-0 text-white" />
+                  </button>
+                )}
+              </div>
+            )
+          })}
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
+        {/* CTA buttons */}
+        <div className="mt-8 flex gap-[15px]">
           <a
             href="#"
-            className="inline-flex h-[48px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-10 tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Join Waitlist
           </a>
           <a
             href="#"
-            className="inline-flex h-[48px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-10 tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "14px" }}
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Learn More
           </a>
         </div>
+
+        {/* Mobile bottom CTA */}
+        <div className="mt-14">
+          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+          <h2
+            className="mb-6 uppercase leading-[1.5] tracking-[0.12em] text-[#2D2D2D]"
+            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            HAVE QUESTIONS ABOUT THE ACADEMY?
+          </h2>
+          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            Whether you&apos;re preparing for your EGBC exam or want to learn more about the program, we&apos;re here to help.
+          </p>
+          <div className="flex gap-[15px]">
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Contact Us
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Get In Touch
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <div className="hidden lg:block">
