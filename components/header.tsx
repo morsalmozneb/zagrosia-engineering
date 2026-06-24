@@ -29,7 +29,19 @@ export function Header() {
   }, [isOpen])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 lg:absolute lg:py-8" style={{ paddingLeft: "max(20px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}>
+    <header
+      className="fixed top-4 z-50 px-4 py-3 lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none lg:backdrop-blur-none lg:px-6 lg:py-8"
+      style={{
+        left: "16px",
+        right: "16px",
+        borderRadius: "20px",
+        backgroundColor: "rgba(252,252,252,0.92)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        border: "1px solid rgba(0,82,165,0.12)",
+        boxShadow: "0 4px 24px rgba(13,44,96,0.13), 0 1px 6px rgba(13,44,96,0.07)",
+      } as React.CSSProperties}
+    >
       <div className={`${isOpen ? "invisible" : "flex"} items-center justify-between`}>
         <Link href="/" aria-label="Go to homepage">
           <Image
@@ -37,7 +49,7 @@ export function Header() {
             alt="Zagrosia Engineering Inc."
             width={148}
             height={36}
-            className="h-auto w-[136px] drop-shadow-lg"
+            className="h-auto w-[120px]"
             priority
           />
         </Link>
@@ -51,8 +63,8 @@ export function Header() {
             <span className="text-[#2D2D2D] text-2xl font-light">&times;</span>
           ) : (
             <>
-              <span className="w-7 h-[2px] bg-[#FCFCFC]" />
-              <span className="w-7 h-[2px] bg-[#FCFCFC]" />
+              <span className="w-6 h-[2px] bg-[#2D2D2D]" />
+              <span className="w-6 h-[2px] bg-[#2D2D2D]" />
             </>
           )}
         </button>
