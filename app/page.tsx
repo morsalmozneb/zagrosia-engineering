@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-[390px] overflow-hidden bg-[#fcfcfc] shadow-[0_0_0_1px_rgba(13,44,96,0.05)] lg:max-w-none lg:overflow-visible lg:shadow-none">
+    <main className="w-full overflow-hidden bg-[#fcfcfc] lg:overflow-visible lg:shadow-none">
       <HeroSection />
 
       {/* Mobile-only building photo section */}
