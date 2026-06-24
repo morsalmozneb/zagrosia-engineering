@@ -28,7 +28,7 @@ export function AboutPageHeader() {
   }, [isOpen])
 
   return (
-    <header className="hero-content absolute inset-x-0 top-0 z-50 px-6 py-5 lg:py-8" style={{ paddingLeft: "max(24px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}>
+    <header className="hero-content fixed inset-x-0 top-0 z-50 px-6 py-5 lg:absolute lg:py-8" style={{ paddingLeft: "max(24px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}>
       <div className={`${isOpen ? "invisible" : "flex"} items-center justify-between`}>
         <Link href="/" aria-label="Go to homepage">
           <Image
