@@ -145,8 +145,7 @@ export function EngineeringSolutions() {
           <div className="mt-7">
             <a
               href="/services"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.14em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white lg:h-[44px] lg:px-8 lg:text-[14px]"
-              style={{ fontSize: "9.5px", width: "119px", height: "40px" }}
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.14em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white w-[119px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
             >
               Learn More
             </a>
