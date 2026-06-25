@@ -41,14 +41,12 @@ export function EGBCExamPrep() {
         return (
           <div key={feature.id}>
             {isOpen ? (
-              <div className="rounded-[20px] lg:p-px" style={{ background: GRADIENT_BORDER }}>
-                <div
-                  className="rounded-[20px] lg:rounded-[19px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+              <div
+                  className="rounded-[20px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                   style={{
                     boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                     backdropFilter: "blur(61.5px)",
                     WebkitBackdropFilter: "blur(61.5px)",
-                    backgroundColor: "#FCFCFC",
                   }}
                 >
                   <button
@@ -64,7 +62,6 @@ export function EGBCExamPrep() {
                     {feature.description}
                   </p>
                 </div>
-              </div>
             ) : (
               <button
                 className="flex h-[28px] w-full items-center justify-between rounded-[20px] px-3 transition-all hover:opacity-80 hover:scale-[1.005] lg:h-[53px]"

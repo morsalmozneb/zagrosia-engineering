@@ -262,7 +262,7 @@ export function AcademySection() {
                         }
                       }}
                       className="w-full rounded-[20px] bg-[#FCFCFC] px-[32px] pb-[20px] pt-[18px] text-left"
-                      style={{ boxShadow: OPEN_CARD_SHADOW }}
+                      style={{ boxShadow: OPEN_CARD_SHADOW, backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
                     >
                       <div className="flex items-start justify-between gap-8">
                         <div className="min-w-0">

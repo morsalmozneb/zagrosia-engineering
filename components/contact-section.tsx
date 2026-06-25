@@ -236,7 +236,7 @@ export function ContactSection() {
           </div>
 
           {/* Contact Form */}
-          <div className="rounded-[20px] border border-[#E0E0E0] bg-white px-8 py-8 shadow-[0_1px_8px_rgba(0,0,0,0.05)] mb-8">
+          <div className="rounded-[20px] bg-[#FCFCFC] px-8 py-8 mb-8" style={{ boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
             <div className="grid grid-cols-2 gap-5 mb-5">
               <div>
                 <label className="mb-2 block text-[14px] font-semibold tracking-[0.08em] text-[#2D2D2D]">
