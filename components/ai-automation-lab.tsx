@@ -6,11 +6,8 @@ export function AIAutomationLab() {
       {/* Heading */}
       <div className="mb-8">
         <h2 className="zag-heading font-medium leading-[1.18] lg:font-normal lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
-          AI &
-          <br />
-          AUTOMATION
-          <br />
-          LAB
+          <span className="lg:hidden">AI &<br />AUTOMATION<br />LAB</span>
+          <span className="hidden lg:inline">AI & AUTOMATION LAB</span>
         </h2>
       </div>
 
@@ -39,15 +36,13 @@ export function AIAutomationLab() {
       <div className="flex justify-between">
         <a
           href="/contact"
-          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] lg:h-[44px] lg:px-8 lg:text-[14px]"
-          style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
         >
           Request a Service
         </a>
         <a
           href="/ai-lab"
-          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] lg:h-[44px] lg:px-8 lg:text-[14px]"
-          style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
         >
           Learn More
         </a>
