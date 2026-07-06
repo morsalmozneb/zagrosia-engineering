@@ -1,4 +1,11 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const articles = [
   {
@@ -21,8 +28,13 @@ const articles = [
   },
 ]
 
-const ArticleCard = ({ article }: { article: typeof articles[0] }) => (
-  <div>
+const ArticleCard = ({ article, index }: { article: typeof articles[0]; index: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    viewport={{ once: false, amount: 0.1 }}
+    transition={{ duration: 0.6, delay: 0.08 + index * 0.12, ease: EASE }}
+  >
     {/* Mobile */}
     <article className="flex overflow-hidden lg:hidden" style={{ width: "319px", height: "89px", borderRadius: "20px", backgroundColor: "#FCFCFC", boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
       <div className="flex flex-col justify-center flex-1 min-w-0 px-3 py-2">
@@ -60,7 +72,7 @@ const ArticleCard = ({ article }: { article: typeof articles[0] }) => (
         <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
       </div>
     </article>
-  </div>
+  </motion.div>
 )
 
 export function EngineeringBlog() {
@@ -69,40 +81,52 @@ export function EngineeringBlog() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden px-8 pt-8">
-        <h2 className="zag-heading mb-5 font-medium leading-none text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>ENGINEERING BLOG</h2>
-        <p className="mb-8 max-w-[292px] leading-[1.5] tracking-[0.17em] text-[#2d2d2d]" style={{ fontSize: "12px" }}>
-          Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
-        </p>
+        <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+          <h2 className="zag-heading mb-5 font-medium leading-none text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>ENGINEERING BLOG</h2>
+        </Reveal>
+        <Reveal delay={0.18} duration={0.65}>
+          <p className="mb-8 max-w-[292px] leading-[1.5] tracking-[0.17em] text-[#2d2d2d]" style={{ fontSize: "12px" }}>
+            Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
+          </p>
+        </Reveal>
         <div className="space-y-4">
-          {articles.map((a) => <ArticleCard key={a.id} article={a} />)}
+          {articles.map((a, i) => <ArticleCard key={a.id} article={a} index={i} />)}
         </div>
-        <div className="mt-8">
-          <a
-            href="/blog"
-            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-          >
-            View All Articles
-          </a>
-        </div>
+        <Reveal variant="scaleUp" delay={0.2} duration={0.5}>
+          <div className="mt-8">
+            <CtaButton
+              href="/blog"
+              className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              View All Articles
+            </CtaButton>
+          </div>
+        </Reveal>
       </div>
 
       {/* ── DESKTOP: stacked ── */}
       <div className="sidebar-content hidden lg:block lg:pt-16 lg:pb-16 zag-desktop-content-pad">
-        <h2 className="zag-heading mb-5 text-[32px] leading-[1.1] text-[#2d2d2d]">ENGINEERING BLOG</h2>
-        <p className="mb-8 leading-[1.65] tracking-[0.14em] text-[#2d2d2d] whitespace-nowrap" style={{ fontSize: "16px" }}>
-          Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
-        </p>
+        <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+          <h2 className="zag-heading mb-5 text-[32px] leading-[1.1] text-[#2d2d2d]">ENGINEERING BLOG</h2>
+        </Reveal>
+        <Reveal delay={0.18} duration={0.65}>
+          <p className="mb-8 leading-[1.65] tracking-[0.14em] text-[#2d2d2d] whitespace-nowrap" style={{ fontSize: "16px" }}>
+            Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
+          </p>
+        </Reveal>
         <div className="mb-8 space-y-4">
-          {articles.map((a) => <ArticleCard key={a.id} article={a} />)}
+          {articles.map((a, i) => <ArticleCard key={a.id} article={a} index={i} />)}
         </div>
-        <a
-          href="/blog"
-          className="zag-outline-button min-h-[48px] w-[240px] whitespace-nowrap border-[#2d2d2d] px-0 tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-          style={{ fontSize: "16px" }}
-        >
-          View All Articles
-        </a>
+        <Reveal variant="scaleUp" delay={0.2} duration={0.5}>
+          <CtaButton
+            href="/blog"
+            className="zag-outline-button min-h-[48px] w-[240px] whitespace-nowrap border-[#2d2d2d] px-0 tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            style={{ fontSize: "16px" }}
+          >
+            View All Articles
+          </CtaButton>
+        </Reveal>
       </div>
     </section>
   )

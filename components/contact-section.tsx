@@ -1,6 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const services = [
   "Structural Design",
@@ -56,6 +61,7 @@ const contactItems = [
 ]
 
 export function ContactSection() {
+  const reducedMotion = useReducedMotion()
   const [selectedService, setSelectedService] = useState("Structural Design")
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
@@ -64,31 +70,42 @@ export function ContactSection() {
       <div className="lg:hidden px-5 pb-14 pt-24">
 
         {/* Label */}
-        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+        <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+        </Reveal>
 
         {/* Vertical line + heading + body */}
         <div className="relative pl-[12px] mb-8">
-          <div
+          <motion.div
             className="absolute left-0 top-[8px] w-px"
+            initial={reducedMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.85, ease: "easeInOut" }}
             style={{
               height: "calc(100% - 8px)",
+              transformOrigin: "top",
               background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
             }}
           />
-          <h1
-            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
-            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            <span className="text-[#2D2D2D]">START YOUR</span>
-            <br />
-            <span className="text-[#0052A5]">PROJECT TODAY</span>
-          </h1>
-          <p className="text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
-          </p>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h1
+              className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              <span className="text-[#2D2D2D]">START YOUR</span>
+              <br />
+              <span className="text-[#0052A5]">PROJECT TODAY</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="mb-10 rounded-[20px] bg-[#FCFCFC] px-5 py-5"
+        <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="mb-10 rounded-[20px] bg-[#FCFCFC] px-5 py-5"
           style={{
             boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
             backdropFilter: "blur(61.5px)",
@@ -179,23 +196,29 @@ export function ContactSection() {
         </div>
 
         {/* Submit */}
-        <button
+        <CtaButton as="button"
           type="submit"
           className="mt-5 inline-flex h-[48px] w-full items-center justify-center rounded-full bg-[#0052A5] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
           style={{ fontSize: "14px" }}
         >
           Send Message
-        </button>
-        </div>
+        </CtaButton>
+        </Reveal>
 
-        <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">CONTACT INFO</p>
+        <Reveal variant="fadeUp" delay={0.08} duration={0.6}>
+          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">CONTACT INFO</p>
+        </Reveal>
 
         <div className="space-y-[8px]">
-          {contactItems.map((item) => (
-            <a
+          {contactItems.map((item, i) => (
+            <motion.a
               key={item.label}
               href={item.href}
               className="flex items-center gap-4 rounded-[20px] bg-[#0052A5] px-5 py-4 transition-colors hover:bg-[#003f82]"
+              initial={reducedMotion ? false : { opacity: 0, y: 14, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
             >
               <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                 {item.icon}
@@ -204,7 +227,7 @@ export function ContactSection() {
                 <p className="text-[11px] font-semibold tracking-[0.1em] text-white">{item.label}</p>
                 <p className="text-[10px] tracking-[0.07em] text-white/80">{item.value}</p>
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
       </div>
@@ -215,28 +238,38 @@ export function ContactSection() {
           <div className="mb-10">
             <div className="relative pl-5">
               {/* Vertical fading line */}
-              <div
+              <motion.div
                 className="absolute left-0 top-[4px] bottom-0 w-[4px]"
-                style={{ background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)" }}
+                initial={reducedMotion ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, amount: 0.05 }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
+                style={{ transformOrigin: "top", background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)" }}
               />
-              <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">
-                GET IN TOUCH
-              </p>
-              <h1
-                className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
-                style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-              >
-                <span className="mb-[8px] block text-[#2D2D2D]">START YOUR PROJECT</span>
-                <span className="block text-[#0052A5]">TODAY</span>
-              </h1>
-              <p className="mt-5 max-w-[700px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
-              </p>
+              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">
+                  GET IN TOUCH
+                </p>
+              </Reveal>
+              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                <h1
+                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+                >
+                  <span className="mb-[8px] block text-[#2D2D2D]">START YOUR PROJECT</span>
+                  <span className="block text-[#0052A5]">TODAY</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.2} duration={0.65}>
+                <p className="mt-5 max-w-[700px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                  Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
+                </p>
+              </Reveal>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="rounded-[20px] bg-[#FCFCFC] px-8 py-8 mb-8" style={{ boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
+          <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="rounded-[20px] bg-[#FCFCFC] px-8 py-8 mb-8" style={{ boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
             <div className="grid grid-cols-2 gap-5 mb-5">
               <div>
                 <label className="mb-2 block text-[14px] font-semibold tracking-[0.08em] text-[#2D2D2D]">
@@ -315,29 +348,35 @@ export function ContactSection() {
               />
             </div>
 
-            <button
+            <CtaButton as="button"
               type="submit"
               className="inline-flex h-[40px] items-center rounded-full bg-[#0052A5] px-[24px] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
               style={{ fontSize: "16px" }}
             >
               Send Message
-            </button>
-          </div>
+            </CtaButton>
+          </Reveal>
 
           {/* Contact Info */}
           <div>
-            <h2
-              className="mb-5 text-[20px] font-bold uppercase leading-[1.25] tracking-[0.14em] text-[#2D2D2D]"
-              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-            >
-              CONTACT INFO
-            </h2>
+            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+              <h2
+                className="mb-5 text-[20px] font-bold uppercase leading-[1.25] tracking-[0.14em] text-[#2D2D2D]"
+                style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+              >
+                CONTACT INFO
+              </h2>
+            </Reveal>
             <div className="grid grid-cols-3 gap-4">
-              {contactItems.map((item) => (
-                <a
+              {contactItems.map((item, i) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
                   className="flex items-center gap-4 rounded-[12px] bg-[#0052A5] px-5 py-5 transition-colors hover:bg-[#94B8DC]"
+                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.1 }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: EASE }}
                 >
                   <div className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                     {item.icon}
@@ -346,7 +385,7 @@ export function ContactSection() {
                     <p className="text-[14px] font-bold tracking-[0.1em] text-white">{item.label}</p>
                     <p className="mt-1 text-[12px] tracking-[0.08em] text-white/80">{item.value}</p>
                   </div>
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>

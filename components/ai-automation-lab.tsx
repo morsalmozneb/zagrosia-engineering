@@ -1,55 +1,80 @@
+"use client"
+
+import { Reveal } from "./scroll-reveal"
+import { CountUp } from "./scroll-reveal"
+import { motion } from "framer-motion"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
+
+const stats = [
+  { end: 500, suffix: "+", label: "Videos" },
+  { end: 150, suffix: "+", label: "Subjects" },
+  { end: 200, suffix: "+", label: "Views" },
+]
+
 export function AIAutomationLab() {
   return (
     <section id="ai-lab" className="bg-black px-8 py-14 text-white lg:py-20 zag-desktop-content-pad">
       <div className="sidebar-content">
 
-      {/* Heading */}
-      <div className="mb-8">
-        <h2 className="zag-heading font-medium leading-[1.18] lg:font-normal lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
-          AI
-          <br />
-          &
-          <br />
-          AUTOMATION LAB
-        </h2>
-      </div>
+        {/* Heading */}
+        <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+          <div className="mb-8">
+            <h2 className="zag-heading font-medium leading-[1.18] lg:font-normal lg:text-[32px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
+              AI
+              <br />
+              &
+              <br />
+              AUTOMATION LAB
+            </h2>
+          </div>
+        </Reveal>
 
-      {/* Description */}
-      <p className="mb-10 leading-[1.65] tracking-[0.1em] text-white/78 lg:text-[16px]" style={{ fontSize: "12px" }}>
-        Where structural engineering meets artificial intelligence. Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
-      </p>
+        {/* Description */}
+        <Reveal delay={0.18} duration={0.65}>
+          <p className="mb-10 leading-[1.65] tracking-[0.1em] text-white/78 lg:text-[16px]" style={{ fontSize: "12px" }}>
+            Where structural engineering meets artificial intelligence. Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
+          </p>
+        </Reveal>
 
-      {/* Stats */}
-      <div className="mb-10 flex items-start justify-between">
-        <div>
-          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>500+</p>
-          <p className="mt-1 tracking-[0.18em] text-white/78 lg:text-[24px]" style={{ fontSize: "14px" }}>Videos</p>
+        {/* Stats — staggered count-up */}
+        <div className="mb-10 flex items-start justify-between">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: EASE }}
+            >
+              <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>
+                <CountUp end={stat.end} suffix={stat.suffix} duration={1.6} />
+              </p>
+              <p className="mt-1 tracking-[0.18em] text-white/78 lg:text-[24px]" style={{ fontSize: "14px" }}>{stat.label}</p>
+            </motion.div>
+          ))}
         </div>
-        <div>
-          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>150+</p>
-          <p className="mt-1 tracking-[0.18em] text-white/78 lg:text-[24px]" style={{ fontSize: "14px" }}>Subjects</p>
-        </div>
-        <div>
-          <p className="font-semibold tracking-[0.08em] text-white lg:text-[32px]" style={{ fontSize: "20px" }}>200+</p>
-          <p className="mt-1 tracking-[0.18em] text-white/78" style={{ fontSize: "14px" }}>Views</p>
-        </div>
-      </div>
 
-      {/* Buttons */}
-      <div className="flex gap-4">
-        <a
-          href="/contact"
-          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
-        >
-          Request a Service
-        </a>
-        <a
-          href="/ai-lab"
-          className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
-        >
-          Learn More
-        </a>
-      </div>
+        {/* Buttons */}
+        <div className="flex gap-4">
+          <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
+            <CtaButton
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
+            >
+              Request a Service
+            </CtaButton>
+          </Reveal>
+          <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
+            <CtaButton
+              href="/ai-lab"
+              className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
+            >
+              Learn More
+            </CtaButton>
+          </Reveal>
+        </div>
 
       </div>
     </section>

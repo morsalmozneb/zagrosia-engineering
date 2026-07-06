@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Sidebar } from '@/components/sidebar'
+import { IntroAnimation } from '@/components/intro-animation'
 import './globals.css'
 
 const inter = Inter({ 
@@ -33,8 +34,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" style={{ background: "#eff2f9", overflowX: "hidden" }}>
+    <html lang="en" style={{ background: "#07131F", overflowX: "hidden" }}>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
+        <IntroAnimation />
         <Sidebar />
         <div id="page-content">
           {children}

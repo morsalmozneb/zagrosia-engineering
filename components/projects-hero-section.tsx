@@ -2,6 +2,11 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 /* ── Icons ── */
 function FilterIcon() {
@@ -353,13 +358,13 @@ function DesktopProjectCardItem({
                 {title}
               </h3>
             </div>
-            <a
+            <CtaButton
               href="/projects"
               className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#94B8DC] hover:border-[#94B8DC]"
               style={{ fontSize: "10px" }}
             >
               Learn More
-            </a>
+            </CtaButton>
           </div>
         </div>
       </div>
@@ -368,6 +373,7 @@ function DesktopProjectCardItem({
 }
 
 export function ProjectsHeroSection() {
+  const reducedMotion = useReducedMotion()
   const [filterPanelOpen, setFilterPanelOpen] = useState(false)
   const [expertiseOpen, setExpertiseOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -387,49 +393,62 @@ export function ProjectsHeroSection() {
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
       <div className="lg:hidden px-5 pb-14 pt-24">
         {/* Label */}
-        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
-          PORTFOLIO
-        </p>
+        <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
+            PORTFOLIO
+          </p>
+        </Reveal>
 
         {/* Heading + body + stats with vertical line */}
         <div className="relative pl-[12px]">
-          <div
+          <motion.div
             className="absolute left-0 top-[8px] w-px"
+            initial={reducedMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.85, ease: "easeInOut" }}
             style={{
               height: "calc(100% - 8px)",
+              transformOrigin: "top",
               background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
             }}
           />
 
-        <h1
-          className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
-          style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          <span className="text-[#2D2D2D]">CANADIAN</span>
-          <br />
-          <span className="text-[#0052A5]">PROJECTS</span>
-        </h1>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h1
+              className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              <span className="text-[#2D2D2D]">CANADIAN</span>
+              <br />
+              <span className="text-[#0052A5]">PROJECTS</span>
+            </h1>
+          </Reveal>
 
-        {/* Body */}
-        <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-          Explore our portfolio of structural engineering projects across Western Canada — from high-rise retrofits to custom residences and industrial facilities.
-        </p>
+          {/* Body */}
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Explore our portfolio of structural engineering projects across Western Canada — from high-rise retrofits to custom residences and industrial facilities.
+            </p>
+          </Reveal>
 
-        {/* Stats */}
-        <div className="mb-8 flex items-start">
-          <div className="flex-1">
-            <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">200+</p>
-            <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Projects</p>
-          </div>
-          <div className="flex-1">
-            <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">35+</p>
-            <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Experience</p>
-          </div>
-          <div className="flex-1">
-            <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">3</p>
-            <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Provinces</p>
-          </div>
-        </div>
+          {/* Stats */}
+          <Reveal delay={0.28} duration={0.65}>
+            <div className="mb-8 flex items-start">
+              <div className="flex-1">
+                <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">200+</p>
+                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Projects</p>
+              </div>
+              <div className="flex-1">
+                <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">35+</p>
+                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Experience</p>
+              </div>
+              <div className="flex-1">
+                <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">3</p>
+                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Provinces</p>
+              </div>
+            </div>
+          </Reveal>
         </div>{/* end vertical line wrapper */}
 
         {/* Filter toggle */}
@@ -574,13 +593,13 @@ export function ProjectsHeroSection() {
                       <p className="mb-4 leading-[1.65] tracking-[0.06em] text-white/85" style={{ fontSize: "12px" }}>
                         {project.description}
                       </p>
-                      <a
+                      <CtaButton
                         href="/contact"
                         className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                         style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                       >
                         Learn More
-                      </a>
+                      </CtaButton>
                     </>
                   )}
                 </div>
@@ -630,31 +649,41 @@ export function ProjectsHeroSection() {
 
         {/* Mobile bottom CTA */}
         <div className="mt-[76px]">
-          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
-          <h2
-            className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
-            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            DO YOU WANT TO START YOUR PROJECT?
-          </h2>
-          <p className="mb-8 leading-[1.85] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
-            Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
-          </p>
+          <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+            <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
+          </Reveal>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h2
+              className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+              style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              DO YOU WANT TO START YOUR PROJECT?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mb-8 leading-[1.85] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+              Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
+            </p>
+          </Reveal>
           <div className="flex justify-start gap-[15px]">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-            >
-              Request a Service
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-            >
-              Get In Touch
-            </a>
+            <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+              <CtaButton
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              >
+                Request a Service
+              </CtaButton>
+            </Reveal>
+            <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
+              <CtaButton
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              >
+                Get In Touch
+              </CtaButton>
+            </Reveal>
           </div>
         </div>
       </div>
@@ -664,44 +693,57 @@ export function ProjectsHeroSection() {
           <div className="grid grid-cols-12 gap-x-[12px]">
             <div className="col-span-12">
               <div className="relative pl-5">
-                <div
+                <motion.div
                   className="absolute left-0 top-[4px] bottom-0 w-[4px]"
+                  initial={reducedMotion ? false : { scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: false, amount: 0.05 }}
+                  transition={{ duration: 0.9, ease: "easeInOut" }}
                   style={{
+                    transformOrigin: "top",
                     background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)",
                   }}
                 />
 
-                <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.26em] text-[#2D2D2D]">
-                  PORTFOLIO
-                </p>
+                <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                  <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.26em] text-[#2D2D2D]">
+                    PORTFOLIO
+                  </p>
+                </Reveal>
 
-                <h1
-                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
-                  style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-                >
-                  <span className="mb-[8px] block text-[#2D2D2D]">CANADIAN</span>
-                  <span className="block text-[#0052A5]">PROJECTS</span>
-                </h1>
+                <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                  <h1
+                    className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                    style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+                  >
+                    <span className="mb-[8px] block text-[#2D2D2D]">CANADIAN</span>
+                    <span className="block text-[#0052A5]">PROJECTS</span>
+                  </h1>
+                </Reveal>
 
-                <p className="mt-[22px] leading-[1.5] tracking-[0.17em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                  Hover over any project for detailed technical data, HUD overlay with<br />
-                  structural system, codes, loads and materials.
-                </p>
+                <Reveal delay={0.2} duration={0.65}>
+                  <p className="mt-[22px] leading-[1.5] tracking-[0.17em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                    Hover over any project for detailed technical data, HUD overlay with<br />
+                    structural system, codes, loads and materials.
+                  </p>
+                </Reveal>
 
-                <div className="mt-[42px] flex items-start gap-[170px]">
-                  <div>
-                    <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">200+</p>
-                    <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Projects</p>
+                <Reveal delay={0.3} duration={0.65}>
+                  <div className="mt-[42px] flex items-start gap-[170px]">
+                    <div>
+                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">200+</p>
+                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Projects</p>
+                    </div>
+                    <div>
+                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">35+</p>
+                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Experience</p>
+                    </div>
+                    <div>
+                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">3</p>
+                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Province</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">35+</p>
-                    <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Experience</p>
-                  </div>
-                  <div>
-                    <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">3</p>
-                    <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Province</p>
-                  </div>
-                </div>
+                </Reveal>
 
               </div>
             </div>
@@ -802,27 +844,40 @@ export function ProjectsHeroSection() {
 
             <div className="col-span-12 mt-[14px] space-y-[12px]">
               {desktopProjectRows.map((row, rowIndex) => (
-                <div key={rowIndex} className="grid grid-cols-12 gap-[12px]">
+                <motion.div
+                  key={rowIndex}
+                  initial={reducedMotion ? false : { opacity: 0, y: 24, filter: "blur(6px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.05 }}
+                  transition={{ duration: 0.65, delay: 0.05 + rowIndex * 0.08, ease: EASE }}
+                  className="grid grid-cols-12 gap-[12px]"
+                >
                   {row.map((project) => (
                     <DesktopProjectCardItem key={project.id} {...project} />
                   ))}
-                </div>
+                </motion.div>
               ))}
             </div>
 
             <div className="col-span-12 mt-[78px]">
-              <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
-                DO YOU WANT TO START YOU PROJECT?
-              </h2>
-              <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
-                Every project is unique. Contact us to discuss your specific requirements, and Discover how we can help.
-              </p>
-              <a
-                href="/contact"
-                className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] text-[16px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-              >
-                Request a Service
-              </a>
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+                  DO YOU WANT TO START YOUR PROJECT?
+                </h2>
+              </Reveal>
+              <Reveal delay={0.18} duration={0.65}>
+                <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
+                  Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
+                </p>
+              </Reveal>
+              <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+                <CtaButton
+                  href="/contact"
+                  className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] text-[16px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                >
+                  Request a Service
+                </CtaButton>
+              </Reveal>
             </div>
           </div>
         </div>

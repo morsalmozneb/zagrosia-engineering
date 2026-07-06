@@ -3,6 +3,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import { PlusCircle, MinusCircle } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const GRADIENT_BORDER = "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)"
 const CLOSED_FILL = "linear-gradient(to right, rgba(45,45,45,1) 0%, rgba(115,115,115,0.22) 100%)"
@@ -33,13 +38,20 @@ const features = [
 
 export function EGBCExamPrep() {
   const [openId, setOpenId] = useState<number>(1)
+  const reducedMotion = useReducedMotion()
 
   const accordion = (
     <div className="space-y-[6px]">
-      {features.map((feature) => {
+      {features.map((feature, i) => {
         const isOpen = openId === feature.id
         return (
-          <div key={feature.id}>
+          <motion.div
+            key={feature.id}
+            initial={reducedMotion ? false : { opacity: 0, y: 14, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: false, amount: 0.05 }}
+            transition={{ duration: 0.5, delay: 0.08 + i * 0.09, ease: EASE }}
+          >
             {isOpen ? (
               <div
                   className="rounded-[20px] bg-[#FCFCFC] px-4 pb-4 pt-3"
@@ -74,7 +86,7 @@ export function EGBCExamPrep() {
                 <PlusCircle size={20} strokeWidth={2} className="flex-shrink-0 text-white" />
               </button>
             )}
-          </div>
+          </motion.div>
         )
       })}
     </div>
@@ -85,43 +97,51 @@ export function EGBCExamPrep() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden px-8 pt-10 pb-0">
-        <h2 className="zag-heading mb-8 font-medium leading-[1.24] text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>
-          PASS THE EGBC EXAM.
-          <br />
-          THE SMART WAY.
-        </h2>
+        <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+          <h2 className="zag-heading mb-8 font-medium leading-[1.24] text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>
+            PASS THE EGBC EXAM.
+            <br />
+            THE SMART WAY.
+          </h2>
+        </Reveal>
 
         {accordion}
 
-        <p className="mt-9 max-w-[304px] leading-[1.48] tracking-[0.17em] text-[#3f3f3f]" style={{ fontSize: "12px" }}>
-          {"Canada's most comprehensive EGBC National Professional Practice Examination prep platform. Built by a practicing P.Eng. with 35 years of real-world experience — designed for internationally trained engineers building their Canadian career"}
-        </p>
+        <Reveal delay={0.15} duration={0.65}>
+          <p className="mt-9 max-w-[304px] leading-[1.48] tracking-[0.17em] text-[#3f3f3f]" style={{ fontSize: "12px" }}>
+            {"Canada's most comprehensive EGBC National Professional Practice Examination prep platform. Built by a practicing P.Eng. with 35 years of real-world experience — designed for internationally trained engineers building their Canadian career"}
+          </p>
+        </Reveal>
 
         <div className="mb-6 mt-8 flex justify-center gap-[15px]">
-          <a
-            href="/academy"
-            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-          >
-            Join Wait list
-          </a>
-          <a
-            href="/academy"
-            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-          >
-            Learn More
-          </a>
+          <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
+            <CtaButton
+              href="/academy"
+              className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Join Wait list
+            </CtaButton>
+          </Reveal>
+          <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
+            <CtaButton
+              href="/academy"
+              className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Learn More
+            </CtaButton>
+          </Reveal>
         </div>
 
-        <div className="relative -mx-8 h-[245px] w-[calc(100%+4rem)] overflow-hidden -mt-[30px]">
+        <Reveal variant="fadeBlur" delay={0.1} duration={0.8} className="relative -mx-8 h-[245px] w-[calc(100%+4rem)] overflow-hidden -mt-[30px]">
           <Image
             src="/images/pic-10.png"
             alt="Architectural building for EGBC section"
             fill
             className="object-cover object-bottom"
           />
-        </div>
+        </Reveal>
         <div className="flex justify-center">
           <div className="h-[2px] bg-black -ml-[50px]" style={{ width: "400px" }} />
         </div>
@@ -130,40 +150,48 @@ export function EGBCExamPrep() {
       {/* ── DESKTOP: left-aligned content with image below ── */}
       <div className="sidebar-content hidden lg:block lg:pt-20 lg:pb-0 zag-desktop-content-pad">
         <div className="w-full">
-          <h2 className="zag-heading mb-8 text-[32px] leading-[1.18] text-[#2d2d2d]">
-            PASS THE EGBC EXAM.
-            <br />
-            THE SMART WAY.
-          </h2>
+          <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
+            <h2 className="zag-heading mb-8 text-[32px] leading-[1.18] text-[#2d2d2d]">
+              PASS THE EGBC EXAM.
+              <br />
+              THE SMART WAY.
+            </h2>
+          </Reveal>
 
           <div className="w-full text-left">
             {accordion}
           </div>
 
-          <p
-            className="mt-9 text-left leading-[1.48] tracking-[0.17em] text-[#3f3f3f]"
-            style={{ fontSize: "16px" }}
-          >
-            {"Canada's most comprehensive EGBC National Professional Practice Examination prep platform. Built by a practicing P.Eng. with 35 years of real-world experience — designed for internationally trained engineers building their Canadian career"}
-          </p>
+          <Reveal delay={0.15} duration={0.65}>
+            <p
+              className="mt-9 text-left leading-[1.48] tracking-[0.17em] text-[#3f3f3f]"
+              style={{ fontSize: "16px" }}
+            >
+              {"Canada's most comprehensive EGBC National Professional Practice Examination prep platform. Built by a practicing P.Eng. with 35 years of real-world experience — designed for internationally trained engineers building their Canadian career"}
+            </p>
+          </Reveal>
 
           <div className="mt-8 flex justify-start gap-3">
-            <a
-              href="/academy"
-              className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            >
-              Join Wait list
-            </a>
-            <a
-              href="/academy"
-              className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            >
-              Learn More
-            </a>
+            <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
+              <CtaButton
+                href="/academy"
+                className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              >
+                Join Wait list
+              </CtaButton>
+            </Reveal>
+            <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
+              <CtaButton
+                href="/academy"
+                className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              >
+                Learn More
+              </CtaButton>
+            </Reveal>
           </div>
         </div>
 
-        <div className="relative left-[calc(50%-50vw)] -mt-16 w-screen">
+        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="relative left-[calc(50%-50vw)] -mt-16 w-screen">
           <div className="relative h-[560px] overflow-hidden">
             <div className="absolute bottom-0 left-0 h-[560px] w-[1400px]">
               <Image
@@ -175,7 +203,7 @@ export function EGBCExamPrep() {
             </div>
           </div>
           <div className="h-[3px] w-[1034px] bg-[#2d2d2d]" />
-        </div>
+        </Reveal>
       </div>
     </section>
   )

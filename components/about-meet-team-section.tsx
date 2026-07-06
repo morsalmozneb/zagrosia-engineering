@@ -3,6 +3,10 @@
 import Image from "next/image"
 import { useRef, useState, useEffect, useCallback } from "react"
 import type { ReactNode } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 function LinkedInIcon() {
   return (
@@ -229,20 +233,32 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 export function AboutMeetTeamSection() {
+  const reducedMotion = useReducedMotion()
+
   return (
     <section className="bg-[#FCFCFC] px-5 pb-14 pt-10 text-[#2D2D2D]">
       {/* Heading */}
-      <h2
-        className="mb-7 uppercase leading-none tracking-[0.18em] text-[#2D2D2D]"
-        style={{ fontSize: "20px", fontWeight: 600 }}
-      >
-        MEET OUR TEAM
-      </h2>
+      <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+        <h2
+          className="mb-7 uppercase leading-none tracking-[0.18em] text-[#2D2D2D]"
+          style={{ fontSize: "20px", fontWeight: 600 }}
+        >
+          MEET OUR TEAM
+        </h2>
+      </Reveal>
 
       {/* Cards */}
       <div className="space-y-6">
-        {team.map((member) => (
-          <TeamCard key={member.name} member={member} />
+        {team.map((member, i) => (
+          <motion.div
+            key={member.name}
+            initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: false, amount: 0.05 }}
+            transition={{ duration: 0.6, delay: 0.08 + i * 0.1, ease: EASE }}
+          >
+            <TeamCard member={member} />
+          </motion.div>
         ))}
       </div>
     </section>

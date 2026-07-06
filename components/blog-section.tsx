@@ -2,6 +2,11 @@
 
 import Image from "next/image"
 import { useRef, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const GRAD_BORDER = "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)"
 const COMPACT_GRAD_BORDER = "linear-gradient(135deg, rgba(45,45,45,0.5) 0%, rgba(147,147,147,0.18) 100%)"
@@ -91,6 +96,7 @@ function ScrollableArticle({ content }: { content: string }) {
 }
 
 export function BlogSection() {
+  const reducedMotion = useReducedMotion()
   const scrollRef = useRef<HTMLDivElement>(null)
   const [thumbTop, setThumbTop] = useState(0)
   const thumbHeight = 40
@@ -171,36 +177,51 @@ With focused preparation over six to eight weeks, most candidates can pass on th
       <div className="lg:hidden px-5 pb-14 pt-24">
 
         {/* Label */}
-        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INSIGHTS</p>
+        <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INSIGHTS</p>
+        </Reveal>
 
         {/* Vertical line + heading + body */}
         <div className="relative pl-[12px]">
-          <div
+          <motion.div
             className="absolute left-0 top-[8px] w-px"
+            initial={reducedMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.85, ease: "easeInOut" }}
             style={{
               height: "calc(100% - 8px)",
+              transformOrigin: "top",
               background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
             }}
           />
-          <h1
-            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
-            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            <span className="text-[#2D2D2D]">ENGINEERING</span>
-            <br />
-            <span className="text-[#0052A5]">BLOG</span>
-          </h1>
-          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Insights, technical breakdowns, and industry updates from the Zagrosia Engineering team.
-          </p>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h1
+              className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              <span className="text-[#2D2D2D]">ENGINEERING</span>
+              <br />
+              <span className="text-[#0052A5]">BLOG</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Insights, technical breakdowns, and industry updates from the Zagrosia Engineering team.
+            </p>
+          </Reveal>
         </div>
 
         {/* Mobile blog cards — interactive, matches desktop layout */}
         {desktopArticles.map((article, index) => {
           const isOpen = openCards.has(index)
           return (
-            <div
+            <motion.div
               key={index}
+              initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.05 }}
+              transition={{ duration: 0.6, delay: 0.08 + index * 0.12, ease: EASE }}
               className="mb-[10px] rounded-[20px] bg-[#FCFCFC] p-4"
               style={{
                 boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
@@ -276,37 +297,47 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                   <MobileArticleScroll content={article.content} />
                 </>
               )}
-            </div>
+            </motion.div>
           )
         })}
 
         {/* Mobile CTA */}
         <div className="mt-10">
-          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
-          <h2
-            className="mb-6 uppercase leading-[1.45] tracking-[0.12em] text-[#2D2D2D]"
-            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            THINK WE SHOULD COVER MORE TOPICS?
-          </h2>
-          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Have a subject or category you'd like us to write about? We'd love to hear from you.
-          </p>
+          <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+            <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+          </Reveal>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h2
+              className="mb-6 uppercase leading-[1.45] tracking-[0.12em] text-[#2D2D2D]"
+              style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              THINK WE SHOULD COVER MORE TOPICS?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Have a subject or category you&apos;d like us to write about? We&apos;d love to hear from you.
+            </p>
+          </Reveal>
           <div className="flex gap-[15px]">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-            >
-              Contact Us
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-            >
-              Get In Touch
-            </a>
+            <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+              <CtaButton
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              >
+                Contact Us
+              </CtaButton>
+            </Reveal>
+            <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
+              <CtaButton
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              >
+                Get In Touch
+              </CtaButton>
+            </Reveal>
           </div>
         </div>
 
@@ -319,23 +350,36 @@ With focused preparation over six to eight weeks, most candidates can pass on th
           <div className="mb-10">
             <div className="relative pl-5">
               {/* Vertical fading line */}
-              <div
+              <motion.div
                 className="absolute left-0 top-[4px] bottom-0 w-[4px]"
-                style={{ background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)" }}
+                initial={reducedMotion ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, amount: 0.05 }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
+                style={{
+                  transformOrigin: "top",
+                  background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)",
+                }}
               />
-              <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">
-                INSIGHTS
-              </p>
-              <h1
-                className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
-                style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-              >
-                <span className="mb-[8px] block text-[#2D2D2D]">ENGINEERING</span>
-                <span className="block text-[#0052A5]">BLOG</span>
-              </h1>
-              <p className="mt-5 max-w-[680px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
-              </p>
+              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">
+                  INSIGHTS
+                </p>
+              </Reveal>
+              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                <h1
+                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+                >
+                  <span className="mb-[8px] block text-[#2D2D2D]">ENGINEERING</span>
+                  <span className="block text-[#0052A5]">BLOG</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.2} duration={0.65}>
+                <p className="mt-5 max-w-[680px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                  Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
+                </p>
+              </Reveal>
             </div>
           </div>
 
@@ -344,8 +388,12 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             {desktopArticles.map((article, index) => {
               const isOpen = openCards.has(index)
               return (
-                <div
+                <motion.div
                   key={index}
+                  initial={reducedMotion ? false : { opacity: 0, y: 24, filter: "blur(6px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.05 }}
+                  transition={{ duration: 0.65, delay: 0.08 + index * 0.12, ease: EASE }}
                   className="rounded-[20px] bg-[#FCFCFC] px-6 py-5 backdrop-blur-[61.5px]"
                   style={{ boxShadow: "0 4px 19.6px 0 rgba(0,0,0,0.34)" }}
                 >
@@ -430,7 +478,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                       </div>
                     </>
                   )}
-                </div>
+                </motion.div>
               )
             })}
           </div>
@@ -440,19 +488,25 @@ With focused preparation over six to eight weeks, most candidates can pass on th
       {/* ── Desktop CTA ── */}
       <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
         <div className="zag-desktop-content-pad pt-[10px] pb-[80px]">
-          <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
-            THINK WE SHOULD COVER MORE TOPICS?
-          </h2>
-          <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
-            Have a subject or category you'd like us to write about? We'd love to hear from you.
-          </p>
-          <a
-            href="/contact"
-            className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "16px" }}
-          >
-            Contact Us
-          </a>
+          <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+            <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+              THINK WE SHOULD COVER MORE TOPICS?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.18} duration={0.65}>
+            <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
+              Have a subject or category you&apos;d like us to write about? We&apos;d love to hear from you.
+            </p>
+          </Reveal>
+          <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+            <CtaButton
+              href="/contact"
+              className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "16px" }}
+            >
+              Contact Us
+            </CtaButton>
+          </Reveal>
         </div>
       </div>
     </section>

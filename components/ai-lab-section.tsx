@@ -1,4 +1,11 @@
+"use client"
+
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const CARD_GRADIENT = "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 35%, rgba(20,20,20,0.45) 65%, rgba(20,20,20,0.88) 100%)"
 const DESKTOP_CARD_GRADIENT = "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)"
@@ -144,43 +151,60 @@ function DesktopToolCard({
 }
 
 export function AILabSection() {
+  const reducedMotion = useReducedMotion()
+
   return (
     <>
       <section className="bg-[#FCFCFC] lg:hidden px-5 pb-0 pt-24">
 
         {/* Label */}
-        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INNOVATION</p>
+        <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INNOVATION</p>
+        </Reveal>
 
         {/* Vertical line + heading + body */}
         <div className="relative pl-[12px]">
-          <div
+          <motion.div
             className="absolute left-0 top-[8px] w-px"
+            initial={reducedMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.85, ease: "easeInOut" }}
             style={{
               height: "calc(100% - 8px)",
+              transformOrigin: "top",
               background: "linear-gradient(180deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.82) 38%, rgba(45,45,45,0.42) 72%, rgba(45,45,45,0) 100%)",
             }}
           />
 
           {/* Heading */}
-          <h1
-            className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
-            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
-            <br />
-            <span className="text-[#0052A5]">LAB</span>
-          </h1>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h1
+              className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
+              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
+              <br />
+              <span className="text-[#0052A5]">LAB</span>
+            </h1>
+          </Reveal>
 
           {/* Body */}
-          <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Where structural engineering meets artificial intelligence.
-          </p>
-          <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
-          </p>
-          <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-            Click any tool below to watch a demo clip.
-          </p>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Where structural engineering meets artificial intelligence.
+            </p>
+          </Reveal>
+          <Reveal delay={0.26} duration={0.65}>
+            <p className="mb-3 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
+            </p>
+          </Reveal>
+          <Reveal delay={0.32} duration={0.65}>
+            <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+              Click any tool below to watch a demo clip.
+            </p>
+          </Reveal>
         </div>
 
         {/* Hero image + divider — shifted up */}
@@ -215,8 +239,16 @@ export function AILabSection() {
 
         {/* Large feature cards */}
         <div className="space-y-5">
-          {largeTools.map((tool) => (
-            <div key={tool.id} className="relative h-[220px] overflow-hidden rounded-[20px]" style={{ boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}>
+          {largeTools.map((tool, i) => (
+            <motion.div
+              key={tool.id}
+              className="relative h-[220px] overflow-hidden rounded-[20px]"
+              style={{ boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.08 + i * 0.15, ease: EASE }}
+            >
               <Image
                 src={tool.image}
                 alt={tool.title}
@@ -235,22 +267,30 @@ export function AILabSection() {
                 <p className="mb-3 text-[10px] leading-[1.65] tracking-[0.06em] text-white/85">
                   {tool.description}
                 </p>
-                <a
+                <CtaButton
                   href="#"
                   className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                 >
                   Watch Demo
-                </a>
+                </CtaButton>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* 2-column small cards grid */}
         <div className="mt-5 grid grid-cols-2 gap-4">
-          {smallTools.map((tool) => (
-            <div key={tool.id} className="relative overflow-hidden rounded-[20px]" style={{ height: 175, boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}>
+          {smallTools.map((tool, i) => (
+            <motion.div
+              key={tool.id}
+              className="relative overflow-hidden rounded-[20px]"
+              style={{ height: 175, boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.05 }}
+              transition={{ duration: 0.55, delay: 0.05 + i * 0.1, ease: EASE }}
+            >
               <Image
                 src={tool.image}
                 alt={tool.title}
@@ -266,15 +306,15 @@ export function AILabSection() {
                 <h3 className="mb-2 text-[11px] font-semibold leading-tight tracking-[0.06em] text-white uppercase">
                   {tool.title}
                 </h3>
-                <a
+                <CtaButton
                   href="#"
                   className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9px", width: "90px", height: "26px" }}
                 >
                   Watch Demo
-                </a>
+                </CtaButton>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -282,31 +322,41 @@ export function AILabSection() {
 
       {/* Mobile CTA */}
       <section className="bg-[#FCFCFC] lg:hidden px-5 pb-14 pt-10">
-        <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
-        <h2
-          className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
-          style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-        >
-          HAVE QUESTIONS ABOUT OUR AI TOOLS?
-        </h2>
-        <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-          We'd love to show you how our automation tools can transform your workflow. Get in touch with us.
-        </p>
+        <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+        </Reveal>
+        <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+          <h2
+            className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+            style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+          >
+            HAVE QUESTIONS ABOUT OUR AI TOOLS?
+          </h2>
+        </Reveal>
+        <Reveal delay={0.2} duration={0.65}>
+          <p className="mb-8 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
+            We&apos;d love to show you how our automation tools can transform your workflow. Get in touch with us.
+          </p>
+        </Reveal>
         <div className="flex justify-start gap-[15px]">
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-          >
-            Contact Us
-          </a>
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
-          >
-            Get In Touch
-          </a>
+          <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
+            <CtaButton
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Contact Us
+            </CtaButton>
+          </Reveal>
+          <Reveal variant="scaleUp" delay={0.38} duration={0.5}>
+            <CtaButton
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            >
+              Get In Touch
+            </CtaButton>
+          </Reveal>
         </div>
       </section>
 
@@ -319,28 +369,38 @@ export function AILabSection() {
               style={{ background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)" }}
             />
 
-          <p className="mb-[14px] text-[20px] font-semibold uppercase tracking-[0.22em] text-[#2D2D2D]">
-            INNOVATION
-          </p>
-          <h1
-            className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
-            style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-          >
-            <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
-            <br />
-            <span className="text-[#0052A5]">LAB</span>
-          </h1>
+          <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+            <p className="mb-[14px] text-[20px] font-semibold uppercase tracking-[0.22em] text-[#2D2D2D]">
+              INNOVATION
+            </p>
+          </Reveal>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h1
+              className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+            >
+              <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
+              <br />
+              <span className="text-[#0052A5]">LAB</span>
+            </h1>
+          </Reveal>
 
-          <p className="relative z-10 mt-[20px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-            Where structural engineering meets artificial intelligence.
-          </p>
-          <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-            Custom Python scripts, VBA automation, and AI-powered platforms that<br />
-            transform how engineering firms operate.
-          </p>
-          <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-            Click any tool below to watch a demo clip.
-          </p>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="relative z-10 mt-[20px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+              Where structural engineering meets artificial intelligence.
+            </p>
+          </Reveal>
+          <Reveal delay={0.26} duration={0.65}>
+            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+              Custom Python scripts, VBA automation, and AI-powered platforms that<br />
+              transform how engineering firms operate.
+            </p>
+          </Reveal>
+          <Reveal delay={0.32} duration={0.65}>
+            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+              Click any tool below to watch a demo clip.
+            </p>
+          </Reveal>
           </div>{/* end relative pl-5 */}
 
           <div
@@ -361,32 +421,50 @@ export function AILabSection() {
           <div className="mt-[40px] h-[3px] w-[1259px] bg-[#000000]" />
 
           <div className="pt-[80px]">
-            <h2
-              className="text-[32px] font-medium uppercase leading-none tracking-[0.22em] text-[#2D2D2D]"
-              style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-            >
-              ENGINEERING SOFTWARE TOOLS
-            </h2>
-            <p className="mt-[10px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
-              Click any tool to watch a 1-1.5 min demo.
-            </p>
+            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+              <h2
+                className="text-[32px] font-medium uppercase leading-none tracking-[0.22em] text-[#2D2D2D]"
+                style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+              >
+                ENGINEERING SOFTWARE TOOLS
+              </h2>
+            </Reveal>
+            <Reveal delay={0.18} duration={0.65}>
+              <p className="mt-[10px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                Click any tool to watch a 1-1.5 min demo.
+              </p>
+            </Reveal>
 
             <div className="mt-[50px] space-y-[20px]">
-              {largeTools.map((tool) => (
-                <DesktopToolCard
+              {largeTools.map((tool, i) => (
+                <motion.div
                   key={tool.id}
-                  tool={tool}
-                  heightClass="h-[494px]"
-                />
+                  initial={reducedMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.1 }}
+                  transition={{ duration: 0.7, delay: 0.08 + i * 0.15, ease: EASE }}
+                >
+                  <DesktopToolCard
+                    tool={tool}
+                    heightClass="h-[494px]"
+                  />
+                </motion.div>
               ))}
 
               <div className="grid grid-cols-2 gap-[20px]">
-                {smallTools.map((tool) => (
-                  <DesktopToolCard
+                {smallTools.map((tool, i) => (
+                  <motion.div
                     key={tool.id}
-                    tool={tool}
-                    heightClass="h-[381px]"
-                  />
+                    initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.05 }}
+                    transition={{ duration: 0.6, delay: 0.05 + i * 0.1, ease: EASE }}
+                  >
+                    <DesktopToolCard
+                      tool={tool}
+                      heightClass="h-[381px]"
+                    />
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -397,20 +475,26 @@ export function AILabSection() {
       {/* ── Desktop CTA ── */}
       <section className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
         <div className="zag-desktop-content-pad pt-[30px] pb-[80px]">
-          <h2
-            className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]"
-          >
-            HAVE QUESTIONS ABOUT OUR AI TOOLS?
-          </h2>
-          <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
-            We'd love to show you how our automation tools can transform your workflow. Get in touch with us.
-          </p>
-          <a
-            href="/contact"
-            className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] text-[16px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-          >
-            Contact Us
-          </a>
+          <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+            <h2
+              className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]"
+            >
+              HAVE QUESTIONS ABOUT OUR AI TOOLS?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.18} duration={0.65}>
+            <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
+              We&apos;d love to show you how our automation tools can transform your workflow. Get in touch with us.
+            </p>
+          </Reveal>
+          <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
+            <CtaButton
+              href="/contact"
+              className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] text-[16px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            >
+              Contact Us
+            </CtaButton>
+          </Reveal>
         </div>
       </section>
     </>

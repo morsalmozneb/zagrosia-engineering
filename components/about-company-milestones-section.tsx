@@ -2,6 +2,10 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const milestones = [
   {
@@ -115,6 +119,7 @@ const milestones = [
 ]
 
 export function AboutCompanyMilestonesSection() {
+  const reducedMotion = useReducedMotion()
   const [index, setIndex] = useState(0)
   const milestone = milestones[index]
 
@@ -123,14 +128,16 @@ export function AboutCompanyMilestonesSection() {
 
   return (
     <section className="bg-[#FCFCFC] px-6 pb-10 pt-11 text-[#2D2D2D]">
-      <h2
-        className="leading-[1.14] tracking-[0.14em] text-[#2D2D2D]"
-        style={{ fontSize: "20px", fontWeight: 600 }}
-      >
-        COMPANY
-        <br />
-        MILESTONES
-      </h2>
+      <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+        <h2
+          className="leading-[1.14] tracking-[0.14em] text-[#2D2D2D]"
+          style={{ fontSize: "20px", fontWeight: 600 }}
+        >
+          COMPANY
+          <br />
+          MILESTONES
+        </h2>
+      </Reveal>
 
       <div className="mt-6">
         {/* Combined photos + card unit with arrows on sides */}
@@ -164,8 +171,12 @@ export function AboutCompanyMilestonesSection() {
             </div>
 
             {/* Info card */}
-            <div
+            <motion.div
+              key={index}
               className="relative px-4 pb-4 pt-4"
+              initial={reducedMotion ? false : { opacity: 0, y: 12, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.45, ease: EASE }}
               style={{
                 borderRadius: "20px",
                 backgroundColor: "rgba(252,252,252,0.2)",
@@ -196,7 +207,7 @@ export function AboutCompanyMilestonesSection() {
               >
                 {milestone.description}
               </p>
-            </div>
+            </motion.div>
           </div>
 
           <button
@@ -222,8 +233,11 @@ export function AboutCompanyMilestonesSection() {
 
           <div className="mt-4 grid grid-cols-2 gap-3 justify-items-center mx-auto" style={{ width: "fit-content" }}>
             {milestone.projects.map((project, i) => (
-              <div
-                key={i}
+              <motion.div
+                key={`${index}-${i}`}
+                initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.5, delay: 0.05 + i * 0.08, ease: EASE }}
                 style={{
                   width: "141.79px",
                   height: "175.27px",
@@ -260,7 +274,7 @@ export function AboutCompanyMilestonesSection() {
                     {project.period}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

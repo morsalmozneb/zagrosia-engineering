@@ -2,6 +2,11 @@
 
 import { useState, type ReactNode } from "react"
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const EASE = [0.0, 0.0, 0.2, 1] as const
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -152,6 +157,7 @@ function AboutTeamCtaButton({
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export function AboutDesktopPage() {
+  const reducedMotion = useReducedMotion()
   const [pageIndex, setPageIndex] = useState(0)
   const currentPage = milestonePages[pageIndex]
 
@@ -170,32 +176,45 @@ export function AboutDesktopPage() {
         <div className="sidebar-content zag-desktop-content-pad relative z-20 pt-[148px]">
           <div className="max-w-[820px]">
             <div className="relative pl-5">
-              <div
+              <motion.div
                 className="absolute left-0 top-[4px] bottom-0 w-[4px]"
+                initial={reducedMotion ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, amount: 0.05 }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
                 style={{
+                  transformOrigin: "top",
                   background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)",
                 }}
               />
-              <p className="mb-[20px] text-[20px] font-bold tracking-[0.24em] text-[#2D2D2D]">
-                WHO WE ARE
-              </p>
+              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                <p className="mb-[20px] text-[20px] font-bold tracking-[0.24em] text-[#2D2D2D]">
+                  WHO WE ARE
+                </p>
+              </Reveal>
 
-              <h1
-                className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
-                style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-              >
-                <span className="mb-[8px] block text-[#2D2D2D]">STRUCTURAL</span>
-                <span className="mb-[8px] block text-[#0052A5]">ENGINEERING</span>
-                <span className="block text-[#2D2D2D]">EXCELLENCE</span>
-              </h1>
+              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                <h1
+                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+                >
+                  <span className="mb-[8px] block text-[#2D2D2D]">STRUCTURAL</span>
+                  <span className="mb-[8px] block text-[#0052A5]">ENGINEERING</span>
+                  <span className="block text-[#2D2D2D]">EXCELLENCE</span>
+                </h1>
+              </Reveal>
 
               <div className="mt-7 max-w-[760px] space-y-4 pb-[24px]">
-                <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                  With over 35 years of structural engineering expertise, Zagrosia Engineering combines trusted engineering excellence with modern AI-driven workflows.
-                </p>
-                <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                  Led by <span className="font-bold">Seyed Hassan Mozneb</span>, M.Sc., P.Eng., the company specializes in seismic assessments, structural rehabilitation, industrial racking systems, and specialty engineering solutions, all delivered with precision, innovation, and strict compliance with BCBC, NBCC, and EGBC standards.
-                </p>
+                <Reveal delay={0.2} duration={0.65}>
+                  <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                    With over 35 years of structural engineering expertise, Zagrosia Engineering combines trusted engineering excellence with modern AI-driven workflows.
+                  </p>
+                </Reveal>
+                <Reveal delay={0.28} duration={0.65}>
+                  <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                    Led by <span className="font-bold">Seyed Hassan Mozneb</span>, M.Sc., P.Eng., the company specializes in seismic assessments, structural rehabilitation, industrial racking systems, and specialty engineering solutions, all delivered with precision, innovation, and strict compliance with BCBC, NBCC, and EGBC standards.
+                  </p>
+                </Reveal>
               </div>
             </div>
           </div>
@@ -238,59 +257,98 @@ export function AboutDesktopPage() {
             >
               <div className="relative w-[870px]">
                 <div className="flex items-end justify-between">
-                  <div className="relative h-[650px] w-[430px]">
-                <Image
-                  src="/images/homayoun-pic.png"
-                  alt="Seyed Hassan Mozneb"
-                  fill
-                  className="object-contain object-bottom"
-                />
-              </div>
+                  <motion.div
+                    className="relative h-[650px] w-[430px]"
+                    initial={reducedMotion ? false : { opacity: 0, x: -24, filter: "blur(8px)" }}
+                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: EASE }}
+                  >
+                    <Image
+                      src="/images/homayoun-pic.png"
+                      alt="Seyed Hassan Mozneb"
+                      fill
+                      className="object-contain object-bottom"
+                    />
+                  </motion.div>
 
                   <div className="flex h-[332px] w-[170px] flex-col justify-between pb-[8px]">
-                <div>
-                  <p className="text-[32px] font-semibold leading-none tracking-[0.08em] text-[#FCFCFC]">35+</p>
-                  <p className="mt-3 text-[11px] tracking-[0.2em] text-[#FCFCFC]">Experience</p>
+                    {[
+                      { value: "35+", label: "Experience", delay: 0.15 },
+                      { value: "200+", label: "Projects", delay: 0.25 },
+                      { value: "8+", label: "Canada", delay: 0.35 },
+                    ].map(({ value, label, delay }) => (
+                      <motion.div
+                        key={label}
+                        initial={reducedMotion ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
+                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        viewport={{ once: false, amount: 0.1 }}
+                        transition={{ duration: 0.55, delay, ease: EASE }}
+                      >
+                        <p className="text-[32px] font-semibold leading-none tracking-[0.08em] text-[#FCFCFC]">{value}</p>
+                        <p className="mt-3 text-[11px] tracking-[0.2em] text-[#FCFCFC]">{label}</p>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[32px] font-semibold leading-none tracking-[0.08em] text-[#FCFCFC]">200+</p>
-                  <p className="mt-3 text-[11px] tracking-[0.2em] text-[#FCFCFC]">Projects</p>
-                </div>
-                <div>
-                  <p className="text-[32px] font-semibold leading-none tracking-[0.08em] text-[#FCFCFC]">8+</p>
-                  <p className="mt-3 text-[11px] tracking-[0.2em] text-[#FCFCFC]">Canada</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="h-[3px] w-[870px] bg-[#FCFCFC]" />
-          </div>
+                <div className="h-[3px] w-[870px] bg-[#FCFCFC]" />
+              </div>
 
           <div className="mt-10 max-w-[430px]">
             <div className="mb-10">
-              <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">EDUCATION</h2>
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">EDUCATION</h2>
+              </Reveal>
               <ul className="space-y-3 text-[16px] leading-[1.65] tracking-[0.16em] text-[#FCFCFC]">
-                <li>M.Sc. Structural Engineering</li>
-                <li>B.Sc. Civil Engineering</li>
+                {["M.Sc. Structural Engineering", "B.Sc. Civil Engineering"].map((item, i) => (
+                  <motion.li
+                    key={item}
+                    initial={reducedMotion ? false : { opacity: 0, x: -16, filter: "blur(4px)" }}
+                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
+                  >
+                    {item}
+                  </motion.li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">CERTIFICATIONS</h2>
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">CERTIFICATIONS</h2>
+              </Reveal>
               <ul className="space-y-3 text-[16px] leading-[1.6] tracking-[0.16em] text-[#FCFCFC]">
-                <li>Structural Engineering Certificate (SEABC)</li>
-                <li>Construction Operation Certificate</li>
-                <li>P.Eng. Candidacy - Ethical Law Exam Completed</li>
+                {[
+                  "Structural Engineering Certificate (SEABC)",
+                  "Construction Operation Certificate",
+                  "P.Eng. Candidacy - Ethical Law Exam Completed",
+                ].map((item, i) => (
+                  <motion.li
+                    key={item}
+                    initial={reducedMotion ? false : { opacity: 0, x: -16, filter: "blur(4px)" }}
+                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
+                  >
+                    {item}
+                  </motion.li>
+                ))}
               </ul>
             </div>
 
             <div className="mt-9 flex gap-4">
-              <a href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="zag-outline-button min-h-[46px] w-[170px] whitespace-nowrap border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
-                View Resume
-              </a>
-              <a href="/contact" className="zag-outline-button min-h-[46px] w-[154px] border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
-                Contact
-              </a>
+              <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
+                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="zag-outline-button min-h-[46px] w-[170px] whitespace-nowrap border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
+                  View Resume
+                </CtaButton>
+              </Reveal>
+              <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
+                <CtaButton href="/contact" className="zag-outline-button min-h-[46px] w-[154px] border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
+                  Contact
+                </CtaButton>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -304,20 +362,26 @@ export function AboutDesktopPage() {
         <div className="sidebar-content zag-desktop-content-pad">
 
           {/* Heading */}
-          <h2 className="zag-heading mb-10 text-[34px] leading-[1.18] tracking-[0.11em] text-[#2D2D2D]">
-            OUR MISSION
-            <br />
-            &amp;
-            <br />
-            OUR VISION
-          </h2>
+          <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+            <h2 className="zag-heading mb-10 text-[34px] leading-[1.18] tracking-[0.11em] text-[#2D2D2D]">
+              OUR MISSION
+              <br />
+              &amp;
+              <br />
+              OUR VISION
+            </h2>
+          </Reveal>
 
           {/* Two cards below heading, aligned left */}
           <div className="flex gap-5">
 
             {/* Mission card */}
-            <div
+            <motion.div
               className="w-[465px] h-[220px] flex-shrink-0 rounded-[20px] p-px"
+              initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.65, delay: 0.15, ease: EASE }}
               style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
             >
               <div
@@ -329,11 +393,15 @@ export function AboutDesktopPage() {
                   For over 35 years, Zagrosia Engineering has delivered intelligent structural engineering solutions with precision, innovation, and deep industry expertise, combining trusted engineering practices with modern AI-driven workflows.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Vision card */}
-            <div
+            <motion.div
               className="w-[465px] h-[220px] flex-shrink-0 rounded-[20px] p-px"
+              initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.65, delay: 0.25, ease: EASE }}
               style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
             >
               <div
@@ -345,7 +413,7 @@ export function AboutDesktopPage() {
                   To become Western Canada&apos;s leading structural engineering firm through innovation, technical excellence, and the future of engineering technology.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -385,23 +453,34 @@ export function AboutDesktopPage() {
         <div className="sidebar-content relative w-full pb-[72px] pt-[500px] zag-desktop-content-pad">
           <div className="mx-auto max-w-[918px]">
             <div className="relative pl-[26px]">
-              <div
+              <motion.div
                 className="absolute left-0 top-[2px] bottom-[22px] w-[4px]"
+                initial={reducedMotion ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, amount: 0.05 }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
                 style={{
+                  transformOrigin: "top",
                   background: aboutCoreValueStroke,
                 }}
               />
 
               <div className="mb-6">
-                <h2 className="zag-heading text-[32px] leading-none tracking-[0.14em] text-[#FCFCFC]">
-                  OUR CORE VALUES
-                </h2>
+                <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                  <h2 className="zag-heading text-[32px] leading-none tracking-[0.14em] text-[#FCFCFC]">
+                    OUR CORE VALUES
+                  </h2>
+                </Reveal>
               </div>
 
               <div className="space-y-3">
-                {coreValues.map((value) => (
-                  <div
+                {coreValues.map((value, i) => (
+                  <motion.div
                     key={value.title}
+                    initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.65, delay: 0.1 + i * 0.12, ease: EASE }}
                     className="rounded-[20px] p-px"
                     style={{
                       background: aboutCoreValueStroke,
@@ -416,7 +495,7 @@ export function AboutDesktopPage() {
                         {value.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -430,13 +509,19 @@ export function AboutDesktopPage() {
       <section className="overflow-hidden bg-[#FCFCFC] pt-[74px] pb-0">
         <div className="sidebar-content w-full zag-desktop-content-pad">
           <div className="mx-auto max-w-[860px]">
-            <h2 className="zag-heading text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
-              COMPANY MILESTONES
-            </h2>
+            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+              <h2 className="zag-heading text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                COMPANY MILESTONES
+              </h2>
+            </Reveal>
 
             <div className="mt-[34px] pl-[84px]">
               <div className="relative w-full max-w-[620px]">
-                <article
+                <motion.article
+                  key={`top-${pageIndex}`}
+                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.55, ease: EASE }}
                   className="rounded-[20px] bg-[#FCFCFC] px-[20px] py-[18px]"
                   style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
                 >
@@ -446,7 +531,7 @@ export function AboutDesktopPage() {
                   <p className="mt-3 max-w-[520px] leading-[1.58] tracking-[0.12em] text-[#3A3A3A]" style={{ fontSize: "16px" }}>
                     {currentPage.top.description}
                   </p>
-                </article>
+                </motion.article>
                 <span className="absolute right-[-12px] top-[-12px] max-w-[190px] text-right text-[15px] font-semibold leading-none tracking-[0.14em] text-[#2D2D2D]">
                   {currentPage.top.year}
                 </span>
@@ -477,7 +562,11 @@ export function AboutDesktopPage() {
 
             <div className="mt-[24px] pl-[84px]">
               <div className="relative w-full max-w-[620px]">
-                <article
+                <motion.article
+                  key={`bottom-${pageIndex}`}
+                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
                   className="rounded-[20px] bg-[#FCFCFC] px-[20px] py-[18px]"
                   style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
                 >
@@ -487,7 +576,7 @@ export function AboutDesktopPage() {
                   <p className="mt-3 max-w-[520px] leading-[1.58] tracking-[0.12em] text-[#3A3A3A]" style={{ fontSize: "16px" }}>
                     {currentPage.bottom.description}
                   </p>
-                </article>
+                </motion.article>
                 <span className="absolute left-[-18px] bottom-[-12px] max-w-[210px] text-[15px] font-semibold leading-none tracking-[0.14em] text-[#2D2D2D]">
                   {currentPage.bottom.year}
                 </span>
@@ -516,12 +605,18 @@ export function AboutDesktopPage() {
       ══════════════════════════════════════════ */}
       <section className="sidebar-content bg-[#FCFCFC] pb-[72px] pt-[26px] zag-desktop-content-pad">
         <div className="mx-auto max-w-[860px]">
-          <h2 className="zag-heading mb-[24px] text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">MEET OUR TEAM</h2>
+          <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+            <h2 className="zag-heading mb-[24px] text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">MEET OUR TEAM</h2>
+          </Reveal>
 
           <div className="flex flex-col gap-5">
-            {team.map((member) => (
-              <article
+            {team.map((member, i) => (
+              <motion.article
                 key={member.name}
+                initial={reducedMotion ? false : { opacity: 0, y: 24, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: false, amount: 0.05 }}
+                transition={{ duration: 0.65, delay: 0.08 + i * 0.1, ease: EASE }}
                 className="w-full rounded-[20px] bg-[rgba(252,252,252,0.4)] px-[16px] py-[10px] backdrop-blur-[61.5px]"
                 style={{ boxShadow: aboutTeamCardShadow }}
               >
@@ -569,7 +664,7 @@ export function AboutDesktopPage() {
                     </div>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
         </div>
@@ -580,24 +675,34 @@ export function AboutDesktopPage() {
       ══════════════════════════════════════════ */}
       <section className="sidebar-content bg-[#FCFCFC] py-20 zag-desktop-content-pad">
         <div className="mx-auto max-w-[860px]">
-          <p className="mb-4 text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">WHERE WE WORK</p>
-          <h2 className="font-sans text-[32px] font-light uppercase leading-[1.08] tracking-[0.12em] text-[#2D2D2D]">
-            SERVING WESTERN CANADA
-          </h2>
-          <p className="mt-6 leading-[1.8] tracking-[0.10em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
-            Zagrosia Engineering is licensed and insured to provide structural engineering services across<br />
-            <span className="font-semibold">British Columbia</span>,{" "}
-            <span className="font-semibold">Alberta</span>, and{" "}
-            <span className="font-semibold">Saskatchewan</span>. Our team is equipped to handle projects<br />
-            throughout these provinces.
-          </p>
+          <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+            <p className="mb-4 text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">WHERE WE WORK</p>
+          </Reveal>
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h2 className="font-sans text-[32px] font-light uppercase leading-[1.08] tracking-[0.12em] text-[#2D2D2D]">
+              SERVING WESTERN CANADA
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2} duration={0.65}>
+            <p className="mt-6 leading-[1.8] tracking-[0.10em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+              Zagrosia Engineering is licensed and insured to provide structural engineering services across<br />
+              <span className="font-semibold">British Columbia</span>,{" "}
+              <span className="font-semibold">Alberta</span>, and{" "}
+              <span className="font-semibold">Saskatchewan</span>. Our team is equipped to handle projects<br />
+              throughout these provinces.
+            </p>
+          </Reveal>
           <div className="mt-8 flex gap-4">
-            <a href="/contact" className="zag-outline-button min-h-[44px] w-[170px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
-              Work with Us
-            </a>
-            <a href="/contact" className="zag-outline-button min-h-[44px] w-[160px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
-              Get In Touch
-            </a>
+            <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+              <CtaButton href="/contact" className="zag-outline-button min-h-[44px] w-[170px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
+                Work with Us
+              </CtaButton>
+            </Reveal>
+            <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
+              <CtaButton href="/contact" className="zag-outline-button min-h-[44px] w-[160px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
+                Get In Touch
+              </CtaButton>
+            </Reveal>
           </div>
         </div>
       </section>
