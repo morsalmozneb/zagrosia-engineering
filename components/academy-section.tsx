@@ -101,14 +101,15 @@ export function AcademySection() {
           />
 
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h1
+            <h2
               className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+              aria-hidden="true"
             >
               <span className="text-[#2D2D2D]">PASS THE EGBC EXAM</span>
               <br />
               <span className="text-[#0052A5]">THE SMART WAY.</span>
-            </h1>
+            </h2>
           </Reveal>
 
           <Reveal delay={0.2} duration={0.65}>

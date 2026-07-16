@@ -182,7 +182,7 @@ export function ProjectsSection() {
                       style={{ height: "457px" }}
                     >
                       <div className="relative w-full" style={{ height: "205px" }}>
-                        <Image src={project.image} alt={project.title.replace(/\n/g, " ")} fill className="object-cover" />
+                        <Image src={project.image} alt={project.title.replace(/\n/g, " ")} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                       </div>
                       <div className="px-4 pb-4 pt-3">
                         <h3 className="whitespace-pre-line leading-[1.25] tracking-[0.16em] text-[#3a3a3a]" style={{ fontSize: "14px" }}>{project.title}</h3>
@@ -318,7 +318,7 @@ export function ProjectsSection() {
                       exit={{ opacity: 0, filter: "blur(4px)" }}
                       transition={{ duration: 0.35, ease: EASE }}
                     >
-                      <Image src={projects[prevIndex].image} alt={projects[prevIndex].title} fill className="object-cover" />
+                      <Image src={projects[prevIndex].image} alt={projects[prevIndex].title} fill sizes="(max-width: 1024px) 25vw" className="object-cover" />
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -369,7 +369,7 @@ export function ProjectsSection() {
                       exit="exit"
                       transition={{ duration: 0.42, ease: EASE }}
                     >
-                      <Image src={projects[desktopIndex].image} alt={projects[desktopIndex].title} fill className="object-cover" />
+                      <Image src={projects[desktopIndex].image} alt={projects[desktopIndex].title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -430,7 +430,7 @@ export function ProjectsSection() {
                       exit={{ opacity: 0, filter: "blur(4px)" }}
                       transition={{ duration: 0.35, ease: EASE }}
                     >
-                      <Image src={projects[nextIndex].image} alt={projects[nextIndex].title} fill className="object-cover" />
+                      <Image src={projects[nextIndex].image} alt={projects[nextIndex].title} fill sizes="(max-width: 1024px) 25vw" className="object-cover" />
                     </motion.div>
                   </AnimatePresence>
                 </div>

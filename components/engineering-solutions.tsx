@@ -109,7 +109,7 @@ export function EngineeringSolutions() {
 
                       {service.image && (
                         <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:hidden">
-                          <Image src={service.image} alt={service.title} fill className="object-cover" />
+                          <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                         </div>
                       )}
 

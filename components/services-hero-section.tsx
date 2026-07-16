@@ -65,14 +65,15 @@ export function ServicesHeroSection() {
           />
 
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h1
+            <h2
               className="mb-5 text-[24px] font-black uppercase leading-[1.1] tracking-[0.04em]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
+              aria-hidden="true"
             >
               <span className="text-[#2D2D2D]">ENGINEERING</span>
               <br />
               <span className="text-[#0052A5]">SOLUTIONS</span>
-            </h1>
+            </h2>
           </Reveal>
 
           <Reveal delay={0.2} duration={0.65}>
@@ -112,7 +113,7 @@ export function ServicesHeroSection() {
 
                         {service.image && (
                           <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:hidden">
-                            <Image src={service.image} alt={service.title} fill className="object-cover" />
+                            <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                           </div>
                         )}
 

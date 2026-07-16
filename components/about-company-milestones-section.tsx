@@ -158,15 +158,15 @@ export function AboutCompanyMilestonesSection() {
             <div className="absolute inset-x-0 top-0" style={{ height: "110px" }}>
               {/* Left */}
               <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", left: 0, top: "14px", zIndex: 0 }}>
-                <Image src={milestone.stackImages[0]} alt="" fill className="object-cover" />
+                <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
               {/* Center — raised, on top */}
               <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
-                <Image src={milestone.stackImages[1]} alt="" fill className="object-cover" />
+                <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
               {/* Right */}
               <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", right: 0, top: "14px", zIndex: 0 }}>
-                <Image src={milestone.stackImages[2]} alt="" fill className="object-cover" />
+                <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
             </div>
 
