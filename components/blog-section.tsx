@@ -323,7 +323,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="zag-btn"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact Us
@@ -332,7 +332,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="zag-btn"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Get In Touch
@@ -501,7 +501,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
           <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
             <CtaButton
               href="/contact"
-              className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="mt-[26px] zag-btn h-[40px] px-[18px]"
               style={{ fontSize: "16px" }}
             >
               Contact Us

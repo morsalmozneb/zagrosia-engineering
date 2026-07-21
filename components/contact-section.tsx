@@ -199,7 +199,7 @@ export function ContactSection() {
         {/* Submit */}
         <CtaButton as="button"
           type="submit"
-          className="mt-5 inline-flex h-[48px] w-full items-center justify-center rounded-full bg-[#0052A5] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
+          className="mt-5 inline-flex h-[48px] w-full items-center justify-center rounded-full bg-[#0052A5] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#1a6bbf]"
           style={{ fontSize: "14px" }}
         >
           Send Message
@@ -351,7 +351,7 @@ export function ContactSection() {
 
             <CtaButton as="button"
               type="submit"
-              className="inline-flex h-[40px] items-center rounded-full bg-[#0052A5] px-[24px] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
+              className="inline-flex h-[40px] items-center rounded-full bg-[#0052A5] px-[24px] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#1a6bbf]"
               style={{ fontSize: "16px" }}
             >
               Send Message
@@ -373,7 +373,7 @@ export function ContactSection() {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-4 rounded-[12px] bg-[#0052A5] px-5 py-5 transition-colors hover:bg-[#94B8DC]"
+                  className="flex items-center gap-4 rounded-[12px] bg-[#0052A5] px-5 py-5 transition-colors hover:bg-[#1a6bbf]"
                   initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.1 }}

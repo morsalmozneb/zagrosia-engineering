@@ -200,7 +200,7 @@ export function AboutProfileSection() {
                 href="/files/resume-homayoun.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                className="zag-btn"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 View Resume
@@ -209,7 +209,7 @@ export function AboutProfileSection() {
             <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                className="zag-btn"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact

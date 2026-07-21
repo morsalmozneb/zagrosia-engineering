@@ -434,12 +434,12 @@ export function AboutDesktopPage() {
 
             <div className="mt-9 flex gap-4">
               <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
-                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="zag-outline-button min-h-[46px] w-[170px] whitespace-nowrap border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
+                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="zag-btn min-h-[46px] w-[170px] text-[10px]">
                   View Resume
                 </CtaButton>
               </Reveal>
               <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
-                <CtaButton href="/contact" className="zag-outline-button min-h-[46px] w-[154px] border-[#FCFCFC] px-0 text-[10px] tracking-[0.18em] text-[#FCFCFC] hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-[#FCFCFC]">
+                <CtaButton href="/contact" className="zag-btn min-h-[46px] w-[154px] text-[10px]">
                   Contact
                 </CtaButton>
               </Reveal>
@@ -890,12 +890,12 @@ export function AboutDesktopPage() {
           </Reveal>
           <div className="mt-8 flex gap-4">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-              <CtaButton href="/contact" className="zag-outline-button min-h-[44px] w-[170px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
+              <CtaButton href="/contact" className="zag-btn min-h-[44px] w-[170px] text-[10px]">
                 Work with Us
               </CtaButton>
             </Reveal>
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-              <CtaButton href="/contact" className="zag-outline-button min-h-[44px] w-[160px] whitespace-nowrap border-[#2D2D2D] px-0 text-[10px] tracking-[0.18em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white">
+              <CtaButton href="/contact" className="zag-btn min-h-[44px] w-[160px] text-[10px]">
                 Get In Touch
               </CtaButton>
             </Reveal>

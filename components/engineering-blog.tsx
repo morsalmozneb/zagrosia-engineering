@@ -121,7 +121,7 @@ export function EngineeringBlog() {
         <Reveal variant="scaleUp" delay={0.2} duration={0.5}>
           <CtaButton
             href="/blog"
-            className="zag-outline-button min-h-[48px] w-[240px] whitespace-nowrap border-[#2d2d2d] px-0 tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="zag-btn min-h-[48px] w-[240px]"
             style={{ fontSize: "16px" }}
           >
             View All Articles
