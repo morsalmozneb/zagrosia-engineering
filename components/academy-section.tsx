@@ -160,7 +160,7 @@ export function AcademySection() {
                           <CtaButton
                             key={action}
                             href="#"
-                            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                             style={{ fontSize: "8px", height: "28px", width: "100px" }}
                           >
                             {action}
@@ -191,7 +191,7 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
             <CtaButton
               href="#"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Join Waitlist
@@ -200,7 +200,7 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
             <CtaButton
               href="#"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Learn More
@@ -230,7 +230,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact Us
@@ -239,7 +239,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Get In Touch
@@ -340,7 +340,7 @@ export function AcademySection() {
                                 <CtaButton
                                   key={action}
                                   href="#"
-                                  className="inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D] px-[20px] tracking-[0.16em] text-[#2D2D2D] hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                                  className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                                   style={{ fontSize: "16px" }}
                                   onClick={(event) => event.stopPropagation()}
                                 >
@@ -378,7 +378,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
               <CtaButton
                 href="#"
-                className="inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D] px-[24px] tracking-[0.18em] text-[#2D2D2D] hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "16px" }}
               >
                 Join Waitlist
@@ -387,7 +387,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
               <CtaButton
                 href="#"
-                className="inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D] px-[24px] tracking-[0.18em] text-[#2D2D2D] hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "16px" }}
               >
                 Learn More
@@ -413,7 +413,7 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
             <CtaButton
               href="/contact"
-              className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "16px" }}
             >
               Contact Us

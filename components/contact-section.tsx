@@ -199,7 +199,7 @@ export function ContactSection() {
         {/* Submit */}
         <CtaButton as="button"
           type="submit"
-          className="mt-5 inline-flex h-[48px] w-full items-center justify-center rounded-full bg-[#0052A5] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
+          className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
           style={{ fontSize: "14px" }}
         >
           Send Message
@@ -351,7 +351,7 @@ export function ContactSection() {
 
             <CtaButton as="button"
               type="submit"
-              className="inline-flex h-[40px] items-center rounded-full bg-[#0052A5] px-[24px] font-semibold tracking-[0.14em] text-white transition-colors hover:bg-[#94B8DC]"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "16px" }}
             >
               Send Message
