@@ -72,7 +72,7 @@ export function EngineeringExcellence() {
         <Reveal variant="scaleUp" delay={0.35} duration={0.5} className="absolute left-0 top-[387px]">
           <CtaButton
             href="/about"
-            className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Learn More
@@ -113,7 +113,7 @@ export function EngineeringExcellence() {
           <Reveal variant="scaleUp" delay={0.42} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-outline-button w-[164px] border-[#2d2d2d] px-0 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>

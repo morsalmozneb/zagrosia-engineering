@@ -96,7 +96,7 @@ export function EngineeringBlog() {
           <div className="mt-8">
             <CtaButton
               href="/blog"
-              className="inline-flex items-center justify-center rounded-full border border-[#2d2d2d] text-[#2d2d2d] tracking-[0.06em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               View All Articles
@@ -121,7 +121,7 @@ export function EngineeringBlog() {
         <Reveal variant="scaleUp" delay={0.2} duration={0.5}>
           <CtaButton
             href="/blog"
-            className="zag-outline-button min-h-[48px] w-[240px] whitespace-nowrap border-[#2d2d2d] px-0 tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             style={{ fontSize: "16px" }}
           >
             View All Articles

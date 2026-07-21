@@ -161,7 +161,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnA, 12)}>
                 <CtaButton
                   href="/projects"
-                  className="w-[119px] h-[40px] bg-[#FCFCFC] text-[#2D2D2D] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]"
+                  className="inline-flex items-center justify-center rounded-full bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   View Projects
                 </CtaButton>
@@ -169,7 +169,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnB, 12)}>
                 <CtaButton
                   href="/contact"
-                  className="w-[119px] h-[40px] border border-[#FCFCFC] text-[#FCFCFC] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em] text-[9.5px]"
+                  className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Contact Us
                 </CtaButton>
@@ -270,7 +270,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnA, 12)}>
                 <CtaButton
                   href="/projects"
-                  className="inline-flex items-center rounded-full bg-[#FCFCFC] px-6 py-[11px] text-[14px] font-medium tracking-[0.04em] text-[#2D2D2D] transition-colors hover:bg-[#94B8DC] hover:text-white"
+                  className="inline-flex items-center justify-center rounded-full bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   View Projects
                 </CtaButton>
@@ -278,7 +278,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnB, 12)}>
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center rounded-full border border-[#FCFCFC] px-6 py-[11px] text-[14px] font-medium tracking-[0.04em] text-[#FCFCFC] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white"
+                  className="inline-flex items-center justify-center rounded-full border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Contact Us
                 </CtaButton>
