@@ -338,12 +338,11 @@ export function AILabSection() {
             We&apos;d love to show you how our automation tools can transform your workflow. Get in touch with us.
           </p>
         </Reveal>
-        <div className="flex justify-start gap-[15px]">
+        <div className="mt-7 flex justify-start gap-[15px]">
           <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
             <CtaButton
               href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Contact Us
             </CtaButton>
@@ -352,7 +351,6 @@ export function AILabSection() {
             <CtaButton
               href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Get In Touch
             </CtaButton>
@@ -487,7 +485,7 @@ export function AILabSection() {
               We&apos;d love to show you how our automation tools can transform your workflow. Get in touch with us.
             </p>
           </Reveal>
-          <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
+          <Reveal variant="scaleUp" delay={0.28} duration={0.5} className="mt-7">
             <CtaButton
               href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"

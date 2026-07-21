@@ -665,12 +665,11 @@ export function ProjectsHeroSection() {
               Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
             </p>
           </Reveal>
-          <div className="flex justify-start gap-[15px]">
+          <div className="mt-7 flex justify-start gap-[15px]">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Request a Service
               </CtaButton>
@@ -679,7 +678,6 @@ export function ProjectsHeroSection() {
               <CtaButton
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Get In Touch
               </CtaButton>
@@ -870,7 +868,7 @@ export function ProjectsHeroSection() {
                   Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
                 </p>
               </Reveal>
-              <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+              <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
                 <CtaButton
                   href="/contact"
                   className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
