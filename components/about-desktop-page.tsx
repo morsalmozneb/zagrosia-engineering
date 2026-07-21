@@ -624,20 +624,20 @@ export function AboutDesktopPage() {
                 </button>
 
                 {/* Card with stacked photos overlapping from top */}
-                <div className="relative flex-1 max-w-[620px]" style={{ paddingTop: "130px" }}>
+                <div className="relative flex-1 max-w-[620px]" style={{ paddingTop: "160px" }}>
                   {/* Stacked photos */}
-                  <div className="absolute inset-x-0 top-0" style={{ height: "165px" }}>
-                    {/* Left */}
-                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", left: 0, top: "22px", zIndex: 0 }}>
-                      <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                  <div className="absolute inset-x-0 top-0" style={{ height: "200px" }}>
+                    {/* Left — behind card */}
+                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "16px", left: 0, top: "55px", zIndex: 0 }}>
+                      <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
-                    {/* Center — raised, on top */}
-                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
-                      <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                    {/* Center — raised high, above sides */}
+                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "16px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
+                      <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
-                    {/* Right */}
-                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", right: 0, top: "22px", zIndex: 0 }}>
-                      <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                    {/* Right — behind card */}
+                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "16px", right: 0, top: "55px", zIndex: 0 }}>
+                      <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                   </div>
 
