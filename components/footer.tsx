@@ -96,12 +96,12 @@ export function Footer() {
           transition={{ duration: 0.55, delay: 0.3, ease: EASE }}
         >
           <h4 className="mb-5 font-medium tracking-[0.12em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Contact</h4>
-          <div className="flex items-center gap-5">
-            <a href="https://www.linkedin.com/in/zagrosia" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#FCFCFC]/70 hover:text-[#0052A5] transition-colors"><Linkedin size={22} /></a>
-            <a href="https://www.facebook.com/people/Zagrosia-Structural-Engineering/61590665126080/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#FCFCFC]/70 hover:text-[#0052A5] transition-colors"><Facebook size={22} /></a>
-            <a href="https://www.instagram.com/zagrosia_structural/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#FCFCFC]/70 hover:text-[#0052A5] transition-colors"><Instagram size={22} /></a>
-            <a href="tel:+17783171043" aria-label="Phone: +1 (778) 317-1043" className="text-[#FCFCFC]/70 hover:text-[#0052A5] transition-colors"><Phone size={22} /></a>
-            <a href="mailto:shmozneb@zagrosia.ca" aria-label="Email: shmozneb@zagrosia.ca" className="text-[#FCFCFC]/70 hover:text-[#0052A5] transition-colors"><Mail size={22} /></a>
+          <div className="flex items-center gap-3">
+            <a href="https://www.linkedin.com/in/zagrosia" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#FCFCFC]/30 text-[#FCFCFC]/70 transition-all hover:border-[#0052A5] hover:text-[#0052A5]"><Linkedin size={16} /></a>
+            <a href="https://www.facebook.com/people/Zagrosia-Structural-Engineering/61590665126080/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#FCFCFC]/30 text-[#FCFCFC]/70 transition-all hover:border-[#0052A5] hover:text-[#0052A5]"><Facebook size={16} /></a>
+            <a href="https://www.instagram.com/zagrosia_structural/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#FCFCFC]/30 text-[#FCFCFC]/70 transition-all hover:border-[#0052A5] hover:text-[#0052A5]"><Instagram size={16} /></a>
+            <a href="tel:+17783171043" aria-label="Phone: +1 (778) 317-1043" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#FCFCFC]/30 text-[#FCFCFC]/70 transition-all hover:border-[#0052A5] hover:text-[#0052A5]"><Phone size={16} /></a>
+            <a href="mailto:shmozneb@zagrosia.ca" aria-label="Email: shmozneb@zagrosia.ca" className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#FCFCFC]/30 text-[#FCFCFC]/70 transition-all hover:border-[#0052A5] hover:text-[#0052A5]"><Mail size={16} /></a>
           </div>
         </motion.div>
       </div>
