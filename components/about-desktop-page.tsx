@@ -83,22 +83,114 @@ const coreValues = [
   },
 ]
 
-const milestonePages = [
+const milestones = [
   {
-    top: { year: "1989", title: "UNIVERSITY LECTURER & STRUCTURAL ANALYST", description: "Foundational expertise in concrete, steel & masonry systems" },
-    bottom: { year: "2005", title: "PRINCIPAL STRUCTURAL ENGINEER", description: "Led complex rehabilitation and new construction projects" },
+    year: "1989",
+    title: "B.Sc. Civil Engineering",
+    description: "Foundational expertise in concrete, steel & masonry systems",
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-2.png", "/images/company-milestone-3.png"],
+    projects: [
+      { name: "Skytrain Bridge", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.png" },
+      { name: "Skytrain Bridge", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-2.png" },
+      { name: "Skytrain Bridge", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-3.png" },
+      { name: "Skytrain Bridge", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-4.png" },
+    ],
   },
   {
-    top: { year: "1993–1995 & 2002–2003", title: "STRUCTURAL DESIGNER", description: "Designed steel and concrete petrochemical structures, fabrication drawings, and technical reports." },
-    bottom: { year: "1995–2002", title: "HEAD OF CIVIL & STRUCTURAL DEPARTMENT", description: "Led design and restoration of critical concrete and marine structures." },
+    year: "1993",
+    title: "M.Sc. Structural Engineering",
+    description: "Led complex rehabilitation and new construction projects across Canada",
+    stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
+    projects: [
+      { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.png" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.png" },
+      { name: "Steel Design", type: "Industrial", period: "1993", image: "/images/Project-Card-7.png" },
+      { name: "Civil Works", type: "Infrastructure", period: "1993", image: "/images/Project-Card-8.png" },
+    ],
   },
   {
-    top: { year: "2003–2017", title: "CEO & SENIOR STRUCTURAL ENGINEER", description: "Led structural design and project management for residential and commercial developments." },
-    bottom: { year: "2018–2019", title: "CONSTRUCTION OPERATION CERTIFICATE, BCIT", description: "Led structural design and project delivery for residential, industrial, and institutional projects." },
+    year: "1993–1995",
+    title: "Structural Designer",
+    description: "Designed steel and concrete petrochemical structures, fabrication drawings, and technical reports",
+    stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-1.png", "/images/company-milestone-2.png"],
+    projects: [
+      { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.png" },
+      { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.png" },
+      { name: "Fabrication Works", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-11.png" },
+      { name: "Technical Reports", type: "Engineering", period: "1993–1995", image: "/images/Project-Card-12.png" },
+    ],
   },
   {
-    top: { year: "2019–Present", title: "PROFESSIONAL STRUCTURAL ENGINEER", description: "Led structural design and project delivery for residential, industrial, and institutional projects using advanced engineering software." },
-    bottom: { year: "2019–2022", title: "STRUCTURAL ENGINEERING CERTIFICATE (SEABC)", description: "Led design and restoration of critical concrete and marine structures." },
+    year: "1995–2002",
+    title: "Head of Civil & Structural Dept.",
+    description: "Led design and restoration of critical concrete and marine structures",
+    stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
+    projects: [
+      { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.png" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.png" },
+      { name: "Civil Works", type: "Infrastructure", period: "1995–2002", image: "/images/Project-Card-15.png" },
+      { name: "Restoration", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-16.png" },
+    ],
+  },
+  {
+    year: "2002–2003",
+    title: "Structural Designer",
+    description: "Advanced structural design for industrial and commercial developments",
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
+    projects: [
+      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-1.png" },
+      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-2.png" },
+      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-3.png" },
+      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-4.png" },
+    ],
+  },
+  {
+    year: "2003–2017",
+    title: "CEO & Senior Structural Engineer",
+    description: "Led structural design and project management for residential and commercial developments",
+    stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-4.png", "/images/company-milestone-3.png"],
+    projects: [
+      { name: "Residential Tower", type: "Residential", period: "2003–2017", image: "/images/Project-Card-5.png" },
+      { name: "Commercial Dev", type: "Commercial", period: "2003–2017", image: "/images/Project-Card-6.png" },
+      { name: "Industrial Rack", type: "Industrial", period: "2003–2017", image: "/images/Project-Card-7.png" },
+      { name: "Seismic Retrofit", type: "Rehabilitation", period: "2003–2017", image: "/images/Project-Card-8.png" },
+    ],
+  },
+  {
+    year: "2018–2019",
+    title: "Construction Operation Certificate, BCIT",
+    description: "Led structural design and project delivery for residential, industrial, and institutional projects",
+    stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
+    projects: [
+      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-9.png" },
+      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-10.png" },
+      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-11.png" },
+      { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.png" },
+    ],
+  },
+  {
+    year: "2019–2022",
+    title: "Structural Engineering Certificate (SEABC)",
+    description: "Led design and restoration of critical concrete and marine structures",
+    stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-1.png", "/images/company-milestone-3.png"],
+    projects: [
+      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-13.png" },
+      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.png" },
+      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-15.png" },
+      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-16.png" },
+    ],
+  },
+  {
+    year: "2019–Present",
+    title: "Professional Structural Engineer",
+    description: "Leading structural design and project delivery for residential, industrial, and institutional projects",
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-4.png", "/images/company-milestone-2.png"],
+    projects: [
+      { name: "Seismic Assessment", type: "Assessment", period: "2019–Present", image: "/images/Project-Card-1.png" },
+      { name: "AI Engineering", type: "Innovation", period: "2019–Present", image: "/images/Project-Card-2.png" },
+      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–Present", image: "/images/Project-Card-3.png" },
+      { name: "EGBC Compliance", type: "Certification", period: "2019–Present", image: "/images/Project-Card-4.png" },
+    ],
   },
 ]
 
@@ -159,7 +251,9 @@ function AboutTeamCtaButton({
 export function AboutDesktopPage() {
   const reducedMotion = useReducedMotion()
   const [pageIndex, setPageIndex] = useState(0)
-  const currentPage = milestonePages[pageIndex]
+  const milestone = milestones[pageIndex]
+  const prev = () => setPageIndex(i => i === 0 ? milestones.length - 1 : i - 1)
+  const next = () => setPageIndex(i => i === milestones.length - 1 ? 0 : i + 1)
 
   return (
     <div className="hidden lg:block bg-[#FCFCFC] text-[#2D2D2D]">
@@ -515,71 +609,173 @@ export function AboutDesktopPage() {
               </h2>
             </Reveal>
 
-            <div className="mt-[34px] pl-[84px]">
-              <div className="relative w-full max-w-[620px]">
-                <motion.article
-                  key={`top-${pageIndex}`}
-                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.55, ease: EASE }}
-                  className="rounded-[20px] bg-[#FCFCFC] px-[20px] py-[18px]"
-                  style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
+            <div className="mt-8">
+              {/* Arrows + card with stacked images */}
+              <div className="flex items-center justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={prev}
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  aria-label="Previous milestone"
                 >
-                  <h3 className="max-w-[470px] text-[24px] font-semibold leading-[1.24] tracking-[0.14em] text-[#2D2D2D]">
-                    {currentPage.top.title}
-                  </h3>
-                  <p className="mt-3 max-w-[520px] leading-[1.58] tracking-[0.12em] text-[#3A3A3A]" style={{ fontSize: "16px" }}>
-                    {currentPage.top.description}
-                  </p>
-                </motion.article>
-                <span className="absolute right-[-12px] top-[-12px] max-w-[190px] text-right text-[15px] font-semibold leading-none tracking-[0.14em] text-[#2D2D2D]">
-                  {currentPage.top.year}
-                </span>
+                  <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+                    <path d="M10 2L2 10L10 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+
+                {/* Card with stacked photos overlapping from top */}
+                <div className="relative flex-1 max-w-[620px]" style={{ paddingTop: "130px" }}>
+                  {/* Stacked photos */}
+                  <div className="absolute inset-x-0 top-0" style={{ height: "165px" }}>
+                    {/* Left */}
+                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", left: 0, top: "22px", zIndex: 0 }}>
+                      <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                    </div>
+                    {/* Center — raised, on top */}
+                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
+                      <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                    </div>
+                    {/* Right */}
+                    <div className="absolute overflow-hidden" style={{ width: "180px", height: "150px", borderRadius: "16px", right: 0, top: "22px", zIndex: 0 }}>
+                      <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="180px" className="object-cover" />
+                    </div>
+                  </div>
+
+                  {/* Info card */}
+                  <motion.div
+                    key={pageIndex}
+                    className="relative px-6 pb-6 pt-6"
+                    initial={reducedMotion ? false : { opacity: 0, y: 12, filter: "blur(6px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ duration: 0.45, ease: EASE }}
+                    style={{
+                      borderRadius: "20px",
+                      backgroundColor: "rgba(252,252,252,0.2)",
+                      boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+                      backdropFilter: "blur(61.5px)",
+                      WebkitBackdropFilter: "blur(61.5px)",
+                      minHeight: "160px",
+                      zIndex: 10,
+                    }}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="leading-[1.2] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px", fontWeight: 500 }}>
+                        {milestone.title}
+                      </h3>
+                      <span
+                        className="flex-shrink-0 rounded-md px-3 py-1 text-[#FCFCFC] tracking-[0.08em]"
+                        style={{ fontSize: "13px", fontWeight: 500, backgroundColor: "#0052A5" }}
+                      >
+                        {milestone.year}
+                      </span>
+                    </div>
+                    <p className="leading-[1.5] tracking-[0.08em] text-[#4f4f4f]" style={{ fontSize: "16px", marginTop: "24px" }}>
+                      {milestone.description}
+                    </p>
+                  </motion.div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={next}
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  aria-label="Next milestone"
+                >
+                  <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+                    <path d="M2 2L10 10L2 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
               </div>
-            </div>
 
-            <div className="mt-[22px] flex items-center">
-              <button
-                onClick={() => setPageIndex(i => i === 0 ? milestonePages.length - 1 : i - 1)}
-                className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
-                aria-label="Previous"
-              >
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 2L2 10L10 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-              <div className="h-px flex-1 bg-[#2D2D2D]/22" />
-              <button
-                onClick={() => setPageIndex(i => i === milestonePages.length - 1 ? 0 : i + 1)}
-                className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
-                aria-label="Next"
-              >
-                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 2L10 10L2 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </div>
-
-            <div className="mt-[24px] pl-[84px]">
-              <div className="relative w-full max-w-[620px]">
-                <motion.article
-                  key={`bottom-${pageIndex}`}
-                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
-                  className="rounded-[20px] bg-[#FCFCFC] px-[20px] py-[18px]"
-                  style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
-                >
-                  <h3 className="max-w-[500px] text-[24px] font-semibold leading-[1.24] tracking-[0.14em] text-[#2D2D2D]">
-                    {currentPage.bottom.title}
-                  </h3>
-                  <p className="mt-3 max-w-[520px] leading-[1.58] tracking-[0.12em] text-[#3A3A3A]" style={{ fontSize: "16px" }}>
-                    {currentPage.bottom.description}
+              {/* Projects section */}
+              <div className="mt-10">
+                <div className="flex items-center gap-3">
+                  <div className="h-px flex-1 bg-[#2D2D2D]/30" />
+                  <p className="tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "20px", fontWeight: 600 }}>
+                    Projects
                   </p>
-                </motion.article>
-                <span className="absolute left-[-18px] bottom-[-12px] max-w-[210px] text-[15px] font-semibold leading-none tracking-[0.14em] text-[#2D2D2D]">
-                  {currentPage.bottom.year}
-                </span>
+                  <div className="h-px flex-1 bg-[#2D2D2D]/30" />
+                </div>
+
+                <div className="mt-6 grid grid-cols-4 gap-4 justify-items-center">
+                  {milestone.projects.map((project, i) => (
+                    <motion.div
+                      key={`${pageIndex}-${i}`}
+                      initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{ duration: 0.5, delay: 0.05 + i * 0.08, ease: EASE }}
+                      style={{
+                        width: "190px",
+                        height: "235px",
+                        borderRadius: "20px",
+                        backgroundColor: "#EFEFEF",
+                        boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+                        overflow: "hidden",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div
+                        className="relative flex-shrink-0"
+                        style={{ width: "190px", height: "148px", borderRadius: "20px 20px 0 0", overflow: "hidden" }}
+                      >
+                        <Image src={project.image} alt={project.name} fill className="object-cover" />
+                      </div>
+                      <div className="px-3 pt-2">
+                        <p className="tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "15px", fontWeight: 600 }}>
+                          {project.name}
+                        </p>
+                        <p className="tracking-[0.06em] text-[#4f4f4f]" style={{ fontSize: "12px" }}>
+                          {project.type}
+                        </p>
+                        <p className="tracking-[0.06em] text-[#4f4f4f]" style={{ fontSize: "12px" }}>
+                          {project.period}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation timeline */}
+              <div className="no-scrollbar mt-8 overflow-x-auto flex justify-center" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                <div style={{ minWidth: "max-content", paddingLeft: "4px", paddingRight: "4px" }}>
+                  <div className="flex items-center">
+                    {milestones.map((m, i) => (
+                      <div key={i} className="flex items-center flex-shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setPageIndex(i)}
+                          className="rounded-full transition-all flex-shrink-0"
+                          aria-label={`Go to ${m.year}`}
+                          style={{
+                            width: "12px",
+                            height: "12px",
+                            backgroundColor: i === pageIndex ? "#0052A5" : "#B2BBCB",
+                            padding: 0,
+                            border: "none",
+                          }}
+                        />
+                        {i < milestones.length - 1 && (
+                          <div className="flex-shrink-0" style={{ width: "32px", height: "1px", backgroundColor: "#B2BBCB" }} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-start" style={{ marginTop: "4px" }}>
+                    {milestones.map((m, i) => (
+                      <div key={i} className="flex items-start flex-shrink-0">
+                        <div style={{ width: "12px", display: "flex", justifyContent: "center", overflow: "visible" }}>
+                          <span style={{ fontSize: "9px", color: i === pageIndex ? "#0052A5" : "#B2BBCB", whiteSpace: "nowrap", fontWeight: i === pageIndex ? 700 : 400 }}>
+                            {["1989","1993","1995","2002","2003","2017","2019","2022","Present"][i]}
+                          </span>
+                        </div>
+                        {i < milestones.length - 1 && (
+                          <div className="flex-shrink-0" style={{ width: "32px" }} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
