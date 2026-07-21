@@ -92,8 +92,14 @@ export function CtaButton({
     style,
     onMouseEnter: () => setHovered(true),
     onMouseLeave: handleMouseLeave,
+    whileHover: reducedMotion ? undefined : { backgroundColor: "#0052A5", borderColor: "#0052A5", color: "#ffffff" },
     whileTap: reducedMotion ? undefined : { scale: 0.95 },
-    transition: { type: "spring" as const, stiffness: 420, damping: 24, mass: 0.4 },
+    transition: reducedMotion ? undefined : {
+      backgroundColor: { duration: 0.18, ease: "easeInOut" },
+      borderColor:     { duration: 0.18, ease: "easeInOut" },
+      color:           { duration: 0.14, ease: "easeInOut" },
+      scale: { type: "spring" as const, stiffness: 420, damping: 24, mass: 0.4 },
+    },
   }
 
   if (as === "button" || (!href && !as)) {

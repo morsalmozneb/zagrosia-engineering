@@ -236,9 +236,9 @@ function AboutTeamCtaButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-[36px] flex-1 items-center justify-center gap-[8px] rounded-[115px] bg-[#2D2D2D] px-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+      className="flex h-[36px] flex-1 items-center justify-center gap-[8px] rounded-[115px] bg-[#94B8DC] px-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC] transition-colors hover:bg-[#6fa3d0]"
     >
-      <span className="flex flex-shrink-0 items-center justify-center text-[#FCFCFC]">
+      <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
         {icon}
       </span>
       <span>{label}</span>
@@ -890,12 +890,12 @@ export function AboutDesktopPage() {
           </Reveal>
           <div className="mt-8 flex gap-4">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Work with Us
               </CtaButton>
             </Reveal>
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Get In Touch
               </CtaButton>
             </Reveal>

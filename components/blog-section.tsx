@@ -323,7 +323,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact Us
@@ -332,7 +332,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Get In Touch
@@ -498,11 +498,10 @@ With focused preparation over six to eight weeks, most candidates can pass on th
               Have a subject or category you&apos;d like us to write about? We&apos;d love to hear from you.
             </p>
           </Reveal>
-          <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+          <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D]/40 text-[#2D2D2D]/60 font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              style={{ fontSize: "16px" }}
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>
