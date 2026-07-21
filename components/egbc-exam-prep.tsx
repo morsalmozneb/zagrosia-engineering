@@ -175,7 +175,7 @@ export function EGBCExamPrep() {
             <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
               <CtaButton
                 href="/academy"
-                className="zag-btn min-h-[48px] px-8 text-[10px]"
+                className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
               >
                 Join Wait list
               </CtaButton>
@@ -183,7 +183,7 @@ export function EGBCExamPrep() {
             <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
               <CtaButton
                 href="/academy"
-                className="zag-btn min-h-[48px] px-8 text-[10px]"
+                className="zag-outline-button min-h-[48px] flex-none whitespace-nowrap border-[#2d2d2d] px-8 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
               >
                 Learn More
               </CtaButton>

@@ -40,7 +40,7 @@ export function AboutWhereWeWorkSection() {
         <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
           <CtaButton
             href="/contact"
-            className="zag-btn"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
             style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Work with Us
@@ -49,7 +49,7 @@ export function AboutWhereWeWorkSection() {
         <Reveal variant="scaleUp" delay={0.38} duration={0.5}>
           <CtaButton
             href="/contact"
-            className="zag-btn"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
             style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Get In Touch

@@ -159,12 +159,18 @@ export function HeroSection() {
             {/* Mobile CTA buttons */}
             <div className="mt-auto pt-4 flex gap-3">
               <motion.div {...fadeUp(T.btnA, 12)}>
-                <CtaButton href="/projects" className="zag-btn w-[119px] h-[40px] text-[9.5px]">
+                <CtaButton
+                  href="/projects"
+                  className="w-[119px] h-[40px] bg-[#FCFCFC] text-[#2D2D2D] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#FCFCFC]/90 transition-colors tracking-[0.06em] text-[9.5px]"
+                >
                   View Projects
                 </CtaButton>
               </motion.div>
               <motion.div {...fadeUp(T.btnB, 12)}>
-                <CtaButton href="/contact" className="zag-btn w-[119px] h-[40px] text-[9.5px]">
+                <CtaButton
+                  href="/contact"
+                  className="w-[119px] h-[40px] border border-[#FCFCFC] text-[#FCFCFC] font-medium rounded-full text-center flex items-center justify-center hover:bg-[#94B8DC]/30 transition-colors tracking-[0.06em] text-[9.5px]"
+                >
                   Contact Us
                 </CtaButton>
               </motion.div>
@@ -262,12 +268,18 @@ export function HeroSection() {
             {/* 5. Desktop CTA buttons */}
             <div className="mt-10 flex gap-3">
               <motion.div {...fadeUp(T.btnA, 12)}>
-                <CtaButton href="/projects" className="zag-btn px-6 py-[11px] text-[14px]">
+                <CtaButton
+                  href="/projects"
+                  className="inline-flex items-center rounded-full bg-[#FCFCFC] px-6 py-[11px] text-[14px] font-medium tracking-[0.04em] text-[#2D2D2D] transition-colors hover:bg-[#94B8DC] hover:text-white"
+                >
                   View Projects
                 </CtaButton>
               </motion.div>
               <motion.div {...fadeUp(T.btnB, 12)}>
-                <CtaButton href="/contact" className="zag-btn px-6 py-[11px] text-[14px]">
+                <CtaButton
+                  href="/contact"
+                  className="inline-flex items-center rounded-full border border-[#FCFCFC] px-6 py-[11px] text-[14px] font-medium tracking-[0.04em] text-[#FCFCFC] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white"
+                >
                   Contact Us
                 </CtaButton>
               </motion.div>

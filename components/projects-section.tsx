@@ -226,7 +226,7 @@ export function ProjectsSection() {
           </div>
 
           <div className="mt-8 flex justify-center pb-10">
-            <CtaButton href="/projects" className="zag-btn" style={{ fontSize: "9.5px", width: "142px", height: "40px" }}>
+            <CtaButton href="/projects" className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]" style={{ fontSize: "9.5px", width: "142px", height: "40px" }}>
               View All Projects
             </CtaButton>
           </div>
@@ -342,7 +342,7 @@ export function ProjectsSection() {
                       <MapPin size={11} strokeWidth={1.8} /><span>{projects[prevIndex].location}</span>
                     </div>
                     <div className="mt-4">
-                      <CtaButton href="/projects" className="zag-btn min-h-[38px] w-[120px] text-[9px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="zag-outline-button min-h-[38px] w-[120px] whitespace-nowrap border-[#4e5665] px-0 text-[9px] tracking-[0.12em] text-[#384150]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -400,7 +400,7 @@ export function ProjectsSection() {
                       <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
                     </div>
                     <div className="mt-5">
-                      <CtaButton href="/projects" className="zag-btn min-h-[42px] w-[140px] text-[10px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="zag-outline-button min-h-[42px] w-[140px] whitespace-nowrap border-[#4e5665] px-0 text-[10px] tracking-[0.14em] text-[#384150] transition-colors hover:bg-[#384150] hover:text-white">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -454,7 +454,7 @@ export function ProjectsSection() {
                       <MapPin size={11} strokeWidth={1.8} /><span>{projects[nextIndex].location}</span>
                     </div>
                     <div className="mt-4">
-                      <CtaButton href="/projects" className="zag-btn min-h-[38px] w-[120px] text-[9px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="zag-outline-button min-h-[38px] w-[120px] whitespace-nowrap border-[#4e5665] px-0 text-[9px] tracking-[0.12em] text-[#384150]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -477,7 +477,7 @@ export function ProjectsSection() {
 
           {/* All Projects button */}
           <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-8 flex justify-center pb-4">
-            <CtaButton href="/projects" className="zag-btn min-h-[48px] w-[200px] text-[10px]">
+            <CtaButton href="/projects" className="zag-outline-button min-h-[48px] w-[200px] whitespace-nowrap border-white px-0 text-[10px] tracking-[0.2em] text-white transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] hover:text-white">
               All Projects
             </CtaButton>
           </Reveal>

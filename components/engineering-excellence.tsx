@@ -113,7 +113,7 @@ export function EngineeringExcellence() {
           <Reveal variant="scaleUp" delay={0.42} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-btn w-[164px] text-[10px]"
+              className="zag-outline-button w-[164px] border-[#2d2d2d] px-0 text-[10px] tracking-[0.18em] text-[#2d2d2d] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
             >
               Contact Us
             </CtaButton>

@@ -269,7 +269,7 @@ export function AILabSection() {
                 </p>
                 <CtaButton
                   href="#"
-                  className="zag-btn"
+                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                 >
                   Watch Demo
@@ -308,7 +308,7 @@ export function AILabSection() {
                 </h3>
                 <CtaButton
                   href="#"
-                  className="zag-btn"
+                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9px", width: "90px", height: "26px" }}
                 >
                   Watch Demo
@@ -342,7 +342,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-btn"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Contact Us
@@ -351,7 +351,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.38} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-btn"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               Get In Touch
@@ -490,7 +490,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-btn mt-[26px] h-[40px] px-[18px] text-[16px]"
+              className="mt-[26px] inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D]/50 px-[18px] text-[16px] tracking-[0.16em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
             >
               Contact Us
             </CtaButton>

@@ -25,7 +25,7 @@ export function ServicesCTASection() {
         <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
           <CtaButton
             href="/contact"
-            className="zag-btn"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] bg-transparent tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
             style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
           >
             Request a Service
@@ -52,7 +52,7 @@ export function ServicesCTASection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
               <CtaButton
                 href="/contact"
-                className="zag-btn h-[40px] px-6" style={{ fontSize: "14px" }}
+                className="inline-flex h-[40px] items-center rounded-full border border-[#2D2D2D] bg-transparent px-6 tracking-[0.14em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white whitespace-nowrap" style={{ fontSize: "14px" }}
               >
                 Request a Service
               </CtaButton>

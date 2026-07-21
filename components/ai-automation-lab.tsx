@@ -61,7 +61,7 @@ export function AIAutomationLab() {
           <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="zag-btn w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
+              className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
             >
               Request a Service
             </CtaButton>
@@ -69,7 +69,7 @@ export function AIAutomationLab() {
           <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
             <CtaButton
               href="/ai-lab"
-              className="zag-btn w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
+              className="inline-flex items-center justify-center rounded-full border border-white text-white tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC] w-[142px] h-[40px] text-[9.5px] lg:w-auto lg:h-[44px] lg:px-8 lg:text-[14px]"
             >
               Learn More
             </CtaButton>
