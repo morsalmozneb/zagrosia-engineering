@@ -418,7 +418,7 @@ export function AILabSection() {
               />
             </div>
           </div>
-          <div className="mt-[40px] h-[3px] w-[1259px] bg-[#000000]" />
+          <div className="h-[3px] w-[1259px] bg-[#000000]" />
 
           <div className="pt-[80px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
