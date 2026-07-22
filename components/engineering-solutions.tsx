@@ -130,7 +130,7 @@ export function EngineeringSolutions() {
 
           {/* Heading */}
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h2 className="zag-heading mb-5 font-medium uppercase leading-[1.1] lg:font-normal lg:text-[40px] lg:leading-[1.1]" style={{ fontSize: "20px" }}>
+            <h2 className="zag-heading mb-5 font-medium uppercase leading-[1.1] text-[20px] lg:font-normal lg:text-[40px] lg:leading-[1.1]">
               <span className="text-[#2D2D2D]">ENGINEERING</span>
               <br />
               <span className="text-[#2D2D2D]">SOLUTIONS</span>
