@@ -787,7 +787,7 @@ export function ProjectsHeroSection() {
                         {expertiseItems.map((item) => (
                           <button
                             key={item}
-                            className={`block text-left ${selectedExpertise === item ? "font-semibold text-[#0052A5]" : ""}`}
+                            className={`block text-left transition-colors hover:text-[#0052A5] hover:font-semibold ${selectedExpertise === item ? "font-semibold text-[#0052A5]" : ""}`}
                             onClick={() => setSelectedExpertise(selectedExpertise === item ? null : item)}
                           >
                             {item}
@@ -817,7 +817,7 @@ export function ProjectsHeroSection() {
                         {servicesItems.map((item) => (
                           <button
                             key={item}
-                            className={`block text-left ${selectedService === item ? "font-semibold text-[#0052A5]" : ""}`}
+                            className={`block text-left transition-colors hover:text-[#0052A5] hover:font-semibold ${selectedService === item ? "font-semibold text-[#0052A5]" : ""}`}
                             onClick={() => setSelectedService(selectedService === item ? null : item)}
                           >
                             {item}
