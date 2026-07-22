@@ -781,17 +781,19 @@ export function AboutDesktopPage() {
           </div>
         </div>
 
-        <div style={{ marginTop: "50px", marginBottom: "50px", paddingLeft: "64px", paddingRight: "64px" }}>
-          <div style={{ width: "100%", height: "260px", position: "relative", overflow: "hidden" }}>
-            <Image
-              src="/images/about-milestones-building.png"
-              alt="Company milestones building"
-              fill
-              className="object-cover"
-              style={{ objectPosition: "left top" }}
-              sizes="100vw"
-            />
-            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#000000]" />
+        <div className="sidebar-content w-full zag-desktop-content-pad" style={{ marginTop: "50px", marginBottom: "50px" }}>
+          <div className="mx-auto max-w-[860px]">
+            <div style={{ width: "100%", height: "260px", position: "relative", overflow: "hidden", borderRadius: "12px" }}>
+              <Image
+                src="/images/about-milestones-building.png"
+                alt="Company milestones building"
+                fill
+                className="object-cover"
+                style={{ objectPosition: "left top" }}
+                sizes="860px"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#000000]" />
+            </div>
           </div>
         </div>
       </section>
