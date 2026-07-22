@@ -165,7 +165,7 @@ export function EGBCExamPrep() {
             </p>
           </Reveal>
 
-          <div className="mt-8 flex justify-start gap-3">
+          <div className="relative z-10 mt-8 flex justify-start gap-3">
             <CtaButton
               href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
@@ -181,7 +181,7 @@ export function EGBCExamPrep() {
           </div>
         </div>
 
-        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="relative left-[calc(50%-50vw)] -mt-16 w-screen">
+        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pointer-events-none relative left-[calc(50%-50vw)] -mt-16 w-screen">
           <div className="relative h-[560px] overflow-hidden">
             <div className="absolute bottom-0 left-0 h-[560px] w-[1400px]">
               <Image
