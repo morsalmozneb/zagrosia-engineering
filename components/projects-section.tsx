@@ -249,7 +249,7 @@ export function ProjectsSection() {
         <div className="relative" style={{ zIndex: 2 }}>
           <div className="sidebar-content pb-8 pt-14 zag-desktop-content-pad">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className="zag-heading text-[40px] leading-none text-white">PROJECTS</h2>
+              <h2 className="zag-heading text-[32px] leading-none text-white">PROJECTS</h2>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
               <p className="mt-4 leading-[1.6] tracking-[0.16em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>

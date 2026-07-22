@@ -149,7 +149,7 @@ export function EGBCExamPrep() {
       <div className="sidebar-content hidden lg:block lg:pt-20 lg:pb-0 zag-desktop-content-pad">
         <div className="w-full">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
-            <h2 className="zag-heading mb-8 text-[40px] leading-[1.18] text-[#2d2d2d]">
+            <h2 className="zag-heading mb-8 text-[32px] leading-[1.18] text-[#2d2d2d]">
               PASS THE EGBC EXAM.
               <br />
               THE SMART WAY.

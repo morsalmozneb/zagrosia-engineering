@@ -21,7 +21,7 @@ export function AIAutomationLab() {
         {/* Heading */}
         <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
           <div className="mb-8">
-            <h2 className="zag-heading font-medium leading-[1.18] text-[20px] lg:font-normal lg:text-[40px] lg:leading-[1.1]">
+            <h2 className="zag-heading font-medium leading-[1.18] text-[20px] lg:font-normal lg:text-[32px] lg:leading-[1.1]">
               AI
               <br />
               &
