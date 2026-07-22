@@ -781,7 +781,7 @@ export function AboutDesktopPage() {
           </div>
         </div>
 
-        <div style={{ width: "100%", height: "420px", position: "relative", overflow: "hidden", marginTop: "50px", marginBottom: "50px" }}>
+        <div style={{ width: "100%", height: "260px", position: "relative", overflow: "hidden", marginTop: "50px", marginBottom: "50px" }}>
           <Image
             src="/images/about-milestones-building.png"
             alt="Company milestones building"
