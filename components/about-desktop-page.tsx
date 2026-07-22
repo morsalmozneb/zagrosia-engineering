@@ -782,7 +782,7 @@ export function AboutDesktopPage() {
         </div>
 
         <div className="mt-[18px]">
-          <div style={{ width: "100%", height: "480px", position: "relative", overflow: "hidden", marginTop: "50px", marginBottom: "50px" }}>
+          <div style={{ width: "100%", height: "340px", position: "relative", overflow: "hidden", marginTop: "50px", marginBottom: "50px" }}>
             <Image
               src="/images/about-milestones-building.png"
               alt="Company milestones building"
