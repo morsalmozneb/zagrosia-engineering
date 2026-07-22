@@ -71,15 +71,18 @@ const team = [
 const coreValues = [
   {
     title: "Integrity",
-    description: "We maintain the highest standards of professional ethics and transparency in all our work.",
+    description: "We maintain the highest standards of professional ethics and transparency in all our work. Every decision we make is guided by honesty, accountability, and a commitment to doing what is right — for our clients, our partners, and the communities we serve.",
+    points: ["Full transparency in project communication and reporting", "Licensed P.Eng accountability on every structural deliverable", "Uncompromising code compliance and safety standards"],
   },
   {
     title: "Excellence",
-    description: "We are committed to delivering exceptional quality in every project we undertake.",
+    description: "We are committed to delivering exceptional quality in every project we undertake. With 35+ years of hands-on experience across residential, commercial, industrial, and marine structures, our team brings precision engineering and deep technical knowledge to every challenge.",
+    points: ["Rigorous quality assurance on all structural analysis and drawings", "Continuous investment in advanced engineering tools and AI workflows", "Proven track record across BC, Alberta, and Saskatchewan"],
   },
   {
     title: "Collaboration",
-    description: "We work closely with clients and project teams to achieve the best outcomes.",
+    description: "We work closely with clients, architects, contractors, and project teams to achieve the best possible outcomes. We believe great engineering is built on strong relationships, clear communication, and a shared commitment to project success.",
+    points: ["Early engagement with design teams to resolve issues proactively", "Responsive communication throughout every project phase", "Long-term partnerships built on trust and consistent results"],
   },
 ]
 
@@ -581,13 +584,21 @@ export function AboutDesktopPage() {
                       boxShadow: aboutCoreValueShadow,
                     }}
                   >
-                    <div className="min-h-[148px] rounded-[19px] bg-[#010101] px-10 py-[26px] backdrop-blur-[61.5px]">
+                    <div className="rounded-[19px] bg-[#010101] px-10 py-[26px] backdrop-blur-[61.5px]">
                       <h3 className="text-[24px] font-semibold tracking-[0.14em] text-[#FCFCFC]">
                         {value.title}
                       </h3>
                       <p className="mt-4 max-w-[900px] leading-[1.55] tracking-[0.09em] text-[#FCFCFC]/88" style={{ fontSize: "16px" }}>
                         {value.description}
                       </p>
+                      <ul className="mt-4 space-y-2">
+                        {value.points.map((point, j) => (
+                          <li key={j} className="flex items-start gap-3 leading-[1.5] tracking-[0.06em] text-[#FCFCFC]/70" style={{ fontSize: "14px" }}>
+                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#0052A5]" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </motion.div>
                 ))}
