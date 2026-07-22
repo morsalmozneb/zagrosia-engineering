@@ -790,7 +790,7 @@ export function AboutDesktopPage() {
         </div>
 
         <div className="sidebar-content w-full zag-desktop-content-pad" style={{ marginTop: "50px", marginBottom: "50px" }}>
-          <div className="mx-auto max-w-[860px]">
+          <div className="mx-auto max-w-[860px]" style={{ transform: "translateX(-300px)" }}>
             <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden" }}>
               <Image
                 src="/images/about-milestones-building.png"
