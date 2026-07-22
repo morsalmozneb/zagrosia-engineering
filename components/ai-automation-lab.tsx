@@ -33,7 +33,7 @@ export function AIAutomationLab() {
 
         {/* Description */}
         <Reveal delay={0.18} duration={0.65}>
-          <p className="mb-10 leading-[1.65] tracking-[0.1em] text-white/78 lg:text-[16px]" style={{ fontSize: "12px" }}>
+          <p className="mb-10 leading-[1.65] tracking-[0.1em] text-white/78 text-[12px] lg:text-[16px]">
             Where structural engineering meets artificial intelligence. Custom Python scripts, VBA automation, and AI-powered platforms that transform how engineering firms operate.
           </p>
         </Reveal>
