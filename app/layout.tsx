@@ -102,7 +102,7 @@ const jsonLd = {
   description:
     "Licensed structural engineering firm (P.Eng) serving BC, Alberta, and Saskatchewan. Specializing in seismic assessment, structural design, building rehabilitation, and AI-powered engineering tools.",
   telephone: "+1-778-317-1043",
-  email: "shmozneb@zagrosia.ca",
+  email: "info@zagrosia.ca",
   address: {
     "@type": "PostalAddress",
     addressRegion: "BC",

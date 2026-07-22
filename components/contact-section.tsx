@@ -42,8 +42,8 @@ const contactItems = [
       </svg>
     ),
     label: "Email",
-    value: "shmozneb@zagrosia.ca",
-    href: "mailto:shmozneb@zagrosia.ca",
+    value: "info@zagrosia.ca",
+    href: "mailto:info@zagrosia.ca",
   },
   {
     icon: (

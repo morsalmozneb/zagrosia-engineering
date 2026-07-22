@@ -36,7 +36,7 @@ const jsonLd = {
         "@type": "ProfessionalService",
         name: "Zagrosia Engineering Inc.",
         telephone: "+1-778-317-1043",
-        email: "shmozneb@zagrosia.ca",
+        email: "info@zagrosia.ca",
         address: { "@type": "PostalAddress", addressRegion: "BC", addressCountry: "CA" },
         openingHours: "Mo-Fr 09:00-17:00",
       },
