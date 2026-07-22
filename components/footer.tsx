@@ -62,12 +62,12 @@ export function Footer() {
         >
           <h4 className="mb-3 font-medium tracking-[0.12em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Services</h4>
           <ul className="space-y-[6px] tracking-[0.1em] text-[#FCFCFC]/78" style={{ fontSize: "13px" }}>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Structural Design</Link></li>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Seismic Assessment</Link></li>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Rehabilitation</Link></li>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Racking Systems</Link></li>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Building Envelope</Link></li>
-            <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Specialty Reviews</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Structural Design</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Seismic Assessment</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Rehabilitation</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Racking Systems</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Building Envelope</Link></li>
+            <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Specialty Reviews</Link></li>
           </ul>
         </motion.div>
 
@@ -80,11 +80,11 @@ export function Footer() {
         >
           <h4 className="mb-3 font-medium tracking-[0.12em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Platform</h4>
           <ul className="space-y-[6px] tracking-[0.1em] text-[#FCFCFC]/78" style={{ fontSize: "13px" }}>
-            <li><Link href="/ai-lab" className="hover:text-[#FCFCFC] transition-colors">AI Automation Lab</Link></li>
-            <li><Link href="/academy" className="hover:text-[#FCFCFC] transition-colors">EGBC Exam Prep</Link></li>
-            <li><Link href="/projects" className="hover:text-[#FCFCFC] transition-colors">Project Portfolio</Link></li>
-            <li><Link href="/blog" className="hover:text-[#FCFCFC] transition-colors">Blog</Link></li>
-            <li><Link href="/about" className="hover:text-[#FCFCFC] transition-colors">About</Link></li>
+            <li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>
+            <li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>
+            <li><Link href="/projects" className="hover:text-[#0052A5] transition-colors">Project Portfolio</Link></li>
+            <li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>
+            <li><Link href="/about" className="hover:text-[#0052A5] transition-colors">About</Link></li>
           </ul>
         </motion.div>
 
@@ -130,22 +130,22 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-[13px] font-medium tracking-[0.14em] text-[#FCFCFC]">Services</h4>
             <ul className="space-y-[10px] text-[11px] tracking-[0.15em] text-[#FCFCFC]/78">
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Structural Design</Link></li>
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Seismic Assessment</Link></li>
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Rehabilitation</Link></li>
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Racking Systems</Link></li>
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Building Envelope</Link></li>
-              <li><Link href="/services" className="hover:text-[#FCFCFC] transition-colors">Specialty Reviews</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Structural Design</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Seismic Assessment</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Rehabilitation</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Racking Systems</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Building Envelope</Link></li>
+              <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Specialty Reviews</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="mb-4 text-[13px] font-medium tracking-[0.14em] text-[#FCFCFC]">Platform</h4>
             <ul className="space-y-[10px] text-[11px] tracking-[0.15em] text-[#FCFCFC]/78">
-              <li><Link href="/ai-lab" className="hover:text-[#FCFCFC] transition-colors">AI Automation Lab</Link></li>
-              <li><Link href="/academy" className="hover:text-[#FCFCFC] transition-colors">EGBC Exam Prep</Link></li>
-              <li><Link href="/projects" className="hover:text-[#FCFCFC] transition-colors">Project Portfolio</Link></li>
-              <li><Link href="/blog" className="hover:text-[#FCFCFC] transition-colors">Blog</Link></li>
-              <li><Link href="/about" className="hover:text-[#FCFCFC] transition-colors">About</Link></li>
+              <li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>
+              <li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>
+              <li><Link href="/projects" className="hover:text-[#0052A5] transition-colors">Project Portfolio</Link></li>
+              <li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>
+              <li><Link href="/about" className="hover:text-[#0052A5] transition-colors">About</Link></li>
             </ul>
           </div>
         </div>
