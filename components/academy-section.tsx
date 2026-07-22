@@ -25,26 +25,26 @@ const academyItems: AcademyItem[] = [
     id: 1,
     title: "Full Curriculum",
     description:
-      "Ethics, law, professional practice, every EGBC exam topic with Canadian context",
+      "Every EGBC National Professional Practice Examination topic covered in depth — ethics, law, professional practice, engineering economics, and project management. All content is grounded in Canadian context and aligned with current EGBC standards, so you study exactly what the exam tests, nothing more, nothing less.",
     actions: ["Download Files", "View Files"],
   },
   {
     id: 2,
     title: "AI-Powered Quizzes",
     description:
-      "Adaptive learning powered by AI to identify weak areas and strengthen exam confidence.",
+      "Our adaptive quiz engine learns how you think. It identifies your weak areas after each session and automatically generates targeted questions to close the gaps. The more you practice, the smarter it gets — so every study hour is focused on what actually moves your score.",
   },
   {
     id: 3,
     title: "Expert Mentorship",
     description:
-      "Guidance from a practicing P.Eng. with real-world insight and focused exam support.",
+      "Get direct guidance from a practicing P.Eng. with 35+ years of structural engineering experience. Ask real exam strategy questions, get feedback on your answers, and understand the reasoning behind complex professional practice scenarios — not just the right answer, but why it is right.",
   },
   {
     id: 4,
     title: "English & Persian Support",
     description:
-      "Bilingual support for internationally trained engineers building their Canadian career.",
+      "Full bilingual support in English and Persian (Farsi). Explanations, mentorship sessions, and study materials are available in both languages — so internationally trained engineers can focus on mastering the content, not navigating a language barrier.",
   },
 ]
 
