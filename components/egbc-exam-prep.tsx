@@ -116,13 +116,13 @@ export function EGBCExamPrep() {
         <div className="mb-6 mt-8 flex justify-center gap-[15px]">
           <CtaButton
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
           >
             Join Wait list
           </CtaButton>
           <CtaButton
             href="/academy"
-            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
           >
             Learn More
           </CtaButton>
@@ -168,13 +168,13 @@ export function EGBCExamPrep() {
           <div className="mt-8 flex justify-start gap-3">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Join Wait list
             </CtaButton>
             <CtaButton
               href="/academy"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Learn More
             </CtaButton>
