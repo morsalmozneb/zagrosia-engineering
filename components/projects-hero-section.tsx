@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
@@ -51,6 +52,7 @@ const projects = [
     title: "OFFICE TOWER RENOVATION",
     description:
       "Structural retrofit and seismic strengthening for a multi-story commercial office tower to improve performance, safety, and compliance with current building standards.",
+    slug: "office-tower-renovation",
   },
   {
     id: 2,
@@ -105,6 +107,7 @@ type DesktopProjectCard = {
   objectPositionClassName?: string
   titleClassName?: string
   descriptionWidthClassName?: string
+  slug?: string
 }
 
 const desktopProjectRows: DesktopProjectCard[][] = [
@@ -121,6 +124,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       objectPositionClassName: "object-center",
       titleClassName: "text-[18px] leading-[1.14] tracking-[0.12em]",
       descriptionWidthClassName: "max-w-[338px]",
+      slug: "office-tower-renovation",
     },
     {
       id: 2,
@@ -322,52 +326,56 @@ function DesktopProjectCardItem({
   objectPositionClassName = "object-center",
   titleClassName = "text-[13px] leading-[1.22] tracking-[0.10em]",
   descriptionWidthClassName = "max-w-[340px]",
+  slug,
 }: DesktopProjectCard) {
+  const cardHref = slug ? `/projects/${slug}` : "/projects"
+
   return (
     <article
-      className={`${spanClassName} group cursor-pointer overflow-hidden rounded-[18px] shadow-[0_12px_28px_rgba(22,22,22,0.14)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(22,22,22,0.28)]`}
+      className={`${spanClassName} group overflow-hidden rounded-[18px] shadow-[0_12px_28px_rgba(22,22,22,0.14)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(22,22,22,0.28)]`}
     >
-      <div className={`relative ${heightClassName} overflow-hidden rounded-[18px] bg-[#303030]`}>
-        <Image src={image} alt={title.replace(/\n/g, " ")} fill className={`object-cover ${objectPositionClassName} transition-transform duration-500 group-hover:scale-[1.03]`} />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)",
-          }}
-        />
-        {/* Darker overlay on hover so description is readable */}
-        <div className="absolute inset-0 bg-[#1a1a1a]/0 transition-all duration-300 group-hover:bg-[#1a1a1a]/50" />
+      <Link href={cardHref} className="block cursor-pointer">
+        <div className={`relative ${heightClassName} overflow-hidden rounded-[18px] bg-[#303030]`}>
+          <Image src={image} alt={title.replace(/\n/g, " ")} fill className={`object-cover ${objectPositionClassName} transition-transform duration-500 group-hover:scale-[1.03]`} />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)",
+            }}
+          />
+          {/* Darker overlay on hover so description is readable */}
+          <div className="absolute inset-0 bg-[#1a1a1a]/0 transition-all duration-300 group-hover:bg-[#1a1a1a]/50" />
 
-        <div className="absolute inset-x-0 bottom-0 px-[18px] pb-[14px] pt-2 text-white">
-          {description ? (
-            <p
-              className={`mb-[8px] leading-[1.38] tracking-[0.12em] text-white/88 ${descriptionWidthClassName} max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-[120px] group-hover:opacity-100`}
-              style={{ fontSize: "14px" }}
-            >
-              {description}
-            </p>
-          ) : null}
-          <div className="flex items-end justify-between gap-[12px]">
-            <div>
-              <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
-                <LocationPin />
-                <span>{location}</span>
+          <div className="absolute inset-x-0 bottom-0 px-[18px] pb-[14px] pt-2 text-white">
+            {description ? (
+              <p
+                className={`mb-[8px] leading-[1.38] tracking-[0.12em] text-white/88 ${descriptionWidthClassName} max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-[120px] group-hover:opacity-100`}
+                style={{ fontSize: "14px" }}
+              >
+                {description}
+              </p>
+            ) : null}
+            <div className="flex items-end justify-between gap-[12px]">
+              <div>
+                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                  <LocationPin />
+                  <span>{location}</span>
+                </div>
+                <h3 className={`line-clamp-2 font-semibold text-white group-hover:line-clamp-none group-hover:whitespace-pre-line ${titleClassName}`}>
+                  {title}
+                </h3>
               </div>
-              <h3 className={`line-clamp-2 font-semibold text-white group-hover:line-clamp-none group-hover:whitespace-pre-line ${titleClassName}`}>
-                {title}
-              </h3>
+              <span
+                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                style={{ fontSize: "10px" }}
+              >
+                {slug ? "Case Study" : "Learn More"}
+              </span>
             </div>
-            <CtaButton
-              href="/projects"
-              className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#94B8DC] hover:border-[#94B8DC]"
-              style={{ fontSize: "10px" }}
-            >
-              Learn More
-            </CtaButton>
           </div>
         </div>
-      </div>
+      </Link>
     </article>
   )
 }
@@ -594,11 +602,11 @@ export function ProjectsHeroSection() {
                         {project.description}
                       </p>
                       <CtaButton
-                        href="/contact"
+                        href={project.slug ? `/projects/${project.slug}` : "/contact"}
                         className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                         style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                       >
-                        Learn More
+                        {project.slug ? "Case Study" : "Learn More"}
                       </CtaButton>
                     </>
                   )}
