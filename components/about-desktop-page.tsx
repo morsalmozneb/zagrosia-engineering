@@ -781,17 +781,16 @@ export function AboutDesktopPage() {
           </div>
         </div>
 
-        <div className="mt-[18px] flex flex-col items-center" style={{ marginTop: "50px", marginBottom: "50px" }}>
+        <div style={{ width: "100%", height: "420px", position: "relative", overflow: "hidden", marginTop: "50px", marginBottom: "50px" }}>
           <Image
             src="/images/about-milestones-building.png"
             alt="Company milestones building"
-            width={1000}
-            height={790}
-            className="block h-auto"
-            style={{ width: "min(100%, 900px)" }}
-            sizes="min(100vw, 900px)"
+            fill
+            className="object-cover"
+            style={{ objectPosition: "left top" }}
+            sizes="100vw"
           />
-          <div style={{ width: "min(100%, 900px)", height: "3px", backgroundColor: "#000000" }} />
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#000000]" />
         </div>
       </section>
 
