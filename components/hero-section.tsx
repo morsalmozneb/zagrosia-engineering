@@ -65,7 +65,7 @@ export function HeroSection() {
       <video
         autoPlay loop muted playsInline preload="auto"
         disablePictureInPicture disableRemotePlayback
-        className="hero-video hero-bg video-wrapper absolute top-0 left-0 right-0 h-screen w-full object-cover lg:-top-[140px] lg:bottom-auto lg:h-[1060px]"
+        className="hero-video hero-bg video-wrapper absolute top-0 left-0 right-0 h-screen w-full object-cover lg:-top-[190px] lg:bottom-auto lg:h-[1060px]"
         style={{ objectPosition: "70% 0%" }}
       >
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
