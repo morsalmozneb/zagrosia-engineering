@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Sidebar } from '@/components/sidebar'
 import { IntroAnimation } from '@/components/intro-animation'
+import { BackToTop } from '@/components/back-to-top'
 import './globals.css'
 
 const inter = Inter({
@@ -137,6 +138,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
         <IntroAnimation />
         <Sidebar />
+        <BackToTop />
         <div id="page-content">
           {children}
         </div>
