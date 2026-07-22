@@ -29,10 +29,10 @@ export function Footer() {
           <div className="mb-4">
             <Link href="/" aria-label="Go to homepage" onClick={handleLogoClick}>
               <Image
-                src="/images/zagrosia-logo.svg"
+                src="/images/Logo_Footer.png"
                 alt="Zagrosia Engineering Inc."
                 width={148}
-                height={34}
+                height={85}
                 className="h-auto w-[148px]"
               />
             </Link>
@@ -120,7 +120,7 @@ export function Footer() {
       <Reveal variant="fadeUp" delay={0.05} duration={0.65} className="lg:hidden mb-8 -mt-[35px]">
         <div className="mb-8">
           <Link href="/" aria-label="Go to homepage" onClick={handleLogoClick}>
-            <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={172} height={40} className="h-auto w-[172px]" />
+            <Image src="/images/Logo_Footer.png" alt="Zagrosia Engineering Inc." width={172} height={98} className="h-auto w-[172px]" />
           </Link>
         </div>
         <h3 className="mb-5 text-[12px] font-medium tracking-[0.14em] text-[#FCFCFC] -mt-[50px]">Engineered to Solve</h3>
