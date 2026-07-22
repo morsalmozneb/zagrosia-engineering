@@ -24,7 +24,7 @@ const contactItems = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M6.5 2H3.5C2.67 2 2 2.67 2 3.5C2 12.06 8.94 19 17.5 19C18.33 19 19 18.33 19 17.5V14.5C19 13.67 18.33 13 17.5 13C16.48 13 15.49 12.84 14.57 12.54C14.24 12.43 13.88 12.51 13.63 12.76L11.87 14.52C9.41 13.27 7.73 11.59 6.48 9.13L8.24 7.37C8.49 7.12 8.57 6.76 8.46 6.43C8.16 5.51 8 4.52 8 3.5C8 2.67 7.33 2 6.5 2Z"
-          fill="white"
+          fill="currentColor"
         />
       </svg>
     ),
@@ -37,7 +37,7 @@ const contactItems = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M17 3H3C2.45 3 2 3.45 2 4V16C2 16.55 2.45 17 3 17H17C17.55 17 18 16.55 18 16V4C18 3.45 17.55 3 17 3ZM16 6.41L10.71 11.7C10.32 12.09 9.69 12.09 9.3 11.7L4 6.41V5H16V6.41Z"
-          fill="white"
+          fill="currentColor"
         />
       </svg>
     ),
@@ -50,7 +50,7 @@ const contactItems = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM9 16.93C5.6 16.45 3 13.52 3 10C3 9.62 3.04 9.25 3.1 8.89L7 12.79V13.5C7 14.33 7.67 15 8.5 15V16.93H9ZM15.9 14.39C15.64 13.58 14.9 13 14 13H13.5V11C13.5 10.58 13.17 10.25 12.75 10.25H7.5V8.75H9C9.42 8.75 9.75 8.42 9.75 8V6.5H11.25C12.08 6.5 12.75 5.83 12.75 5V4.71C14.93 5.59 16.5 7.62 16.5 10C16.5 11.57 15.89 12.99 14.9 14.07L15.9 14.39Z"
-          fill="white"
+          fill="currentColor"
         />
       </svg>
     ),
@@ -215,18 +215,18 @@ export function ContactSection() {
             <motion.a
               key={item.label}
               href={item.href}
-              className="flex items-center gap-4 rounded-[20px] bg-[#0052A5] px-5 py-4 transition-colors hover:bg-[#003f82]"
+              className="group flex items-center gap-4 rounded-r-[14px] border-l-[3px] border-[#0052A5] bg-white px-4 py-4 shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(0,82,165,0.14)]"
               initial={reducedMotion ? false : { opacity: 0, y: 14, filter: "blur(4px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
             >
-              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
+              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                 {item.icon}
               </div>
               <div>
-                <p className="text-[11px] font-semibold tracking-[0.1em] text-white">{item.label}</p>
-                <p className="text-[10px] tracking-[0.07em] text-white/80">{item.value}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0052A5]">{item.label}</p>
+                <p className="mt-[2px] text-[11px] font-medium tracking-[0.04em] text-[#2D2D2D]">{item.value}</p>
               </div>
             </motion.a>
           ))}
@@ -373,18 +373,18 @@ export function ContactSection() {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-4 rounded-[12px] bg-[#0052A5] px-5 py-5 transition-colors hover:bg-[#94B8DC]"
+                  className="group flex items-center gap-4 rounded-r-[16px] border-l-[3px] border-[#0052A5] bg-white px-5 py-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(0,82,165,0.15)]"
                   initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.1 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: EASE }}
                 >
-                  <div className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-white/15">
+                  <div className="flex h-[44px] w-[44px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-[14px] font-bold tracking-[0.1em] text-white">{item.label}</p>
-                    <p className="mt-1 text-[12px] tracking-[0.08em] text-white/80">{item.value}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0052A5]">{item.label}</p>
+                    <p className="mt-[4px] text-[14px] font-medium tracking-[0.04em] text-[#2D2D2D]">{item.value}</p>
                   </div>
                 </motion.a>
               ))}
