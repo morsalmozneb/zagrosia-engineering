@@ -346,7 +346,7 @@ export function AboutDesktopPage() {
       >
 
             <div
-              className="sidebar-content relative mx-auto h-full w-full max-w-[1440px] zag-desktop-content-pad"
+              className="sidebar-content relative h-full zag-desktop-content-pad"
               style={{ paddingTop: "0px", paddingBottom: "92px", marginTop: "-120px", position: "relative", zIndex: 2 }}
             >
               <div className="relative w-[870px]">
