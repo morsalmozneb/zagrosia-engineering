@@ -523,15 +523,15 @@ export function AboutDesktopPage() {
             "linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 24%, rgba(246,247,249,1) 44%, rgba(218,222,226,1) 60%, rgba(134,138,144,1) 82%, #080102 100%)",
         }}
       >
-        <div className="absolute inset-x-0 top-[-30px] pointer-events-none">
-          <div className="w-full">
+        <div className="absolute inset-x-0 top-[-30px] pointer-events-none flex justify-center">
+          <div style={{ width: "min(100%, 1280px)" }}>
             <Image
               src="/images/about-core-values-building.png"
               alt="Architectural building"
-              width={1440}
-              height={1002}
+              width={1280}
+              height={890}
               className="block h-auto w-full"
-              sizes="100vw"
+              sizes="min(100vw, 1280px)"
             />
           </div>
         </div>
@@ -544,7 +544,7 @@ export function AboutDesktopPage() {
           }}
         />
 
-        <div className="sidebar-content relative w-full pb-[72px] pt-[500px] zag-desktop-content-pad">
+        <div className="sidebar-content relative w-full pb-[72px] pt-[380px] zag-desktop-content-pad">
           <div className="mx-auto max-w-[918px]">
             <div className="relative pl-[26px]">
               <motion.div
