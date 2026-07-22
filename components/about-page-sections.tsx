@@ -100,7 +100,7 @@ export function AboutProfileSection() {
   const reducedMotion = useReducedMotion()
 
   return (
-    <section id="profile" className="relative -mt-[42px] bg-[#071018] px-6 pb-10 pt-0 text-[#FCFCFC]">
+    <section id="profile" className="relative -mt-[42px] overflow-hidden bg-[#071018] px-6 pb-10 pt-0 text-[#FCFCFC]">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[72px]"
         style={{
