@@ -150,9 +150,9 @@ export function EGBCExamPrep() {
         <div className="w-full">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
             <h2 className="zag-heading mb-8 text-[32px] leading-[1.18] text-[#2d2d2d]">
-              PASS THE EGBC EXAM.
+              PASS THE EGBC EXAM
               <br />
-              THE SMART WAY.
+              THE SMART WAY
             </h2>
           </Reveal>
 
@@ -172,7 +172,7 @@ export function EGBCExamPrep() {
           <div className="mt-8 flex justify-start gap-3">
             <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
               <CtaButton
-                href="/academy"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Join Wait list
