@@ -143,9 +143,7 @@ export function Sidebar() {
                     href={item.href}
                     aria-label={item.label}
                     className={`rounded-[10px] transition-colors duration-150 overflow-hidden ${
-                      expanded
-                        ? isActive ? "bg-[#0D2C60]/15" : "hover:bg-[#0D2C60]/10"
-                        : ""
+                      expanded ? "hover:bg-[#0052A5]/10" : ""
                     }`}
                     style={
                       expanded
@@ -167,14 +165,13 @@ export function Sidebar() {
                           }
                     }
                     onMouseLeave={() => setTooltip(null)}
+                    onClick={() => setTooltip(null)}
                   >
                     {/* Icon wrapper — fixed 35×35 */}
                     <div
                       className={`flex items-center justify-center rounded-[8px] transition-all duration-200 ease-out ${
                         !expanded
-                          ? isActive
-                            ? "bg-[#0D2C60]/15 opacity-100"
-                            : "hover:bg-[#0D2C60]/10 opacity-70 hover:opacity-100"
+                          ? "hover:bg-[#0052A5]/15 opacity-70 hover:opacity-100"
                           : ""
                       }`}
                       style={{ width: 35, height: 35, flexShrink: 0 }}
@@ -269,11 +266,11 @@ export function Sidebar() {
           >
             {/* Arrow — alignSelf:center pins it to the tooltip container's midline */}
             <div
-              className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[6px] border-r-[#0D2C60]"
+              className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[6px] border-r-[#0052A5]"
               style={{ alignSelf: "center" }}
             />
             <div
-              className="rounded-[8px] bg-[#0D2C60] px-3 shadow-lg"
+              className="rounded-[8px] bg-[#0052A5] px-3 shadow-lg"
               style={{ display: "flex", alignItems: "center", height: 28 }}
             >
               <span
