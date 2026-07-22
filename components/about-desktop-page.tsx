@@ -482,8 +482,8 @@ export function AboutDesktopPage() {
                 className="w-full h-full rounded-[19px] bg-[#FCFCFC] p-[18px] overflow-hidden"
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
-                <p className="mb-4 text-[10px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR MISSION</p>
-                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
+                <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR MISSION</p>
+                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                   For over 35 years, Zagrosia Engineering has delivered intelligent structural engineering solutions with precision, innovation, and deep industry expertise, combining trusted engineering practices with modern AI-driven workflows.
                 </p>
               </div>
@@ -502,8 +502,8 @@ export function AboutDesktopPage() {
                 className="w-full h-full rounded-[19px] bg-[#FCFCFC] p-[18px] overflow-hidden"
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
-                <p className="mb-4 text-[10px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR VISION</p>
-                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
+                <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR VISION</p>
+                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                   To become Western Canada&apos;s leading structural engineering firm through innovation, technical excellence, and the future of engineering technology.
                 </p>
               </div>
