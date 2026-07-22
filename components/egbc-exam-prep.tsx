@@ -17,22 +17,22 @@ const features = [
     id: 1,
     title: "Full Curriculum",
     description:
-      "Ethics, law, professional practice — every EGBC exam topic with Canadian context",
+      "Every EGBC National Professional Practice Examination topic covered in depth — ethics, law, professional practice, engineering economics, and project management. All content is grounded in Canadian context and aligned with current EGBC standards, so you study exactly what the exam tests, nothing more, nothing less.",
   },
   {
     id: 2,
     title: "AI-Powered Quizzes",
-    description: "Adaptive learning powered by AI to identify and strengthen weak areas.",
+    description: "Our adaptive quiz engine learns how you think. It identifies your weak areas after each session and automatically generates targeted questions to close the gaps. The more you practice, the smarter it gets — so every study hour is focused on what actually moves your score.",
   },
   {
     id: 3,
     title: "Expert Mentorship",
-    description: "Direct access to practicing P.Eng. professionals for guidance.",
+    description: "Get direct guidance from a practicing P.Eng. with 35+ years of structural engineering experience. Ask real exam strategy questions, get feedback on your answers, and understand the reasoning behind complex professional practice scenarios — not just the right answer, but why it is right.",
   },
   {
     id: 4,
     title: "English & Persian Support",
-    description: "Bilingual support for internationally trained engineers.",
+    description: "Full bilingual support in English and Persian (Farsi). Explanations, mentorship sessions, and study materials are available in both languages — so internationally trained engineers can focus on mastering the content, not navigating a language barrier.",
   },
 ]
 
@@ -99,9 +99,9 @@ export function EGBCExamPrep() {
       <div className="lg:hidden px-8 pt-10 pb-0">
         <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
           <h2 className="zag-heading mb-8 font-medium leading-[1.24] text-[#2d2d2d] lg:font-normal" style={{ fontSize: "20px" }}>
-            PASS THE EGBC EXAM.
+            PASS THE EGBC EXAM
             <br />
-            THE SMART WAY.
+            THE SMART WAY
           </h2>
         </Reveal>
 
@@ -116,7 +116,7 @@ export function EGBCExamPrep() {
         <div className="mb-6 mt-8 flex justify-center gap-[15px]">
           <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
             <CtaButton
-              href="/academy"
+              href="/contact"
               className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Join Wait list
