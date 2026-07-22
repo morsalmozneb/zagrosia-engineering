@@ -591,7 +591,7 @@ export function AboutDesktopPage() {
                       <ul className="mt-4 space-y-2">
                         {value.points.map((point, j) => (
                           <li key={j} className="flex items-start gap-3 leading-[1.5] tracking-[0.06em] text-[#FCFCFC]/70" style={{ fontSize: "16px" }}>
-                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#0052A5]" />
+                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#FCFCFC]/70" />
                             {point}
                           </li>
                         ))}
