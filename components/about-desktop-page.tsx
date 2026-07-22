@@ -523,15 +523,15 @@ export function AboutDesktopPage() {
             "linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 24%, rgba(246,247,249,1) 44%, rgba(218,222,226,1) 60%, rgba(134,138,144,1) 82%, #080102 100%)",
         }}
       >
-        <div className="absolute inset-x-0 top-0 pointer-events-none flex justify-center">
-          <div style={{ width: "min(100%, 820px)", height: "220px", position: "relative", overflow: "hidden", borderRadius: "0 0 8px 8px" }}>
+        <div className="absolute inset-x-0 top-[-30px] pointer-events-none">
+          <div className="w-full">
             <Image
               src="/images/about-core-values-building.png"
               alt="Architectural building"
-              fill
-              className="object-cover"
-              style={{ objectPosition: "center 25%" }}
-              sizes="820px"
+              width={1440}
+              height={1002}
+              className="block h-auto w-full"
+              sizes="100vw"
             />
           </div>
         </div>
@@ -540,11 +540,11 @@ export function AboutDesktopPage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,1) 100%)",
+              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 47%, rgba(0,0,0,1) 100%)",
           }}
         />
 
-        <div className="sidebar-content relative w-full pb-[72px] pt-[180px] zag-desktop-content-pad">
+        <div className="sidebar-content relative w-full pb-[72px] pt-[500px] zag-desktop-content-pad">
           <div className="mx-auto max-w-[918px]">
             <div className="relative pl-[26px]">
               <motion.div
@@ -781,15 +781,15 @@ export function AboutDesktopPage() {
           </div>
         </div>
 
-        <div className="mt-[18px]">
-          <div className="w-full">
+        <div className="mt-[18px] flex justify-center">
+          <div style={{ width: "min(100%, 900px)", height: "320px", position: "relative", overflow: "hidden" }}>
             <Image
               src="/images/about-milestones-building.png"
               alt="Company milestones building"
-              width={1440}
-              height={1138}
-              className="block h-auto w-full"
-              sizes="100vw"
+              fill
+              className="object-cover"
+              style={{ objectPosition: "center 40%" }}
+              sizes="900px"
             />
           </div>
           <div className="h-[3px] w-[1173px] bg-[#000000]" />
