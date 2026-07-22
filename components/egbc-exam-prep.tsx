@@ -114,22 +114,18 @@ export function EGBCExamPrep() {
         </Reveal>
 
         <div className="mb-6 mt-8 flex justify-center gap-[15px]">
-          <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
-            <CtaButton
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-            >
-              Join Wait list
-            </CtaButton>
-          </Reveal>
-          <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
-            <CtaButton
-              href="/academy"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-            >
-              Learn More
-            </CtaButton>
-          </Reveal>
+          <CtaButton
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+          >
+            Join Wait list
+          </CtaButton>
+          <CtaButton
+            href="/academy"
+            className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+          >
+            Learn More
+          </CtaButton>
         </div>
 
         <Reveal variant="fadeBlur" delay={0.1} duration={0.8} className="relative -mx-8 h-[245px] w-[calc(100%+4rem)] overflow-hidden -mt-[30px]">
@@ -170,22 +166,18 @@ export function EGBCExamPrep() {
           </Reveal>
 
           <div className="mt-8 flex justify-start gap-3">
-            <Reveal variant="scaleUp" delay={0.25} duration={0.5}>
-              <CtaButton
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              >
-                Join Wait list
-              </CtaButton>
-            </Reveal>
-            <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
-              <CtaButton
-                href="/academy"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              >
-                Learn More
-              </CtaButton>
-            </Reveal>
+            <CtaButton
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            >
+              Join Wait list
+            </CtaButton>
+            <CtaButton
+              href="/academy"
+              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            >
+              Learn More
+            </CtaButton>
           </div>
         </div>
 
