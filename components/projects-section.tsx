@@ -338,10 +338,10 @@ export function ProjectsSection() {
                         <span key={tag} className="rounded-full border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-3 flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
-                      <MapPin size={11} strokeWidth={1.8} /><span>{projects[prevIndex].location}</span>
-                    </div>
-                    <div className="mt-4">
+                    <div className="mt-4 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
+                        <MapPin size={11} strokeWidth={1.8} /><span>{projects[prevIndex].location}</span>
+                      </div>
                       <CtaButton href="/projects" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
@@ -396,10 +396,10 @@ export function ProjectsSection() {
                         <span key={tag} className="rounded-full border border-[#aab4c2] px-[10px] py-[4px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-4 flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "16px" }}>
-                      <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
-                    </div>
-                    <div className="mt-5">
+                    <div className="mt-5 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "16px" }}>
+                        <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
+                      </div>
                       <CtaButton href="/projects" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
@@ -450,10 +450,10 @@ export function ProjectsSection() {
                         <span key={tag} className="rounded-full border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-3 flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
-                      <MapPin size={11} strokeWidth={1.8} /><span>{projects[nextIndex].location}</span>
-                    </div>
-                    <div className="mt-4">
+                    <div className="mt-4 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
+                        <MapPin size={11} strokeWidth={1.8} /><span>{projects[nextIndex].location}</span>
+                      </div>
                       <CtaButton href="/projects" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
