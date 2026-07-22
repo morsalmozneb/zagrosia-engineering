@@ -151,7 +151,7 @@ export function EngineeringExcellence() {
           </div>
           {/* Stats below the line */}
           <div className="flex justify-center gap-[90px] pt-6">
-            {[{ end: 25, suffix: "+", label: "Experience" }, { end: 200, suffix: "+", label: "Projects" }].map((stat, i) => (
+            {[{ end: 35, suffix: "+", label: "Experience" }, { end: 200, suffix: "+", label: "Projects" }].map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 16 }}
