@@ -47,7 +47,7 @@ export function Header() {
           className={`${isOpen ? "invisible" : "flex"} items-center justify-between px-5`}
           style={{ height: "45px" }}
         >
-          <Link href="/" aria-label="Go to homepage" className="flex items-center">
+          <Link href="/" aria-label="Go to homepage" className="flex items-center" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
             <Image
               src="/images/zagrosia-logo.svg"
               alt="Zagrosia Engineering Inc."
@@ -74,7 +74,7 @@ export function Header() {
         className="hidden lg:flex items-center justify-between px-6 py-8"
         style={{ paddingLeft: "max(20px, calc(var(--desktop-grid-content-start, 0px) + 4px))" }}
       >
-        <Link href="/" aria-label="Go to homepage">
+        <Link href="/" aria-label="Go to homepage" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
           <Image
             src="/images/zagrosia-logo.svg"
             alt="Zagrosia Engineering Inc."

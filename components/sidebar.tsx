@@ -103,7 +103,7 @@ export function Sidebar() {
                     exit={{ opacity: 0, x: -6 }}
                     transition={{ duration: 0.22, ease: "easeOut" }}
                   >
-                    <Link href="/" aria-label="Go to homepage">
+                    <Link href="/" aria-label="Go to homepage" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
                       <Image src="/images/Sidebar-Logo-Open.png" alt="Zagrosia Engineering" width={115} height={30} className="h-auto" priority />
                     </Link>
                   </motion.div>
@@ -115,7 +115,7 @@ export function Sidebar() {
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
                   >
-                    <Link href="/" aria-label="Go to homepage">
+                    <Link href="/" aria-label="Go to homepage" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
                       <Image src="/images/Sidebar-Logo-Closed.png" alt="Zagrosia" width={30} height={24} className="h-auto" priority />
                     </Link>
                   </motion.div>
