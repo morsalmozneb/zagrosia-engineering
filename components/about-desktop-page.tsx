@@ -737,41 +737,41 @@ export function AboutDesktopPage() {
               </div>
 
               {/* Navigation timeline */}
-              <div className="no-scrollbar mt-8 overflow-x-auto flex justify-center" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-                <div style={{ minWidth: "max-content", paddingLeft: "4px", paddingRight: "4px" }}>
-                  <div className="flex items-center">
+              <div className="mt-8 flex justify-center">
+                <div style={{ width: "808px" }}>
+                  {/* Dots + lines row */}
+                  <div className="flex items-center w-full">
                     {milestones.map((m, i) => (
-                      <div key={i} className="flex items-center flex-shrink-0">
+                      <div key={i} className="flex items-center" style={{ flex: i < milestones.length - 1 ? "1" : "0 0 auto" }}>
                         <button
                           type="button"
                           onClick={() => setPageIndex(i)}
                           className="rounded-full transition-all flex-shrink-0"
                           aria-label={`Go to ${m.year}`}
                           style={{
-                            width: "12px",
-                            height: "12px",
+                            width: "16px",
+                            height: "16px",
                             backgroundColor: i === pageIndex ? "#0052A5" : "#B2BBCB",
                             padding: 0,
-                            border: "none",
+                            border: i === pageIndex ? "3px solid #003d7a" : "none",
+                            boxShadow: i === pageIndex ? "0 0 0 3px rgba(0,82,165,0.2)" : "none",
                           }}
                         />
                         {i < milestones.length - 1 && (
-                          <div className="flex-shrink-0" style={{ width: "32px", height: "1px", backgroundColor: "#B2BBCB" }} />
+                          <div style={{ flex: 1, height: "2px", backgroundColor: i < pageIndex ? "#0052A5" : "#B2BBCB" }} />
                         )}
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-start" style={{ marginTop: "4px" }}>
+                  {/* Year labels row */}
+                  <div className="flex items-start w-full" style={{ marginTop: "8px" }}>
                     {milestones.map((m, i) => (
-                      <div key={i} className="flex items-start flex-shrink-0">
-                        <div style={{ width: "12px", display: "flex", justifyContent: "center", overflow: "visible" }}>
-                          <span style={{ fontSize: "9px", color: i === pageIndex ? "#0052A5" : "#B2BBCB", whiteSpace: "nowrap", fontWeight: i === pageIndex ? 700 : 400 }}>
+                      <div key={i} className="flex items-start" style={{ flex: i < milestones.length - 1 ? "1" : "0 0 auto" }}>
+                        <div style={{ width: "16px", display: "flex", justifyContent: "center", overflow: "visible" }}>
+                          <span style={{ fontSize: "11px", color: i === pageIndex ? "#0052A5" : "#6B7280", whiteSpace: "nowrap", fontWeight: i === pageIndex ? 700 : 400, letterSpacing: "0.05em" }}>
                             {["1989","1993","1995","2002","2003","2017","2019","2022","Present"][i]}
                           </span>
                         </div>
-                        {i < milestones.length - 1 && (
-                          <div className="flex-shrink-0" style={{ width: "32px" }} />
-                        )}
                       </div>
                     ))}
                   </div>
