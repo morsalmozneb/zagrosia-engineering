@@ -524,13 +524,14 @@ export function AboutDesktopPage() {
         }}
       >
         <div className="absolute inset-x-0 top-[-30px] pointer-events-none flex justify-center">
-          <div style={{ width: "min(100%, 1280px)" }}>
+          <div style={{ width: "min(100%, 1280px)", height: "300px", overflow: "hidden" }}>
             <Image
               src="/images/about-core-values-building.png"
               alt="Architectural building"
               width={1280}
               height={890}
-              className="block h-auto w-full"
+              className="block w-full"
+              style={{ height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
               sizes="min(100vw, 1280px)"
             />
           </div>
@@ -544,7 +545,7 @@ export function AboutDesktopPage() {
           }}
         />
 
-        <div className="sidebar-content relative w-full pb-[72px] pt-[380px] zag-desktop-content-pad">
+        <div className="sidebar-content relative w-full pb-[72px] pt-[240px] zag-desktop-content-pad">
           <div className="mx-auto max-w-[918px]">
             <div className="relative pl-[26px]">
               <motion.div
