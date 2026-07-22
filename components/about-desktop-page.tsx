@@ -788,7 +788,7 @@ export function AboutDesktopPage() {
               alt="Company milestones building"
               fill
               className="object-cover"
-              style={{ objectPosition: "center 40%" }}
+              style={{ objectPosition: "center top" }}
               sizes="100vw"
             />
             {/* Line at the bottom of the photo */}
