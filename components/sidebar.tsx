@@ -143,7 +143,9 @@ export function Sidebar() {
                     href={item.href}
                     aria-label={item.label}
                     className={`rounded-[10px] transition-colors duration-150 overflow-hidden ${
-                      expanded ? "hover:bg-[#0052A5]/10" : ""
+                      expanded
+                        ? isActive ? "bg-[#0052A5]/15" : "hover:bg-[#0052A5]/10"
+                        : ""
                     }`}
                     style={
                       expanded
@@ -171,7 +173,9 @@ export function Sidebar() {
                     <div
                       className={`flex items-center justify-center rounded-[8px] transition-all duration-200 ease-out ${
                         !expanded
-                          ? "hover:bg-[#0052A5]/15 opacity-70 hover:opacity-100"
+                          ? isActive
+                            ? "bg-[#0052A5]/15 opacity-100"
+                            : "hover:bg-[#0052A5]/15 opacity-70 hover:opacity-100"
                           : ""
                       }`}
                       style={{ width: 35, height: 35, flexShrink: 0 }}
