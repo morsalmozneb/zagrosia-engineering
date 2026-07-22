@@ -588,9 +588,6 @@ export function AboutDesktopPage() {
                       <h3 className="text-[24px] font-semibold tracking-[0.14em] text-[#FCFCFC]">
                         {value.title}
                       </h3>
-                      <p className="mt-4 max-w-[900px] leading-[1.55] tracking-[0.09em] text-[#FCFCFC]/88" style={{ fontSize: "16px" }}>
-                        {value.description}
-                      </p>
                       <ul className="mt-4 space-y-2">
                         {value.points.map((point, j) => (
                           <li key={j} className="flex items-start gap-3 leading-[1.5] tracking-[0.06em] text-[#FCFCFC]/70" style={{ fontSize: "14px" }}>
