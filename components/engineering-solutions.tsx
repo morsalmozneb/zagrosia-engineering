@@ -243,13 +243,13 @@ export function EngineeringSolutions() {
       </div>
 
       {/* BOTTOM: Building image — slides in from right with blur */}
-      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="flex justify-end overflow-hidden lg:pr-[0px] -mt-10">
+      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="overflow-hidden -mt-10">
         <Image
           src="/images/curved-building.png"
           alt="Modern curved architectural building"
           width={1200}
           height={600}
-          className="w-full object-contain lg:w-auto"
+          className="w-full object-cover"
           priority
         />
       </Reveal>
