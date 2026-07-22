@@ -89,7 +89,7 @@ export function EngineeringExcellence() {
           style={{ paddingLeft: "var(--desktop-grid-content-start)", paddingRight: "60px" }}
         >
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
-            <h2 className="zag-heading mb-8 text-[45px] leading-[1.1] text-[#2d2d2d]">
+            <h2 className="zag-heading mb-8 text-[40px] leading-[1.1] text-[#2d2d2d]">
               ENGINEERING
               <br />
               EXCELLENCE

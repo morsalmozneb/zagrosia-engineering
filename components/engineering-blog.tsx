@@ -108,7 +108,7 @@ export function EngineeringBlog() {
       {/* ── DESKTOP: stacked ── */}
       <div className="sidebar-content hidden lg:block lg:pt-16 lg:pb-16 zag-desktop-content-pad">
         <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-          <h2 className="zag-heading mb-5 text-[45px] leading-[1.1] text-[#2d2d2d]">ENGINEERING BLOG</h2>
+          <h2 className="zag-heading mb-5 text-[40px] leading-[1.1] text-[#2d2d2d]">ENGINEERING BLOG</h2>
         </Reveal>
         <Reveal delay={0.18} duration={0.65}>
           <p className="mb-8 leading-[1.65] tracking-[0.14em] text-[#2d2d2d] whitespace-nowrap" style={{ fontSize: "16px" }}>
