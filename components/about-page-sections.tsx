@@ -100,7 +100,7 @@ export function AboutProfileSection() {
   const reducedMotion = useReducedMotion()
 
   return (
-    <section id="profile" className="relative -mt-[42px] overflow-hidden bg-[#071018] px-6 pb-10 pt-0 text-[#FCFCFC]">
+    <section id="profile" className="relative -mt-[42px] bg-[#071018] px-6 pb-10 pt-0 text-[#FCFCFC]">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[72px]"
         style={{
@@ -120,7 +120,7 @@ export function AboutProfileSection() {
         >
           {/* Photo + line: left side, shifted up */}
           <div className="flex-shrink-0 -mt-[45px]">
-            <div className="relative overflow-hidden -ml-[40px]" style={{ width: "220px", height: "320px" }}>
+            <div className="relative overflow-hidden" style={{ width: "220px", height: "320px", transform: "translateX(-40px)" }}>
               <Image
                 src="/images/homayoun-pic-mobile.png"
                 alt="Seyed Hassan Mozneb"
@@ -128,7 +128,7 @@ export function AboutProfileSection() {
                 className="object-contain object-bottom"
               />
             </div>
-            <div className="h-[2px] bg-[#FCFCFC] -ml-[40px]" style={{ width: "300px" }} />
+            <div className="h-[2px] bg-[#FCFCFC]" style={{ width: "300px", transform: "translateX(-40px)" }} />
           </div>
 
           {/* Stats: right side, stacked vertically */}
