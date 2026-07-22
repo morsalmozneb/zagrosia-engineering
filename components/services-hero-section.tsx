@@ -11,14 +11,12 @@ const EASE = [0.0, 0.0, 0.2, 1] as const
 const GRADIENT_BORDER = "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)"
 const CLOSED_FILL = "linear-gradient(to right, rgba(45,45,45,1) 0%, rgba(115,115,115,0.22) 100%)"
 
-const tags = ["Steel", "Concrete", "Wood", "Masonry", "BCBC 2024", "NBCC"]
-
 const services = [
   {
     id: 1,
     title: "Structural Design",
     image: "/images/services-building.png",
-    intro: "Bridging structural engineering with advanced automation and modern digital workflows.",
+    intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
       "Commercial buildings (offices, retail, mixed-use)",
@@ -27,13 +25,83 @@ const services = [
       "Steel, concrete, wood, and masonry structures",
       "Structural drawings and specifications",
     ],
-    tags,
+    tags: ["Steel", "Concrete", "Wood", "Masonry", "BCBC 2024", "NBCC"],
   },
-  { id: 2, title: "Seismic Assessment", image: "/images/seismic-crane.jpg", intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.", bullets: [], tags: [] },
-  { id: 3, title: "Building Rehabilitation", image: "/images/about-milestones-building.png", intro: "Expert structural upgrades and rehabilitation for aging and distressed buildings.", bullets: [], tags: [] },
-  { id: 4, title: "Heavy Racking", image: "/images/industrial-racking.jpg", intro: "Industrial racking systems design, engineering review, and seismic compliance for warehouses and distribution centres.", bullets: [], tags: [] },
-  { id: 5, title: "Building Envelope", image: "/images/glass-building.jpg", intro: "Building envelope assessments and structural integration for moisture, performance, and longevity.", bullets: [], tags: [] },
-  { id: 6, title: "Specialty Reviews", image: "/images/about-core-values-building.png", intro: "Specialized structural reviews, peer reviews, and engineering consultations for unique and complex projects.", bullets: [], tags: [] },
+  {
+    id: 2,
+    title: "Seismic Assessment",
+    image: "/images/seismic-crane.jpg",
+    intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.",
+    bullets: [
+      "Seismic hazard and site classification analysis",
+      "Existing building vulnerability assessments",
+      "Retrofit design and structural strengthening",
+      "Post-earthquake damage evaluation",
+      "Compliance with BCBC 2024 and NBCC seismic provisions",
+      "Detailed reporting and engineering recommendations",
+    ],
+    tags: ["BCBC 2024", "NBCC", "Seismic", "Retrofit", "Risk Assessment"],
+  },
+  {
+    id: 3,
+    title: "Building Rehabilitation",
+    image: "/images/about-milestones-building.png",
+    intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
+    bullets: [
+      "Condition assessment and structural investigation",
+      "Repair design for concrete, steel, and masonry",
+      "Seismic and code-compliance upgrades",
+      "Structural reinforcement and strengthening",
+      "Heritage and existing building retrofits",
+      "Long-term rehabilitation planning and reporting",
+    ],
+    tags: ["Rehabilitation", "Retrofit", "Concrete", "Masonry", "EGBC"],
+  },
+  {
+    id: 4,
+    title: "Heavy Racking",
+    image: "/images/industrial-racking.jpg",
+    intro: "Industrial racking systems engineering — design, seismic review, and code compliance for warehouses and distribution centres.",
+    bullets: [
+      "Selective and drive-in pallet racking design",
+      "Seismic bracing and anchor design",
+      "Load capacity and operational safety review",
+      "Site-specific seismic compliance (BCBC / NBCC)",
+      "Racking system inspection and certification",
+      "Full engineering drawing packages",
+    ],
+    tags: ["Industrial", "Steel", "Seismic", "BCBC 2024", "Warehousing"],
+  },
+  {
+    id: 5,
+    title: "Building Envelope",
+    image: "/images/glass-building.jpg",
+    intro: "Structural integration and performance assessments for building envelopes — moisture control, cladding systems, and longevity.",
+    bullets: [
+      "Exterior cladding and curtain wall structural review",
+      "Moisture and air barrier assessment",
+      "Window and glazing system structural analysis",
+      "Roof structure and waterproofing coordination",
+      "Facade inspection and failure investigation",
+      "Performance improvement recommendations",
+    ],
+    tags: ["Envelope", "Cladding", "Glazing", "Waterproofing", "Building Science"],
+  },
+  {
+    id: 6,
+    title: "Specialty Reviews",
+    image: "/images/about-core-values-building.png",
+    intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
+    bullets: [
+      "Independent structural peer review",
+      "Third-party engineering assessments",
+      "Expert technical opinions and reports",
+      "Construction progress and compliance review",
+      "Dispute resolution and forensic engineering support",
+      "Custom consulting for unique structural challenges",
+    ],
+    tags: ["Peer Review", "Forensic", "Consulting", "Inspection", "EGBC"],
+  },
 ]
 
 export function ServicesHeroSection() {
@@ -246,6 +314,11 @@ export function ServicesHeroSection() {
                             </span>
                             <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />
                           </button>
+                          {service.image && (
+                            <div className="relative mt-3 h-[220px] w-full overflow-hidden rounded-[10px]">
+                              <Image src={service.image} alt={service.title} fill sizes="50vw" className="object-cover" />
+                            </div>
+                          )}
                           <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                             {service.intro}
                           </p>
