@@ -640,7 +640,7 @@ export function AboutDesktopPage() {
                       <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                     {/* Center — raised high, above sides */}
-                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "16px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
+                    <div className="absolute overflow-hidden" style={{ width: "320px", height: "285px", borderRadius: "16px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
                       <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                     {/* Right — behind card */}
