@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Reveal } from "./scroll-reveal"
 import { motion } from "framer-motion"
 import { Phone, Mail, Linkedin, Facebook, Instagram } from "lucide-react"
@@ -9,6 +10,15 @@ import { Phone, Mail, Linkedin, Facebook, Instagram } from "lucide-react"
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
 export function Footer() {
+  const pathname = usePathname()
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }
+
   return (
     <footer id="contact" className="bg-[#000000] py-8 text-[#FCFCFC] lg:py-10">
       <div className="sidebar-content px-8 zag-desktop-content-pad">
@@ -17,7 +27,7 @@ export function Footer() {
       <div className="hidden lg:block mb-8">
         <Reveal variant="fadeUp" delay={0.05} duration={0.65}>
           <div className="mb-4">
-            <Link href="/" aria-label="Go to homepage">
+            <Link href="/" aria-label="Go to homepage" onClick={handleLogoClick}>
               <Image
                 src="/images/zagrosia-logo.svg"
                 alt="Zagrosia Engineering Inc."
@@ -109,7 +119,7 @@ export function Footer() {
       {/* ── MOBILE: logo + tagline ── */}
       <Reveal variant="fadeUp" delay={0.05} duration={0.65} className="lg:hidden mb-8 -mt-[35px]">
         <div className="mb-8">
-          <Link href="/" aria-label="Go to homepage">
+          <Link href="/" aria-label="Go to homepage" onClick={handleLogoClick}>
             <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={172} height={40} className="h-auto w-[172px]" />
           </Link>
         </div>
