@@ -282,7 +282,7 @@ export default function OfficeTowerRenovationPage() {
                       className="w-full h-full rounded-[19px] bg-[#FCFCFC] p-[22px]"
                       style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)", minHeight: "200px" }}
                     >
-                      <span className="mb-4 block font-black leading-none text-[#0052A5]" style={{ fontSize: "36px" }}>{item.step}</span>
+                      <span className="mb-4 block font-black leading-none" style={{ fontSize: "36px", color: "#0052A5" }}>{item.step}</span>
                       <p className="mb-3 text-[14px] font-bold tracking-[0.14em] text-[#2D2D2D] uppercase">{item.title}</p>
                       <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]/75" style={{ fontSize: "14px" }}>{item.body}</p>
                     </div>
@@ -422,19 +422,14 @@ export default function OfficeTowerRenovationPage() {
 
               {/* Back to Projects — bottom */}
               <div className="mt-14">
-                <div className="h-px w-full bg-[#2D2D2D]/10 mb-8" />
-                <Reveal variant="fadeUp" delay={0.05} duration={0.5}>
-                  {/* Mobile */}
-                  <Link href="/projects" className="lg:hidden inline-flex items-center gap-2 text-[10px] tracking-[0.14em] text-[#2D2D2D]/55 hover:text-[#0052A5] transition-colors">
-                    <svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M11 4.5H1M1 4.5L4.5 1M1 4.5L4.5 8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    PROJECTS
-                  </Link>
-                  {/* Desktop */}
-                  <Link href="/projects" className="hidden lg:inline-flex items-center gap-2 text-[11px] tracking-[0.14em] text-[#2D2D2D]/50 hover:text-[#0052A5] transition-colors">
-                    <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    BACK TO PROJECTS
-                  </Link>
-                </Reveal>
+                <div className="h-px w-full mb-8" style={{ background: "rgba(45,45,45,0.1)" }} />
+                <Link
+                  href="/projects"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "11px", letterSpacing: "0.14em", color: "rgba(45,45,45,0.5)", textDecoration: "none" }}
+                >
+                  <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  BACK TO PROJECTS
+                </Link>
               </div>
 
             </div>
