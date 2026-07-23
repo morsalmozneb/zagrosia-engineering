@@ -61,6 +61,7 @@ const projects = [
     title: "CONTEMPORARY CUSTOM RESIDENCE",
     description:
       "Full structural engineering for a luxury contemporary residence featuring open-concept layouts, cantilevered elements, and large-span architectural glazing systems.",
+    slug: "contemporary-custom-residence",
   },
   {
     id: 3,
@@ -69,6 +70,7 @@ const projects = [
     title: "FIRE & FREEZE FORT MCMURRAY",
     description:
       "Advanced structural engineering for a large-scale industrial facility with crane supports, equipment foundations, and reinforced steel systems.",
+    slug: "fire-freeze-fort-mcmurray",
   },
   {
     id: 4,
@@ -77,6 +79,7 @@ const projects = [
     title: "144-UNIT TOWNHOUSE",
     description:
       "Comprehensive structural design for a large-scale townhouse complex, including foundation systems, shear walls, and gravity load analysis.",
+    slug: "144-unit-townhouse",
   },
   {
     id: 5,
@@ -85,6 +88,7 @@ const projects = [
     title: "STRATA — STONE VENEER REMEDIATION",
     description:
       "Structural assessment and remediation design for deteriorating stone veneer cladding on a multi-unit strata building.",
+    slug: "strata-stone-veneer-remediation",
   },
   {
     id: 6,
@@ -93,6 +97,7 @@ const projects = [
     title: "CLOVERDALE REC CENTRE",
     description:
       "Structural engineering for a community recreation centre, including long-span roof systems, gymnasium framing, and seismic design.",
+    slug: "cloverdale-rec-centre",
   },
 ]
 
@@ -138,6 +143,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       objectPositionClassName: "object-center",
       titleClassName: "text-[17px] leading-[1.16] tracking-[0.12em]",
       descriptionWidthClassName: "max-w-[236px]",
+      slug: "contemporary-custom-residence",
     },
   ],
   [
@@ -149,6 +155,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "fire-freeze-fort-mcmurray",
     },
     {
       id: 4,
@@ -158,6 +165,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "144-unit-townhouse",
     },
     {
       id: 5,
@@ -167,6 +175,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "strata-stone-veneer-remediation",
     },
   ],
   [
@@ -178,6 +187,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-6",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "cloverdale-rec-centre",
     },
     {
       id: 7,
@@ -187,6 +197,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-6",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "industrial-racking",
     },
   ],
   [
@@ -198,6 +209,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "union-park-eps-5773",
     },
     {
       id: 9,
@@ -207,6 +219,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "high-rise-rehabilitation",
     },
     {
       id: 10,
@@ -216,6 +229,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "multi-family-residential-complex",
     },
   ],
   [
@@ -227,6 +241,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "bridge-rehabilitation-project",
     },
     {
       id: 12,
@@ -236,6 +251,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "concrete-parkade-restoration",
     },
     {
       id: 13,
@@ -245,6 +261,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "foundation-and-shoring-design",
     },
   ],
   [
@@ -256,6 +273,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "mixed-use-tower-development",
     },
     {
       id: 15,
@@ -265,6 +283,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "community-centre-expansion",
     },
     {
       id: 16,
@@ -274,6 +293,7 @@ const desktopProjectRows: DesktopProjectCard[][] = [
       spanClassName: "col-span-4",
       heightClassName: "h-[222px]",
       objectPositionClassName: "object-center",
+      slug: "seismic-upgrade-program",
     },
   ],
 ]
