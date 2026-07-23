@@ -367,10 +367,10 @@ function DesktopProjectCardItem({
                 </h3>
               </div>
               <span
-                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
                 style={{ fontSize: "10px" }}
               >
-                {slug ? "Case Study" : "Learn More"}
+                Learn More
               </span>
             </div>
           </div>
@@ -606,7 +606,7 @@ export function ProjectsHeroSection() {
                         className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                         style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                       >
-                        {project.slug ? "Case Study" : "Learn More"}
+                        Learn More
                       </CtaButton>
                     </>
                   )}
