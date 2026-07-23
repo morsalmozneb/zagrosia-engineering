@@ -362,28 +362,64 @@ export default function OfficeTowerRenovationPage() {
           </div>
         </section>
 
-        {/* ── BOTTOM NAV ── */}
-        <section className="bg-[#FCFCFC] pb-[80px]">
+        {/* ── BOTTOM CTA — matches Projects / Services page style ── */}
+        <section className="bg-[#FCFCFC] pb-[98px]">
           <div className="sidebar-content zag-desktop-content-pad px-5">
             <div className="mx-auto max-w-[860px]">
-              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
-              <Reveal variant="fadeUp" delay={0.1}>
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-2 rounded-full border border-[#2D2D2D]/25 px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-[#2D2D2D] transition-all hover:border-[#0052A5] hover:text-[#0052A5]"
-                  >
-                    <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    Back to All Projects
-                  </Link>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[11px] tracking-[0.12em] text-[#2D2D2D]/50">Start a similar project?</span>
-                    <Link href="/contact" className="inline-flex items-center rounded-full bg-[#0052A5] px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-white transition-all hover:bg-[#003d7a]">
-                      Contact Us
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[78px]" />
+
+              {/* Mobile */}
+              <div className="lg:hidden">
+                <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                  <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
+                </Reveal>
+                <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                  <h2 className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]"
+                    style={{ fontSize: "20px", fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>
+                    DO YOU WANT TO START YOUR PROJECT?
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.2} duration={0.65}>
+                  <p className="mb-8 leading-[1.85] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
+                    Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
+                  </p>
+                </Reveal>
+                <div className="flex gap-[15px]">
+                  <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
+                    <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">
+                      Request a Service
                     </Link>
-                  </div>
+                  </Reveal>
+                  <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
+                    <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">
+                      Get In Touch
+                    </Link>
+                  </Reveal>
                 </div>
-              </Reveal>
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden lg:block">
+                <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                  <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+                    DO YOU WANT TO START YOUR PROJECT?
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.18} duration={0.65}>
+                  <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
+                    Every project is unique. Contact us to discuss your specific requirements, and discover how we can help.
+                  </p>
+                </Reveal>
+                <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]"
+                  >
+                    Request a Service
+                  </Link>
+                </Reveal>
+              </div>
+
             </div>
           </div>
         </section>
