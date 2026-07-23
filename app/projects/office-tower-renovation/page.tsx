@@ -174,177 +174,219 @@ export default function OfficeTowerRenovationPage() {
         </div>
 
         {/* ══════════════════════════════════════════
-            CONTENT SECTIONS — shared mobile + desktop
+            CONTENT SECTIONS
         ══════════════════════════════════════════ */}
-        <div className="sidebar-content px-5 pb-20 zag-desktop-content-pad">
-          <div className="mx-auto max-w-[860px]">
 
-            {/* Thin top rule */}
-            <Reveal variant="lineGrowX" duration={0.8}>
-              <div className="mb-12 h-px w-full bg-[#2D2D2D]/10" />
-            </Reveal>
+        {/* ── PROJECT OVERVIEW ── */}
+        <section className="bg-[#FCFCFC] pt-[48px] pb-[60px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-14">
+                <div>
+                  <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                    <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                      PROJECT OVERVIEW
+                    </h2>
+                  </Reveal>
+                  <Reveal variant="fadeUp" delay={0.12}>
+                    <p className="mb-5 leading-[1.65] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                      This project involved a comprehensive seismic assessment and structural retrofit of an existing multi-story commercial office tower in Burnaby, BC. The building's original lateral force-resisting system no longer met current code requirements, requiring a full engineering solution to bring it into compliance with NBCC 2020.
+                    </p>
+                  </Reveal>
+                  <Reveal variant="fadeUp" delay={0.18}>
+                    <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                      Zagrosia Engineering provided complete structural engineering services from initial assessment through construction administration, coordinating with the architect, mechanical engineer, and general contractor to minimize disruption to occupied floors.
+                    </p>
+                  </Reveal>
+                </div>
 
-            {/* ── PROJECT OVERVIEW ── */}
-            <div className="lg:grid lg:grid-cols-[1fr_260px] lg:gap-12 mb-16">
-
-              <div>
-                <Reveal variant="fadeUp" delay={0.05}>
-                  <p className="mb-2 text-[10px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">Project Overview</p>
-                </Reveal>
-                <Reveal variant="fadeUp" delay={0.1}>
-                  <h2 className="mb-5 font-black uppercase leading-[1.18] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px" }}>
-                    Structural Retrofit &amp;<br />Seismic Strengthening
-                  </h2>
-                </Reveal>
-                <Reveal variant="fadeUp" delay={0.15}>
-                  <p className="mb-4 leading-[1.75] tracking-[0.06em] text-[#2D2D2D]/80" style={{ fontSize: "15px" }}>
-                    This project involved a comprehensive seismic assessment and structural retrofit of an existing multi-story commercial office tower in Burnaby, BC. The building's original lateral force-resisting system no longer met current code requirements, requiring a full engineering solution to bring it into compliance with NBCC 2020.
-                  </p>
-                </Reveal>
-                <Reveal variant="fadeUp" delay={0.2}>
-                  <p className="leading-[1.75] tracking-[0.06em] text-[#2D2D2D]/80" style={{ fontSize: "15px" }}>
-                    Zagrosia Engineering provided complete structural engineering services from initial assessment through construction administration, coordinating closely with the project architect, mechanical engineer, and general contractor to minimize disruption to occupied floors during construction.
-                  </p>
+                {/* Project Details card — gradient border style matching About page */}
+                <Reveal variant="fadeBlur" delay={0.2}>
+                  <div
+                    className="mt-10 lg:mt-0 rounded-[20px] p-px"
+                    style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
+                  >
+                    <div
+                      className="w-full h-full rounded-[19px] bg-[#FCFCFC] p-[22px]"
+                      style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
+                    >
+                      <p className="mb-5 text-[14px] font-bold tracking-[0.22em] text-[#2D2D2D]">PROJECT DETAILS</p>
+                      <ul className="space-y-4">
+                        {keyFacts.map((fact) => (
+                          <li key={fact.label} className="flex flex-col gap-[3px]">
+                            <span className="text-[10px] font-semibold tracking-[0.16em] text-[#2D2D2D]/45 uppercase">{fact.label}</span>
+                            <span className="text-[14px] tracking-[0.08em] text-[#2D2D2D] font-medium">{fact.value}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </Reveal>
               </div>
-
-              <Reveal variant="fadeBlur" delay={0.2}>
-                <div className="mt-10 lg:mt-0 rounded-[16px] border border-[#2D2D2D]/10 bg-[#F4F6F9] p-6">
-                  <p className="mb-4 text-[10px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">Project Details</p>
-                  <ul className="space-y-3">
-                    {keyFacts.map((fact) => (
-                      <li key={fact.label} className="flex flex-col gap-[2px]">
-                        <span className="text-[10px] font-semibold tracking-[0.14em] text-[#2D2D2D]/50 uppercase">{fact.label}</span>
-                        <span className="text-[13px] tracking-[0.08em] text-[#2D2D2D] font-medium">{fact.value}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
             </div>
+          </div>
+        </section>
 
-            <Reveal variant="lineGrowX" duration={0.8}>
-              <div className="mb-16 h-px w-full bg-[#2D2D2D]/10" />
-            </Reveal>
-
-            {/* ── THE CHALLENGE ── */}
-            <div className="mb-16">
-              <Reveal variant="fadeUp" delay={0.05}>
-                <p className="mb-2 text-[10px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">The Challenge</p>
-              </Reveal>
-              <Reveal variant="fadeUp" delay={0.1}>
-                <h2 className="mb-6 font-black uppercase leading-[1.18] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px" }}>
-                  Engineering Around an<br />Occupied Building
+        {/* ── THE CHALLENGE ── */}
+        <section className="bg-[#FCFCFC] pb-[60px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                  THE CHALLENGE
                 </h2>
               </Reveal>
-              <div className="lg:grid lg:grid-cols-2 lg:gap-10">
-                <Reveal variant="fadeUp" delay={0.15}>
-                  <p className="mb-6 lg:mb-0 leading-[1.75] tracking-[0.06em] text-[#2D2D2D]/80" style={{ fontSize: "15px" }}>
+              <div className="lg:grid lg:grid-cols-2 lg:gap-12">
+                <Reveal variant="fadeUp" delay={0.12}>
+                  <p className="mb-6 lg:mb-0 leading-[1.65] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                     The building remained partially occupied throughout the construction phase, requiring a phased retrofit strategy that maintained structural integrity and life-safety at all times. Existing drawings were incomplete, demanding thorough field investigation and destructive testing to verify as-built conditions before any analysis could begin.
                   </p>
                 </Reveal>
-                <Reveal variant="fadeUp" delay={0.2}>
-                  <p className="leading-[1.75] tracking-[0.06em] text-[#2D2D2D]/80" style={{ fontSize: "15px" }}>
+                <Reveal variant="fadeUp" delay={0.18}>
+                  <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                     The existing concrete shear wall system had significant deficiencies in shear capacity and connection detailing. The solution required adding new lateral elements while carefully managing load path continuity through each construction stage — demanding close coordination between structural design and construction sequencing.
                   </p>
                 </Reveal>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* ── ENGINEERING APPROACH ── */}
-            <div className="mb-16">
-              <Reveal variant="fadeUp" delay={0.05}>
-                <p className="mb-2 text-[10px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">Engineering Approach</p>
-              </Reveal>
-              <Reveal variant="fadeUp" delay={0.1}>
-                <h2 className="mb-8 font-black uppercase leading-[1.18] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px" }}>
-                  Precision-Designed Retrofit<br />With Minimal Disruption
+        {/* ── ENGINEERING APPROACH ── */}
+        <section className="bg-[#FCFCFC] pb-[60px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                  ENGINEERING APPROACH
                 </h2>
               </Reveal>
-              <div className="lg:grid lg:grid-cols-3 lg:gap-6">
+              <div className="lg:grid lg:grid-cols-3 lg:gap-5">
                 {[
                   { step: "01", title: "Assessment & Modelling", body: "A full 3D finite element model was built from field investigation data. Nonlinear time-history analysis was used to evaluate seismic performance and identify critical deficiencies." },
                   { step: "02", title: "Retrofit Strategy", body: "New steel moment frames were introduced at key bays to supplement the existing concrete walls, designed to minimize penetrations into occupied tenant areas." },
                   { step: "03", title: "Phased Construction", body: "The retrofit was sequenced across four phases, each independently verified for structural adequacy. Stage-by-stage analysis ensured compliance at every intermediate state." },
-                ].map((item) => (
-                  <Reveal key={item.step} variant="fadeBlur" delay={0.1}>
-                    <div className="mb-6 lg:mb-0 rounded-[14px] border border-[#2D2D2D]/10 bg-[#F4F6F9] p-6">
-                      <span className="mb-3 block font-black text-[#0052A5]/30 leading-none" style={{ fontSize: "32px" }}>{item.step}</span>
-                      <h3 className="mb-3 font-bold tracking-[0.08em] text-[#2D2D2D] uppercase" style={{ fontSize: "13px" }}>{item.title}</h3>
-                      <p className="leading-[1.7] tracking-[0.06em] text-[#2D2D2D]/70" style={{ fontSize: "13px" }}>{item.body}</p>
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.step}
+                    initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.65, delay: 0.1 + i * 0.12, ease: EASE }}
+                    className="mb-5 lg:mb-0 rounded-[20px] p-px"
+                    style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
+                  >
+                    <div
+                      className="w-full h-full rounded-[19px] bg-[#FCFCFC] p-[22px]"
+                      style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)", minHeight: "200px" }}
+                    >
+                      <span className="mb-4 block font-black leading-none text-[#0052A5]/25" style={{ fontSize: "36px" }}>{item.step}</span>
+                      <p className="mb-3 text-[14px] font-bold tracking-[0.14em] text-[#2D2D2D] uppercase">{item.title}</p>
+                      <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]/75" style={{ fontSize: "14px" }}>{item.body}</p>
                     </div>
-                  </Reveal>
+                  </motion.div>
                 ))}
               </div>
             </div>
+          </div>
+        </section>
 
-            <Reveal variant="lineGrowX" duration={0.8}>
-              <div className="mb-16 h-px w-full bg-[#2D2D2D]/10" />
-            </Reveal>
-
-            {/* ── SCOPE OF WORK ── */}
-            <div className="mb-16">
-              <Reveal variant="fadeUp" delay={0.05}>
-                <p className="mb-2 text-[10px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">Scope of Work</p>
-              </Reveal>
-              <Reveal variant="fadeUp" delay={0.1}>
-                <h2 className="mb-8 font-black uppercase leading-[1.18] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px" }}>
-                  Full Structural Engineering<br />Services
+        {/* ── SCOPE OF WORK ── */}
+        <section className="bg-[#FCFCFC] pb-[60px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                  SCOPE OF WORK
                 </h2>
               </Reveal>
-              <ul className="space-y-4">
+              <div className="space-y-3">
                 {scopeItems.map((item, i) => (
-                  <Reveal key={item.label} variant="fadeUp" delay={0.05 + i * 0.06}>
-                    <li className="flex items-start gap-4 rounded-[12px] border border-[#2D2D2D]/8 bg-[#F9FAFB] px-5 py-4">
-                      <span className="mt-[3px] flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]">
+                  <motion.div
+                    key={item.label}
+                    initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.55, delay: 0.08 + i * 0.08, ease: EASE }}
+                    className="rounded-[20px] p-px"
+                    style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
+                  >
+                    <div
+                      className="flex items-start gap-4 rounded-[19px] bg-[#FCFCFC] px-6 py-5"
+                      style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
+                    >
+                      <span className="mt-[3px] flex h-[24px] w-[24px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]">
                         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                           <path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
                       <div>
-                        <p className="mb-[3px] text-[13px] font-semibold tracking-[0.08em] text-[#2D2D2D]">{item.label}</p>
-                        <p className="leading-[1.65] tracking-[0.06em] text-[#2D2D2D]/65" style={{ fontSize: "13px" }}>{item.detail}</p>
+                        <p className="mb-[4px] text-[14px] font-semibold tracking-[0.10em] text-[#2D2D2D]">{item.label}</p>
+                        <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]/65" style={{ fontSize: "14px" }}>{item.detail}</p>
                       </div>
-                    </li>
-                  </Reveal>
+                    </div>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
             </div>
-
-            {/* ── OUTCOME ── */}
-            <Reveal variant="fadeBlur" delay={0.1}>
-              <div className="mb-16 rounded-[18px] px-8 py-10" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
-                <p className="mb-2 text-[10px] font-semibold tracking-[0.18em] text-white/60 uppercase">Outcome</p>
-                <h2 className="mb-4 font-black uppercase leading-[1.18] tracking-[0.08em] text-white" style={{ fontSize: "20px" }}>
-                  Code-Compliant &amp; Delivered On Schedule
-                </h2>
-                <p className="leading-[1.75] tracking-[0.06em] text-white/80" style={{ fontSize: "15px" }}>
-                  The completed retrofit brought the building into full compliance with NBCC 2020 seismic requirements, significantly improving life-safety performance and extending the building's functional lifespan. The phased construction approach enabled tenants to remain in place throughout, and the project achieved permit approval and final inspection on schedule.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* ── BOTTOM NAV ── */}
-            <Reveal variant="fadeUp" delay={0.1}>
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#2D2D2D]/25 px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-[#2D2D2D] transition-all hover:border-[#0052A5] hover:text-[#0052A5]"
-                >
-                  <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  Back to All Projects
-                </Link>
-                <div className="flex items-center gap-3">
-                  <span className="text-[11px] tracking-[0.12em] text-[#2D2D2D]/50">Start a similar project?</span>
-                  <Link href="/contact" className="inline-flex items-center rounded-full bg-[#0052A5] px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-white transition-all hover:bg-[#003d7a]">
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
-
           </div>
-        </div>
+        </section>
+
+        {/* ── OUTCOME ── */}
+        <section className="bg-[#FCFCFC] pb-[60px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+                  OUTCOME
+                </h2>
+              </Reveal>
+              <Reveal variant="fadeBlur" delay={0.12}>
+                <div
+                  className="rounded-[20px] p-px"
+                  style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}
+                >
+                  <div className="rounded-[19px] px-8 py-10" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
+                    <p className="mb-3 text-[14px] font-bold tracking-[0.22em] text-white/70">CODE-COMPLIANT &amp; DELIVERED ON SCHEDULE</p>
+                    <p className="leading-[1.65] tracking-[0.08em] text-white/85" style={{ fontSize: "16px" }}>
+                      The completed retrofit brought the building into full compliance with NBCC 2020 seismic requirements, significantly improving life-safety performance and extending the building's functional lifespan. The phased construction approach enabled tenants to remain in place throughout, and the project achieved permit approval and final inspection on schedule.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ── BOTTOM NAV ── */}
+        <section className="bg-[#FCFCFC] pb-[80px]">
+          <div className="sidebar-content zag-desktop-content-pad px-5">
+            <div className="mx-auto max-w-[860px]">
+              <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
+              <Reveal variant="fadeUp" delay={0.1}>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <Link
+                    href="/projects"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#2D2D2D]/25 px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-[#2D2D2D] transition-all hover:border-[#0052A5] hover:text-[#0052A5]"
+                  >
+                    <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    Back to All Projects
+                  </Link>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] tracking-[0.12em] text-[#2D2D2D]/50">Start a similar project?</span>
+                    <Link href="/contact" className="inline-flex items-center rounded-full bg-[#0052A5] px-6 py-3 text-[11px] font-semibold tracking-[0.14em] text-white transition-all hover:bg-[#003d7a]">
+                      Contact Us
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />
