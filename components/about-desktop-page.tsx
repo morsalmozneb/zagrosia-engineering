@@ -93,8 +93,8 @@ const milestones = [
     description: "Foundational expertise in concrete, steel & masonry systems",
     stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-2.png", "/images/company-milestone-3.png"],
     projects: [
-      { name: "Office Tower Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.png" },
-      { name: "Bridge Structural Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.png" },
+      { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.png" },
+      { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.png" },
       { name: "Residential Complex", type: "Residential", period: "1989–1999", image: "/images/Project-Card-3.png" },
       { name: "Industrial Facility", type: "Industrial", period: "1989–1999", image: "/images/Project-Card-4.png" },
     ],
