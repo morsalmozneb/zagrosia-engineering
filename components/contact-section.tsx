@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
+import { Phone, Mail, Linkedin } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
@@ -20,40 +21,19 @@ const services = [
 
 const contactItems = [
   {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M6.5 2H3.5C2.67 2 2 2.67 2 3.5C2 12.06 8.94 19 17.5 19C18.33 19 19 18.33 19 17.5V14.5C19 13.67 18.33 13 17.5 13C16.48 13 15.49 12.84 14.57 12.54C14.24 12.43 13.88 12.51 13.63 12.76L11.87 14.52C9.41 13.27 7.73 11.59 6.48 9.13L8.24 7.37C8.49 7.12 8.57 6.76 8.46 6.43C8.16 5.51 8 4.52 8 3.5C8 2.67 7.33 2 6.5 2Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
+    icon: <Phone size={16} />,
     label: "Phone",
     value: "+1 (778) 317-1043",
     href: "tel:+17783171043",
   },
   {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M17 3H3C2.45 3 2 3.45 2 4V16C2 16.55 2.45 17 3 17H17C17.55 17 18 16.55 18 16V4C18 3.45 17.55 3 17 3ZM16 6.41L10.71 11.7C10.32 12.09 9.69 12.09 9.3 11.7L4 6.41V5H16V6.41Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
+    icon: <Mail size={16} />,
     label: "Email",
     value: "info@zagrosia.ca",
     href: "mailto:info@zagrosia.ca",
   },
   {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M16 3H4C3.45 3 3 3.45 3 4V16C3 16.55 3.45 17 4 17H16C16.55 17 17 16.55 17 16V4C17 3.45 16.55 3 16 3ZM7.5 14.5H5.5V8.5H7.5V14.5ZM6.5 7.5C5.95 7.5 5.5 7.05 5.5 6.5C5.5 5.95 5.95 5.5 6.5 5.5C7.05 5.5 7.5 5.95 7.5 6.5C7.5 7.05 7.05 7.5 6.5 7.5ZM14.5 14.5H12.5V11.5C12.5 10.95 12.05 10.5 11.5 10.5C10.95 10.5 10.5 10.95 10.5 11.5V14.5H8.5V8.5H10.5V9.46C10.93 8.93 11.62 8.5 12.5 8.5C13.6 8.5 14.5 9.4 14.5 10.5V14.5Z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
+    icon: <Linkedin size={16} />,
     label: "LinkedIn",
     value: "linkedin.com/in/zagrosia",
     href: "https://www.linkedin.com/in/zagrosia",
