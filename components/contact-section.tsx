@@ -253,7 +253,7 @@ export function ContactSection() {
               viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
             >
-              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                 {item.icon}
               </div>
               <div>
@@ -330,7 +330,7 @@ export function ContactSection() {
                   viewport={{ once: false, amount: 0.1 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: EASE }}
                 >
-                  <div className="flex h-[44px] w-[44px] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+                  <div className="flex h-[44px] w-[44px] flex-shrink-0 items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                     {item.icon}
                   </div>
                   <div>
