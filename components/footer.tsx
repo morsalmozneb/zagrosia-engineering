@@ -173,9 +173,12 @@ export function Footer() {
       </div>
 
       {/* Copyright — both layouts */}
-      <div className="border-t border-[#FCFCFC]/12 pt-5">
+      <div className="border-t border-[#FCFCFC]/12 pt-5 space-y-2">
         <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/46 lg:max-w-none" style={{ fontSize: "6px" }}>
           2025 Zagrosia Engineering Inc. — All rights reserved. Founded by Seyed Hassan Mozneb, M.Sc., P.Eng.
+        </p>
+        <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/30 lg:max-w-none" style={{ fontSize: "6px" }}>
+          Disclaimer: Project images and portfolio content shown on this website are temporary placeholders. This site is currently under development and actual project content will be updated shortly.
         </p>
       </div>
 
