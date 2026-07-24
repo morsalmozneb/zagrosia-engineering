@@ -77,7 +77,7 @@ export function AboutHeroSection() {
 
       <Reveal variant="fadeBlur" delay={0.15} duration={0.8} className="relative -mx-6 -mt-[19px] h-[208px] w-[calc(100%+3rem)] overflow-hidden">
         <Image
-          src="/images/about-bridge.png"
+          src="/images/about-bridge-2.png"
           alt="Bridge structure"
           fill
           className="object-cover object-left-bottom"

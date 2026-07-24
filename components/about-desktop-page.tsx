@@ -319,7 +319,7 @@ export function AboutDesktopPage() {
 
         <div className="pointer-events-none absolute left-0 z-0 w-full" style={{ bottom: "48px" }}>
           <Image
-            src="/images/about-bridge.png"
+            src="/images/about-bridge-2.png"
             alt="Bridge structure"
             width={1500}
             height={1067}
