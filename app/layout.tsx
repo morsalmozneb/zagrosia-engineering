@@ -21,8 +21,8 @@ const BASE_URL = "https://www.zagrosia.ca"
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Zagrosia Engineering Inc. | Structural Engineers in BC, Alberta & Saskatchewan",
-    template: "%s | Zagrosia Engineering",
+    default: "Zagrosia Engineering Inc.",
+    template: "%s",
   },
   description:
     "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, racking systems, and AI-powered engineering tools. 35+ years of expertise.",

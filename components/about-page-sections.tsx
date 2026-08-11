@@ -52,24 +52,13 @@ export function AboutHeroSection() {
         <div className="mt-6 max-w-[292px] space-y-4">
           <Reveal delay={0.2} duration={0.65}>
             <p className="leading-[1.48] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
-              With over 35 years of structural
-              engineering expertise, Zagrosia
-              Engineering combines trusted
-              engineering excellence with modern AI-
-              driven workflows.
+              At Zagrosia Engineering, we believe structural engineering is more than calculations and drawings. It is about understanding how structures behave, how they perform throughout their service life, and how thoughtful engineering solutions can improve safety, functionality, resilience, and long-term value.
             </p>
           </Reveal>
 
           <Reveal delay={0.28} duration={0.65}>
             <p className="max-w-[302px] leading-[1.44] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
-              Led by <span className="font-semibold">Seyed Hassan Mozneb</span>, M.Sc.,
-              P.Eng., the company specializes in
-              seismic assessments, structural
-              rehabilitation, industrial racking
-              systems, and specialty engineering
-              solutions, all delivered with precision,
-              innovation, and strict compliance with
-              BCBC, NBCC, and EGBC standards.
+              We provide structural engineering services for residential, commercial, industrial, and institutional projects, delivering practical, code-compliant, and constructible solutions. From new construction to existing building rehabilitation, our work is guided by sound engineering judgment, technical excellence, and a commitment to public safety.
             </p>
           </Reveal>
         </div>
@@ -253,41 +242,7 @@ export function AboutMissionVisionSection() {
           }}
         >
           <p className="leading-[1.35] tracking-[0.15em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
-            For over 35
-            <br />
-            years, We has
-            <br />
-            delivered
-            <br />
-            intelligent
-            <br />
-            structural
-            <br />
-            engineering
-            <br />
-            solutions with
-            <br />
-            precision,
-            <br />
-            innovation, and
-            <br />
-            deep industry
-            <br />
-            expertise,
-            <br />
-            combining
-            <br />
-            trusted
-            <br />
-            engineering
-            <br />
-            practices with
-            <br />
-            modern AI-
-            <br />
-            driven
-            <br />
-            workflows.
+            To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients&apos; goals, and contribute to the resilience and sustainability of the built environment.
           </p>
         </motion.div>
 
@@ -306,31 +261,7 @@ export function AboutMissionVisionSection() {
           }}
         >
           <p className="leading-[1.35] tracking-[0.15em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
-            To become
-            <br />
-            Western
-            <br />
-            Canada&apos;s
-            <br />
-            leading
-            <br />
-            structural
-            <br />
-            engineering
-            <br />
-            firm through
-            <br />
-            innovation,
-            <br />
-            technical
-            <br />
-            excellence, and
-            <br />
-            the future of
-            <br />
-            engineering
-            <br />
-            technology.
+            To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.
           </p>
         </motion.div>
       </div>
@@ -340,19 +271,34 @@ export function AboutMissionVisionSection() {
 
 const coreValues = [
   {
+    title: "Engineering Excellence",
+    description:
+      "Every project is approached with technical rigor, sound engineering judgment, and a commitment to quality.",
+  },
+  {
+    title: "Practical Solutions",
+    description:
+      "We believe the best engineering solutions are not only technically correct but also practical, constructible, and cost-effective.",
+  },
+  {
+    title: "Innovation",
+    description:
+      "We continuously explore emerging technologies, including artificial intelligence, to improve engineering workflows and client service.",
+  },
+  {
     title: "Integrity",
     description:
-      "We maintain the highest standards of professional ethics and transparency in all our work.",
+      "Professional ethics, transparency, and accountability guide every decision we make.",
   },
   {
-    title: "Excellence",
+    title: "Continuous Learning",
     description:
-      "We are committed to delivering exceptional quality in every project we undertake.",
+      "Engineering is constantly evolving. We are committed to expanding our knowledge and sharing it with clients, industry partners, and future engineers.",
   },
   {
-    title: "Collaboration",
+    title: "Client Partnership",
     description:
-      "We work closely with clients and project teams to achieve the best outcomes.",
+      "We value long-term relationships built on trust, communication, and reliable engineering support.",
   },
 ]
 

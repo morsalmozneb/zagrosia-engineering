@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Engineering Lab",
+  title: "AI Lab",
   description:
     "Zagrosia Engineering's AI Lab — AI-powered structural engineering tools, automated seismic analysis, and intelligent building assessment software built for licensed P.Eng engineers.",
   alternates: { canonical: "https://www.zagrosia.ca/ai-lab" },

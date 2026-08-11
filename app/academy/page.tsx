@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Zagrosia Academy — EGBC Exam Prep",
+  title: "Academy",
   description:
     "Prepare for your EGBC professional practice exam with Zagrosia Academy. Practice questions, study guides, and resources for engineers pursuing P.Eng licensure in British Columbia.",
   alternates: { canonical: "https://www.zagrosia.ca/academy" },

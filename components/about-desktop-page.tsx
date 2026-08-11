@@ -12,7 +12,7 @@ const EASE = [0.0, 0.0, 0.2, 1] as const
 
 const team = [
   {
-    name: "HOMAYOUN MOZNEB",
+    name: "SEYED HASSAN MOZNEB",
     image: "/images/Homayoun-pic-2.png",
     experience: "35+",
     degrees: ["M.Sc.", "B.Sc"],
@@ -70,19 +70,34 @@ const team = [
 
 const coreValues = [
   {
+    title: "Engineering Excellence",
+    description: "Every project is approached with technical rigor, sound engineering judgment, and a commitment to quality.",
+    points: ["Technical rigor and sound engineering judgment on every project", "Rigorous quality assurance on all structural analysis and drawings", "Precision and accountability in code compliance and public safety"],
+  },
+  {
+    title: "Practical Solutions",
+    description: "We believe the best engineering solutions are not only technically correct but also practical, constructible, and cost-effective.",
+    points: ["Solutions that are technically correct, constructible, and cost-effective", "Clear load paths and buildable details tailored to each project", "Coordination with architects, contractors, and project teams"],
+  },
+  {
+    title: "Innovation",
+    description: "We continuously explore emerging technologies, including artificial intelligence, to improve engineering workflows and client service.",
+    points: ["Continuous integration of AI tools into engineering workflows", "Investment in digital technologies to improve client service", "Exploring emerging methods to enhance engineering practice"],
+  },
+  {
     title: "Integrity",
-    description: "We maintain the highest standards of professional ethics and transparency in all our work. Every decision we make is guided by honesty, accountability, and a commitment to doing what is right — for our clients, our partners, and the communities we serve.",
-    points: ["Full transparency in project communication and reporting", "Licensed P.Eng accountability on every structural deliverable", "Uncompromising code compliance and safety standards"],
+    description: "Professional ethics, transparency, and accountability guide every decision we make.",
+    points: ["Licensed P.Eng accountability on every structural deliverable", "Full transparency in project communication and reporting", "Uncompromising code compliance and public safety standards"],
   },
   {
-    title: "Excellence",
-    description: "We are committed to delivering exceptional quality in every project we undertake. With 35+ years of hands-on experience across residential, commercial, industrial, and marine structures, our team brings precision engineering and deep technical knowledge to every challenge.",
-    points: ["Rigorous quality assurance on all structural analysis and drawings", "Continuous investment in advanced engineering tools and AI workflows", "Proven track record across BC, Alberta, and Saskatchewan"],
+    title: "Continuous Learning",
+    description: "Engineering is constantly evolving. We are committed to expanding our knowledge and sharing it with clients, industry partners, and future engineers.",
+    points: ["Ongoing professional development and knowledge expansion", "Sharing engineering knowledge with clients and industry partners", "Staying current with evolving codes, standards, and technologies"],
   },
   {
-    title: "Collaboration",
-    description: "We work closely with clients, architects, contractors, and project teams to achieve the best possible outcomes. We believe great engineering is built on strong relationships, clear communication, and a shared commitment to project success.",
-    points: ["Early engagement with design teams to resolve issues proactively", "Responsive communication throughout every project phase", "Long-term partnerships built on trust and consistent results"],
+    title: "Client Partnership",
+    description: "We value long-term relationships built on trust, communication, and reliable engineering support.",
+    points: ["Long-term relationships built on trust and consistent results", "Responsive communication throughout every project phase", "Reliable engineering support from concept through construction"],
   },
 ]
 
@@ -304,12 +319,12 @@ export function AboutDesktopPage() {
               <div className="mt-7 max-w-[760px] space-y-4 pb-[24px]">
                 <Reveal delay={0.2} duration={0.65}>
                   <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                    With over 35 years of structural engineering expertise, Zagrosia Engineering combines trusted engineering excellence with modern AI-driven workflows.
+                    At Zagrosia Engineering, we believe structural engineering is more than calculations and drawings. It is about understanding how structures behave, how they perform throughout their service life, and how thoughtful engineering solutions can improve safety, functionality, resilience, and long-term value.
                   </p>
                 </Reveal>
                 <Reveal delay={0.28} duration={0.65}>
                   <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                    Led by <span className="font-bold">Seyed Hassan Mozneb</span>, M.Sc., P.Eng., the company specializes in seismic assessments, structural rehabilitation, industrial racking systems, and specialty engineering solutions, all delivered with precision, innovation, and strict compliance with BCBC, NBCC, and EGBC standards.
+                    We provide structural engineering services for residential, commercial, industrial, and institutional projects, delivering practical, code-compliant, and constructible solutions tailored to each project&apos;s unique requirements. From new construction to existing building rehabilitation, our work is guided by sound engineering judgment, technical excellence, and a commitment to public safety.
                   </p>
                 </Reveal>
               </div>
@@ -487,7 +502,7 @@ export function AboutDesktopPage() {
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR MISSION</p>
                 <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
-                  For over 35 years, Zagrosia Engineering has delivered intelligent structural engineering solutions with precision, innovation, and deep industry expertise, combining trusted engineering practices with modern AI-driven workflows.
+                  To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients&apos; goals, and contribute to the resilience and sustainability of the built environment.
                 </p>
               </div>
             </motion.div>
@@ -507,7 +522,7 @@ export function AboutDesktopPage() {
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR VISION</p>
                 <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
-                  To become Western Canada&apos;s leading structural engineering firm through innovation, technical excellence, and the future of engineering technology.
+                  To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.
                 </p>
               </div>
             </motion.div>

@@ -31,7 +31,7 @@ const jsonLd = {
       mainEntity: {
         "@type": "ProfessionalService",
         name: "Zagrosia Engineering Inc.",
-        founder: { "@type": "Person", name: "Homayoun Mozneb", jobTitle: "Principal Engineer, P.Eng", knowsAbout: ["Structural Engineering", "Seismic Assessment", "Building Rehabilitation"] },
+        founder: { "@type": "Person", name: "Seyed Hassan Mozneb", jobTitle: "Principal Engineer, P.Eng", knowsAbout: ["Structural Engineering", "Seismic Assessment", "Building Rehabilitation"] },
         foundingDate: "1989",
         numberOfEmployees: { "@type": "QuantitativeValue", value: 5 },
         areaServed: ["British Columbia", "Alberta", "Saskatchewan"],
