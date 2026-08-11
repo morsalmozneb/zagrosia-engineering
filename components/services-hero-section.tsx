@@ -474,7 +474,7 @@ export function ServicesHeroSection() {
                           }}
                         >
                           <button className="flex w-full items-center justify-between" onClick={() => setOpenId(0)}>
-                            <span className="font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "24px" }}>
+                            <span className="flex-1 pr-4 text-left font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "24px" }}>
                               {service.id}. {service.title}
                             </span>
                             <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />

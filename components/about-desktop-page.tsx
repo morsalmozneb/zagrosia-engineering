@@ -284,7 +284,7 @@ export function AboutDesktopPage() {
           Large white space in upper-right intentional.
       ══════════════════════════════════════════ */}
       <div className="relative overflow-x-hidden">
-      <section className="relative overflow-hidden min-h-[1340px]">
+      <section className="relative overflow-hidden min-h-[1600px]">
         <div className="sidebar-content zag-desktop-content-pad relative z-20 pt-[148px]">
           <div className="max-w-[820px]">
             <div className="relative pl-5">
@@ -489,7 +489,7 @@ export function AboutDesktopPage() {
 
             {/* Mission card */}
             <motion.div
-              className="w-[465px] h-[220px] flex-shrink-0 rounded-[20px] p-px"
+              className="w-[465px] h-[280px] flex-shrink-0 rounded-[20px] p-px"
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.1 }}
@@ -509,7 +509,7 @@ export function AboutDesktopPage() {
 
             {/* Vision card */}
             <motion.div
-              className="w-[465px] h-[220px] flex-shrink-0 rounded-[20px] p-px"
+              className="w-[465px] h-[280px] flex-shrink-0 rounded-[20px] p-px"
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.1 }}
