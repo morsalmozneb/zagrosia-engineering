@@ -20,9 +20,14 @@ const BASE_URL = "https://www.zagrosia.ca"
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  icons: {
+    icon: "/images/zagrosia-logo.svg",
+    shortcut: "/images/zagrosia-logo.svg",
+    apple: "/images/zagrosia-logo.svg",
+  },
   title: {
-    default: "Zagrosia Engineering Inc.",
-    template: "%s",
+    default: "Zagrosia Engineering Inc. | Structural Engineers BC, AB & SK | P.Eng",
+    template: "%s | Zagrosia Engineering Inc.",
   },
   description:
     "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, racking systems, and AI-powered engineering tools. 35+ years of expertise.",
@@ -95,31 +100,63 @@ export const viewport: Viewport = {
 // JSON-LD structured data — helps Google understand this is a local engineering business
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "EngineeringFirm"],
   name: "Zagrosia Engineering Inc.",
-  alternateName: "i3 Building Science & Consulting Inc.",
   url: BASE_URL,
   logo: `${BASE_URL}/images/zagrosia-logo.svg`,
+  image: `${BASE_URL}/images/og-image.jpg`,
   description:
-    "Licensed structural engineering firm (P.Eng) serving BC, Alberta, and Saskatchewan. Specializing in seismic assessment, structural design, building rehabilitation, and AI-powered engineering tools.",
+    "Licensed P.Eng structural engineering firm serving BC, Alberta, and Saskatchewan. Specializing in seismic assessment, structural design, building rehabilitation, masonry engineering, racking systems, and AI-powered engineering tools. 35+ years of combined expertise.",
   telephone: "+1-778-317-1043",
   email: "info@zagrosia.ca",
   address: {
     "@type": "PostalAddress",
+    addressLocality: "Vancouver",
     addressRegion: "BC",
     addressCountry: "CA",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 49.2827,
+    longitude: -123.1207,
+  },
   areaServed: [
-    { "@type": "Province", name: "British Columbia" },
-    { "@type": "Province", name: "Alberta" },
-    { "@type": "Province", name: "Saskatchewan" },
+    { "@type": "State", name: "British Columbia", sameAs: "https://en.wikipedia.org/wiki/British_Columbia" },
+    { "@type": "State", name: "Alberta", sameAs: "https://en.wikipedia.org/wiki/Alberta" },
+    { "@type": "State", name: "Saskatchewan", sameAs: "https://en.wikipedia.org/wiki/Saskatchewan" },
   ],
+  founder: {
+    "@type": "Person",
+    name: "Seyed Hassan Mozneb",
+    jobTitle: "P.Eng, Founder",
+  },
   hasCredential: [
-    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — British Columbia" },
-    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — Alberta" },
-    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — Saskatchewan" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — Engineers and Geoscientists BC (EGBC)" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — APEGA Alberta" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "P.Eng — APEGS Saskatchewan" },
   ],
-  sameAs: [],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Structural Engineering Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Seismic Assessment and Retrofit Design" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Structural Design — New Construction" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Building Rehabilitation and Retrofit" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Masonry Structural Engineering" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Industrial Racking System Engineering" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Retaining Wall Design" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Foundation Engineering" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Structural Peer Review" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Permit-Ready Structural Drawings and Calculations" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Structural Inspection and Field Review" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Insurance Restoration Structural Engineering" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Strata Engineering Reports" } },
+    ],
+  },
+  sameAs: [
+    "https://www.linkedin.com/company/zagrosia-engineering",
+  ],
+  keywords: "structural engineer BC, structural engineer Vancouver, P.Eng BC, seismic assessment Vancouver, structural engineering Alberta, structural engineer Saskatchewan, building rehabilitation BC, masonry engineering Vancouver, racking system engineer BC, permit structural drawings BC",
 }
 
 export default function RootLayout({
