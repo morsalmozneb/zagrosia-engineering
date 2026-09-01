@@ -1,0 +1,49 @@
+[build]
+  publish = "."
+  command = ""
+  functions = "netlify/functions"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+[[redirects]]
+  from = "/"
+  to = "/portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal"
+  to = "/portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/clockin"
+  to = "/portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/manager"
+  to = "/portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/login.html"
+  to = "/portal.html"
+  status = 301
+
+[[redirects]]
+  from = "/timesheet.html"
+  to = "/portal.html"
+  status = 301
+
+[[redirects]]
+  from = "/clockin.html"
+  to = "/portal.html"
+  status = 301
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
