@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zagrosia — Employee Portal</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --navy: #0052A5;
+  --navy-dark: #003d7a;
+  --blue-light: #e8f1fa;
+  --border: #c9d4dd;
+  --gray-bg: #f4f6f8;
+  --text: #1f2a33;
+  --muted: #5b6b78;
+  --green: #2e8b57;
+  --green-light: #eaf5ee;
+  --red: #c0392b;
+  --red-light: #fdf0ef;
+  --amber: #b45309;
+  --amber-light: #fef9ec;
+  --sidebar: 230px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--gray-bg); color: var(--text); min-height: 100vh; }
+
+/* ── Login ── */
+.login-overlay { position: fixed; inset: 0; background: var(--gray-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; }
+.login-card { background: #fff; border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); width: 100%; max-width: 400px; overflow: hidden; }
+.login-head { background: linear-gradient(135deg, var(--navy), var(--navy-dark)); padding: 28px 32px 22px; text-align: center; }
+.login-head img { height: 46px; margin-bottom: 14px; display: block; margin-left: auto; margin-right: auto; }
+.login-head h2 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.login-head p { color: rgba(255,255,255,0.72); font-size: 13px; }
+.login-body { padding: 28px 32px 32px; }
+.fg { margin-bottom: 16px; }
+.fg label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 6px; }
+.fg input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color .2s; }
+.fg input:focus { border-color: var(--navy); }
+.btn-login { width: 100%; padding: 12px; background: var(--navy); color: #fff; border: none; border-radius: 7px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .15s; }
+.btn-login:hover { background: var(--navy-dark); }
+.btn-login:disabled { opacity: .6; cursor: not-allowed; }
+.login-err { margin-top: 12px; padding: 10px 13px; background: var(--red-light); border: 1px solid #f5c6c3; border-radius: 6px; color: var(--red); font-size: 13px; display: none; }
+
+/* ── App shell ── */
+.app { display: none; }
+.letterhead { background: #fff; padding: 10px 24px; display: flex; align-items: center; border-bottom: 2px solid var(--navy); }
+.letterhead img { height: 50px; width: auto; }
+.topbar { background: linear-gradient(135deg, var(--navy), var(--navy-dark)); height: 46px; display: flex; align-items: center; padding: 0 20px; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.topbar .tb-title { color: rgba(255,255,255,.85); font-size: 13px; font-weight: 600; letter-spacing: .3px; }
+.topbar .spacer { flex: 1; }
+.topbar .tb-user { color: rgba(255,255,255,.85); font-size: 13px; font-weight: 500; }
+.btn-so { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #fff; padding: 4px 13px; border-radius: 5px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.btn-so:hover { background: rgba(255,255,255,.22); }
+.hamburger { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 4px 8px; }
+
+/* ── Layout ── */
+.layout { display: flex; min-height: calc(100vh - 122px); }
+
+/* ── Sidebar ── */
+.sidebar { width: var(--sidebar); min-width: var(--sidebar); background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; padding-bottom: 20px; }
+.sidebar-section { padding: 20px 20px 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #b0bec5; }
+.nav-item { display: flex; align-items: center; padding: 10px 20px; cursor: pointer; border-left: 3px solid transparent; font-size: 14px; font-weight: 500; color: var(--muted); transition: all .15s; border-top: none; border-right: none; border-bottom: none; background: none; width: 100%; text-align: left; font-family: inherit; }
+.nav-item:hover { background: var(--blue-light); color: var(--navy); border-left-color: var(--border); }
+.nav-item.active { background: var(--blue-light); color: var(--navy); font-weight: 700; border-left-color: var(--navy); }
+.nav-item.locked { color: #c8d3db; }
+.nav-item.locked:hover { background: var(--gray-bg); color: #c8d3db; border-left-color: transparent; }
+.nav-lock { margin-left: auto; font-size: 12px; color: #c8d3db; }
+.sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+
+/* ── Main content ── */
+.main { flex: 1; overflow-y: auto; padding: 28px; min-width: 0; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── Section headers ── */
+.section-head { margin-bottom: 24px; }
+.section-head h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.section-head p { font-size: 14px; color: var(--muted); }
+
+/* ── Cards ── */
+.card { background: #fff; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.06); margin-bottom: 20px; overflow: hidden; }
+.card-head { padding: 14px 20px; border-bottom: 2px solid var(--navy); background: var(--blue-light); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.card-head h3 { font-size: 12px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .5px; }
+.card-body { padding: 20px; }
+
+/* ── Dashboard ── */
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.stat-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+.stat-box .s-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); margin-bottom: 8px; }
+.stat-box .s-val { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-box .s-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.clock-main { text-align: center; padding: 32px 24px; }
+.clock-time { font-size: 54px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
+.clock-elapsed { font-size: 14px; color: var(--muted); min-height: 22px; margin-bottom: 28px; }
+.status-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+.pill-out { background: var(--gray-bg); color: var(--muted); border: 1.5px solid var(--border); }
+.pill-in  { background: var(--green-light); color: var(--green); border: 1.5px solid #a7d7b8; }
+.s-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.btn-clock { display: inline-flex; align-items: center; gap: 10px; padding: 15px 52px; font-size: 17px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; transition: all .15s; box-shadow: 0 3px 12px rgba(0,0,0,0.14); }
+.btn-clock:active { transform: translateY(1px); }
+.btn-clock:disabled { opacity: .55; cursor: not-allowed; }
+.btn-ci { background: var(--green); color: #fff; }
+.btn-ci:hover { background: #256f46; }
+.btn-co { background: var(--red); color: #fff; }
+.btn-co:hover { background: #a93226; }
+.clock-since { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+/* ── Time Off ── */
+.rto-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.rto-form-grid .span2 { grid-column: 1 / -1; }
+select, .fg select { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color .2s; background: #fff; }
+select:focus { border-color: var(--navy); }
+textarea.fg-ta { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color .2s; resize: vertical; min-height: 80px; }
+textarea.fg-ta:focus { border-color: var(--navy); }
+.btn-submit { padding: 10px 28px; background: var(--navy); color: #fff; border: none; border-radius: 7px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .15s; }
+.btn-submit:hover { background: var(--navy-dark); }
+.btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+.form-msg { margin-top: 12px; font-size: 13px; padding: 10px 14px; border-radius: 7px; display: none; }
+.form-msg.ok  { background: var(--green-light); color: var(--green); border: 1px solid #a7d7b8; }
+.form-msg.err { background: var(--red-light); color: var(--red); border: 1px solid #f5c6c3; }
+
+/* ── Tables ── */
+table.t { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.t th { text-align: left; padding: 10px 16px; background: var(--gray-bg); color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--border); }
+table.t td { padding: 12px 16px; border-bottom: 1px solid #eef0f2; color: var(--text); vertical-align: middle; }
+table.t tr:last-child td { border-bottom: none; }
+table.t tbody tr:hover td { background: var(--blue-light); }
+
+/* ── Badges ── */
+.badge { display: inline-block; padding: 3px 11px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: .3px; }
+.badge-green  { background: var(--green-light); color: var(--green); border: 1px solid #a7d7b8; }
+.badge-amber  { background: var(--amber-light); color: var(--amber); border: 1px solid #fcd34d; }
+.badge-red    { background: var(--red-light); color: var(--red); border: 1px solid #f5c6c3; }
+.badge-blue   { background: var(--blue-light); color: var(--navy); border: 1px solid var(--border); }
+.badge-gray   { background: var(--gray-bg); color: var(--muted); border: 1px solid var(--border); }
+
+/* ── Paychecks ── */
+.pay-period-row td:first-child { font-weight: 600; }
+.pay-amount { font-size: 15px; font-weight: 700; color: var(--navy); }
+.rate-note { font-size: 13px; color: var(--muted); font-style: italic; }
+
+/* ── Locked section ── */
+.locked-screen { text-align: center; padding: 64px 24px; }
+.lock-icon { font-size: 48px; margin-bottom: 20px; }
+.locked-screen h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.locked-screen p { font-size: 14px; color: var(--muted); max-width: 380px; margin: 0 auto 20px; line-height: 1.6; }
+.locked-screen .contact { display: inline-block; background: var(--blue-light); border: 1px solid var(--border); color: var(--navy); font-weight: 600; padding: 10px 24px; border-radius: 7px; font-size: 14px; }
+
+/* ── Empty state ── */
+.empty { text-align: center; padding: 40px 24px; color: var(--muted); font-size: 14px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  :root { --sidebar: 220px; }
+  .sidebar { position: fixed; top: 122px; left: -240px; height: calc(100vh - 122px); z-index: 200; transition: left .25s; box-shadow: 4px 0 20px rgba(0,0,0,0.12); }
+  .sidebar.open { left: 0; }
+  .hamburger { display: block; }
+  .main { padding: 20px 16px; }
+  .dash-grid { grid-template-columns: 1fr; }
+  .rto-form-grid { grid-template-columns: 1fr; }
+  .rto-form-grid .span2 { grid-column: 1; }
+  .cal-day { min-height: 52px; padding: 5px; }
+  .cal-day .day-hrs, .cal-day .day-active { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <div class="login-head">
+      <img src="./public/images/Sidebar-Logo-Open.png" alt="Zagrosia">
+      <h2>Employee Portal</h2>
+      <p>Sign in to access your dashboard</p>
+    </div>
+    <div class="login-body">
+      <div class="fg"><label>Email Address</label>
+        <input type="email" id="inEmail" placeholder="you@zagrosia.ca" autocomplete="email">
+      </div>
+      <div class="fg"><label>Password</label>
+        <input type="password" id="inPass" placeholder="••••••••" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn-login" id="btnLogin" onclick="doLogin()">Sign In</button>
+      <div class="login-err" id="loginErr"></div>
+    </div>
+  </div>
+</div>
+
+<!-- App -->
+<div class="app" id="app">
+
+  <div class="letterhead">
+    <img src="./public/images/Sidebar-Logo-Open.png" alt="Zagrosia Engineering Inc.">
+  </div>
+  <div class="topbar">
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <span class="tb-title">Employee Portal</span>
+    <div class="spacer"></div>
+    <span class="tb-user" id="tbUser"></span>
+    <button class="btn-so" onclick="doLogout()">Sign Out</button>
+  </div>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-section">Main</div>
+      <button class="nav-item active" id="nav-dashboard" onclick="showSection('dashboard')">Dashboard</button>
+      <hr class="sidebar-divider">
+      <div class="sidebar-section">My Records</div>
+      <button class="nav-item" id="nav-timeoff" onclick="showSection('timeoff')">Time Off (RTO)</button>
+      <button class="nav-item" id="nav-timesheets" onclick="showSection('timesheets')">Timesheets</button>
+      <button class="nav-item" id="nav-paychecks" onclick="showSection('paychecks')">Paychecks</button>
+      <hr class="sidebar-divider">
+      <div class="sidebar-section">Administration</div>
+      <button class="nav-item locked" id="nav-admin" onclick="goAdmin()">Team Overview <span class="nav-lock" id="adminLock1">&#128274;</span></button>
+      <button class="nav-item locked" id="nav-payroll" onclick="goAdmin()">Payroll <span class="nav-lock" id="adminLock2">&#128274;</span></button>
+      <button class="nav-item locked" id="nav-reports" onclick="goAdmin()">Reports <span class="nav-lock" id="adminLock3">&#128274;</span></button>
+    </nav>
+
+    <!-- Main -->
+    <main class="main" id="mainContent">
+
+      <!-- Dashboard -->
+      <div class="section active" id="section-dashboard">
+        <div class="section-head">
+          <h2 id="greetingText">Welcome!</h2>
+          <p id="greetingDate"></p>
+        </div>
+        <div class="dash-grid">
+          <div class="stat-box">
+            <div class="s-lbl">Hours This Week</div>
+            <div class="s-val" id="statWeek">—</div>
+            <div class="s-sub">Mon – today</div>
+          </div>
+          <div class="stat-box">
+            <div class="s-lbl">Hours This Pay Period</div>
+            <div class="s-val" id="statPeriod">—</div>
+            <div class="s-sub" id="statPeriodSub"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Clock In / Out</h3></div>
+          <div class="clock-main">
+            <div class="status-pill pill-out" id="statusPill">
+              <span class="s-dot"></span><span id="statusTxt">Not Clocked In</span>
+            </div>
+            <div class="clock-time" id="liveTime">--:--:--</div>
+            <div class="clock-elapsed" id="elapsed"></div>
+            <button class="btn-clock btn-ci" id="btnClock" onclick="toggleClock()">
+              <span id="clkIcon">&#9654;</span><span id="clkLabel">Clock In</span>
+            </button>
+            <div class="clock-since" id="clockSince"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Recent Punches</h3></div>
+          <div id="recentPunches"><div class="empty">Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- Time Off -->
+      <div class="section" id="section-timeoff">
+        <div class="section-head">
+          <h2>Time Off Requests</h2>
+          <p>Request vacation, sick days, or personal time.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Submit a Request</h3></div>
+          <div class="card-body">
+            <div class="rto-form-grid">
+              <div class="fg"><label>Start Date</label><input type="date" id="rtoStart"></div>
+              <div class="fg"><label>End Date</label><input type="date" id="rtoEnd"></div>
+              <div class="fg"><label>Type</label>
+                <select id="rtoType">
+                  <option value="vacation">Vacation</option>
+                  <option value="sick">Sick Day</option>
+                  <option value="personal">Personal</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="fg"></div>
+              <div class="fg span2"><label>Reason (optional)</label>
+                <textarea class="fg-ta" id="rtoReason" placeholder="Brief description…"></textarea>
+              </div>
+            </div>
+            <button class="btn-submit" id="btnRto" onclick="submitRTO()">Submit Request</button>
+            <div class="form-msg" id="rtoMsg"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>My Requests</h3></div>
+          <div id="rtoList"><div class="empty">Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- Timesheets -->
+      <div class="section" id="section-timesheets">
+        <div class="section-head">
+          <h2>My Timesheets</h2>
+          <p>View and manage your bi-weekly timesheet records.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Pay Periods</h3></div>
+          <div id="timesheetList"><div class="empty">Loading…</div></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px">
+          To fill in or edit a timesheet, go to the
+          <a href="./timesheet.html" style="color:var(--navy);font-weight:600">Timesheet Portal</a>.
+        </p>
+      </div>
+
+      <!-- Paychecks -->
+      <div class="section" id="section-paychecks">
+        <div class="section-head">
+          <h2>Paychecks</h2>
+          <p>Pay calculated from your approved hours.</p>
+        </div>
+        <div class="card" id="paycheckCard">
+          <div class="card-head"><h3>Pay History</h3></div>
+          <div id="paycheckList"><div class="empty">Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- Admin (locked) -->
+      <div class="section" id="section-admin">
+        <div class="locked-screen">
+          <div class="lock-icon">&#128274;</div>
+          <h3>Restricted Area</h3>
+          <p>This section is only accessible to authorized managers. If you need assistance or have a question about payroll, scheduling, or team records, please contact your manager.</p>
+          <span class="contact">Contact: Morsal Mozneb — morsalm@zagrosia.ca</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+const SB_URL = 'https://jftemrpvbwfwmztccpon.supabase.co';
+const SB_KEY = 'sb_publishable_Fpit6hpvuwHxb0YlbjAH5g_aj7QGlDI';
+const { createClient } = supabase;
+const sb = createClient(SB_URL, SB_KEY);
+
+let me = null, profile = null, openPunch = null;
+let clockTick = null, elapsedTick = null;
+
+// ── Auth ──
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) await loadUser(session.user);
+  sb.auth.onAuthStateChange(async (evt, sess) => {
+    if (evt === 'SIGNED_IN' && sess) await loadUser(sess.user);
+    if (evt === 'SIGNED_OUT') showLogin();
+  });
+}
+
+async function loadUser(user) {
+  me = user;
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  profile = data;
+  document.getElementById('tbUser').textContent = profile?.full_name || user.email;
+  if (profile?.role === 'manager') {
+    ['nav-admin','nav-payroll','nav-reports'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) { btn.classList.remove('locked'); }
+    });
+    ['adminLock1','adminLock2','adminLock3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+  showApp();
+}
+
+async function doLogin() {
+  const email = document.getElementById('inEmail').value.trim();
+  const pass  = document.getElementById('inPass').value;
+  const btn = document.getElementById('btnLogin'), err = document.getElementById('loginErr');
+  err.style.display = 'none';
+  if (!email || !pass) { err.textContent = 'Please enter your email and password.'; err.style.display = ''; return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+  btn.disabled = false; btn.textContent = 'Sign In';
+  if (error) { err.textContent = error.message; err.style.display = ''; }
+}
+
+async function doLogout() { clearInterval(clockTick); clearInterval(elapsedTick); await sb.auth.signOut(); }
+
+function showLogin() {
+  me = null; profile = null; openPunch = null;
+  clearInterval(clockTick); clearInterval(elapsedTick);
+  document.getElementById('loginOverlay').style.display = '';
+  document.getElementById('app').style.display = 'none';
+}
+
+function showApp() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  updateGreeting();
+  startLiveClock();
+  loadPunchState();
+  loadDashboardStats();
+  loadRecentPunches();
+}
+
+// ── Nav ──
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  const navBtn = document.getElementById('nav-' + name);
+  if (navBtn) navBtn.classList.add('active');
+  if (name === 'timeoff')  { loadRTOList(); }
+  if (name === 'timesheets') loadTimesheets();
+  if (name === 'paychecks')  loadPaychecks();
+  // close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+function goAdmin() {
+  if (profile?.role === 'manager') {
+    window.location.href = '/manager';
+  } else {
+    showSection('admin');
+  }
+}
+
+// ── Greeting ──
+function updateGreeting() {
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  const name = (profile?.full_name || '').split(' ')[0] || 'there';
+  document.getElementById('greetingText').textContent = g + ', ' + name + '!';
+  document.getElementById('greetingDate').textContent = new Date().toLocaleDateString('en-CA', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+}
+
+// ── Live clock ──
+function startLiveClock() {
+  clearInterval(clockTick);
+  const el = document.getElementById('liveTime');
+  const tick = () => { el.textContent = new Date().toLocaleTimeString('en-CA', { hour12: false }); };
+  tick(); clockTick = setInterval(tick, 1000);
+}
+
+function updateElapsed() {
+  if (!openPunch) { document.getElementById('elapsed').textContent = ''; return; }
+  const ms = Date.now() - new Date(openPunch.clock_in).getTime();
+  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
+  document.getElementById('elapsed').textContent = 'Clocked in for ' + pad(h) + ':' + pad(m) + ':' + pad(s);
+}
+
+function setClockUI() {
+  const pill = document.getElementById('statusPill'), txt = document.getElementById('statusTxt');
+  const btn = document.getElementById('btnClock'), icon = document.getElementById('clkIcon'), lbl = document.getElementById('clkLabel');
+  const since = document.getElementById('clockSince');
+  clearInterval(elapsedTick);
+  if (openPunch) {
+    pill.className = 'status-pill pill-in'; txt.textContent = 'Clocked In';
+    btn.className = 'btn-clock btn-co'; icon.textContent = '■'; lbl.textContent = 'Clock Out';
+    since.textContent = 'Since ' + fmt(openPunch.clock_in);
+    updateElapsed(); elapsedTick = setInterval(updateElapsed, 1000);
+  } else {
+    pill.className = 'status-pill pill-out'; txt.textContent = 'Not Clocked In';
+    btn.className = 'btn-clock btn-ci'; icon.textContent = '▶'; lbl.textContent = 'Clock In';
+    since.textContent = ''; document.getElementById('elapsed').textContent = '';
+  }
+}
+
+// ── Punch ──
+async function loadPunchState() {
+  const today = new Date().toLocaleDateString('en-CA');
+  const { data } = await sb.from('punches').select('*').eq('employee_id', me.id).eq('date', today)
+    .is('clock_out', null).order('clock_in', { ascending: false }).limit(1);
+  openPunch = data?.length ? data[0] : null;
+  setClockUI();
+}
+
+async function toggleClock() {
+  const btn = document.getElementById('btnClock'); btn.disabled = true;
+  if (!openPunch) {
+    const now = new Date();
+    const { data, error } = await sb.from('punches').insert({
+      employee_id: me.id, clock_in: now.toISOString(), date: now.toLocaleDateString('en-CA')
+    }).select().single();
+    if (error) { alert('Clock in failed: ' + error.message); }
+    else { openPunch = data; }
+  } else {
+    const { error } = await sb.from('punches').update({ clock_out: new Date().toISOString() }).eq('id', openPunch.id);
+    if (error) { alert('Clock out failed: ' + error.message); }
+    else { openPunch = null; loadDashboardStats(); loadRecentPunches(); }
+  }
+  setClockUI(); btn.disabled = false;
+}
+
+// ── Dashboard Stats ──
+async function loadDashboardStats() {
+  const now = new Date();
+  const monday = new Date(now); monday.setDate(now.getDate() - (now.getDay() || 7) + 1); monday.setHours(0,0,0,0);
+  const { data: weekData } = await sb.from('punches').select('clock_in,clock_out').eq('employee_id', me.id)
+    .gte('date', monday.toLocaleDateString('en-CA')).not('clock_out', 'is', null);
+  let weekHrs = 0;
+  (weekData || []).forEach(p => { weekHrs += (new Date(p.clock_out) - new Date(p.clock_in)) / 3600000; });
+  document.getElementById('statWeek').textContent = weekHrs.toFixed(1) + ' h';
+
+  // Pay period (bi-weekly from a fixed anchor — Jan 6 2025 Monday)
+  const anchor = new Date('2025-01-06');
+  const diff = Math.floor((now - anchor) / (14 * 86400000));
+  const periodStart = new Date(anchor.getTime() + diff * 14 * 86400000);
+  const periodEnd   = new Date(periodStart.getTime() + 13 * 86400000);
+  document.getElementById('statPeriodSub').textContent =
+    periodStart.toLocaleDateString('en-CA', {month:'short',day:'numeric'}) + ' – ' +
+    periodEnd.toLocaleDateString('en-CA', {month:'short',day:'numeric'});
+  const { data: periodData } = await sb.from('punches').select('clock_in,clock_out').eq('employee_id', me.id)
+    .gte('date', periodStart.toLocaleDateString('en-CA')).lte('date', periodEnd.toLocaleDateString('en-CA'))
+    .not('clock_out', 'is', null);
+  let periodHrs = 0;
+  (periodData || []).forEach(p => { periodHrs += (new Date(p.clock_out) - new Date(p.clock_in)) / 3600000; });
+  document.getElementById('statPeriod').textContent = periodHrs.toFixed(1) + ' h';
+}
+
+async function loadRecentPunches() {
+  const since = new Date(); since.setDate(since.getDate() - 7);
+  const { data } = await sb.from('punches').select('*').eq('employee_id', me.id)
+    .gte('date', since.toLocaleDateString('en-CA')).order('clock_in', { ascending: false });
+  const wrap = document.getElementById('recentPunches');
+  if (!data?.length) { wrap.innerHTML = '<div class="empty">No punch records this week.</div>'; return; }
+  const rows = data.map(p => {
+    const d = new Date(p.date + 'T12:00:00').toLocaleDateString('en-CA', { weekday:'short', month:'short', day:'numeric' });
+    const inT = fmt(p.clock_in), outT = p.clock_out ? fmt(p.clock_out) : '—';
+    const hrs = p.clock_out ? ((new Date(p.clock_out)-new Date(p.clock_in))/3600000).toFixed(2)+' h' : '—';
+    const badge = p.approved ? '<span class="badge badge-green">Approved</span>'
+      : p.clock_out ? '<span class="badge badge-amber">Pending</span>'
+      : '<span class="badge badge-blue">Active</span>';
+    return `<tr><td>${d}</td><td>${inT}</td><td>${outT}</td><td>${hrs}</td><td>${badge}</td></tr>`;
+  }).join('');
+  wrap.innerHTML = `<table class="t"><thead><tr><th>Date</th><th>In</th><th>Out</th><th>Hours</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ── Time Off ──
+async function submitRTO() {
+  const start  = document.getElementById('rtoStart').value;
+  const end    = document.getElementById('rtoEnd').value;
+  const type   = document.getElementById('rtoType').value;
+  const reason = document.getElementById('rtoReason').value.trim();
+  const btn = document.getElementById('btnRto'), msg = document.getElementById('rtoMsg');
+  msg.style.display = 'none';
+  if (!start || !end) { showMsg(msg, 'err', 'Please select start and end dates.'); return; }
+  if (end < start)    { showMsg(msg, 'err', 'End date must be after start date.'); return; }
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  const { error } = await sb.from('time_off_requests').insert({ employee_id: me.id, start_date: start, end_date: end, type, reason });
+  btn.disabled = false; btn.textContent = 'Submit Request';
+  if (error) { showMsg(msg, 'err', error.message); return; }
+  showMsg(msg, 'ok', 'Request submitted successfully. Your manager will review it shortly.');
+  document.getElementById('rtoStart').value = '';
+  document.getElementById('rtoEnd').value = '';
+  document.getElementById('rtoReason').value = '';
+  loadRTOList();
+}
+
+async function loadRTOList() {
+  const { data } = await sb.from('time_off_requests').select('*').eq('employee_id', me.id).order('created_at', { ascending: false });
+  const wrap = document.getElementById('rtoList');
+  if (!data?.length) { wrap.innerHTML = '<div class="empty">No time-off requests yet.</div>'; return; }
+  const typeLabel = { vacation:'Vacation', sick:'Sick Day', personal:'Personal', other:'Other' };
+  const rows = data.map(r => {
+    const sd = fmtDate(r.start_date), ed = fmtDate(r.end_date);
+    const days = Math.round((new Date(r.end_date) - new Date(r.start_date)) / 86400000) + 1;
+    const badge = r.status === 'approved' ? '<span class="badge badge-green">Approved</span>'
+      : r.status === 'denied' ? '<span class="badge badge-red">Denied</span>'
+      : '<span class="badge badge-amber">Pending</span>';
+    const note = r.manager_note ? `<br><span style="font-size:12px;color:var(--muted)">Note: ${r.manager_note}</span>` : '';
+    return `<tr><td>${sd} – ${ed}<br><span style="font-size:12px;color:var(--muted)">${days} day${days>1?'s':''}</span></td><td>${typeLabel[r.type]||r.type}</td><td>${r.reason||'—'}</td><td>${badge}${note}</td></tr>`;
+  }).join('');
+  wrap.innerHTML = `<table class="t"><thead><tr><th>Dates</th><th>Type</th><th>Reason</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ── Timesheets ──
+async function loadTimesheets() {
+  // Generate last 6 pay periods
+  const anchor = new Date('2025-01-06');
+  const now = new Date();
+  const diff = Math.floor((now - anchor) / (14 * 86400000));
+  const periods = [];
+  for (let i = diff; i >= Math.max(0, diff - 5); i--) {
+    const pStart = new Date(anchor.getTime() + i * 14 * 86400000);
+    const pEnd   = new Date(pStart.getTime() + 13 * 86400000);
+    periods.push({ start: pStart.toLocaleDateString('en-CA'), end: pEnd.toLocaleDateString('en-CA') });
+  }
+  // Fetch approved punch totals
+  const rows = await Promise.all(periods.map(async p => {
+    const { data } = await sb.from('punches').select('clock_in,clock_out,approved').eq('employee_id', me.id)
+      .gte('date', p.start).lte('date', p.end).not('clock_out', 'is', null);
+    let totalHrs = 0; let allApproved = data?.length > 0;
+    (data||[]).forEach(punch => {
+      totalHrs += (new Date(punch.clock_out) - new Date(punch.clock_in)) / 3600000;
+      if (!punch.approved) allApproved = false;
+    });
+    const isCurrent = p.start <= now.toLocaleDateString('en-CA') && p.end >= now.toLocaleDateString('en-CA');
+    const badge = isCurrent ? '<span class="badge badge-blue">Current</span>'
+      : allApproved && data?.length ? '<span class="badge badge-green">Approved</span>'
+      : data?.length ? '<span class="badge badge-amber">Pending</span>'
+      : '<span class="badge badge-gray">No Punches</span>';
+    return `<tr>
+      <td>${fmtDate(p.start)} – ${fmtDate(p.end)}</td>
+      <td>${totalHrs.toFixed(2)} h</td>
+      <td>${badge}</td>
+      <td><a href="./timesheet.html" style="color:var(--navy);font-size:13px;font-weight:600">Open Timesheet</a></td>
+    </tr>`;
+  }));
+  const wrap = document.getElementById('timesheetList');
+  wrap.innerHTML = `<table class="t"><thead><tr><th>Pay Period</th><th>Total Hours</th><th>Status</th><th>Action</th></tr></thead><tbody>${rows.join('')}</tbody></table>`;
+}
+
+// ── Paychecks ──
+async function loadPaychecks() {
+  const rate = profile?.hourly_rate;
+  const anchor = new Date('2025-01-06');
+  const now = new Date();
+  const diff = Math.floor((now - anchor) / (14 * 86400000));
+  const periods = [];
+  for (let i = diff - 1; i >= Math.max(0, diff - 6); i--) {
+    const pStart = new Date(anchor.getTime() + i * 14 * 86400000);
+    const pEnd   = new Date(pStart.getTime() + 13 * 86400000);
+    periods.push({ start: pStart.toLocaleDateString('en-CA'), end: pEnd.toLocaleDateString('en-CA') });
+  }
+  const rows = await Promise.all(periods.map(async p => {
+    const { data } = await sb.from('punches').select('clock_in,clock_out,approved').eq('employee_id', me.id)
+      .gte('date', p.start).lte('date', p.end).eq('approved', true).not('clock_out', 'is', null);
+    let hrs = 0;
+    (data||[]).forEach(punch => { hrs += (new Date(punch.clock_out) - new Date(punch.clock_in)) / 3600000; });
+    const gross = rate ? (hrs * rate).toFixed(2) : null;
+    const hoursCell = hrs > 0 ? hrs.toFixed(2) + ' h' : '—';
+    const payCell = !rate ? '<span class="rate-note">Rate not set</span>'
+      : gross > 0 ? `<span class="pay-amount">$${gross}</span>`
+      : '—';
+    return `<tr>
+      <td style="font-weight:600">${fmtDate(p.start)} – ${fmtDate(p.end)}</td>
+      <td>${hoursCell}</td>
+      <td>${rate ? '$' + Number(rate).toFixed(2) + '/h' : '—'}</td>
+      <td>${payCell}</td>
+      <td><span class="badge badge-green">Paid</span></td>
+    </tr>`;
+  }));
+  const wrap = document.getElementById('paycheckList');
+  if (!rate) {
+    wrap.innerHTML = '<div class="empty" style="padding:32px">Your hourly rate has not been configured yet. Please contact your manager.</div>';
+    return;
+  }
+  wrap.innerHTML = `<table class="t"><thead><tr><th>Pay Period</th><th>Approved Hours</th><th>Rate</th><th>Gross Pay</th><th>Status</th></tr></thead><tbody>${rows.join('')}</tbody></table>`;
+}
+
+// ── Helpers ──
+function showMsg(el, type, text) { el.className = 'form-msg ' + type; el.textContent = text; el.style.display = ''; }
+function pad(n) { return String(n).padStart(2,'0'); }
+function fmt(iso) { return new Date(iso).toLocaleTimeString('en-CA', { hour:'2-digit', minute:'2-digit', hour12:true }); }
+function fmtDate(d) { return new Date(d+'T12:00:00').toLocaleDateString('en-CA', { month:'short', day:'numeric', year:'numeric' }); }
+
+init();
+</script>
+</body>
+</html>

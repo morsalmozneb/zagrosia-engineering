@@ -7,3 +7,15 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/portal"
+  to = "https://portal.zagrosia.ca/portal"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/portal/*"
+  to = "https://portal.zagrosia.ca/portal/:splat"
+  status = 200
+  force = true

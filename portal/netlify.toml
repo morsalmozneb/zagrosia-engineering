@@ -10,6 +10,7 @@
   from = "/"
   to = "/portal.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/portal"

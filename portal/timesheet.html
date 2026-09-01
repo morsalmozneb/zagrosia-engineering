@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Time Sheet</title>
+<style>
+  :root{
+    --navy:#0052A5;
+    --navy-dark:#003d7a;
+    --blue:#0052A5;
+    --blue-light:#e8f1fa;
+    --border:#c9d4dd;
+    --gray-bg:#f4f6f8;
+    --weekend-bg:#eef1f4;
+    --today-bg:transparent;
+    --text:#1f2a33;
+    --muted:#5b6b78;
+    --green:#2e8b57;
+    --red:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--gray-bg);
+    color:var(--text);
+    padding:20px;
+  }
+  .sheet{
+    max-width:1200px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    overflow:hidden;
+  }
+  .letterhead{
+    background:#fff;
+    padding:16px 24px 12px 24px;
+    display:flex;
+    align-items:center;
+    border-bottom:2px solid var(--navy);
+  }
+  .letterhead img.logo-img{
+    height:58px;
+    width:auto;
+    display:block;
+  }
+  header.topbar{
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark));
+    color:#fff;
+    padding:18px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header.topbar h1{
+    margin:0;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:0.3px;
+  }
+  header.topbar .sub{
+    font-size:12px;
+    opacity:0.75;
+    margin-top:2px;
+  }
+  .actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    border:none;
+    border-radius:6px;
+    padding:8px 15px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:background .15s ease, box-shadow .15s ease, transform .1s ease;
+    letter-spacing:0.2px;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,0.12);}
+  .btn-primary:hover{background:#f0f6ff;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+  .btn-ghost{background:rgba(255,255,255,0.13);color:#fff;border:1px solid rgba(255,255,255,0.2);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.23);border-color:rgba(255,255,255,0.35);}
+  .btn-outline{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .btn-outline:hover{background:var(--blue-light);}
+  .btn-danger{background:#fff;color:var(--red);border:1px solid var(--red);}
+  .btn-small{padding:4px 8px;font-size:12px;}
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:16px 24px;
+    background:var(--blue-light);
+    border-bottom:1px solid var(--border);
+    align-items:flex-end;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .field label{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    color:var(--muted);
+  }
+  .field input[type=text], .field input[type=date]{
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:7px 9px;
+    font-size:14px;
+    min-width:200px;
+    background:#fff;
+  }
+  .field input[type=text]:focus, .field input[type=date]:focus{
+    outline:2px solid var(--blue);
+    outline-offset:1px;
+  }
+  .period-display{
+    font-size:14px;
+    font-weight:600;
+    color:var(--navy);
+  }
+  .period-display .range{
+    font-weight:400;
+    color:var(--muted);
+    font-size:12px;
+    display:block;
+  }
+
+  .week-tabs{
+    display:flex;
+    gap:6px;
+    padding:14px 24px 0 24px;
+    align-items:center;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .tab-group{display:flex;gap:6px;}
+  .tab-btn{
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--navy);
+    padding:9px 16px;
+    border-radius:6px 6px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border-bottom:none;
+  }
+  .tab-btn.active{
+    background:var(--navy);
+    color:#fff;
+    border-color:var(--navy);
+  }
+  .period-total{
+    font-size:13px;
+    color:var(--muted);
+  }
+  .period-total b{color:var(--navy);font-size:15px;}
+
+  .week-block{
+    padding:0 24px 8px 24px;
+  }
+  .week-block.hidden-screen{display:none;}
+
+  table.hours{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    margin-top:0;
+  }
+  table.hours th, table.hours td{
+    border:1px solid var(--border);
+    padding:6px 6px;
+    text-align:center;
+    vertical-align:middle;
+  }
+  table.hours thead th{
+    background:var(--navy);
+    color:#fff;
+    font-weight:600;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+    padding:8px 6px;
+  }
+  table.hours thead th .dow{display:block;font-size:11px;}
+  table.hours thead th .ddate{display:block;font-size:10px;font-weight:400;opacity:0.85;}
+  table.hours td.proj-num, table.hours th.col-proj-num{width:90px;}
+  table.hours td.proj-desc, table.hours th.col-proj-desc{width:220px;text-align:left;}
+  table.hours td.proj-num input, table.hours td.proj-desc input{
+    width:100%;
+    border:1px solid transparent;
+    background:transparent;
+    padding:5px 4px;
+    font-size:13px;
+    border-radius:3px;
+    font-family:inherit;
+  }
+  table.hours td.proj-num input:hover, table.hours td.proj-desc input:hover{border-color:var(--border);}
+  table.hours td.proj-num input:focus, table.hours td.proj-desc input:focus{
+    border-color:var(--blue);
+    outline:none;
+    background:#fff;
+  }
+  th.weekend, td.weekend{background:var(--weekend-bg);}
+  td.today-col{background:var(--today-bg) !important;}
+  td.hour-cell{
+    width:64px;
+    cursor:pointer;
+    position:relative;
+    font-weight:600;
+    color:var(--navy);
+    background:#fff;
+  }
+  td.hour-cell:hover{background:var(--blue-light);}
+  td.hour-cell.overtime{background:#fff5f5 !important;}
+  td.hour-cell.overtime .val{color:var(--red);}
+  td.hour-cell .val{font-size:14px;}
+  td.hour-cell .val.zero{color:#b7c1c9;font-weight:400;}
+  td.hour-cell .note-dot{
+    position:absolute;
+    top:3px;
+    right:4px;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--blue);
+  }
+  td.row-total, th.col-total{
+    width:70px;
+    font-weight:700;
+    background:#eef3f7;
+    color:var(--navy);
+  }
+  td.row-del{
+    width:34px;
+    background:#fff;
+    border:none;
+  }
+  .del-btn{
+    background:none;
+    border:none;
+    color:var(--red);
+    cursor:pointer;
+    font-size:15px;
+    opacity:0.55;
+  }
+  .del-btn:hover{opacity:1;}
+  tfoot td{
+    background:var(--navy);
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+  }
+  tfoot td.foot-label{text-align:right;padding-right:10px;}
+
+  .add-row-wrap{padding:10px 0 4px 0;}
+
+  footer.summary{
+    display:flex;
+    flex-direction:column;
+    padding:20px 24px 28px 24px;
+    gap:20px;
+    border-top:2px solid var(--blue-light);
+    margin-top:8px;
+    background:#fff;
+  }
+  .totals-cards{display:flex;gap:14px;flex-wrap:wrap;}
+  .card{
+    background:linear-gradient(135deg,#f8fafc,#eef4fb);
+    border:1px solid #d0dce8;
+    border-radius:10px;
+    padding:14px 20px;
+    min-width:120px;
+    text-align:center;
+    box-shadow:0 1px 4px rgba(0,82,165,0.07);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,82,165,0.12);}
+  .card .num{font-size:22px;font-weight:800;color:var(--navy);}
+  .card .lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin-top:3px;font-weight:600;}
+
+  .submit-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+  }
+  .btn-submit{
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark));
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:13px 40px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    letter-spacing:0.4px;
+    box-shadow:0 4px 14px rgba(0,82,165,0.3);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-submit:hover{
+    background:linear-gradient(135deg,#0060c4,var(--navy));
+    box-shadow:0 6px 20px rgba(0,82,165,0.4);
+    transform:translateY(-2px);
+  }
+  .btn-submit:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,82,165,0.25);}
+  .submit-note{font-size:13px;color:var(--muted);}
+
+  .autosave-note{
+    font-size:11px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .autosave-note .dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+
+  /* Modal */
+  .overlay{
+    position:fixed;inset:0;
+    background:rgba(15,25,35,0.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    padding:16px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:#fff;
+    border-radius:8px;
+    width:100%;
+    max-width:420px;
+    padding:22px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  }
+  .modal h3{margin:0 0 4px 0;font-size:16px;color:var(--navy);}
+  .modal .modal-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+  .modal .field{margin-bottom:14px;width:100%;}
+  .modal input[type=number]{
+    width:120px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:8px 10px;
+    font-size:15px;
+  }
+  .modal textarea{
+    width:100%;
+    min-height:110px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:9px 10px;
+    font-size:13px;
+    font-family:inherit;
+    resize:vertical;
+  }
+  .modal input:focus, .modal textarea:focus{outline:2px solid var(--blue);outline-offset:1px;}
+  .modal-actions{display:flex;justify-content:space-between;gap:8px;margin-top:8px;}
+
+  .toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--navy);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:6px;
+    font-size:13px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    z-index:100;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+
+  /* Notes area */
+  .notes-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .notes-wrap label{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    color:var(--muted);
+  }
+  .notes-wrap textarea{
+    width:100%;
+    min-height:80px;
+    border:1.5px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:13px;
+    font-family:inherit;
+    resize:vertical;
+    background:#fff;
+    color:var(--text);
+    transition:border-color .15s;
+  }
+  .notes-wrap textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(0,82,165,0.1);}
+
+  /* Last submitted banner */
+  .submitted-banner{
+    background:linear-gradient(135deg,#e8f5e9,#f1f8e9);
+    border:1px solid #a5d6a7;
+    border-radius:8px;
+    padding:10px 16px;
+    font-size:13px;
+    color:#2e7d32;
+    display:none;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+  }
+  .submitted-banner.show{display:flex;}
+
+  /* Mobile */
+  @media(max-width:700px){
+    body{padding:0;}
+    .sheet{border-radius:0;}
+    header.topbar{padding:12px 14px;gap:8px;}
+    header.topbar h1{font-size:16px;}
+    .actions{gap:5px;}
+    .btn{padding:6px 10px;font-size:12px;}
+    .meta-row{padding:12px 14px;gap:12px;}
+    .field input[type=text],.field input[type=date]{min-width:0;width:100%;}
+    .week-tabs{padding:10px 14px 0 14px;}
+    .week-block{padding:0 6px 8px 6px;}
+    table.hours{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    footer.summary{padding:16px 14px 24px 14px;}
+    .totals-cards{gap:8px;}
+    .card{min-width:80px;padding:10px 12px;}
+    .card .num{font-size:17px;}
+    .submit-wrap{align-items:stretch;}
+    .btn-submit{padding:13px 20px;width:100%;}
+    .letterhead img.logo-img{height:40px;}
+  }
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border-radius:0;max-width:100%;}
+    .actions, .btn, .week-tabs .tab-group, .add-row-wrap, .del-btn, .autosave-note{display:none !important;}
+    .week-block.hidden-screen{display:block !important;}
+    .week-block{page-break-inside:avoid;padding:0 10px 10px 10px;}
+    table.hours{font-size:11px;}
+    header.topbar{background:var(--navy) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    table.hours thead th{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    tfoot td{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+const _supabase = createClient('https://jftemrpvbwfwmztccpon.supabase.co', 'sb_publishable_Fpit6hpvuwHxb0YlbjAH5g_aj7QGlDI')
+window._supabase = _supabase
+
+// Auth check - redirect to login if not logged in
+const { data: { session } } = await _supabase.auth.getSession()
+if (!session) {
+  window.location.href = 'login.html'
+} else {
+  window._userEmail = session.user.email
+  window._userId = session.user.id
+  document.getElementById('userEmailDisplay').textContent = session.user.email
+
+  // Load cloud data and merge into localStorage
+  try {
+    const { data: rows } = await _supabase.from('timesheets').select('*').eq('user_id', session.user.id)
+    if (rows && rows.length > 0) {
+      let merged = { employeeName: '', periods: {} }
+      try { const local = JSON.parse(localStorage.getItem('timesheet_db_v1') || '{}'); if (local.periods) merged = local } catch(e) {}
+      rows.forEach(row => {
+        if (row.data && row.data.periods) {
+          Object.assign(merged.periods, row.data.periods)
+          if (!merged.employeeName && row.data.employeeName) merged.employeeName = row.data.employeeName
+        }
+      })
+      localStorage.setItem('timesheet_db_v1', JSON.stringify(merged))
+    }
+  } catch(e) { console.warn('Cloud load failed', e) }
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="letterhead">
+    <img class="logo-img" src="./public/images/Sidebar-Logo-Open.png" alt="Zagrosia Engineering Inc.">
+  </div>
+  <header class="topbar">
+    <div>
+      <h1>Employee Time Sheet</h1>
+      <div class="sub">Two-week pay period &middot; click any hour cell to log details</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:13px;">
+      <span id="userEmailDisplay"></span>
+      <button class="btn btn-ghost" id="btnLogout" style="padding:6px 12px;font-size:12px;">Sign Out</button>
+    </div>
+    <div class="actions">
+      <button class="btn btn-ghost" id="btnPrint" title="Print this time sheet">Print</button>
+      <button class="btn btn-ghost" id="btnPDF" title="Save this time sheet as a PDF file">Save as PDF</button>
+      <button class="btn btn-ghost" id="btnOpen" title="Open a previously saved JSON file">Open File</button>
+      <input type="file" id="fileInput" accept="application/json" style="display:none;">
+      <button class="btn btn-primary" id="btnSave" title="Save this period as a JSON file">Save File</button>
+    </div>
+  </header>
+
+  <div class="meta-row">
+    <div class="field">
+      <label for="employeeName">Employee Name</label>
+      <input type="text" id="employeeName" placeholder="Full name" list="employeeList">
+      <datalist id="employeeList">
+        <option value="Atena Jahangard">
+        <option value="Farnaz Gholami">
+        <option value="Mehdi Mozneb">
+        <option value="Morsal Mozneb">
+        <option value="Seyed Hassan Mozneb">
+      </datalist>
+    </div>
+    <div class="field">
+      <label for="periodStart">Pay Period — Start (Mon)</label>
+      <input type="date" id="periodStart">
+    </div>
+    <div class="field">
+      <span class="period-display" id="periodDisplay">—</span>
+    </div>
+    <div class="field" style="margin-left:auto;">
+      <div class="autosave-note"><span class="dot"></span><span id="autosaveNote">Auto-saved to this browser</span></div>
+    </div>
+  </div>
+
+  <div class="week-tabs">
+    <div class="tab-group">
+      <button class="tab-btn active" id="tabWeek1" data-week="1">Week 1</button>
+      <button class="tab-btn" id="tabWeek2" data-week="2">Week 2</button>
+    </div>
+    <div class="period-total">Two-Week Total: <b id="periodTotal">0.0</b> hrs</div>
+  </div>
+
+  <div class="week-block" id="weekBlock1"></div>
+  <div class="week-block hidden-screen" id="weekBlock2"></div>
+
+  <footer class="summary">
+    <div class="totals-cards">
+      <div class="card"><div class="num" id="cardWeek1">0.0</div><div class="lbl">Week 1 Hours</div></div>
+      <div class="card"><div class="num" id="cardWeek2">0.0</div><div class="lbl">Week 2 Hours</div></div>
+      <div class="card"><div class="num" id="cardPeriod">0.0</div><div class="lbl">Period Total</div></div>
+      <div class="card"><div class="num" id="cardProjects">0</div><div class="lbl">Projects</div></div>
+    </div>
+    <div class="submitted-banner" id="submittedBanner">✅ Timesheet already submitted for this period</div>
+    <div class="notes-wrap">
+      <label for="periodNotes">Period Notes — What did you work on this pay period?</label>
+      <textarea id="periodNotes" placeholder="e.g. Structural drawings for Project 1024, site visit on Tuesday, peer review for ABC Building..."></textarea>
+    </div>
+    <div class="submit-wrap">
+      <button id="btnSubmitTimesheet" class="btn-submit">Submit Timesheet</button>
+      <div id="submitNote" class="submit-note"></div>
+    </div>
+  </footer>
+
+  <!-- Hidden Netlify form for email notifications -->
+  <form name="timesheet-submit" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
+    <input name="bot-field" />
+    <input name="employee" />
+    <input name="email" />
+    <input name="period" />
+    <input name="week1_hours" />
+    <input name="week2_hours" />
+    <input name="period_total" />
+    <input name="projects" />
+    <input name="submitted_at" />
+    <textarea name="notes"></textarea>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3 id="modalTitle">Log Hours</h3>
+    <div class="modal-sub" id="modalSub"></div>
+    <div class="field">
+      <label for="modalHours">Hours</label>
+      <input type="number" id="modalHours" min="0" max="24" step="0.25">
+    </div>
+    <div class="field">
+      <label for="modalNotes">Description of Work Done</label>
+      <textarea id="modalNotes" placeholder="e.g. Site visit, drafting, client call..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-danger" id="modalClear">Clear</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-outline" id="modalCancel">Cancel</button>
+        <button class="btn btn-primary" style="background:var(--navy);color:#fff;" id="modalSave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.14.0/html2pdf.bundle.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "timesheet_db_v1";
+  var DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  // ---------- utilities ----------
+  function uid(){
+    if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+  }
+  function pad(n){ return n < 10 ? "0"+n : ""+n; }
+  function toISO(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); }
+  function fromISO(s){
+    var parts = s.split("-").map(Number);
+    return new Date(parts[0], parts[1]-1, parts[2]);
+  }
+  function addDays(d, n){
+    var r = new Date(d);
+    r.setDate(r.getDate()+n);
+    return r;
+  }
+  function mondayOf(d){
+    var r = new Date(d);
+    var day = r.getDay(); // 0 Sun .. 6 Sat
+    var diff = (day === 0) ? -6 : (1 - day);
+    r.setDate(r.getDate() + diff);
+    return r;
+  }
+  function fmtShort(d){
+    return (d.getMonth()+1) + "/" + d.getDate();
+  }
+  function fmtRange(startISO){
+    var s = fromISO(startISO);
+    var e = addDays(s, 13);
+    var opts = {month:"short", day:"numeric"};
+    return s.toLocaleDateString(undefined,opts) + " – " + e.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+  }
+  function entryKey(projectId, dateISO){ return projectId + "__" + dateISO; }
+  function todayISO(){ return toISO(new Date()); }
+
+  // ---------- database (localStorage) ----------
+  function loadDB(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return { employeeName:"", periods:{} };
+      var parsed = JSON.parse(raw);
+      if(!parsed.periods) parsed.periods = {};
+      return parsed;
+    }catch(e){
+      return { employeeName:"", periods:{} };
+    }
+  }
+  function saveDB(db){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+      setAutosaveNote("Saving...");
+    }catch(e){}
+    // Sync to Supabase
+    if(window._supabase && window._userId){
+      var periodKey = db.currentPeriod || 'default';
+      window._supabase.from('timesheets').upsert({
+        user_id: window._userId,
+        period_key: periodKey,
+        data: db,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id,period_key' }).then(function(res){
+        if(!res.error){
+          setAutosaveNote("Saved to cloud · " + new Date().toLocaleTimeString());
+        } else {
+          setAutosaveNote("Cloud sync failed — saved locally");
+        }
+      });
+    } else {
+      setAutosaveNote("Auto-saved locally · " + new Date().toLocaleTimeString());
+    }
+  }
+  function setAutosaveNote(txt){
+    var el = document.getElementById("autosaveNote");
+    if(el) el.textContent = txt;
+  }
+
+  // ---------- state ----------
+  var db = loadDB();
+  var state = {
+    employeeName: db.employeeName || "",
+    periodStart: mondayISOForToday(),
+    activeWeek: 1,
+    projects: [],
+    entries: {}
+  };
+
+  function mondayISOForToday(){
+    return toISO(mondayOf(new Date()));
+  }
+
+  function blankPeriod(){
+    return {
+      projects: [ { id: uid(), number:"", description:"" } ],
+      entries: {},
+      notes: "",
+      submitted: false,
+      submittedAt: null
+    };
+  }
+
+  function loadPeriod(periodStartISO){
+    var p = db.periods[periodStartISO];
+    if(!p){
+      p = blankPeriod();
+      db.periods[periodStartISO] = p;
+    }
+    state.periodStart = periodStartISO;
+    state.projects = p.projects;
+    state.entries = p.entries;
+    state.notes = p.notes || "";
+    state.submitted = p.submitted || false;
+    state.submittedAt = p.submittedAt || null;
+    // Update notes textarea and banner
+    var notesEl = document.getElementById('periodNotes');
+    if(notesEl) notesEl.value = state.notes;
+    updateSubmittedBanner();
+  }
+
+  function updateSubmittedBanner(){
+    var banner = document.getElementById('submittedBanner');
+    var btn = document.getElementById('btnSubmitTimesheet');
+    if(!banner) return;
+    if(state.submitted && state.submittedAt){
+      var d = new Date(state.submittedAt);
+      banner.textContent = '✅ Submitted on ' + d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) + ' at ' + d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+      banner.classList.add('show');
+      if(btn){ btn.textContent = 'Resubmit Timesheet'; btn.style.background='linear-gradient(135deg,#2e8b57,#1a5c38)'; }
+    } else {
+      banner.classList.remove('show');
+      if(btn){ btn.textContent = 'Submit Timesheet'; btn.style.background=''; }
+    }
+  }
+
+  function persistCurrentPeriod(){
+    var notesEl = document.getElementById('periodNotes');
+    if(notesEl) state.notes = notesEl.value;
+    db.periods[state.periodStart] = {
+      projects: state.projects,
+      entries: state.entries,
+      notes: state.notes,
+      submitted: state.submitted,
+      submittedAt: state.submittedAt
+    };
+    db.employeeName = state.employeeName;
+    db.currentPeriod = state.periodStart;
+    saveDB(db);
+  }
+
+  // ---------- rendering ----------
+  var els = {
+    employeeName: document.getElementById("employeeName"),
+    periodStart: document.getElementById("periodStart"),
+    periodDisplay: document.getElementById("periodDisplay"),
+    tabWeek1: document.getElementById("tabWeek1"),
+    tabWeek2: document.getElementById("tabWeek2"),
+    weekBlock1: document.getElementById("weekBlock1"),
+    weekBlock2: document.getElementById("weekBlock2"),
+    periodTotal: document.getElementById("periodTotal"),
+    cardWeek1: document.getElementById("cardWeek1"),
+    cardWeek2: document.getElementById("cardWeek2"),
+    cardPeriod: document.getElementById("cardPeriod"),
+    cardProjects: document.getElementById("cardProjects")
+  };
+
+  function weekDates(weekNum){
+    var start = fromISO(state.periodStart);
+    var offset = (weekNum === 1) ? 0 : 7;
+    var dates = [];
+    for(var i=0;i<7;i++){
+      dates.push(addDays(start, offset+i));
+    }
+    return dates;
+  }
+
+  function hoursFor(projectId, dateISO){
+    var e = state.entries[entryKey(projectId, dateISO)];
+    return e && e.hours ? Number(e.hours) : 0;
+  }
+  function notesFor(projectId, dateISO){
+    var e = state.entries[entryKey(projectId, dateISO)];
+    return e && e.notes ? e.notes : "";
+  }
+
+  function buildWeekTable(weekNum){
+    var dates = weekDates(weekNum);
+    var todayStr = todayISO();
+    var html = '<table class="hours" data-week="'+weekNum+'">';
+    html += '<thead><tr>';
+    html += '<th class="col-proj-num">Project #</th><th class="col-proj-desc">Description</th>';
+    dates.forEach(function(d){
+      var iso = toISO(d);
+      var isWeekend = (d.getDay()===0 || d.getDay()===6);
+      var isToday = (iso === todayStr);
+      html += '<th class="'+(isWeekend?'weekend ':'')+(isToday?'today ':'')+'">'
+            + '<span class="dow">'+DOW[(d.getDay()+6)%7]+'</span>'
+            + '<span class="ddate">'+fmtShort(d)+'</span></th>';
+    });
+    html += '<th class="col-total">Total</th><th style="width:30px;border:none;background:var(--navy);"></th>';
+    html += '</tr></thead><tbody>';
+
+    state.projects.forEach(function(proj){
+      html += '<tr data-proj="'+proj.id+'">';
+      html += '<td class="proj-num"><input type="text" data-field="number" data-proj="'+proj.id+'" value="'+escapeAttr(proj.number)+'" placeholder="e.g. 1024"></td>';
+      html += '<td class="proj-desc"><input type="text" data-field="description" data-proj="'+proj.id+'" value="'+escapeAttr(proj.description)+'" placeholder="Project name / description"></td>';
+      var rowTotal = 0;
+      dates.forEach(function(d){
+        var iso = toISO(d);
+        var h = hoursFor(proj.id, iso);
+        rowTotal += h;
+        var hasNotes = notesFor(proj.id, iso).length > 0;
+        var isWeekend = (d.getDay()===0 || d.getDay()===6);
+        var isToday = (iso === todayStr);
+        var isOvertime = (h > 8);
+        html += '<td class="hour-cell '+(isWeekend?'weekend ':'')+(isToday?'today-col ':'')+(isOvertime?'overtime ':'')+'" data-proj="'+proj.id+'" data-date="'+iso+'">'
+              + '<span class="val'+(h===0?' zero':'')+'">'+(h===0?'–':h)+'</span>'
+              + (hasNotes ? '<span class="note-dot" title="Has notes"></span>' : '')
+              + '</td>';
+      });
+      html += '<td class="row-total">'+rowTotal.toFixed(2).replace(/\.00$/,'')+'</td>';
+      html += '<td class="row-del"><button class="del-btn" data-del="'+proj.id+'" title="Remove project row">✕</button></td>';
+      html += '</tr>';
+    });
+
+    html += '</tbody><tfoot><tr>';
+    html += '<td class="foot-label" colspan="2">Daily Total</td>';
+    var weekTotal = 0;
+    dates.forEach(function(d){
+      var iso = toISO(d);
+      var dayTotal = 0;
+      state.projects.forEach(function(proj){ dayTotal += hoursFor(proj.id, iso); });
+      weekTotal += dayTotal;
+      html += '<td>'+(dayTotal===0?'–':dayTotal.toFixed(2).replace(/\.00$/,''))+'</td>';
+    });
+    html += '<td>'+weekTotal.toFixed(2).replace(/\.00$/,'')+'</td><td></td>';
+    html += '</tr></tfoot></table>';
+    html += '<div class="add-row-wrap"><button class="btn btn-outline btn-small" id="addRow'+weekNum+'">+ Add Project Row</button></div>';
+    return { html: html, weekTotal: weekTotal };
+  }
+
+  function escapeAttr(s){
+    return String(s || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  }
+
+  function render(){
+    els.employeeName.value = state.employeeName;
+    els.periodStart.value = state.periodStart;
+    els.periodDisplay.innerHTML = "Two-Week Period<span class='range'>"+fmtRange(state.periodStart)+"</span>";
+
+    var w1 = buildWeekTable(1);
+    var w2 = buildWeekTable(2);
+    els.weekBlock1.innerHTML = w1.html;
+    els.weekBlock2.innerHTML = w2.html;
+
+    els.tabWeek1.classList.toggle("active", state.activeWeek===1);
+    els.tabWeek2.classList.toggle("active", state.activeWeek===2);
+    els.weekBlock1.classList.toggle("hidden-screen", state.activeWeek!==1);
+    els.weekBlock2.classList.toggle("hidden-screen", state.activeWeek!==2);
+
+    var periodTotal = w1.weekTotal + w2.weekTotal;
+    els.periodTotal.textContent = periodTotal.toFixed(2).replace(/\.00$/,'');
+    els.cardWeek1.textContent = w1.weekTotal.toFixed(2).replace(/\.00$/,'');
+    els.cardWeek2.textContent = w2.weekTotal.toFixed(2).replace(/\.00$/,'');
+    els.cardPeriod.textContent = periodTotal.toFixed(2).replace(/\.00$/,'');
+    els.cardProjects.textContent = state.projects.length;
+
+    updateSubmittedBanner();
+    attachRowEvents();
+  }
+
+  function attachRowEvents(){
+    document.querySelectorAll('input[data-field]').forEach(function(inp){
+      inp.addEventListener('change', function(){
+        var pid = this.getAttribute('data-proj');
+        var field = this.getAttribute('data-field');
+        var proj = state.projects.find(function(p){ return p.id===pid; });
+        if(proj){
+          proj[field] = this.value;
+          persistCurrentPeriod();
+        }
+      });
+    });
+    document.querySelectorAll('td.hour-cell').forEach(function(cell){
+      cell.addEventListener('click', function(){
+        openModal(this.getAttribute('data-proj'), this.getAttribute('data-date'));
+      });
+    });
+    document.querySelectorAll('button[data-del]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pid = this.getAttribute('data-del');
+        if(state.projects.length <= 1){
+          showToast("At least one project row is required.");
+          return;
+        }
+        if(!confirm("Remove this project row and all its logged hours for this period?")) return;
+        state.projects = state.projects.filter(function(p){ return p.id!==pid; });
+        Object.keys(state.entries).forEach(function(k){
+          if(k.indexOf(pid+"__")===0) delete state.entries[k];
+        });
+        persistCurrentPeriod();
+        render();
+      });
+    });
+    var add1 = document.getElementById('addRow1');
+    var add2 = document.getElementById('addRow2');
+    [add1, add2].forEach(function(btn){
+      if(btn) btn.addEventListener('click', function(){
+        state.projects.push({ id: uid(), number:"", description:"" });
+        persistCurrentPeriod();
+        render();
+      });
+    });
+  }
+
+  // ---------- modal ----------
+  var overlay = document.getElementById('overlay');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalSub = document.getElementById('modalSub');
+  var modalHours = document.getElementById('modalHours');
+  var modalNotes = document.getElementById('modalNotes');
+  var activeCell = { projectId:null, dateISO:null };
+
+  function openModal(projectId, dateISO){
+    activeCell = { projectId: projectId, dateISO: dateISO };
+    var proj = state.projects.find(function(p){ return p.id===projectId; });
+    var label = (proj && (proj.number || proj.description))
+      ? ((proj.number?proj.number+" — ":"") + (proj.description||""))
+      : "Untitled project";
+    var d = fromISO(dateISO);
+    modalTitle.textContent = "Log Hours";
+    modalSub.textContent = label + " · " + d.toLocaleDateString(undefined,{weekday:'long', month:'short', day:'numeric'});
+    modalHours.value = hoursFor(projectId, dateISO) || "";
+    modalNotes.value = notesFor(projectId, dateISO);
+    overlay.classList.add('open');
+    setTimeout(function(){ modalHours.focus(); }, 30);
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    activeCell = { projectId:null, dateISO:null };
+  }
+  document.getElementById('modalCancel').addEventListener('click', closeModal);
+  document.getElementById('modalClear').addEventListener('click', function(){
+    if(!activeCell.projectId) return;
+    delete state.entries[entryKey(activeCell.projectId, activeCell.dateISO)];
+    persistCurrentPeriod();
+    closeModal();
+    render();
+  });
+  document.getElementById('modalSave').addEventListener('click', function(){
+    if(!activeCell.projectId) return;
+    var h = parseFloat(modalHours.value);
+    if(isNaN(h) || h < 0) h = 0;
+    if(h > 24) h = 24;
+    var notes = modalNotes.value.trim();
+    if(h === 0 && !notes){
+      delete state.entries[entryKey(activeCell.projectId, activeCell.dateISO)];
+    } else {
+      state.entries[entryKey(activeCell.projectId, activeCell.dateISO)] = { hours: h, notes: notes };
+    }
+    persistCurrentPeriod();
+    closeModal();
+    render();
+  });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  // ---------- top controls ----------
+  els.employeeName.addEventListener('change', function(){
+    state.employeeName = this.value;
+    persistCurrentPeriod();
+  });
+  els.periodStart.addEventListener('change', function(){
+    var d = fromISO(this.value);
+    var monday = mondayOf(d);
+    var iso = toISO(monday);
+    if(iso !== this.value){
+      showToast("Adjusted to the Monday of that week: " + fmtShort(monday));
+    }
+    persistCurrentPeriod();
+    loadPeriod(iso);
+    state.activeWeek = 1;
+    render();
+  });
+  els.tabWeek1.addEventListener('click', function(){ state.activeWeek = 1; render(); });
+  els.tabWeek2.addEventListener('click', function(){ state.activeWeek = 2; render(); });
+
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+
+  var logoutBtn = document.getElementById('btnLogout');
+  if(logoutBtn){
+    logoutBtn.addEventListener('click', function(){
+      if(window._supabase){ window._supabase.auth.signOut().then(function(){ window.location.href='login.html'; }); }
+      else { window.location.href='login.html'; }
+    });
+  }
+
+  function withExportLayout(callback){
+    var toHide = document.querySelectorAll('.actions, .week-tabs .tab-group, .add-row-wrap, .del-btn, .autosave-note');
+    var prevDisplay = [];
+    toHide.forEach(function(el){ prevDisplay.push(el.style.display); el.style.display = 'none'; });
+    var wasHidden1 = els.weekBlock1.classList.contains('hidden-screen');
+    var wasHidden2 = els.weekBlock2.classList.contains('hidden-screen');
+    els.weekBlock1.classList.remove('hidden-screen');
+    els.weekBlock2.classList.remove('hidden-screen');
+
+    function restore(){
+      toHide.forEach(function(el,i){ el.style.display = prevDisplay[i]; });
+      if(wasHidden1) els.weekBlock1.classList.add('hidden-screen');
+      if(wasHidden2) els.weekBlock2.classList.add('hidden-screen');
+    }
+    return callback().then(function(r){ restore(); return r; }, function(err){ restore(); throw err; });
+  }
+
+  document.getElementById('btnPDF').addEventListener('click', function(){
+    var btn = this;
+    if(typeof html2pdf === 'undefined'){
+      alert('The PDF generator could not load (no internet connection?). Use the Print button instead and choose "Save as PDF" in the print dialog.');
+      return;
+    }
+    persistCurrentPeriod();
+    var originalHTML = btn.innerHTML;
+    btn.innerHTML = '⏳ Generating…';
+    btn.disabled = true;
+    var namePart = (state.employeeName || 'employee').trim().replace(/\s+/g,'_');
+    var filename = namePart + '_' + state.periodStart + '_timesheet.pdf';
+
+    withExportLayout(function(){
+      return html2pdf().set({
+        margin: 0.3,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+      }).from(document.querySelector('.sheet')).save();
+    }).then(function(){
+      showToast('PDF saved: ' + filename);
+    }).catch(function(err){
+      console.error(err);
+      alert('Something went wrong generating the PDF. Try the Print button instead.');
+    }).then(function(){
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+    });
+  });
+
+  document.getElementById('btnSave').addEventListener('click', function(){
+    persistCurrentPeriod();
+    var payload = {
+      type: "timesheet-period",
+      employeeName: state.employeeName,
+      periodStart: state.periodStart,
+      periodEnd: toISO(addDays(fromISO(state.periodStart),13)),
+      projects: state.projects,
+      entries: state.entries,
+      exportedAt: new Date().toISOString()
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var namePart = (state.employeeName || "employee").trim().replace(/\s+/g,'_');
+    a.href = url;
+    a.download = namePart + "_" + state.periodStart + "_timesheet.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    showToast("Saved: " + a.download);
+  });
+
+  document.getElementById('btnOpen').addEventListener('click', function(){
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      try{
+        var data = JSON.parse(evt.target.result);
+        importData(data);
+        showToast("Loaded " + file.name);
+      }catch(err){
+        alert("Could not read that file — it doesn't look like a valid time sheet JSON file.");
+      }
+      e.target.value = "";
+    };
+    reader.readAsText(file);
+  });
+
+  function importData(data){
+    if(data && data.periods && typeof data.periods === 'object'){
+      // full backup file
+      Object.keys(data.periods).forEach(function(k){
+        db.periods[k] = data.periods[k];
+      });
+      if(data.employeeName) db.employeeName = data.employeeName;
+      state.employeeName = db.employeeName || state.employeeName;
+      var firstKey = Object.keys(data.periods)[0] || state.periodStart;
+      loadPeriod(firstKey);
+    } else if(data && data.periodStart && data.projects){
+      // single period export
+      db.periods[data.periodStart] = { projects: data.projects, entries: data.entries || {} };
+      if(data.employeeName) { db.employeeName = data.employeeName; state.employeeName = data.employeeName; }
+      loadPeriod(data.periodStart);
+    } else {
+      throw new Error("Unrecognized format");
+    }
+    state.activeWeek = 1;
+    persistCurrentPeriod();
+    render();
+  }
+
+  // ---------- toast ----------
+  var toastTimer = null;
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  // ---------- fallback email (if Netlify form not yet set up) ----------
+  function showFallbackEmail(name, periodEnd, week1, week2, total, projList, notes){
+    var note = document.getElementById('submitNote');
+    var subject = encodeURIComponent('Timesheet — ' + name + ' (' + state.periodStart + ' to ' + periodEnd + ')');
+    var body = encodeURIComponent(
+      'Employee: ' + name + '\n' +
+      'Email: ' + (window._userEmail||'') + '\n' +
+      'Period: ' + state.periodStart + ' to ' + periodEnd + '\n' +
+      'Week 1: ' + week1 + ' hrs\n' +
+      'Week 2: ' + week2 + ' hrs\n' +
+      'Total: ' + total + ' hrs\n' +
+      'Projects: ' + projList + '\n' +
+      (notes ? 'Notes: ' + notes + '\n' : '') +
+      'Submitted: ' + new Date().toLocaleString()
+    );
+    var mailto = 'mailto:Morsalm@zagrosia.ca,shmozneb@zagrosia.ca?subject=' + subject + '&body=' + body;
+    note.innerHTML = '';
+    var msg = document.createElement('span');
+    msg.textContent = 'Auto-submit unavailable — ';
+    msg.style.color = '#cc6600';
+    var link = document.createElement('a');
+    link.href = mailto;
+    link.textContent = 'click here to email your timesheet directly';
+    link.style.cssText = 'color:var(--navy);font-weight:700;';
+    note.appendChild(msg);
+    note.appendChild(link);
+  }
+
+  // ---------- submit timesheet ----------
+  document.getElementById('btnSubmitTimesheet').addEventListener('click', function(){
+    persistCurrentPeriod();
+    var name = state.employeeName || window._userEmail || 'Unknown';
+    var periodEnd = toISO(addDays(fromISO(state.periodStart), 13));
+    var week1 = parseFloat(document.getElementById('cardWeek1').textContent) || 0;
+    var week2 = parseFloat(document.getElementById('cardWeek2').textContent) || 0;
+    var total = parseFloat(document.getElementById('cardPeriod').textContent) || 0;
+    var projList = state.projects.map(function(p){
+      return (p.number ? p.number + ': ' : '') + (p.description || '(no description)');
+    }).join(' | ');
+    var notes = (document.getElementById('periodNotes') || {}).value || '';
+
+    if(!state.employeeName){
+      alert('Please enter your employee name before submitting.');
+      return;
+    }
+    if(total === 0){
+      if(!confirm('Your total hours are 0. Are you sure you want to submit?')) return;
+    }
+    // Double-submission guard
+    if(state.submitted){
+      if(!confirm('You already submitted this period. Do you want to resubmit?')) return;
+    }
+
+    var note = document.getElementById('submitNote');
+    note.innerHTML = '⏳ Generating PDF…';
+    note.style.color = '#555';
+
+    var btn = document.getElementById('btnSubmitTimesheet');
+    if(btn) btn.disabled = true;
+
+    var period = state.periodStart + ' to ' + periodEnd;
+
+    // Show both weeks and prep for clean screenshot
+    var weekBlock1 = document.getElementById('weekBlock1');
+    var weekBlock2 = document.getElementById('weekBlock2');
+    var week2WasHidden = weekBlock2 && weekBlock2.classList.contains('hidden-screen');
+    if(weekBlock1) weekBlock1.classList.remove('hidden-screen');
+    if(weekBlock2) weekBlock2.classList.remove('hidden-screen');
+
+    var sheetEl = document.querySelector('.sheet');
+    // Force full-width clean layout for capture
+    var CAPTURE_W = 1500;
+    sheetEl.style.maxWidth = CAPTURE_W + 'px';
+    sheetEl.style.width = CAPTURE_W + 'px';
+    sheetEl.style.boxShadow = 'none';
+    sheetEl.style.borderRadius = '0';
+    // Hide UI-only elements
+    var hideEls = document.querySelectorAll('.actions, .tab-group, .del-btn, .add-row-wrap, .autosave-note, #submitNote, #btnSubmitTimesheet');
+    hideEls.forEach(function(el){ el.style.display = 'none'; });
+
+    function restoreSheet(){
+      sheetEl.style.maxWidth = '';
+      sheetEl.style.width = '';
+      sheetEl.style.boxShadow = '';
+      sheetEl.style.borderRadius = '';
+      if(week2WasHidden && weekBlock2) weekBlock2.classList.add('hidden-screen');
+      if(weekBlock1 && state.activeWeek !== 1) weekBlock1.classList.add('hidden-screen');
+      hideEls.forEach(function(el){ el.style.display = ''; });
+    }
+
+    html2canvas(sheetEl, {
+      scale: 1.5,
+      useCORS: true,
+      logging: false,
+      width: CAPTURE_W,
+      windowWidth: CAPTURE_W
+    }).then(function(canvas){
+      restoreSheet();
+
+      var { jsPDF } = window.jspdf;
+      var pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+      var pageW = pdf.internal.pageSize.getWidth();
+      var pageH = pdf.internal.pageSize.getHeight();
+      var imgH = (canvas.height * pageW) / canvas.width;
+      var y = 0;
+      while(y < imgH) {
+        if(y > 0) pdf.addPage();
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.82), 'JPEG', 0, -y, pageW, imgH);
+        y += pageH;
+      }
+      var pdfBase64 = pdf.output('datauristring').split(',')[1];
+      var filename = 'Timesheet-' + name.replace(/\s+/g,'-') + '-' + period.replace(/\s/g,'').replace('to','-') + '.pdf';
+
+      note.innerHTML = '⏳ Sending…';
+      note.style.display = '';
+
+      fetch('/.netlify/functions/send-timesheet', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pdf_base64: pdfBase64,
+          employee_name: name,
+          period: period,
+          notes: notes || ''
+        })
+      }).then(function(res){ return res.text(); }).then(function(text){
+        if(!text) throw new Error('Empty response from server');
+        var data = JSON.parse(text);
+        if(data.ok){
+          state.submitted = true;
+          state.submittedAt = new Date().toISOString();
+          persistCurrentPeriod();
+          updateSubmittedBanner();
+          if(btn) btn.disabled = false;
+          showToast('✅ Timesheet submitted successfully!');
+          note.innerHTML = '✅ Timesheet PDF sent to Morsal & Hassan.';
+          note.style.color = '#0a7a0a';
+        } else {
+          throw new Error(JSON.stringify(data.error));
+        }
+      }).catch(function(err){
+        if(btn) btn.disabled = false;
+        note.innerHTML = '❌ Send failed: ' + err.message + '. Please screenshot and send to Morsal.';
+        note.style.color = '#c0392b';
+      });
+    }).catch(function(err){
+      restoreSheet();
+      if(btn) btn.disabled = false;
+      note.innerHTML = '❌ PDF generation failed: ' + err.message;
+      note.style.color = '#c0392b';
+    });
+
+  });
+
+  // ---------- period notes auto-save ----------
+  var notesTextarea = document.getElementById('periodNotes');
+  if(notesTextarea){
+    notesTextarea.addEventListener('input', function(){
+      clearTimeout(notesTextarea._saveTimer);
+      notesTextarea._saveTimer = setTimeout(function(){ persistCurrentPeriod(); }, 800);
+    });
+  }
+
+  // ---------- init ----------
+  loadPeriod(state.periodStart);
+  render();
+
+})();
+</script>
+
+</body>
+</html>

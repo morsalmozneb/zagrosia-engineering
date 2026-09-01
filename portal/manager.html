@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zagrosia — Manager Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --navy: #0052A5;
+  --navy-dark: #003d7a;
+  --blue-light: #e8f1fa;
+  --border: #c9d4dd;
+  --gray-bg: #f4f6f8;
+  --text: #1f2a33;
+  --muted: #5b6b78;
+  --green: #2e8b57;
+  --green-light: #eaf5ee;
+  --red: #c0392b;
+  --red-light: #fdf0ef;
+  --amber: #b45309;
+  --amber-light: #fef9ec;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.letterhead {
+  background: #fff;
+  padding: 10px 28px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--navy);
+}
+.letterhead img.logo { height: 52px; width: auto; display: block; }
+.site-header {
+  background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-title { color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; opacity: 0.9; }
+.mgr-badge {
+  background: #f59e0b;
+  color: #1a2332;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.header-spacer { flex: 1; }
+.header-user { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500; }
+.btn-signout {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-signout:hover { background: rgba(255,255,255,0.22); }
+
+/* ── Login ── */
+.login-wrap {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+.login-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+}
+.login-card-head {
+  background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+  padding: 28px 32px 24px;
+  text-align: center;
+}
+.login-card-head img { height: 44px; margin-bottom: 14px; }
+.login-card-head h2 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.login-card-head p { color: rgba(255,255,255,0.75); font-size: 13px; }
+.login-card-body { padding: 28px 32px 32px; }
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus { border-color: var(--navy); }
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s;
+}
+.btn-login:hover { background: var(--navy-dark); }
+.btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+.login-err {
+  margin-top: 12px;
+  padding: 10px 13px;
+  background: var(--red-light);
+  border: 1px solid #f5c6c3;
+  border-radius: 6px;
+  color: var(--red);
+  font-size: 13px;
+  display: none;
+}
+.access-denied {
+  text-align: center;
+  padding: 48px 24px;
+  max-width: 380px;
+  margin: 80px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+}
+.access-denied .icon { font-size: 40px; margin-bottom: 16px; }
+.access-denied h3 { color: var(--red); font-size: 18px; margin-bottom: 8px; }
+.access-denied p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+/* ── Dashboard ── */
+.dash-wrap { max-width: 1100px; margin: 28px auto; padding: 0 16px 48px; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 4px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  width: fit-content;
+}
+.tab-btn {
+  padding: 9px 22px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--muted);
+  background: transparent;
+  transition: all .15s;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.tab-btn:hover:not(.active) { background: var(--gray-bg); color: var(--text); }
+.tab-btn.active { background: var(--navy); color: #fff; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.card-head {
+  padding: 14px 22px;
+  border-bottom: 2px solid var(--navy);
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.card-head h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-body { padding: 22px; }
+
+/* Stat row */
+.stat-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.stat-chip {
+  background: var(--blue-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-chip .val { font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-chip .lbl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; }
+
+/* Live board */
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+}
+.emp-tile {
+  border-radius: 9px;
+  padding: 16px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: box-shadow .15s;
+}
+.emp-tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.emp-tile.active { border-color: #86efac; background: var(--green-light); }
+.emp-tile .emp-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.emp-tile .emp-status { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.emp-tile .emp-status .dot { width: 7px; height: 7px; border-radius: 50%; }
+.dot-in  { background: var(--green); }
+.dot-out { background: #cbd5e1; }
+.status-in  { color: var(--green); }
+.status-out { color: var(--muted); }
+.emp-tile .emp-meta { font-size: 12px; color: var(--muted); }
+.emp-tile .emp-hrs  { font-size: 13px; font-weight: 700; color: var(--text); }
+
+/* Filters */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 22px;
+  background: var(--gray-bg);
+  border-bottom: 1px solid var(--border);
+}
+.filter-bar label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.filter-bar select,
+.filter-bar input[type=date] {
+  padding: 7px 11px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+.filter-bar select:focus, .filter-bar input[type=date]:focus { border-color: var(--navy); }
+.btn-filter {
+  padding: 7px 18px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-filter:hover { background: var(--navy-dark); }
+.btn-clear {
+  padding: 7px 14px;
+  background: #fff;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s;
+}
+.btn-clear:hover { border-color: var(--navy); color: var(--navy); }
+.btn-refresh {
+  margin-left: auto;
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.btn-refresh:hover { background: var(--blue-light); }
+
+/* Summary bar */
+.summary-bar {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.summary-chip {
+  flex: 1;
+  min-width: 110px;
+  padding: 14px 16px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.summary-chip:last-child { border-right: none; }
+.summary-chip .s-val { font-size: 20px; font-weight: 700; color: var(--navy); }
+.summary-chip .s-lbl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 3px; }
+
+/* Table */
+table.main-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.main-table th {
+  text-align: left;
+  padding: 11px 16px;
+  background: var(--gray-bg);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+table.main-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eef0f2;
+  color: var(--text);
+  vertical-align: middle;
+}
+table.main-table tr:last-child td { border-bottom: none; }
+table.main-table tbody tr:hover td { background: var(--blue-light); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.badge-approved { background: var(--green-light); color: var(--green); border: 1px solid #a7d7b8; }
+.badge-pending  { background: var(--amber-light);  color: var(--amber);  border: 1px solid #fcd34d; }
+.badge-open     { background: var(--blue-light);   color: var(--navy);   border: 1px solid var(--border); }
+
+.btn-approve {
+  padding: 4px 14px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-approve:hover { background: #256f46; }
+.btn-approve:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+
+/* Add employee */
+.add-emp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-top: 16px;
+}
+.add-emp-grid input {
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.add-emp-grid input:focus { border-color: var(--navy); }
+.btn-add-emp {
+  padding: 10px 22px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.btn-add-emp:hover { background: var(--navy-dark); }
+.add-emp-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+.add-emp-ok { font-size: 13px; color: var(--green); margin-top: 8px; font-weight: 600; display: none; }
+.add-emp-err { font-size: 13px; color: var(--red); margin-top: 8px; display: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-emp-grid { grid-template-columns: 1fr 1fr; }
+  .add-emp-grid button { grid-column: 1 / -1; }
+  .tabs { width: 100%; }
+  .tab-btn { flex: 1; justify-content: center; }
+  table.main-table th:nth-child(4), table.main-table td:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="letterhead">
+  <img class="logo" src="./public/images/Sidebar-Logo-Open.png" alt="Zagrosia Engineering Inc.">
+</div>
+<header class="site-header">
+  <span class="header-title">Manager Dashboard</span>
+  <span class="mgr-badge">Manager</span>
+  <div class="header-spacer"></div>
+  <span class="header-user" id="hUser"></span>
+  <button class="btn-signout" id="btnSignOut" style="display:none" onclick="doLogout()">Sign Out</button>
+</header>
+
+<!-- Login -->
+<div id="loginSection" class="login-wrap">
+  <div class="login-card">
+    <div class="login-card-head">
+      <img src="/public/images/Sidebar-Logo-Open.png" alt="Zagrosia">
+      <h2>Manager Sign In</h2>
+      <p>Access your team's attendance dashboard</p>
+    </div>
+    <div class="login-card-body">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="inEmail" placeholder="morsalm@zagrosia.ca" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="inPass" placeholder="••••••••" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn-login" id="btnLogin" onclick="doLogin()">Sign In</button>
+      <div class="login-err" id="loginErr"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Access denied -->
+<div id="deniedSection" style="display:none">
+  <div class="access-denied">
+    <div class="icon">🔒</div>
+    <h3>Access Denied</h3>
+    <p>This dashboard is only available to managers. Please contact Morsal if you need access.</p>
+    <button class="btn-login" style="width:auto;padding:9px 28px" onclick="doLogout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="appSection" style="display:none">
+  <div class="dash-wrap">
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-live" onclick="showTab('live')">Live Board</button>
+      <button class="tab-btn" id="tab-punches" onclick="showTab('punches')">All Punches</button>
+      <button class="tab-btn" id="tab-timeoff" onclick="showTab('timeoff')">Time Off</button>
+      <button class="tab-btn" id="tab-payroll" onclick="showTab('payroll')">Payroll</button>
+      <button class="tab-btn" id="tab-employees" onclick="showTab('employees')">Employees</button>
+    </div>
+
+    <!-- Live Board -->
+    <div id="panelLive">
+      <div class="card">
+        <div class="card-head">
+          <h3>Who's Clocked In — Today</h3>
+          <button class="btn-refresh" onclick="loadLive()">↻ Refresh</button>
+        </div>
+        <div class="card-body">
+          <div class="live-grid" id="liveGrid"><div class="empty-state">Loading…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Punches -->
+    <div id="panelPunches" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <h3>All Punch Records</h3>
+        </div>
+        <div class="filter-bar">
+          <label>Employee</label>
+          <select id="filterEmp"><option value="">All Employees</option></select>
+          <label>From</label>
+          <input type="date" id="filterFrom">
+          <label>To</label>
+          <input type="date" id="filterTo">
+          <button class="btn-filter" onclick="loadPunches()">Filter</button>
+          <button class="btn-clear" onclick="clearFilters()">Clear</button>
+        </div>
+        <div id="summaryBar" style="display:none" class="summary-bar"></div>
+        <div id="punchesWrap"><div class="empty-state">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- Time Off Requests -->
+    <div id="panelTimeoff" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <h3>Time Off Requests</h3>
+          <button class="btn-refresh" onclick="loadTimeOff()">↻ Refresh</button>
+        </div>
+        <div class="filter-bar">
+          <label>Status</label>
+          <select id="rtoFilterStatus" onchange="loadTimeOff()">
+            <option value="">All</option>
+            <option value="pending" selected>Pending</option>
+            <option value="approved">Approved</option>
+            <option value="denied">Denied</option>
+          </select>
+          <label>Employee</label>
+          <select id="rtoFilterEmp" onchange="loadTimeOff()"><option value="">All Employees</option></select>
+        </div>
+        <div id="rtoWrap"><div class="empty-state">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- Payroll -->
+    <div id="panelPayroll" style="display:none">
+      <div class="card">
+        <div class="card-head">
+          <h3>Payroll Summary</h3>
+        </div>
+        <div class="filter-bar">
+          <label>Employee</label>
+          <select id="payrollEmpFilter" onchange="loadPayroll()"><option value="">All Employees</option></select>
+          <label>Pay Periods</label>
+          <select id="payrollPeriods" onchange="loadPayroll()">
+            <option value="6">Last 6 periods</option>
+            <option value="12">Last 12 periods</option>
+            <option value="26">Last 26 periods</option>
+          </select>
+        </div>
+        <div id="payrollWrap"><div class="empty-state">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- Employees -->
+    <div id="panelEmployees" style="display:none">
+      <div class="card">
+        <div class="card-head"><h3>Employee List</h3></div>
+        <div id="empListWrap"><div class="empty-state">Loading…</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Add New Employee Account</h3></div>
+        <div class="card-body">
+          <p class="add-emp-note">Create a login for a new employee. They'll sign in at <strong>timesheet.zagrosia.ca/clockin.html</strong> using the email and password you set here.</p>
+          <div class="add-emp-grid">
+            <input type="text"     id="newName"  placeholder="Full Name">
+            <input type="email"    id="newEmail" placeholder="Email address">
+            <input type="password" id="newPass"  placeholder="Temporary password">
+            <button class="btn-add-emp" onclick="addEmployee()">Add Employee</button>
+          </div>
+          <div class="add-emp-ok" id="addOk">✓ Employee account created successfully!</div>
+          <div class="add-emp-err" id="addErr"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SB_URL = 'https://jftemrpvbwfwmztccpon.supabase.co';
+const SB_KEY = 'sb_publishable_Fpit6hpvuwHxb0YlbjAH5g_aj7QGlDI';
+const { createClient } = supabase;
+const sb = createClient(SB_URL, SB_KEY);
+
+let me = null, myProfile = null, allProfiles = [];
+let liveTimer = null;
+
+async function init() {
+  const today = new Date().toLocaleDateString('en-CA');
+  const ago30 = new Date(); ago30.setDate(ago30.getDate() - 30);
+  document.getElementById('filterFrom').value = ago30.toLocaleDateString('en-CA');
+  document.getElementById('filterTo').value = today;
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) await loadUser(session.user);
+  sb.auth.onAuthStateChange(async (evt, sess) => {
+    if (evt === 'SIGNED_IN' && sess) await loadUser(sess.user);
+    if (evt === 'SIGNED_OUT') showLogin();
+  });
+}
+
+async function loadUser(user) {
+  me = user;
+  const { data } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  myProfile = data;
+  if (!myProfile || myProfile.role !== 'manager') { showDenied(); return; }
+  document.getElementById('hUser').textContent = myProfile.full_name || user.email;
+  document.getElementById('btnSignOut').style.display = '';
+  showApp();
+}
+
+async function doLogin() {
+  const email = document.getElementById('inEmail').value.trim();
+  const pass  = document.getElementById('inPass').value;
+  const btn = document.getElementById('btnLogin');
+  const err = document.getElementById('loginErr');
+  err.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+  btn.disabled = false; btn.textContent = 'Sign In';
+  if (error) { err.textContent = error.message; err.style.display = ''; }
+}
+
+async function doLogout() { clearInterval(liveTimer); await sb.auth.signOut(); }
+
+function showLogin() {
+  me = null; myProfile = null;
+  clearInterval(liveTimer);
+  document.getElementById('loginSection').style.display = '';
+  document.getElementById('deniedSection').style.display = 'none';
+  document.getElementById('appSection').style.display = 'none';
+  document.getElementById('hUser').textContent = '';
+  document.getElementById('btnSignOut').style.display = 'none';
+}
+function showDenied() {
+  document.getElementById('loginSection').style.display = 'none';
+  document.getElementById('deniedSection').style.display = '';
+  document.getElementById('appSection').style.display = 'none';
+}
+async function showApp() {
+  document.getElementById('loginSection').style.display = 'none';
+  document.getElementById('deniedSection').style.display = 'none';
+  document.getElementById('appSection').style.display = '';
+  await loadProfiles();
+  loadLive();
+  clearInterval(liveTimer);
+  liveTimer = setInterval(loadLive, 60000);
+}
+
+// ── Tabs ──
+function showTab(tab) {
+  ['live','punches','timeoff','payroll','employees'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === tab ? '' : 'none';
+  });
+  if (tab === 'punches') loadPunches();
+  if (tab === 'timeoff')   loadTimeOff();
+  if (tab === 'payroll')   loadPayroll();
+  if (tab === 'employees') renderEmpList();
+}
+
+// ── Profiles ──
+async function loadProfiles() {
+  const { data } = await sb.from('profiles').select('*').order('full_name');
+  allProfiles = data || [];
+  [document.getElementById('filterEmp'), document.getElementById('rtoFilterEmp'), document.getElementById('payrollEmpFilter')].forEach(sel => {
+    if (!sel) return;
+    sel.innerHTML = '<option value="">All Staff</option>';
+    allProfiles.forEach(p => { sel.innerHTML += `<option value="${p.id}">${p.full_name || p.id}${p.role==='manager'?' (Mgr)':''}</option>`; });
+  });
+}
+
+function nameFor(id) {
+  const p = allProfiles.find(x => x.id === id);
+  return p?.full_name || id.slice(0, 8) + '…';
+}
+
+// ── Live Board ──
+async function loadLive() {
+  const grid = document.getElementById('liveGrid');
+  const today = new Date().toLocaleDateString('en-CA');
+  const { data: open } = await sb.from('punches')
+    .select('*, profiles!punches_employee_id_fkey(full_name)')
+    .eq('date', today).is('clock_out', null)
+    .order('clock_in', { ascending: true });
+  if (!allProfiles.length) {
+    grid.innerHTML = '<div class="empty-state">No employees yet. Add them in the Employees tab.</div>';
+    return;
+  }
+  const clockedIds = new Set((open || []).map(p => p.employee_id));
+  let html = '';
+  for (const punch of (open || [])) {
+    const name = punch.profiles?.full_name || nameFor(punch.employee_id);
+    const isManager = allProfiles.find(p => p.id === punch.employee_id)?.role === 'manager';
+    html += `<div class="emp-tile active">
+      <div class="emp-name">${name}${isManager ? ' <span style="font-size:10px;background:#f59e0b;color:#1a2332;padding:1px 6px;border-radius:8px;font-weight:800">MGR</span>' : ''}</div>
+      <div class="emp-status"><span class="dot dot-in"></span><span class="status-in">Clocked In</span></div>
+      <div class="emp-meta">Since ${fmt(punch.clock_in)}</div>
+      <div class="emp-hrs">${elapsed(punch.clock_in)} elapsed</div>
+    </div>`;
+  }
+  for (const emp of allProfiles) {
+    if (!clockedIds.has(emp.id)) {
+      const isManager = emp.role === 'manager';
+      html += `<div class="emp-tile">
+        <div class="emp-name">${emp.full_name || '—'}${isManager ? ' <span style="font-size:10px;background:#f59e0b;color:#1a2332;padding:1px 6px;border-radius:8px;font-weight:800">MGR</span>' : ''}</div>
+        <div class="emp-status"><span class="dot dot-out"></span><span class="status-out">Not clocked in</span></div>
+        <div class="emp-meta"></div>
+        <div class="emp-hrs"></div>
+      </div>`;
+    }
+  }
+  grid.innerHTML = html;
+}
+
+function elapsed(isoStart) {
+  const ms = Date.now() - new Date(isoStart).getTime();
+  const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
+  return h + 'h ' + String(m).padStart(2,'0') + 'm';
+}
+
+// ── All Punches ──
+function clearFilters() {
+  document.getElementById('filterEmp').value = '';
+  const today = new Date().toLocaleDateString('en-CA');
+  const ago30 = new Date(); ago30.setDate(ago30.getDate() - 30);
+  document.getElementById('filterFrom').value = ago30.toLocaleDateString('en-CA');
+  document.getElementById('filterTo').value = today;
+  loadPunches();
+}
+
+async function loadPunches() {
+  const empId = document.getElementById('filterEmp').value;
+  const from  = document.getElementById('filterFrom').value;
+  const to    = document.getElementById('filterTo').value;
+  document.getElementById('punchesWrap').innerHTML = '<div class="empty-state">Loading…</div>';
+  let q = sb.from('punches').select('*').order('clock_in', { ascending: false });
+  if (empId) q = q.eq('employee_id', empId);
+  if (from)  q = q.gte('date', from);
+  if (to)    q = q.lte('date', to);
+  const { data } = await q;
+  renderPunchTable(data || []);
+}
+
+function renderPunchTable(data) {
+  const summaryBar = document.getElementById('summaryBar');
+  const wrap = document.getElementById('punchesWrap');
+  if (!data.length) {
+    wrap.innerHTML = '<div class="empty-state">No punch records found for the selected filters.</div>';
+    summaryBar.style.display = 'none';
+    return;
+  }
+  let totalHrs = 0;
+  data.forEach(p => { if (p.clock_out) totalHrs += (new Date(p.clock_out) - new Date(p.clock_in)) / 3600000; });
+  const pending  = data.filter(p => p.clock_out && !p.approved).length;
+  const approved = data.filter(p => p.approved).length;
+  const openC    = data.filter(p => !p.clock_out).length;
+  summaryBar.innerHTML = `
+    <div class="summary-chip"><div class="s-val">${data.length}</div><div class="s-lbl">Records</div></div>
+    <div class="summary-chip"><div class="s-val">${totalHrs.toFixed(1)}</div><div class="s-lbl">Total Hours</div></div>
+    <div class="summary-chip"><div class="s-val">${pending}</div><div class="s-lbl">Pending</div></div>
+    <div class="summary-chip"><div class="s-val">${approved}</div><div class="s-lbl">Approved</div></div>
+    <div class="summary-chip"><div class="s-val">${openC}</div><div class="s-lbl">Active</div></div>`;
+  summaryBar.style.display = '';
+
+  let rows = data.map(p => {
+    const name   = nameFor(p.employee_id);
+    const date   = new Date(p.date + 'T12:00:00').toLocaleDateString('en-CA', { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+    const inT    = fmt(p.clock_in);
+    const outT   = p.clock_out ? fmt(p.clock_out) : '—';
+    const hrs    = p.clock_out ? ((new Date(p.clock_out) - new Date(p.clock_in)) / 3600000).toFixed(2) : '—';
+    let badge, actionBtn = '';
+    if (!p.clock_out) {
+      badge = '<span class="badge badge-open">Active</span>';
+    } else if (p.approved) {
+      badge = '<span class="badge badge-approved">✓ Approved</span>';
+    } else if (!p.approved && p.approved_by) {
+      badge = '<span class="badge badge-pending" style="background:#fdf0ef;color:#c0392b;border-color:#f5c6c3">✕ Not Approved</span>';
+    } else {
+      badge = '<span class="badge badge-pending">Pending</span>';
+      actionBtn = `<button class="btn-approve" onclick="approvePunch('${p.id}',this,true)" style="margin-right:6px">Approve</button>
+                  <button class="btn-approve" onclick="approvePunch('${p.id}',this,false)" style="background:var(--red)">Deny</button>`;
+    }
+    return `<tr><td><strong>${name}</strong></td><td>${date}</td><td>${inT}</td><td>${outT}</td><td>${hrs}</td><td>${badge}</td><td>${actionBtn}</td></tr>`;
+  }).join('');
+
+  wrap.innerHTML = `<table class="main-table">
+    <thead><tr><th>Employee</th><th>Date</th><th>Clock In</th><th>Clock Out</th><th>Hours</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+async function approvePunch(id, btn, approve) {
+  btn.disabled = true; btn.textContent = '…';
+  const { error } = await sb.from('punches').update({
+    approved: approve, approved_by: me.id, approved_at: new Date().toISOString()
+  }).eq('id', id);
+  if (error) { btn.disabled = false; btn.textContent = approve ? 'Approve' : 'Deny'; alert(error.message); return; }
+  const td = btn.closest('td');
+  td.previousElementSibling.innerHTML = approve
+    ? '<span class="badge badge-approved">✓ Approved</span>'
+    : '<span class="badge badge-pending" style="background:#fdf0ef;color:#c0392b;border-color:#f5c6c3">✕ Not Approved</span>';
+  td.innerHTML = '';
+}
+
+// ── Employee list ──
+function renderEmpList() {
+  const wrap = document.getElementById('empListWrap');
+  const employees = allProfiles;
+  if (!employees.length) {
+    wrap.innerHTML = '<div class="empty-state">No employees yet — add one below.</div>';
+    return;
+  }
+  const rows = employees.map(e => `<tr>
+    <td><strong>${e.full_name || '—'}</strong></td>
+    <td>${e.role === 'manager' ? '<span style="font-size:11px;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;padding:2px 10px;border-radius:10px;font-weight:700">Manager</span>' : '<span style="font-size:11px;background:var(--blue-light);color:var(--navy);border:1px solid var(--border);padding:2px 10px;border-radius:10px;font-weight:700">Employee</span>'}</td>
+    <td>${new Date(e.created_at).toLocaleDateString('en-CA', { year:'numeric', month:'short', day:'numeric' })}</td>
+    <td>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:13px">$</span>
+        <input type="number" step="0.01" min="0" value="${e.hourly_rate || ''}" placeholder="0.00"
+          style="width:80px;padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;outline:none"
+          onchange="saveRate('${e.id}', this)"
+          onfocus="this.style.borderColor='var(--navy)'"
+          onblur="this.style.borderColor='var(--border)'">
+        <span style="font-size:11px;color:var(--muted)">/h</span>
+      </div>
+    </td>
+  </tr>`).join('');
+  wrap.innerHTML = `<table class="main-table">
+    <thead><tr><th>Name</th><th>Role</th><th>Date Added</th><th>Hourly Rate</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+// ── Add Employee ──
+async function addEmployee() {
+  const name  = document.getElementById('newName').value.trim();
+  const email = document.getElementById('newEmail').value.trim();
+  const pass  = document.getElementById('newPass').value;
+  const ok = document.getElementById('addOk');
+  const err = document.getElementById('addErr');
+  ok.style.display = 'none'; err.style.display = 'none';
+  if (!name || !email || !pass) { err.textContent = 'Please fill in all fields.'; err.style.display = ''; return; }
+  if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.style.display = ''; return; }
+  const { data: { session } } = await sb.auth.getSession();
+  const res = await fetch('/.netlify/functions/add-employee', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password: pass, manager_token: session?.access_token || '' })
+  });
+  const data = await res.json();
+  if (data.ok) {
+    document.getElementById('newName').value = '';
+    document.getElementById('newEmail').value = '';
+    document.getElementById('newPass').value = '';
+    ok.style.display = '';
+    await loadProfiles();
+    renderEmpList();
+  } else {
+    err.textContent = data.error || 'Failed to create employee account.';
+    err.style.display = '';
+  }
+}
+
+// ── Hourly rate ──
+async function saveRate(empId, input) {
+  const rate = parseFloat(input.value);
+  if (isNaN(rate) || rate < 0) { input.style.borderColor = 'var(--red)'; return; }
+  input.style.borderColor = 'var(--green)';
+  await sb.from('profiles').update({ hourly_rate: rate }).eq('id', empId);
+  // update local cache
+  const idx = allProfiles.findIndex(p => p.id === empId);
+  if (idx >= 0) allProfiles[idx].hourly_rate = rate;
+  setTimeout(() => { input.style.borderColor = 'var(--border)'; }, 1500);
+}
+
+// ── Time Off ──
+async function loadTimeOff() {
+  const status = document.getElementById('rtoFilterStatus').value;
+  const empId  = document.getElementById('rtoFilterEmp').value;
+  document.getElementById('rtoWrap').innerHTML = '<div class="empty-state">Loading…</div>';
+  let q = sb.from('time_off_requests').select('*').order('created_at', { ascending: false });
+  if (status) q = q.eq('status', status);
+  if (empId)  q = q.eq('employee_id', empId);
+  const { data } = await q;
+  if (!data?.length) {
+    document.getElementById('rtoWrap').innerHTML = '<div class="empty-state">No time-off requests found.</div>';
+    return;
+  }
+  const typeLabel = { vacation:'Vacation', sick:'Sick Day', personal:'Personal', other:'Other' };
+  const rows = data.map(r => {
+    const name = nameFor(r.employee_id);
+    const sd = fmtDate(r.start_date), ed = fmtDate(r.end_date);
+    const days = Math.round((new Date(r.end_date) - new Date(r.start_date)) / 86400000) + 1;
+    let badge, actions = '';
+    if (r.status === 'approved') {
+      badge = '<span class="badge badge-approved">Approved</span>';
+    } else if (r.status === 'denied') {
+      badge = '<span class="badge" style="background:#fdf0ef;color:var(--red);border:1px solid #f5c6c3">Denied</span>';
+    } else {
+      badge = '<span class="badge badge-pending">Pending</span>';
+      actions = `<button class="btn-approve" onclick="reviewRTO('${r.id}','approved',this)" style="margin-right:6px">Approve</button>
+                 <button class="btn-approve" onclick="reviewRTO('${r.id}','denied',this)" style="background:var(--red)">Deny</button>`;
+    }
+    return `<tr>
+      <td><strong>${name}</strong></td>
+      <td>${sd} – ${ed}<br><span style="font-size:12px;color:var(--muted)">${days} day${days>1?'s':''}</span></td>
+      <td>${typeLabel[r.type]||r.type}</td>
+      <td>${r.reason||'—'}</td>
+      <td>${badge}</td>
+      <td>${actions}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('rtoWrap').innerHTML = `<table class="main-table">
+    <thead><tr><th>Employee</th><th>Dates</th><th>Type</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+}
+
+async function reviewRTO(id, status, btn) {
+  btn.disabled = true;
+  const { error } = await sb.from('time_off_requests').update({
+    status, reviewed_by: me.id, reviewed_at: new Date().toISOString()
+  }).eq('id', id);
+  if (error) { btn.disabled = false; alert(error.message); return; }
+  loadTimeOff();
+}
+
+// ── Payroll ──
+async function loadPayroll() {
+  const empFilter = document.getElementById('payrollEmpFilter').value;
+  const numPeriods = parseInt(document.getElementById('payrollPeriods').value);
+  document.getElementById('payrollWrap').innerHTML = '<div class="empty-state">Loading…</div>';
+  const anchor = new Date('2025-01-06');
+  const now = new Date();
+  const diff = Math.floor((now - anchor) / (14 * 86400000));
+  const periods = [];
+  for (let i = diff - 1; i >= Math.max(0, diff - numPeriods); i--) {
+    const pStart = new Date(anchor.getTime() + i * 14 * 86400000);
+    const pEnd   = new Date(pStart.getTime() + 13 * 86400000);
+    periods.push({ start: pStart.toLocaleDateString('en-CA'), end: pEnd.toLocaleDateString('en-CA') });
+  }
+  const employees = allProfiles.filter(p => p.role === 'employee' && (!empFilter || p.id === empFilter));
+  let tableRows = '';
+  let grandTotal = 0;
+  for (const period of periods) {
+    let periodTotal = 0;
+    for (const emp of employees) {
+      const { data } = await sb.from('punches').select('clock_in,clock_out').eq('employee_id', emp.id)
+        .gte('date', period.start).lte('date', period.end).eq('approved', true).not('clock_out', 'is', null);
+      let hrs = 0; (data||[]).forEach(p => { hrs += (new Date(p.clock_out) - new Date(p.clock_in)) / 3600000; });
+      const rate = emp.hourly_rate || 0;
+      const gross = hrs * rate;
+      periodTotal += gross;
+      if (hrs === 0 && !empFilter) continue; // skip zero rows in all-employee view
+      tableRows += `<tr>
+        <td>${fmtDate(period.start)} – ${fmtDate(period.end)}</td>
+        <td>${emp.full_name || '—'}</td>
+        <td>${hrs.toFixed(2)} h</td>
+        <td>${rate ? '$' + Number(rate).toFixed(2) + '/h' : '<span style="color:var(--muted);font-size:12px">Not set</span>'}</td>
+        <td style="font-weight:700;color:var(--navy)">${rate && hrs ? '$' + gross.toFixed(2) : '—'}</td>
+      </tr>`;
+    }
+    if (!empFilter && employees.length > 1 && periodTotal > 0) {
+      tableRows += `<tr style="background:var(--blue-light)">
+        <td colspan="4" style="font-weight:700;text-align:right;color:var(--navy)">Period Total</td>
+        <td style="font-weight:700;color:var(--navy)">$${periodTotal.toFixed(2)}</td>
+      </tr>`;
+    }
+    grandTotal += periodTotal;
+  }
+  if (!tableRows) {
+    document.getElementById('payrollWrap').innerHTML = '<div class="empty-state">No approved punch data for this period.</div>';
+    return;
+  }
+  document.getElementById('payrollWrap').innerHTML = `
+    <table class="main-table">
+      <thead><tr><th>Pay Period</th><th>Employee</th><th>Approved Hours</th><th>Rate</th><th>Gross Pay</th></tr></thead>
+      <tbody>${tableRows}</tbody>
+      <tfoot><tr style="background:var(--navy);color:#fff">
+        <td colspan="4" style="font-weight:700;text-align:right;padding:12px 16px">Grand Total</td>
+        <td style="font-weight:700;padding:12px 16px">$${grandTotal.toFixed(2)}</td>
+      </tr></tfoot>
+    </table>`;
+}
+
+function fmtDate(d) { return new Date(d+'T12:00:00').toLocaleDateString('en-CA', { month:'short', day:'numeric', year:'numeric' }); }
+
+function fmt(iso) {
+  return new Date(iso).toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit', hour12: true });
+}
+
+init();
+</script>
+</body>
+</html>
