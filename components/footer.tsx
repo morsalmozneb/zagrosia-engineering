@@ -178,7 +178,7 @@ export function Footer() {
           2025 Zagrosia Engineering Inc. — All rights reserved. Founded by Seyed Hassan Mozneb, M.Sc., P.Eng.
         </p>
         <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/30 lg:max-w-none" style={{ fontSize: "6px" }}>
-          Disclaimer: Project images and portfolio content shown on this website are temporary placeholders. This site is currently under development and actual project content will be updated shortly.
+          Disclaimer: Project graphics shown on this website are illustrative placeholders. Project summaries are anonymized and do not reproduce client reports or drawings.
         </p>
       </div>
 

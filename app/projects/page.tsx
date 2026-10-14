@@ -3,12 +3,12 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Explore Zagrosia Engineering Inc.'s completed structural engineering projects across BC, Alberta & Saskatchewan — seismic retrofits, new builds, racking systems, and building rehabilitations.",
+    "Selected structural engineering projects and principal experience from Zagrosia Engineering Inc. — fire and storm damage assessments, temporary shoring, concrete repair, racking systems, residential and industrial design.",
   alternates: { canonical: "https://www.zagrosia.ca/projects" },
   openGraph: {
     title: "Engineering Projects | Zagrosia Engineering Inc.",
     description:
-      "Structural engineering projects in Western Canada — seismic retrofits, new construction, racking systems, and building rehabilitation.",
+      "Selected structural engineering projects — damage assessments, temporary shoring, concrete repair, racking and residential design.",
     url: "https://www.zagrosia.ca/projects",
   },
 }
@@ -29,9 +29,9 @@ const jsonLd = {
     },
     {
       "@type": "CollectionPage",
-      name: "Structural Engineering Projects Portfolio",
+      name: "Structural Engineering Projects",
       url: "https://www.zagrosia.ca/projects",
-      description: "Portfolio of completed structural engineering projects by Zagrosia Engineering Inc. across BC, Alberta and Saskatchewan.",
+      description: "Selected structural engineering projects and principal experience from Zagrosia Engineering Inc.",
       provider: { "@type": "ProfessionalService", name: "Zagrosia Engineering Inc.", url: "https://www.zagrosia.ca" },
     },
   ],

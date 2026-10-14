@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { projects } from "@/lib/projects-data"
 
 const BASE = "https://www.zagrosia.ca"
 
@@ -52,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    ...projects.map((p) => ({
+      url: `${BASE}/projects/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    })),
   ]
 }

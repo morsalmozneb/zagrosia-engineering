@@ -1,3 +1,5 @@
+import { oldPlaceholderSlugs } from "./lib/projects-redirects.mjs"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -12,6 +14,14 @@ const nextConfig = {
   },
   // Compress responses
   compress: true,
+  // The 16 earlier placeholder project pages were replaced; send old URLs to the projects listing
+  async redirects() {
+    return oldPlaceholderSlugs.map((slug) => ({
+      source: `/projects/${slug}`,
+      destination: "/projects",
+      permanent: true,
+    }))
+  },
 }
 
 export default nextConfig

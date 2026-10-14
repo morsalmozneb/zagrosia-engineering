@@ -6,6 +6,7 @@ import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
+import { projects as realProjects } from "@/lib/projects-data"
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
@@ -43,63 +44,17 @@ const servicesItems = [
   "Specialty Reviews",
 ]
 
-/* ── Project data ── */
-const projects = [
-  {
-    id: 1,
-    image: "/images/Project-Card-1.png",
-    location: "Burnaby, BC",
-    title: "OFFICE TOWER RENOVATION",
-    description:
-      "Structural retrofit and seismic strengthening for a multi-story commercial office tower to improve performance, safety, and compliance with current building standards.",
-    slug: "office-tower-renovation",
-  },
-  {
-    id: 2,
-    image: "/images/Project-Card-2.png",
-    location: "Calgary, AB",
-    title: "CONTEMPORARY CUSTOM RESIDENCE",
-    description:
-      "Full structural engineering for a luxury contemporary residence featuring open-concept layouts, cantilevered elements, and large-span architectural glazing systems.",
-    slug: "contemporary-custom-residence",
-  },
-  {
-    id: 3,
-    image: "/images/Project-Card-3.png",
-    location: "Burnaby, BC",
-    title: "FIRE & FREEZE FORT MCMURRAY",
-    description:
-      "Advanced structural engineering for a large-scale industrial facility with crane supports, equipment foundations, and reinforced steel systems.",
-    slug: "fire-freeze-fort-mcmurray",
-  },
-  {
-    id: 4,
-    image: "/images/Project-Card-4.png",
-    location: "Burnaby, BC",
-    title: "144-UNIT TOWNHOUSE",
-    description:
-      "Comprehensive structural design for a large-scale townhouse complex, including foundation systems, shear walls, and gravity load analysis.",
-    slug: "144-unit-townhouse",
-  },
-  {
-    id: 5,
-    image: "/images/Project-Card-5.png",
-    location: "Calgary, AB",
-    title: "STRATA — STONE VENEER REMEDIATION",
-    description:
-      "Structural assessment and remediation design for deteriorating stone veneer cladding on a multi-unit strata building.",
-    slug: "strata-stone-veneer-remediation",
-  },
-  {
-    id: 6,
-    image: "/images/Project-Card-6.png",
-    location: "Saskatoon, SK",
-    title: "CLOVERDALE REC CENTRE",
-    description:
-      "Structural engineering for a community recreation centre, including long-span roof systems, gymnasium framing, and seismic design.",
-    slug: "cloverdale-rec-centre",
-  },
-]
+/* ── Project data (edit projects in /lib/projects-data.ts) ── */
+const projects = realProjects.map((p) => ({
+  id: p.id,
+  image: p.image,
+  location: p.location,
+  title: p.title,
+  description: p.summary,
+  slug: p.slug,
+  badge: p.badge,
+  attribution: p.attribution,
+}))
 
 type DesktopProjectCard = {
   id: number
@@ -113,190 +68,54 @@ type DesktopProjectCard = {
   titleClassName?: string
   descriptionWidthClassName?: string
   slug?: string
+  badge?: string
+  attribution?: string
 }
 
-const desktopProjectRows: DesktopProjectCard[][] = [
-  [
+/* Row 1: two large cards with descriptions; following rows: 3 cards each; remainder fills the last row. */
+function buildDesktopRows(): DesktopProjectCard[][] {
+  const rows: DesktopProjectCard[][] = []
+  const [first, second, ...rest] = projects
+  rows.push([
     {
-      id: 1,
-      image: "/images/Project-Card-1.png",
-      location: "Burnaby, BC",
-      title: "OFFICE TOWER RENOVATION",
-      description:
-        "Structural retrofit and seismic strengthening for a multi-story commercial office tower to improve performance, safety, and compliance with current building standards.",
+      ...first,
       spanClassName: "col-span-7",
       heightClassName: "h-[360px]",
       objectPositionClassName: "object-center",
       titleClassName: "text-[18px] leading-[1.14] tracking-[0.12em]",
       descriptionWidthClassName: "max-w-[338px]",
-      slug: "office-tower-renovation",
     },
     {
-      id: 2,
-      image: "/images/Project-Card-2.png",
-      location: "Calgary, AB",
-      title: "CONTEMPORARY CUSTOM RESIDENCE",
-      description:
-        "Full structural engineering for a luxury contemporary residence featuring open-concept layouts, cantilevered elements, and large-span architectural glazing systems.",
+      ...second,
       spanClassName: "col-span-5",
       heightClassName: "h-[360px]",
       objectPositionClassName: "object-center",
       titleClassName: "text-[17px] leading-[1.16] tracking-[0.12em]",
       descriptionWidthClassName: "max-w-[236px]",
-      slug: "contemporary-custom-residence",
     },
-  ],
-  [
-    {
-      id: 3,
-      image: "/images/Project-Card-3.png",
-      location: "Burnaby, BC",
-      title: "FIRE & FREEZE FORT MCMURRAY",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "fire-freeze-fort-mcmurray",
-    },
-    {
-      id: 4,
-      image: "/images/Project-Card-4.png",
-      location: "Burnaby, BC",
-      title: "144-UNIT TOWNHOUSE",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "144-unit-townhouse",
-    },
-    {
-      id: 5,
-      image: "/images/Project-Card-5.png",
-      location: "Calgary, AB",
-      title: "STRATA — STONE VENEER REMEDIATION",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "strata-stone-veneer-remediation",
-    },
-  ],
-  [
-    {
-      id: 6,
-      image: "/images/Project-Card-6.png",
-      location: "Saskatoon, SK",
-      title: "CLOVERDALE REC CENTRE",
-      spanClassName: "col-span-6",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "cloverdale-rec-centre",
-    },
-    {
-      id: 7,
-      image: "/images/Project-Card-7.png",
-      location: "Saskatoon, SK",
-      title: "INDUSTRIAL RACKING",
-      spanClassName: "col-span-6",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "industrial-racking",
-    },
-  ],
-  [
-    {
-      id: 8,
-      image: "/images/Project-Card-8.png",
-      location: "Saskatoon, SK",
-      title: "UNION PARK EPS 5773",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "union-park-eps-5773",
-    },
-    {
-      id: 9,
-      image: "/images/Project-Card-9.png",
-      location: "Vancouver, BC",
-      title: "HIGH-RISE REHABILITATION",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "high-rise-rehabilitation",
-    },
-    {
-      id: 10,
-      image: "/images/Project-Card-10.png",
-      location: "Coquitlam, BC",
-      title: "MULTI-FAMILY RESIDENTIAL COMPLEX",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "multi-family-residential-complex",
-    },
-  ],
-  [
-    {
-      id: 11,
-      image: "/images/Project-Card-11.png",
-      location: "Saskatoon, SK",
-      title: "BRIDGE REHABILITATION PROJECT",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "bridge-rehabilitation-project",
-    },
-    {
-      id: 12,
-      image: "/images/Project-Card-12.png",
-      location: "Vancouver, BC",
-      title: "CONCRETE PARKADE RESTORATION",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "concrete-parkade-restoration",
-    },
-    {
-      id: 13,
-      image: "/images/Project-Card-13.png",
-      location: "Coquitlam, BC",
-      title: "FOUNDATION AND SHORING DESIGN",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "foundation-and-shoring-design",
-    },
-  ],
-  [
-    {
-      id: 14,
-      image: "/images/Project-Card-14.png",
-      location: "Burnaby, BC",
-      title: "MIXED-USE TOWER DEVELOPMENT",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "mixed-use-tower-development",
-    },
-    {
-      id: 15,
-      image: "/images/Project-Card-15.png",
-      location: "Burnaby, BC",
-      title: "COMMUNITY CENTRE EXPANSION",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "community-centre-expansion",
-    },
-    {
-      id: 16,
-      image: "/images/Project-Card-16.png",
-      location: "Vancouver, BC",
-      title: "SEISMIC UPGRADE PROGRAM",
-      spanClassName: "col-span-4",
-      heightClassName: "h-[222px]",
-      objectPositionClassName: "object-center",
-      slug: "seismic-upgrade-program",
-    },
-  ],
-]
+  ])
+  for (let i = 0; i < rest.length; i += 3) {
+    const chunk = rest.slice(i, i + 3)
+    const span = chunk.length === 3 ? "col-span-4" : chunk.length === 2 ? "col-span-6" : "col-span-12"
+    rows.push(
+      chunk.map((p) => ({
+        id: p.id,
+        image: p.image,
+        location: p.location,
+        title: p.title,
+        slug: p.slug,
+        badge: p.badge,
+        attribution: p.attribution,
+        spanClassName: span,
+        heightClassName: "h-[222px]",
+        objectPositionClassName: "object-center",
+      })),
+    )
+  }
+  return rows
+}
+
+const desktopProjectRows = buildDesktopRows()
 
 function LocationPin() {
   return (
@@ -336,6 +155,18 @@ function CloseIcon() {
   )
 }
 
+function BadgePill({ badge, attribution, className = "" }: { badge: string; attribution?: string; className?: string }) {
+  const style =
+    attribution === "zagrosia"
+      ? "bg-[#0052A5] text-white"
+      : "border border-white/60 bg-white/15 text-white backdrop-blur-[6px]"
+  return (
+    <span className={`inline-flex items-center rounded-full px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
+      {badge}
+    </span>
+  )
+}
+
 function DesktopProjectCardItem({
   image,
   location,
@@ -347,6 +178,8 @@ function DesktopProjectCardItem({
   titleClassName = "text-[13px] leading-[1.22] tracking-[0.10em]",
   descriptionWidthClassName = "max-w-[340px]",
   slug,
+  badge,
+  attribution,
 }: DesktopProjectCard) {
   const cardHref = slug ? `/projects/${slug}` : "/projects"
 
@@ -364,6 +197,7 @@ function DesktopProjectCardItem({
                 "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)",
             }}
           />
+          {badge ? <BadgePill badge={badge} attribution={attribution} className="absolute left-[14px] top-[14px] z-10" /> : null}
           {/* Darker overlay on hover so description is readable */}
           <div className="absolute inset-0 bg-[#1a1a1a]/0 transition-all duration-300 group-hover:bg-[#1a1a1a]/50" />
 
@@ -447,7 +281,7 @@ export function ProjectsHeroSection() {
               className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
             >
-              <span className="text-[#2D2D2D]">CANADIAN</span>
+              <span className="text-[#2D2D2D]">SELECTED</span>
               <br />
               <span className="text-[#0052A5]">PROJECTS</span>
             </h1>
@@ -456,7 +290,7 @@ export function ProjectsHeroSection() {
           {/* Body */}
           <Reveal delay={0.2} duration={0.65}>
             <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-              Explore our portfolio of structural engineering projects across Western Canada — from high-rise retrofits to custom residences and industrial facilities.
+              Selected structural engineering projects and principal experience — from fire-damage assessments and temporary shoring to residential, racking and industrial design.
             </p>
           </Reveal>
 
@@ -600,6 +434,7 @@ export function ProjectsHeroSection() {
                       "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 22%, rgba(20,20,20,0.70) 60%, rgba(20,20,20,1) 100%)",
                   }}
                 />
+                {project.badge ? <BadgePill badge={project.badge} attribution={project.attribution} className="absolute left-4 top-4 z-10" /> : null}
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
                   <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                     <LocationPin />
@@ -675,6 +510,11 @@ export function ProjectsHeroSection() {
           </p>
         </div>
 
+        {/* Attribution note */}
+        <p className="mt-10 text-[10px] leading-[1.7] tracking-[0.08em] text-[#2D2D2D]/60">
+          Projects marked Principal Experience illustrate the professional experience of Seyed Hassan Mozneb, P.Eng., undertaken through other firms or before founding Zagrosia. They are not presented as projects commissioned directly to Zagrosia Engineering Inc.
+        </p>
+
         {/* Mobile bottom CTA */}
         <div className="mt-[76px]">
           <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
@@ -742,15 +582,15 @@ export function ProjectsHeroSection() {
                     className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
                     style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
                   >
-                    <span className="mb-[8px] block text-[#2D2D2D]">CANADIAN</span>
+                    <span className="mb-[8px] block text-[#2D2D2D]">SELECTED</span>
                     <span className="block text-[#0052A5]">PROJECTS</span>
                   </h1>
                 </Reveal>
 
                 <Reveal delay={0.2} duration={0.65}>
                   <p className="mt-[22px] leading-[1.5] tracking-[0.17em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                    Hover over any project for detailed technical data, HUD overlay with<br />
-                    structural system, codes, loads and materials.
+                    Selected Zagrosia assignments and the principal&apos;s professional experience.<br />
+                    Open any project for its scope and engineering details.
                   </p>
                 </Reveal>
 
@@ -883,6 +723,12 @@ export function ProjectsHeroSection() {
                   ))}
                 </motion.div>
               ))}
+            </div>
+
+            <div className="col-span-12 mt-[28px]">
+              <p className="max-w-[900px] text-[12px] leading-[1.7] tracking-[0.1em] text-[#2D2D2D]/60">
+                Projects marked Principal Experience illustrate the professional experience of Seyed Hassan Mozneb, P.Eng., undertaken through other firms or before founding Zagrosia. They are not presented as projects commissioned directly to Zagrosia Engineering Inc.
+              </p>
             </div>
 
             <div className="col-span-12 mt-[78px]">

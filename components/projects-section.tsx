@@ -7,65 +7,20 @@ import useEmblaCarousel from "embla-carousel-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
+import { projects as allProjects } from "@/lib/projects-data"
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-const projects = [
-  {
-    id: 1,
-    title: "OFFICE TOWER RENOVATION",
-    description:
-      "Structural retrofit and seismic strengthening for a multi-story commercial office tower to improve performance, safety, and compliance with current building standards.",
-    tags: ["Retrofit", "Seismic", "Commercial"],
-    location: "Burnaby, BC",
-    image: "/images/Project-Card-1.png",
-  },
-  {
-    id: 2,
-    title: "CONTEMPORARY CUSTOM RESIDENCE",
-    description:
-      "Full structural engineering for a luxury contemporary residence featuring open-concept layouts, cantilevered elements, and large-span architectural glazing systems.",
-    tags: ["Residential", "Steel", "Custom"],
-    location: "Calgary, AB",
-    image: "/images/Project-Card-2.png",
-  },
-  {
-    id: 3,
-    title: "FIRE & FREEZE FORT MCMURRAY",
-    description:
-      "Advanced structural engineering for a large-scale industrial facility with crane supports, equipment foundations, and reinforced steel systems.",
-    tags: ["Industrial", "Steel", "Foundation"],
-    location: "Burnaby, BC",
-    image: "/images/Project-Card-3.png",
-  },
-  {
-    id: 4,
-    title: "144-UNIT TOWNHOUSE",
-    description:
-      "Comprehensive structural design for a large-scale townhouse complex, including foundation systems, shear walls, and gravity load analysis.",
-    tags: ["Residential", "Wood", "BCBC 2024"],
-    location: "Burnaby, BC",
-    image: "/images/Project-Card-4.png",
-  },
-  {
-    id: 5,
-    title: "STRATA — STONE VENEER REMEDIATION",
-    description:
-      "Structural assessment and remediation design for deteriorating stone veneer cladding on a multi-unit strata building.",
-    tags: ["Remediation", "Masonry", "Envelope"],
-    location: "Calgary, AB",
-    image: "/images/Project-Card-5.png",
-  },
-  {
-    id: 6,
-    title: "CLOVERDALE REC CENTRE",
-    description:
-      "Structural engineering for a community recreation centre, including long-span roof systems, gymnasium framing, and seismic design.",
-    tags: ["Commercial", "Seismic", "Steel"],
-    location: "Saskatoon, SK",
-    image: "/images/Project-Card-6.png",
-  },
-]
+const featuredProjects = allProjects.filter((p) => p.featured)
+
+const projects = featuredProjects.map((p) => ({
+  id: p.id,
+  title: p.title,
+  description: p.summary,
+  tags: p.tags,
+  location: p.location,
+  image: p.image,
+}))
 
 export function ProjectsSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
