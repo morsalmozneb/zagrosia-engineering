@@ -452,12 +452,12 @@ export function AboutDesktopPage() {
 
             <div className="mt-9 flex gap-4">
               <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
-                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   View Resume
                 </CtaButton>
               </Reveal>
               <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
-                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   Contact
                 </CtaButton>
               </Reveal>
@@ -606,7 +606,7 @@ export function AboutDesktopPage() {
                       <ul className="mt-4 space-y-2">
                         {value.points.map((point, j) => (
                           <li key={j} className="flex items-start gap-3 leading-[1.5] tracking-[0.06em] text-[#FCFCFC]/70" style={{ fontSize: "16px" }}>
-                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-[3px] bg-[#FCFCFC]/70" />
+                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-[6px] bg-[#FCFCFC]/70" />
                             {point}
                           </li>
                         ))}
@@ -638,7 +638,7 @@ export function AboutDesktopPage() {
                 <button
                   type="button"
                   onClick={prev}
-                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
                   aria-label="Previous milestone"
                 >
                   <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
@@ -701,7 +701,7 @@ export function AboutDesktopPage() {
                 <button
                   type="button"
                   onClick={next}
-                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
                   aria-label="Next milestone"
                 >
                   <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
@@ -913,12 +913,12 @@ export function AboutDesktopPage() {
           </Reveal>
           <div className="mt-8 flex gap-4">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Work with Us
               </CtaButton>
             </Reveal>
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Get In Touch
               </CtaButton>
             </Reveal>

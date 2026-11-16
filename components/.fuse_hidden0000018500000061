@@ -237,7 +237,7 @@ export function Sidebar() {
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 500, damping: 22 }}
             style={{ position: "absolute", right: -13, top: 36, zIndex: 10, cursor: "pointer" }}
-            className="flex h-[22px] w-[22px] items-center justify-center rounded-[3px] bg-white/90 shadow-md hover:bg-white"
+            className="flex h-[22px] w-[22px] items-center justify-center rounded-[6px] bg-white/90 shadow-md hover:bg-white"
           >
             <motion.svg
               width="7" height="7" viewBox="0 0 10 10" fill="none"

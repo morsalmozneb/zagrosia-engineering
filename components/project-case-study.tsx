@@ -59,7 +59,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </h1>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
-              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[2px] bg-[#0052A5] px-[8px] py-[3px] text-[8px] tracking-[0.10em] text-white">
+              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[4px] bg-[#0052A5] px-[8px] py-[3px] text-[8px] tracking-[0.10em] text-white">
                 <svg width="9" height="11" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                 {project.location}
               </div>
@@ -69,7 +69,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </Reveal>
           </div>
           <Reveal variant="fadeBlur" delay={0.15} duration={0.7}>
-            <div className="relative mt-8 h-[220px] w-full overflow-hidden rounded-[3px]">
+            <div className="relative mt-8 h-[220px] w-full overflow-hidden rounded-[6px]">
               <Image src={project.image} alt={project.title} fill className="object-cover object-center" />
             </div>
           </Reveal>
@@ -105,7 +105,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     </h1>
                   </Reveal>
                   <Reveal delay={0.2} duration={0.65}>
-                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[2px] bg-[#0052A5] px-[10px] py-[4px] text-[9px] tracking-[0.10em] text-white">
+                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[4px] bg-[#0052A5] px-[10px] py-[4px] text-[9px] tracking-[0.10em] text-white">
                       <svg width="10" height="12" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                       {project.location}
                     </div>
@@ -117,9 +117,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </div>
               <div className="col-span-5 flex items-end">
                 <Reveal variant="fadeBlur" delay={0.18} duration={0.75} className="w-full">
-                  <div className="zag-ticks relative w-full overflow-hidden rounded-[4px]" style={{ height: "340px" }}>
+                  <div className="zag-ticks relative w-full overflow-hidden rounded-[8px]" style={{ height: "340px" }}>
                     <Image src={project.image} alt={project.title} fill className="object-cover object-center" />
-                    <div className="absolute inset-0 rounded-[4px]" style={{ background: "linear-gradient(180deg, transparent 60%, rgba(7,19,31,0.18) 100%)" }} />
+                    <div className="absolute inset-0 rounded-[8px]" style={{ background: "linear-gradient(180deg, transparent 60%, rgba(7,19,31,0.18) 100%)" }} />
                   </div>
                 </Reveal>
               </div>
@@ -143,8 +143,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   ))}
                 </div>
                 <Reveal variant="fadeBlur" delay={0.2}>
-                  <div className="mt-10 lg:mt-0 rounded-[4px] p-px" style={{ background: CARD_BORDER }}>
-                    <div className="w-full h-full rounded-[4px] bg-[#FCFCFC] p-[22px]" style={CARD_SHADOW}>
+                  <div className="mt-10 lg:mt-0 rounded-[8px] p-px" style={{ background: CARD_BORDER }}>
+                    <div className="w-full h-full rounded-[8px] bg-[#FCFCFC] p-[22px]" style={CARD_SHADOW}>
                       <p className="mb-5 text-[14px] font-bold tracking-[0.22em] text-[#2D2D2D]">PROJECT DETAILS</p>
                       <ul className="space-y-4">
                         {project.facts.map((fact) => (
@@ -179,10 +179,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       viewport={{ once: false, amount: 0.1 }}
                       transition={{ duration: 0.65, delay: 0.1 + i * 0.12, ease: EASE }}
-                      className="mb-5 lg:mb-0 rounded-[4px] p-px"
+                      className="mb-5 lg:mb-0 rounded-[8px] p-px"
                       style={{ background: CARD_BORDER }}
                     >
-                      <div className="w-full h-full rounded-[4px] bg-[#FCFCFC] p-[22px]" style={{ ...CARD_SHADOW, minHeight: "200px" }}>
+                      <div className="w-full h-full rounded-[8px] bg-[#FCFCFC] p-[22px]" style={{ ...CARD_SHADOW, minHeight: "200px" }}>
                         <span className="mb-4 block font-black leading-none" style={{ fontSize: "36px", color: "#0052A5" }}>{String(i + 1).padStart(2, "0")}</span>
                         <p className="mb-3 text-[14px] font-bold tracking-[0.14em] text-[#2D2D2D] uppercase">{item.title}</p>
                         <p className="leading-[1.65] tracking-[0.08em] text-[#2D2D2D]/75" style={{ fontSize: "14px" }}>{item.body}</p>
@@ -212,11 +212,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       viewport={{ once: false, amount: 0.1 }}
                       transition={{ duration: 0.55, delay: 0.08 + i * 0.08, ease: EASE }}
-                      className="rounded-[4px] p-px"
+                      className="rounded-[8px] p-px"
                       style={{ background: CARD_BORDER }}
                     >
-                      <div className="flex items-start gap-4 rounded-[4px] bg-[#FCFCFC] px-6 py-5" style={CARD_SHADOW}>
-                        <span className="mt-[3px] flex h-[24px] w-[24px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#0052A5]">
+                      <div className="flex items-start gap-4 rounded-[8px] bg-[#FCFCFC] px-6 py-5" style={CARD_SHADOW}>
+                        <span className="mt-[3px] flex h-[24px] w-[24px] flex-shrink-0 items-center justify-center rounded-[6px] bg-[#0052A5]">
                           <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                         </span>
                         <div>
@@ -241,8 +241,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">ABOUT THIS PROJECT</h2>
               </Reveal>
               <Reveal variant="fadeBlur" delay={0.12}>
-                <div className="rounded-[4px] p-px" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
-                  <div className="rounded-[4px] px-8 py-10" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
+                <div className="rounded-[8px] p-px" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
+                  <div className="rounded-[8px] px-8 py-10" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
                     <p className="mb-3 text-[14px] font-bold tracking-[0.22em] text-white/70">{project.badge}</p>
                     <p className="leading-[1.65] tracking-[0.08em] text-white/85" style={{ fontSize: "16px" }}>{project.note}</p>
                   </div>
@@ -273,10 +273,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </Reveal>
                 <div className="flex gap-[15px]">
                   <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
                   </Reveal>
                   <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
                   </Reveal>
                 </div>
               </div>
@@ -290,7 +290,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   </p>
                 </Reveal>
                 <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
-                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
+                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
                     Request a Service
                   </Link>
                 </Reveal>

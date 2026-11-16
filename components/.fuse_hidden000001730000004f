@@ -98,7 +98,7 @@ export function ContactSection() {
     if (submitted) {
       return (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="mb-4 flex h-[56px] w-[56px] items-center justify-center rounded-[3px] bg-[#0052A5]/10">
+          <div className="mb-4 flex h-[56px] w-[56px] items-center justify-center rounded-[6px] bg-[#0052A5]/10">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 13l4 4L19 7" stroke="#0052A5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -178,7 +178,7 @@ export function ContactSection() {
         )}
 
         <CtaButton as="button" type="submit" disabled={submitting}
-          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-[2px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
+          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-[4px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
           style={{ fontSize: mobile ? "14px" : "16px" }}
         >
           {submitting ? "Sending..." : "Send Message"}

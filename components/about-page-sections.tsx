@@ -189,7 +189,7 @@ export function AboutProfileSection() {
                 href="/files/resume-homayoun.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 View Resume
@@ -198,7 +198,7 @@ export function AboutProfileSection() {
             <Reveal variant="scaleUp" delay={0.35} duration={0.5}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact
@@ -234,7 +234,7 @@ export function AboutMissionVisionSection() {
           viewport={{ once: false, amount: 0.1 }}
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
           style={{
-            borderRadius: "4px",
+            borderRadius: "8px",
             backgroundColor: "rgba(252,252,252,0.4)",
             boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
             backdropFilter: "blur(61.5px)",
@@ -253,7 +253,7 @@ export function AboutMissionVisionSection() {
           viewport={{ once: false, amount: 0.1 }}
           transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
           style={{
-            borderRadius: "4px",
+            borderRadius: "8px",
             backgroundColor: "rgba(252,252,252,0.4)",
             boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
             backdropFilter: "blur(61.5px)",
@@ -358,7 +358,7 @@ export function AboutCoreValuesSection() {
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 0.55, delay: 0.12 + i * 0.1, ease: EASE }}
                 style={{
-                  borderRadius: "4px",
+                  borderRadius: "8px",
                   backgroundColor: "#010101",
                   boxShadow: "0px 1px 15.1px 0px rgba(255,255,255,0.68)",
                   backdropFilter: "blur(61.5px)",

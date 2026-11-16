@@ -38,7 +38,7 @@ export function AboutPageHeader() {
       <div
         className="lg:hidden"
         style={{
-          borderRadius: "4px",
+          borderRadius: "8px",
           backgroundColor: "rgba(148,184,220,0.5)",
           boxShadow: "0px 4px 19.6px 0px rgba(148,184,220,0.34)",
           backdropFilter: "blur(61.5px)",
@@ -132,7 +132,7 @@ export function AboutPageHeader() {
                       }`}
                       style={isActive ? {
                         backgroundColor: "rgba(0,82,165,0.09)",
-                        borderRadius: "3px",
+                        borderRadius: "6px",
                         padding: "8px 16px 8px 12px",
                         boxShadow: "inset 0 0 0 1px rgba(0,82,165,0.18)",
                         fontWeight: 850,

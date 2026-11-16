@@ -204,7 +204,7 @@ export function EngineeringSolutions() {
                       {service.tags.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-[6px]">
                           {service.tags.map((tag) => (
-                            <span key={tag} className="rounded-[2px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
+                            <span key={tag} className="rounded-[4px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
                               {tag}
                             </span>
                           ))}
@@ -233,7 +233,7 @@ export function EngineeringSolutions() {
             <div className="mt-7">
               <CtaButton
                 href="/services"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Learn More
               </CtaButton>

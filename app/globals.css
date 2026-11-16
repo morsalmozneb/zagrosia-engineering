@@ -23,7 +23,7 @@
   --border: oklch(0.9 0 0);
   --input: oklch(0.9 0 0);
   --ring: oklch(0.55 0.15 250);
-  --radius: 0.25rem;
+  --radius: 0.5rem;
   
   /* Custom Zagrosia colors */
   --navy: oklch(0.18 0.03 250);
@@ -121,7 +121,7 @@ button, a, [role="button"] {
   justify-content: center;
   min-height: 48px;
   border: 1px solid currentColor;
-  border-radius: 3px;
+  border-radius: 6px;
   padding: 0 1.75rem;
   font-size: 14px;
   font-weight: 500;

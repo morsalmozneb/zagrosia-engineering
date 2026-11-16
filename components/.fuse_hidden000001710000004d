@@ -161,7 +161,7 @@ function BadgePill({ badge, attribution, className = "" }: { badge: string; attr
       ? "bg-[#0052A5] text-white"
       : "border border-white/60 bg-white/15 text-white backdrop-blur-[6px]"
   return (
-    <span className={`inline-flex items-center rounded-[2px] px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
+    <span className={`inline-flex items-center rounded-[4px] px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
       {badge}
     </span>
   )
@@ -212,7 +212,7 @@ function DesktopProjectCardItem({
             ) : null}
             <div className="flex items-end justify-between gap-[12px]">
               <div>
-                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[2px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[4px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                   <LocationPin />
                   <span>{location}</span>
                 </div>
@@ -221,7 +221,7 @@ function DesktopProjectCardItem({
                 </h3>
               </div>
               <span
-                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-[2px] border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
+                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-[4px] border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
                 style={{ fontSize: "10px" }}
               >
                 Learn More
@@ -436,7 +436,7 @@ export function ProjectsHeroSection() {
                 />
                 {project.badge ? <BadgePill badge={project.badge} attribution={project.attribution} className="absolute left-4 top-4 z-10" /> : null}
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
-                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[2px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[4px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                     <LocationPin />
                     <span>{project.location}</span>
                   </div>
@@ -458,7 +458,7 @@ export function ProjectsHeroSection() {
                       </p>
                       <CtaButton
                         href={project.slug ? `/projects/${project.slug}` : "/contact"}
-                        className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                        className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                         style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                       >
                         Learn More
@@ -537,7 +537,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Request a Service
               </CtaButton>
@@ -545,7 +545,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Get In Touch
               </CtaButton>
@@ -745,7 +745,7 @@ export function ProjectsHeroSection() {
               <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Request a Service
                 </CtaButton>

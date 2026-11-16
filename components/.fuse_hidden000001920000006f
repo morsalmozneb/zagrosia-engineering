@@ -158,7 +158,7 @@ export function EngineeringSolutions() {
                 >
                   {isOpen ? (
                     <div
-                      className="rounded-[4px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                      className="rounded-[8px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                       style={{
                         boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                         backdropFilter: "blur(61.5px)",
@@ -176,7 +176,7 @@ export function EngineeringSolutions() {
                       </button>
 
                       {service.image && (
-                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[3px] lg:h-[220px]">
+                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[6px] lg:h-[220px]">
                           <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                         </div>
                       )}
@@ -204,7 +204,7 @@ export function EngineeringSolutions() {
                       {service.tags.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-[6px]">
                           {service.tags.map((tag) => (
-                            <span key={tag} className="rounded-[2px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
+                            <span key={tag} className="rounded-[4px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
                               {tag}
                             </span>
                           ))}
@@ -213,7 +213,7 @@ export function EngineeringSolutions() {
                     </div>
                   ) : (
                     <button
-                      className="flex h-[28px] w-full items-center justify-between rounded-[4px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
+                      className="flex h-[28px] w-full items-center justify-between rounded-[8px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
                       style={{ background: CLOSED_FILL }}
                       onClick={() => setOpenId(service.id)}
                     >
@@ -233,7 +233,7 @@ export function EngineeringSolutions() {
             <div className="mt-7">
               <CtaButton
                 href="/services"
-                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Learn More
               </CtaButton>

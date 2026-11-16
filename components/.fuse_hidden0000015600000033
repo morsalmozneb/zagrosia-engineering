@@ -273,10 +273,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </Reveal>
                 <div className="flex gap-[15px]">
                   <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
                   </Reveal>
                   <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
                   </Reveal>
                 </div>
               </div>
@@ -290,7 +290,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   </p>
                 </Reveal>
                 <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
-                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
+                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
                     Request a Service
                   </Link>
                 </Reveal>

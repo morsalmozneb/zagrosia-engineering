@@ -145,7 +145,7 @@ export function AboutCompanyMilestonesSection() {
           <button
             type="button"
             onClick={prev}
-            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC]"
+            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC]"
             aria-label="Previous milestone"
             style={{ fontSize: "18px", lineHeight: 1, paddingBottom: "1px" }}
           >
@@ -213,7 +213,7 @@ export function AboutCompanyMilestonesSection() {
           <button
             type="button"
             onClick={next}
-            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC]"
+            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC]"
             aria-label="Next milestone"
             style={{ fontSize: "18px", lineHeight: 1, paddingBottom: "1px" }}
           >

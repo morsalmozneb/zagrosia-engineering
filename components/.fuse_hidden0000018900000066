@@ -59,7 +59,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </h1>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
-              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[2px] bg-[#0052A5] px-[8px] py-[3px] text-[8px] tracking-[0.10em] text-white">
+              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[4px] bg-[#0052A5] px-[8px] py-[3px] text-[8px] tracking-[0.10em] text-white">
                 <svg width="9" height="11" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                 {project.location}
               </div>
@@ -105,7 +105,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     </h1>
                   </Reveal>
                   <Reveal delay={0.2} duration={0.65}>
-                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[2px] bg-[#0052A5] px-[10px] py-[4px] text-[9px] tracking-[0.10em] text-white">
+                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[4px] bg-[#0052A5] px-[10px] py-[4px] text-[9px] tracking-[0.10em] text-white">
                       <svg width="10" height="12" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                       {project.location}
                     </div>
@@ -216,7 +216,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       style={{ background: CARD_BORDER }}
                     >
                       <div className="flex items-start gap-4 rounded-[19px] bg-[#FCFCFC] px-6 py-5" style={CARD_SHADOW}>
-                        <span className="mt-[3px] flex h-[24px] w-[24px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#0052A5]">
+                        <span className="mt-[3px] flex h-[24px] w-[24px] flex-shrink-0 items-center justify-center rounded-[6px] bg-[#0052A5]">
                           <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                         </span>
                         <div>
@@ -273,10 +273,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </Reveal>
                 <div className="flex gap-[15px]">
                   <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
                   </Reveal>
                   <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
                   </Reveal>
                 </div>
               </div>
@@ -290,7 +290,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   </p>
                 </Reveal>
                 <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
-                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
+                  <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]">
                     Request a Service
                   </Link>
                 </Reveal>

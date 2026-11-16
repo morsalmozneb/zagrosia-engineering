@@ -54,7 +54,7 @@ export function EGBCExamPrep() {
           >
             {isOpen ? (
               <div
-                  className="rounded-[4px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                  className="rounded-[8px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                   style={{
                     boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                     backdropFilter: "blur(61.5px)",
@@ -76,7 +76,7 @@ export function EGBCExamPrep() {
                 </div>
             ) : (
               <button
-                className="flex h-[28px] w-full items-center justify-between rounded-[4px] px-3 transition-all hover:opacity-80 hover:scale-[1.005] lg:h-[53px]"
+                className="flex h-[28px] w-full items-center justify-between rounded-[8px] px-3 transition-all hover:opacity-80 hover:scale-[1.005] lg:h-[53px]"
                 style={{ background: CLOSED_FILL }}
                 onClick={() => setOpenId(feature.id)}
               >
@@ -116,13 +116,13 @@ export function EGBCExamPrep() {
         <div className="mb-6 mt-8 flex justify-center gap-[15px]">
           <CtaButton
             href="/contact"
-            className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
           >
             Join Wait list
           </CtaButton>
           <CtaButton
             href="/academy"
-            className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
           >
             Learn More
           </CtaButton>
@@ -168,13 +168,13 @@ export function EGBCExamPrep() {
           <div className="relative z-10 mt-8 flex justify-start gap-3">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Join Wait list
             </CtaButton>
             <CtaButton
               href="/academy"
-              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Learn More
             </CtaButton>

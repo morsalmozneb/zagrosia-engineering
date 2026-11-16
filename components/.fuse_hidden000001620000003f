@@ -38,7 +38,7 @@ function ContactPill({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-[5px] rounded-[2px] bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
+      className="flex items-center gap-[5px] rounded-[4px] bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
       style={{ width: "75px", height: "20px" }}
     >
       <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">

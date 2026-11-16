@@ -129,7 +129,7 @@ export function ProjectsSection() {
                     transition={{ duration: 0.55, delay: 0.1 + index * 0.06, ease: EASE }}
                   >
                     <article
-                      className={`overflow-hidden rounded-[4px] bg-[#fcfcfc] text-[#2d2d2d] transition-all duration-300 ease-out ${
+                      className={`overflow-hidden rounded-[8px] bg-[#fcfcfc] text-[#2d2d2d] transition-all duration-300 ease-out ${
                         isActive
                           ? "scale-100 shadow-[0_24px_44px_rgba(0,0,0,0.24)] opacity-100"
                           : "scale-[0.925] shadow-[0_12px_24px_rgba(0,0,0,0.12)] opacity-90"
@@ -144,7 +144,7 @@ export function ProjectsSection() {
                         <p className="mt-3 leading-[1.42] tracking-[0.11em] text-[#5a5a5a]" style={{ fontSize: "12px" }}>{project.description}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
                           {project.tags.map((tag) => (
-                            <span key={tag} className="rounded-[2px] border border-[#aab4c2] px-[9px] py-[3px] leading-none tracking-[0.12em] text-[#6b7380]" style={{ fontSize: "8px" }}>{tag}</span>
+                            <span key={tag} className="rounded-[4px] border border-[#aab4c2] px-[9px] py-[3px] leading-none tracking-[0.12em] text-[#6b7380]" style={{ fontSize: "8px" }}>{tag}</span>
                           ))}
                         </div>
                         <div className="mt-4 flex items-center gap-1.5 tracking-[0.12em] text-[#6e7684]" style={{ fontSize: "10px" }}>
@@ -154,7 +154,7 @@ export function ProjectsSection() {
                         <div className="mt-4">
                           <CtaButton
                             href="/projects"
-                            className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                            className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                             style={{ fontSize: "9.5px", width: "100px", height: "30px" }}
                           >
                             View Project
@@ -174,14 +174,14 @@ export function ProjectsSection() {
               <button
                 key={index}
                 onClick={() => emblaApi?.scrollTo(index)}
-                className={`h-[12px] w-[12px] rounded-[3px] transition-colors ${index === selectedIndex ? "bg-[#1f69d7]" : "bg-white"}`}
+                className={`h-[12px] w-[12px] rounded-[6px] transition-colors ${index === selectedIndex ? "bg-[#1f69d7]" : "bg-white"}`}
                 aria-label={`Go to project ${index + 1}`}
               />
             ))}
           </div>
 
           <div className="mt-8 flex justify-center pb-10">
-            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               View All Projects
             </CtaButton>
           </div>
@@ -220,7 +220,7 @@ export function ProjectsSection() {
           {/* Left arrow */}
           <motion.button
             onClick={() => goTo(prevIndex, -1)}
-            className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[3px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
+            className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[6px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
             style={{ left: "150px", top: "336px" }}
             aria-label="Previous project"
             whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
@@ -235,7 +235,7 @@ export function ProjectsSection() {
           {/* Right arrow */}
           <motion.button
             onClick={() => goTo(nextIndex, 1)}
-            className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[3px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
+            className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[6px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
             style={{ right: "150px", top: "336px" }}
             aria-label="Next project"
             whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
@@ -253,7 +253,7 @@ export function ProjectsSection() {
             {/* LEFT card — hover lift, crossfade content */}
             <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginRight: "-152px", paddingTop: "52px" }}>
               <motion.article
-                className="overflow-hidden rounded-[4px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+                className="overflow-hidden rounded-[8px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
                 style={{ transformOrigin: "left center", cursor: "pointer", opacity: 0.6, scale: 0.88 }}
                 onClick={() => goTo(prevIndex, -1)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goTo(prevIndex, -1); } }}
@@ -290,14 +290,14 @@ export function ProjectsSection() {
                     <p className="mt-2 text-[10px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[prevIndex].description}</p>
                     <div className="mt-3 flex flex-wrap gap-[5px]">
                       {projects[prevIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[2px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[4px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-4 flex items-center justify-between">
                       <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
                         <MapPin size={11} strokeWidth={1.8} /><span>{projects[prevIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -305,7 +305,7 @@ export function ProjectsSection() {
             </div>
 
             {/* CENTER card — direction-aware slide+blur on navigate */}
-            <div className="relative flex-shrink-0" style={{ width: "80%", zIndex: 30, overflow: "hidden", borderRadius: "4px", boxShadow: "-2px 4px 31px 0px rgba(0,0,0,0.68)" }}>
+            <div className="relative flex-shrink-0" style={{ width: "80%", zIndex: 30, overflow: "hidden", borderRadius: "8px", boxShadow: "-2px 4px 31px 0px rgba(0,0,0,0.68)" }}>
               <article className="bg-[#fcfcfc] text-[#2d2d2d]" style={{ height: "576px" }}>
                 {/* Image with direction-aware slide */}
                 <div className="relative w-full overflow-hidden" style={{ height: "304px" }}>
@@ -348,14 +348,14 @@ export function ProjectsSection() {
                     <p className="mt-3 leading-[1.55] tracking-[0.07em] text-[#5a5a5a]" style={{ fontSize: "16px" }}>{projects[desktopIndex].description}</p>
                     <div className="mt-4 flex flex-wrap gap-[6px]">
                       {projects[desktopIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[2px] border border-[#aab4c2] px-[10px] py-[4px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[4px] border border-[#aab4c2] px-[10px] py-[4px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-5 flex items-center justify-between">
                       <div className="flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "16px" }}>
                         <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -365,7 +365,7 @@ export function ProjectsSection() {
             {/* RIGHT card — hover lift, crossfade content */}
             <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginLeft: "-152px", paddingTop: "52px" }}>
               <motion.article
-                className="overflow-hidden rounded-[4px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+                className="overflow-hidden rounded-[8px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
                 style={{ transformOrigin: "right center", cursor: "pointer", opacity: 0.6, scale: 0.88 }}
                 onClick={() => goTo(nextIndex, 1)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goTo(nextIndex, 1); } }}
@@ -402,14 +402,14 @@ export function ProjectsSection() {
                     <p className="mt-2 text-[10px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[nextIndex].description}</p>
                     <div className="mt-3 flex flex-wrap gap-[5px]">
                       {projects[nextIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[2px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[4px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-4 flex items-center justify-between">
                       <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
                         <MapPin size={11} strokeWidth={1.8} /><span>{projects[nextIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -424,7 +424,7 @@ export function ProjectsSection() {
               <button
                 key={index}
                 onClick={() => goTo(index, index > desktopIndex ? 1 : -1)}
-                className={`h-[10px] w-[10px] rounded-[3px] transition-colors ${index === desktopIndex ? "bg-[#1f69d7]" : "bg-white/40"}`}
+                className={`h-[10px] w-[10px] rounded-[6px] transition-colors ${index === desktopIndex ? "bg-[#1f69d7]" : "bg-white/40"}`}
                 aria-label={`Go to project ${index + 1}`}
               />
             ))}
@@ -432,7 +432,7 @@ export function ProjectsSection() {
 
           {/* All Projects button */}
           <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-8 flex justify-center pb-4">
-            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               All Projects
             </CtaButton>
           </Reveal>
