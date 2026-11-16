@@ -5,6 +5,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { isHiddenHref } from "@/lib/hidden-sections"
+
 const WAVE_COLOR = "#C5DEF5"
 
 const menuItems = [
@@ -16,7 +18,7 @@ const menuItems = [
   { label: "ACADEMY",  href: "/academy",  icon: "/icons/icon-academy.svg"  },
   { label: "BLOG",     href: "/blog",     icon: "/icons/icon-blog.svg"     },
   { label: "CONTACT",  href: "/contact",  icon: "/icons/icon-contact.svg"  },
-]
+].filter((item) => !isHiddenHref(item.href))
 
 export function AboutPageHeader() {
   const [isOpen, setIsOpen] = useState(false)

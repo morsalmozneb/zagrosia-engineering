@@ -6,6 +6,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence, useAnimation } from "framer-motion"
 
+import { isHiddenHref } from "@/lib/hidden-sections"
+
 const navItems = [
   { label: "HOME",     href: "/",         icon: "/icons/icon-home.svg"     },
   { label: "ABOUT",    href: "/about",    icon: "/icons/icon-about.svg"    },
@@ -15,7 +17,7 @@ const navItems = [
   { label: "ACADEMY",  href: "/academy",  icon: "/icons/icon-academy.svg"  },
   { label: "BLOG",     href: "/blog",     icon: "/icons/icon-blog.svg"     },
   { label: "CONTACT",  href: "/contact",  icon: "/icons/icon-contact.svg"  },
-]
+].filter((item) => !isHiddenHref(item.href))
 
 const COLLAPSED_W = 45
 const EXPANDED_W  = 162

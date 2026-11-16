@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { isHiddenHref } from "@/lib/hidden-sections"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Reveal } from "./scroll-reveal"
@@ -90,10 +91,10 @@ export function Footer() {
         >
           <h4 className="mb-3 font-medium tracking-[0.12em] text-[#FCFCFC]" style={{ fontSize: "14px" }}>Platform</h4>
           <ul className="space-y-[6px] tracking-[0.1em] text-[#FCFCFC]/78" style={{ fontSize: "13px" }}>
-            <li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>
-            <li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>
+            {!isHiddenHref("/ai-lab") && (<li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>)}
+            {!isHiddenHref("/academy") && (<li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>)}
             <li><Link href="/projects" className="hover:text-[#0052A5] transition-colors">Project Portfolio</Link></li>
-            <li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>
+            {!isHiddenHref("/blog") && (<li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>)}
             <li><Link href="/about" className="hover:text-[#0052A5] transition-colors">About</Link></li>
           </ul>
         </motion.div>
@@ -151,10 +152,10 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-[13px] font-medium tracking-[0.14em] text-[#FCFCFC]">Platform</h4>
             <ul className="space-y-[10px] text-[11px] tracking-[0.15em] text-[#FCFCFC]/78">
-              <li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>
-              <li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>
+              {!isHiddenHref("/ai-lab") && (<li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>)}
+              {!isHiddenHref("/academy") && (<li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>)}
               <li><Link href="/projects" className="hover:text-[#0052A5] transition-colors">Project Portfolio</Link></li>
-              <li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>
+              {!isHiddenHref("/blog") && (<li><Link href="/blog" className="hover:text-[#0052A5] transition-colors">Blog</Link></li>)}
               <li><Link href="/about" className="hover:text-[#0052A5] transition-colors">About</Link></li>
             </ul>
           </div>

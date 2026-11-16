@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next"
 import { projects } from "@/lib/projects-data"
+import { isHiddenHref } from "@/lib/hidden-sections"
 
 const BASE = "https://www.zagrosia.ca"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const entries: MetadataRoute.Sitemap = [
     {
       url: BASE,
       lastModified: new Date(),
@@ -60,4 +61,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     })),
   ]
+  return entries.filter((e) => !isHiddenHref(new URL(e.url).pathname))
 }

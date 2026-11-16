@@ -21,6 +21,7 @@ import { ProjectsSection } from "@/components/projects-section"
 import { EGBCExamPrep } from "@/components/egbc-exam-prep"
 import { EngineeringBlog } from "@/components/engineering-blog"
 import { Footer } from "@/components/footer"
+import { HIDE_AI_LAB_ACADEMY_BLOG } from "@/lib/hidden-sections"
 
 export default function Home() {
   return (
@@ -40,11 +41,11 @@ export default function Home() {
 
       <div className="below-hero-content">
         <EngineeringSolutions />
-        <AIAutomationLab />
+        {!HIDE_AI_LAB_ACADEMY_BLOG && <AIAutomationLab />}
         <EngineeringExcellence />
         <ProjectsSection />
-        <EGBCExamPrep />
-        <EngineeringBlog />
+        {!HIDE_AI_LAB_ACADEMY_BLOG && <EGBCExamPrep />}
+        {!HIDE_AI_LAB_ACADEMY_BLOG && <EngineeringBlog />}
         <Footer />
       </div>
     </main>

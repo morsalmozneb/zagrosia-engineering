@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { HIDE_AI_LAB_ACADEMY_BLOG } from "@/lib/hidden-sections"
 
 export const metadata: Metadata = {
   title: "Academy",
@@ -47,6 +49,7 @@ const jsonLd = {
 }
 
 export default function AcademyPage() {
+  if (HIDE_AI_LAB_ACADEMY_BLOG) notFound()
   return (
     <main className="w-full overflow-hidden bg-[#FCFCFC] lg:overflow-visible lg:shadow-none">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
