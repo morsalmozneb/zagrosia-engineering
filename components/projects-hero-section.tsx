@@ -161,7 +161,7 @@ function BadgePill({ badge, attribution, className = "" }: { badge: string; attr
       ? "bg-[#0052A5] text-white"
       : "border border-white/60 bg-white/15 text-white backdrop-blur-[6px]"
   return (
-    <span className={`inline-flex items-center rounded-full px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
+    <span className={`inline-flex items-center rounded-[2px] px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
       {badge}
     </span>
   )
@@ -185,10 +185,10 @@ function DesktopProjectCardItem({
 
   return (
     <article
-      className={`${spanClassName} group overflow-hidden rounded-[18px] shadow-[0_12px_28px_rgba(22,22,22,0.14)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(22,22,22,0.28)]`}
+      className={`${spanClassName} group zag-card-outline overflow-hidden rounded-[4px] shadow-[0_12px_28px_rgba(22,22,22,0.14)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(22,22,22,0.28)]`}
     >
       <Link href={cardHref} className="block cursor-pointer">
-        <div className={`relative ${heightClassName} overflow-hidden rounded-[18px] bg-[#303030]`}>
+        <div className={`zag-ticks relative ${heightClassName} overflow-hidden rounded-[4px] bg-[#303030]`}>
           <Image src={image} alt={title.replace(/\n/g, " ")} fill className={`object-cover ${objectPositionClassName} transition-transform duration-500 group-hover:scale-[1.03]`} />
           <div
             className="absolute inset-0"
@@ -212,7 +212,7 @@ function DesktopProjectCardItem({
             ) : null}
             <div className="flex items-end justify-between gap-[12px]">
               <div>
-                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[2px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                   <LocationPin />
                   <span>{location}</span>
                 </div>
@@ -221,7 +221,7 @@ function DesktopProjectCardItem({
                 </h3>
               </div>
               <span
-                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-full border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
+                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-[2px] border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
                 style={{ fontSize: "10px" }}
               >
                 Learn More
@@ -324,7 +324,7 @@ export function ProjectsHeroSection() {
         </button>
 
         {filterPanelOpen && (
-          <div className="mb-8 overflow-hidden rounded-[10px] border border-[#DEDEDE]">
+          <div className="mb-8 overflow-hidden rounded-[3px] border border-[#DEDEDE]">
             <div>
               <button
                 className="flex w-full items-center justify-between px-4 py-3 text-left"
@@ -407,7 +407,7 @@ export function ProjectsHeroSection() {
               <div
                 key={project.id}
                 onClick={() => !isActive && setActiveIndex(index)}
-                className="absolute overflow-hidden rounded-[20px] transition-all duration-500"
+                className="absolute overflow-hidden rounded-[4px] transition-all duration-500"
                 style={{
                   top:      `${tops[i]}px`,
                   left:     lefts[i],
@@ -436,7 +436,7 @@ export function ProjectsHeroSection() {
                 />
                 {project.badge ? <BadgePill badge={project.badge} attribution={project.attribution} className="absolute left-4 top-4 z-10" /> : null}
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
-                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-full bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[2px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                     <LocationPin />
                     <span>{project.location}</span>
                   </div>
@@ -458,7 +458,7 @@ export function ProjectsHeroSection() {
                       </p>
                       <CtaButton
                         href={project.slug ? `/projects/${project.slug}` : "/contact"}
-                        className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                        className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                         style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                       >
                         Learn More
@@ -537,7 +537,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Request a Service
               </CtaButton>
@@ -545,7 +545,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Get In Touch
               </CtaButton>
@@ -634,7 +634,7 @@ export function ProjectsHeroSection() {
 
             {filterPanelOpen ? (
               <div className="col-span-12 mt-[10px]">
-                <div className="w-full overflow-hidden rounded-[18px] border border-[#2D2D2D]/10 bg-[#FCFCFC]/95 shadow-[0_12px_30px_rgba(45,45,45,0.18)] backdrop-blur-[10px]">
+                <div className="w-full overflow-hidden rounded-[4px] border border-[#2D2D2D]/10 bg-[#FCFCFC]/95 shadow-[0_12px_30px_rgba(45,45,45,0.18)] backdrop-blur-[10px]">
                   <div className="px-[16px] py-[12px]">
                     <button
                       className="flex w-full cursor-pointer items-center justify-between text-left text-[16px] font-semibold tracking-[0.14em] text-[#2D2D2D]"
@@ -745,7 +745,7 @@ export function ProjectsHeroSection() {
               <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Request a Service
                 </CtaButton>

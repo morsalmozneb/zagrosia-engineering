@@ -145,7 +145,7 @@ export function AboutCompanyMilestonesSection() {
           <button
             type="button"
             onClick={prev}
-            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC]"
+            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC]"
             aria-label="Previous milestone"
             style={{ fontSize: "18px", lineHeight: 1, paddingBottom: "1px" }}
           >
@@ -157,15 +157,15 @@ export function AboutCompanyMilestonesSection() {
             {/* Stacked photos — no gaps, center raised and in front */}
             <div className="absolute inset-x-0 top-0" style={{ height: "110px" }}>
               {/* Left */}
-              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", left: 0, top: "14px", zIndex: 0 }}>
+              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "3px", left: 0, top: "14px", zIndex: 0 }}>
                 <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
               {/* Center — raised, on top */}
-              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
+              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "3px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
                 <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
               {/* Right */}
-              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "12px", right: 0, top: "14px", zIndex: 0 }}>
+              <div className="absolute overflow-hidden" style={{ width: "111px", height: "97px", borderRadius: "3px", right: 0, top: "14px", zIndex: 0 }}>
                 <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="111px" className="object-cover" />
               </div>
             </div>
@@ -178,7 +178,7 @@ export function AboutCompanyMilestonesSection() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.45, ease: EASE }}
               style={{
-                borderRadius: "20px",
+                borderRadius: "4px",
                 backgroundColor: "rgba(252,252,252,0.2)",
                 boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                 backdropFilter: "blur(61.5px)",
@@ -213,7 +213,7 @@ export function AboutCompanyMilestonesSection() {
           <button
             type="button"
             onClick={next}
-            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-full bg-[#2D2D2D] text-[#FCFCFC]"
+            className="flex h-[29px] w-[29px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#2D2D2D] text-[#FCFCFC]"
             aria-label="Next milestone"
             style={{ fontSize: "18px", lineHeight: 1, paddingBottom: "1px" }}
           >
@@ -241,7 +241,7 @@ export function AboutCompanyMilestonesSection() {
                 style={{
                   width: "141.79px",
                   height: "175.27px",
-                  borderRadius: "20px",
+                  borderRadius: "4px",
                   backgroundColor: "#EFEFEF",
                   boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                   backdropFilter: "blur(61.5px)",
@@ -256,7 +256,7 @@ export function AboutCompanyMilestonesSection() {
                   style={{
                     width: "141.79px",
                     height: "110.95px",
-                    borderRadius: "20px 20px 0 0",
+                    borderRadius: "4px 4px 0 0",
                     overflow: "hidden",
                   }}
                 >
@@ -289,7 +289,7 @@ export function AboutCompanyMilestonesSection() {
                   <button
                     type="button"
                     onClick={() => setIndex(i)}
-                    className="rounded-full transition-all flex-shrink-0"
+                    className="rounded-[2px] transition-all flex-shrink-0"
                     aria-label={`Go to ${m.year}`}
                     style={{
                       width: "10px",

@@ -222,7 +222,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.05 }}
               transition={{ duration: 0.6, delay: 0.08 + index * 0.12, ease: EASE }}
-              className="mb-[10px] rounded-[20px] bg-[#FCFCFC] p-4"
+              className="mb-[10px] rounded-[4px] bg-[#FCFCFC] p-4"
               style={{
                 boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                 backdropFilter: "blur(61.5px)",
@@ -233,7 +233,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
               {!isOpen && (
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <span className="mb-2 inline-block rounded-full border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
+                    <span className="mb-2 inline-block rounded-[2px] border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
                       {article.category}
                     </span>
                     <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
@@ -250,14 +250,14 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <button
                       type="button"
                       onClick={() => setOpenCards(prev => { const next = new Set(prev); next.add(index); return next })}
-                      className="flex h-[28px] w-[28px] items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                      className="flex h-[28px] w-[28px] items-center justify-center rounded-[3px] border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
                       aria-label="Expand article"
                     >
                       <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                         <path d="M7 2V12M2 7H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                       </svg>
                     </button>
-                    <div className="relative h-[90px] w-[80px] overflow-hidden rounded-[10px]">
+                    <div className="relative h-[90px] w-[80px] overflow-hidden rounded-[3px]">
                       <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
                     </div>
                   </div>
@@ -269,7 +269,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                 <>
                   <div className="flex items-start justify-between gap-3 mb-1">
                     <div className="flex-1 min-w-0">
-                      <span className="mb-2 inline-block rounded-full border border-[#0052A5] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#0052A5]">
+                      <span className="mb-2 inline-block rounded-[2px] border border-[#0052A5] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#0052A5]">
                         {article.category}
                       </span>
                       <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
@@ -282,7 +282,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <button
                       type="button"
                       onClick={() => setOpenCards(prev => { const next = new Set(prev); next.delete(index); return next })}
-                      className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                      className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-[3px] border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
                       aria-label="Collapse article"
                     >
                       <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -291,7 +291,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     </button>
                   </div>
                   <div className="my-3 h-px w-full bg-[#E0E0E0]" />
-                  <div className="mb-3 relative h-[160px] w-full overflow-hidden rounded-[12px]">
+                  <div className="mb-3 relative h-[160px] w-full overflow-hidden rounded-[3px]">
                     <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
                   </div>
                   <MobileArticleScroll content={article.content} />
@@ -323,7 +323,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Contact Us
@@ -332,7 +332,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
               >
                 Get In Touch
@@ -394,7 +394,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.65, delay: 0.08 + index * 0.12, ease: EASE }}
-                  className="rounded-[20px] bg-[#FCFCFC] px-6 py-5 backdrop-blur-[61.5px]"
+                  className="rounded-[4px] bg-[#FCFCFC] px-6 py-5 backdrop-blur-[61.5px]"
                   style={{ boxShadow: "0 4px 19.6px 0 rgba(0,0,0,0.34)" }}
                 >
                   {/* Closed layout */}
@@ -402,7 +402,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <div className="flex items-start gap-4">
                       {/* Left: text */}
                       <div className="flex-1 min-w-0">
-                        <span className="mb-3 inline-block rounded-full border border-[#2D2D2D] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
+                        <span className="mb-3 inline-block rounded-[2px] border border-[#2D2D2D] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
                           {article.category}
                         </span>
                         <h2 className="text-[18px] font-bold leading-[1.25] tracking-[0.03em] text-[#2D2D2D]">
@@ -416,7 +416,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                         </p>
                       </div>
                       {/* Middle: thumbnail */}
-                      <div className="relative flex-shrink-0 overflow-hidden rounded-[12px]" style={{ width: 130, height: 130 }}>
+                      <div className="relative flex-shrink-0 overflow-hidden rounded-[3px]" style={{ width: 130, height: 130 }}>
                         <Image
                           src={article.image}
                           alt={article.title}
@@ -428,7 +428,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                       <button
                         type="button"
                         onClick={() => setOpenCards(prev => { const next = new Set(prev); next.add(index); return next })}
-                        className="mt-1 flex h-[32px] w-[32px] flex-shrink-0 items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                        className="mt-1 flex h-[32px] w-[32px] flex-shrink-0 items-center justify-center rounded-[3px] border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
                         aria-label="Expand article"
                       >
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -443,7 +443,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <>
                       <div className="flex items-start justify-between gap-6 mb-1">
                         <div className="flex-1 min-w-0">
-                          <span className="mb-3 inline-block rounded-full border border-[#0052A5] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#0052A5]">
+                          <span className="mb-3 inline-block rounded-[2px] border border-[#0052A5] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#0052A5]">
                             {article.category}
                           </span>
                           <h2 className="text-[18px] font-bold leading-[1.25] tracking-[0.03em] text-[#2D2D2D]">
@@ -456,7 +456,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                         <button
                           type="button"
                           onClick={() => setOpenCards(prev => { const next = new Set(prev); next.delete(index); return next })}
-                          className="mt-1 flex h-[32px] w-[32px] flex-shrink-0 items-center justify-center rounded-full border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
+                          className="mt-1 flex h-[32px] w-[32px] flex-shrink-0 items-center justify-center rounded-[3px] border border-[#D0D0D0] text-[#2D2D2D] transition-colors hover:border-[#0052A5] hover:text-[#0052A5]"
                           aria-label="Collapse article"
                         >
                           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -467,7 +467,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                       <div className="my-5 h-px w-full bg-[#E0E0E0]" />
                       <div className="grid grid-cols-[1fr_300px] gap-8">
                         <ScrollableArticle content={article.content} />
-                        <div className="relative overflow-hidden rounded-[12px]" style={{ minHeight: 300 }}>
+                        <div className="relative overflow-hidden rounded-[3px]" style={{ minHeight: 300 }}>
                           <Image
                             src={article.image}
                             alt={article.title}
@@ -501,7 +501,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
           <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>

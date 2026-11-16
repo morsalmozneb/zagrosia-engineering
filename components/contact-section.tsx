@@ -98,7 +98,7 @@ export function ContactSection() {
     if (submitted) {
       return (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="mb-4 flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#0052A5]/10">
+          <div className="mb-4 flex h-[56px] w-[56px] items-center justify-center rounded-[3px] bg-[#0052A5]/10">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 13l4 4L19 7" stroke="#0052A5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -178,7 +178,7 @@ export function ContactSection() {
         )}
 
         <CtaButton as="button" type="submit" disabled={submitting}
-          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
+          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-[2px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
           style={{ fontSize: mobile ? "14px" : "16px" }}
         >
           {submitting ? "Sending..." : "Send Message"}
@@ -228,7 +228,7 @@ export function ContactSection() {
           </Reveal>
         </div>
 
-        <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="mb-10 rounded-[20px] bg-[#FCFCFC] px-5 py-5"
+        <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="mb-10 rounded-[4px] bg-[#FCFCFC] px-5 py-5"
           style={{ boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
         >
           <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
@@ -251,7 +251,7 @@ export function ContactSection() {
               viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: EASE }}
             >
-              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+              <div className="flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                 {item.icon}
               </div>
               <div>
@@ -299,7 +299,7 @@ export function ContactSection() {
           </div>
 
           {/* Contact Form */}
-          <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="rounded-[20px] bg-[#FCFCFC] px-8 py-8 mb-8"
+          <Reveal variant="fadeBlur" delay={0.15} duration={0.7} className="rounded-[4px] bg-[#FCFCFC] px-8 py-8 mb-8"
             style={{ boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
           >
             <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
@@ -328,7 +328,7 @@ export function ContactSection() {
                   viewport={{ once: false, amount: 0.1 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: EASE }}
                 >
-                  <div className="flex h-[44px] w-[44px] flex-shrink-0 items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+                  <div className="flex h-[44px] w-[44px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
                     {item.icon}
                   </div>
                   <div>

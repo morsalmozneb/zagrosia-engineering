@@ -109,7 +109,7 @@ function DesktopToolCard({
 }) {
   return (
     <article
-      className={`group relative cursor-pointer overflow-hidden rounded-[20px] ${heightClass} transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(0,0,0,0.4)]`}
+      className={`group relative cursor-pointer overflow-hidden rounded-[4px] ${heightClass} transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(0,0,0,0.4)]`}
       style={{ boxShadow: DESKTOP_CARD_SHADOW }}
     >
       <Image
@@ -142,7 +142,7 @@ function DesktopToolCard({
           </p>
         ) : null}
 
-        <span className="mt-[18px] inline-flex h-[31px] translate-y-2 items-center rounded-full border border-white/80 px-[17px] text-[8.5px] uppercase tracking-[0.16em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="mt-[18px] inline-flex h-[31px] translate-y-2 items-center rounded-[2px] border border-white/80 px-[17px] text-[8.5px] uppercase tracking-[0.16em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           Watch Demo
         </span>
       </div>
@@ -242,7 +242,7 @@ export function AILabSection() {
           {largeTools.map((tool, i) => (
             <motion.div
               key={tool.id}
-              className="relative h-[220px] overflow-hidden rounded-[20px]"
+              className="relative h-[220px] overflow-hidden rounded-[4px]"
               style={{ boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -269,7 +269,7 @@ export function AILabSection() {
                 </p>
                 <CtaButton
                   href="#"
-                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
                 >
                   Watch Demo
@@ -284,7 +284,7 @@ export function AILabSection() {
           {smallTools.map((tool, i) => (
             <motion.div
               key={tool.id}
-              className="relative overflow-hidden rounded-[20px]"
+              className="relative overflow-hidden rounded-[4px]"
               style={{ height: 175, boxShadow: "0px 20px 52px rgba(0,0,0,0.44), 0px 4px 14px rgba(0,0,0,0.18)" }}
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -308,7 +308,7 @@ export function AILabSection() {
                 </h3>
                 <CtaButton
                   href="#"
-                  className="inline-flex items-center justify-center rounded-full border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
                   style={{ fontSize: "9px", width: "90px", height: "26px" }}
                 >
                   Watch Demo
@@ -342,7 +342,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>
@@ -350,7 +350,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.38} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Get In Touch
             </CtaButton>
@@ -488,7 +488,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[3px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>

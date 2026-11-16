@@ -1,0 +1,258 @@
+"use client"
+
+import { useState } from "react"
+import Image from "next/image"
+import { PlusCircle, MinusCircle } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Reveal, StaggerReveal } from "./scroll-reveal"
+import { CtaButton } from "@/components/cta-button"
+
+const CLOSED_FILL = "linear-gradient(to right, rgba(45,45,45,1) 0%, rgba(115,115,115,0.22) 100%)"
+const EASE = [0.0, 0.0, 0.2, 1] as const
+
+const services = [
+  {
+    id: 1,
+    title: "Structural Design",
+    image: "/images/services-building.png",
+    intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
+    bullets: [
+      "Residential structures (single-family, multi-family, townhomes)",
+      "Commercial buildings (offices, retail, mixed-use)",
+      "Industrial facilities and warehouses",
+      "Foundation design and analysis",
+      "Steel, concrete, wood, and masonry structures",
+      "Structural drawings and specifications",
+    ],
+    tags: ["Steel", "Concrete", "Wood", "Masonry", "BCBC 2024", "NBCC"],
+  },
+  {
+    id: 2,
+    title: "Seismic Assessment",
+    image: "/images/seismic-crane.jpg",
+    intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.",
+    bullets: [
+      "Seismic hazard and site classification analysis",
+      "Existing building vulnerability assessments",
+      "Retrofit design and structural strengthening",
+      "Post-earthquake damage evaluation",
+      "Compliance with BCBC 2024 and NBCC seismic provisions",
+      "Detailed reporting and engineering recommendations",
+    ],
+    tags: ["BCBC 2024", "NBCC", "Seismic", "Retrofit", "Risk Assessment"],
+  },
+  {
+    id: 3,
+    title: "Building Rehabilitation",
+    image: "/images/about-milestones-building.png",
+    intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
+    bullets: [
+      "Condition assessment and structural investigation",
+      "Repair design for concrete, steel, and masonry",
+      "Seismic and code-compliance upgrades",
+      "Structural reinforcement and strengthening",
+      "Heritage and existing building retrofits",
+      "Long-term rehabilitation planning and reporting",
+    ],
+    tags: ["Rehabilitation", "Retrofit", "Concrete", "Masonry", "EGBC"],
+  },
+  {
+    id: 4,
+    title: "Heavy Racking",
+    image: "/images/industrial-racking.jpg",
+    intro: "Industrial racking systems engineering — design, seismic review, and code compliance for warehouses and distribution centres.",
+    bullets: [
+      "Selective and drive-in pallet racking design",
+      "Seismic bracing and anchor design",
+      "Load capacity and operational safety review",
+      "Site-specific seismic compliance (BCBC / NBCC)",
+      "Racking system inspection and certification",
+      "Full engineering drawing packages",
+    ],
+    tags: ["Industrial", "Steel", "Seismic", "BCBC 2024", "Warehousing"],
+  },
+  {
+    id: 5,
+    title: "Building Envelope",
+    image: "/images/glass-building.jpg",
+    intro: "Structural integration and performance assessments for building envelopes — moisture control, cladding systems, and longevity.",
+    bullets: [
+      "Exterior cladding and curtain wall structural review",
+      "Moisture and air barrier assessment",
+      "Window and glazing system structural analysis",
+      "Roof structure and waterproofing coordination",
+      "Facade inspection and failure investigation",
+      "Performance improvement recommendations",
+    ],
+    tags: ["Envelope", "Cladding", "Glazing", "Waterproofing", "Building Science"],
+  },
+  {
+    id: 6,
+    title: "Specialty Reviews",
+    image: "/images/about-core-values-building.png",
+    intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
+    bullets: [
+      "Independent structural peer review",
+      "Third-party engineering assessments",
+      "Expert technical opinions and reports",
+      "Construction progress and compliance review",
+      "Dispute resolution and forensic engineering support",
+      "Custom consulting for unique structural challenges",
+    ],
+    tags: ["Peer Review", "Forensic", "Consulting", "Inspection", "EGBC"],
+  },
+]
+
+export function EngineeringSolutions() {
+  const [openId, setOpenId] = useState<number>(1)
+  const reducedMotion = useReducedMotion()
+
+  return (
+    <section id="services" className="bg-[#FCFCFC] text-[#2D2D2D]">
+
+      {/* TOP: Accordion */}
+      <div className="sidebar-content px-6 pb-10 pt-12 lg:pt-20 lg:pb-14 zag-desktop-content-pad">
+        <div className="relative pl-5 lg:max-w-[940px]">
+
+          {/* Vertical fading line — draws in from top */}
+          <motion.div
+            className="absolute left-0 top-0 w-[1.5px]"
+            style={{
+              height: "100%",
+              background: "linear-gradient(to bottom, rgba(45,45,45,1) 0%, rgba(45,45,45,0.8) 30%, rgba(45,45,45,0.4) 65%, rgba(45,45,45,0) 100%)",
+              transformOrigin: "top",
+            }}
+            initial={reducedMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+          />
+
+          {/* Heading */}
+          <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+            <h2 className="zag-heading mb-5 font-medium uppercase leading-[1.1] text-[20px] lg:font-normal lg:text-[32px] lg:leading-[1.1]">
+              <span className="text-[#2D2D2D]">ENGINEERING</span>
+              <br />
+              <span className="text-[#2D2D2D]">SOLUTIONS</span>
+            </h2>
+          </Reveal>
+
+          {/* Description */}
+          <Reveal delay={0.22} duration={0.65}>
+            <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.04em] text-[#2D2D2D] lg:text-[18px]" style={{ lineHeight: 1.65 }}>
+              From new structural design to complex rehabilitation, every engagement backed by 35+ years of expertise.
+            </p>
+          </Reveal>
+
+          {/* Accordion — each row staggers in */}
+          <div className="w-full space-y-[6px] lg:max-w-[916px]">
+            {services.map((service, i) => {
+              const isOpen = service.id === openId
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.05 }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
+                >
+                  {isOpen ? (
+                    <div
+                      className="rounded-[20px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                      style={{
+                        boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
+                        backdropFilter: "blur(61.5px)",
+                        WebkitBackdropFilter: "blur(61.5px)",
+                      }}
+                    >
+                      <button
+                        className="flex w-full items-start justify-between"
+                        onClick={() => setOpenId(0)}
+                      >
+                        <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D] lg:text-[24px]">
+                          {service.id}. {service.title}
+                        </span>
+                        <MinusCircle size={22} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
+                      </button>
+
+                      {service.image && (
+                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:h-[220px]">
+                          <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                        </div>
+                      )}
+
+                      <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D] lg:text-[16px]" style={{ fontSize: "12px" }}>
+                        {service.intro}
+                      </p>
+
+                      {service.bullets.length > 0 && (
+                        <>
+                          <p className="mt-4 font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                            What We Offer
+                          </p>
+                          <ul className="mt-2 space-y-[5px]">
+                            {service.bullets.map((b) => (
+                              <li key={b} className="flex items-start gap-2 leading-[1.65] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
+                                <span className="mt-[3px] text-[8px]">•</span>
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+
+                      {service.tags.length > 0 && (
+                        <div className="mt-4 flex flex-wrap gap-[6px]">
+                          {service.tags.map((tag) => (
+                            <span key={tag} className="rounded-full bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <button
+                      className="flex h-[28px] w-full items-center justify-between rounded-[20px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
+                      style={{ background: CLOSED_FILL }}
+                      onClick={() => setOpenId(service.id)}
+                    >
+                      <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
+                        {service.id}. {service.title}
+                      </span>
+                      <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
+                    </button>
+                  )}
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Learn More CTA */}
+          <Reveal variant="scaleUp" delay={0.3} duration={0.55}>
+            <div className="mt-7">
+              <CtaButton
+                href="/services"
+                className="inline-flex items-center justify-center rounded-full border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              >
+                Learn More
+              </CtaButton>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* BOTTOM: Building image — slides in from right with blur */}
+      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="overflow-hidden -mt-10">
+        <Image
+          src="/images/curved-building.png"
+          alt="Modern curved architectural building"
+          width={1200}
+          height={600}
+          className="w-full object-cover"
+          priority
+        />
+      </Reveal>
+    </section>
+  )
+}
