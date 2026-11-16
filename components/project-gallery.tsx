@@ -51,7 +51,7 @@ export function ProjectGallery({ photos, title }: { photos: string[]; title: str
                 type="button"
                 onClick={() => setOpen(i)}
                 aria-label={`Open photo ${i + 1} of ${photos.length}`}
-                className="zag-card-outline group relative aspect-[4/3] overflow-hidden rounded-[8px] bg-[#E8EDF4]"
+                className="zag-card-outline group relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#E8EDF4]"
               >
                 <Image
                   src={src}
@@ -91,7 +91,7 @@ export function ProjectGallery({ photos, title }: { photos: string[]; title: str
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/40 text-[18px] text-white transition-colors hover:bg-[#0052A5]"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-[10px] border border-white/40 text-[18px] text-white transition-colors hover:bg-[#0052A5]"
           >
             ✕
           </button>
@@ -104,7 +104,7 @@ export function ProjectGallery({ photos, title }: { photos: string[]; title: str
                   prev()
                 }}
                 aria-label="Previous photo"
-                className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[6px] border border-white/40 text-[20px] text-white transition-colors hover:bg-[#0052A5]"
+                className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 text-[20px] text-white transition-colors hover:bg-[#0052A5]"
               >
                 ←
               </button>
@@ -115,7 +115,7 @@ export function ProjectGallery({ photos, title }: { photos: string[]; title: str
                   next()
                 }}
                 aria-label="Next photo"
-                className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[6px] border border-white/40 text-[20px] text-white transition-colors hover:bg-[#0052A5]"
+                className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 text-[20px] text-white transition-colors hover:bg-[#0052A5]"
               >
                 →
               </button>

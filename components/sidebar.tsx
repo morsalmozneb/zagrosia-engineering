@@ -73,7 +73,7 @@ export function Sidebar() {
                 : "rgba(184,190,200,0.82)",
             }}
             transition={panelSpring}
-            className="relative flex flex-col items-center rounded-[8px] backdrop-blur-md py-2 overflow-hidden"
+            className="relative flex flex-col items-center rounded-[14px] backdrop-blur-md py-2 overflow-hidden"
             style={{ height: HIDE_AI_LAB_ACADEMY_BLOG ? "auto" : SIDEBAR_H, paddingBottom: HIDE_AI_LAB_ACADEMY_BLOG ? 12 : undefined }}
           >
             {/* Shimmer sweep */}
@@ -144,7 +144,7 @@ export function Sidebar() {
                     key={item.label}
                     href={item.href}
                     aria-label={item.label}
-                    className={`rounded-[6px] transition-colors duration-150 overflow-hidden ${
+                    className={`rounded-[10px] transition-colors duration-150 overflow-hidden ${
                       expanded
                         ? isActive ? "bg-[#0052A5]/15" : "hover:bg-[#0052A5]/10"
                         : ""
@@ -237,7 +237,7 @@ export function Sidebar() {
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 500, damping: 22 }}
             style={{ position: "absolute", right: -13, top: 36, zIndex: 10, cursor: "pointer" }}
-            className="flex h-[22px] w-[22px] items-center justify-center rounded-[6px] bg-white/90 shadow-md hover:bg-white"
+            className="flex h-[22px] w-[22px] items-center justify-center rounded-[10px] bg-white/90 shadow-md hover:bg-white"
           >
             <motion.svg
               width="7" height="7" viewBox="0 0 10 10" fill="none"

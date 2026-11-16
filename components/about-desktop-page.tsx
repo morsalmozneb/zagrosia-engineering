@@ -254,7 +254,7 @@ function AboutTeamCtaButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-[36px] flex-1 items-center justify-center gap-[8px] rounded-[6px] bg-[#94B8DC] px-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC] transition-colors hover:bg-[#6fa3d0]"
+      className="flex h-[36px] flex-1 items-center justify-center gap-[8px] rounded-[10px] bg-[#94B8DC] px-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC] transition-colors hover:bg-[#6fa3d0]"
     >
       <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
         {icon}
@@ -452,12 +452,12 @@ export function AboutDesktopPage() {
 
             <div className="mt-9 flex gap-4">
               <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
-                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   View Resume
                 </CtaButton>
               </Reveal>
               <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
-                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   Contact
                 </CtaButton>
               </Reveal>
@@ -489,7 +489,7 @@ export function AboutDesktopPage() {
 
             {/* Mission card */}
             <motion.div
-              className="w-[465px] h-[280px] flex-shrink-0 rounded-[8px] p-px"
+              className="w-[465px] h-[280px] flex-shrink-0 rounded-[14px] p-px"
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.1 }}
@@ -497,7 +497,7 @@ export function AboutDesktopPage() {
               style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
             >
               <div
-                className="w-full h-full rounded-[8px] bg-[#FCFCFC] p-[18px] overflow-hidden"
+                className="w-full h-full rounded-[14px] bg-[#FCFCFC] p-[18px] overflow-hidden"
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR MISSION</p>
@@ -509,7 +509,7 @@ export function AboutDesktopPage() {
 
             {/* Vision card */}
             <motion.div
-              className="w-[465px] h-[280px] flex-shrink-0 rounded-[8px] p-px"
+              className="w-[465px] h-[280px] flex-shrink-0 rounded-[14px] p-px"
               initial={reducedMotion ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.1 }}
@@ -517,7 +517,7 @@ export function AboutDesktopPage() {
               style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
             >
               <div
-                className="w-full h-full rounded-[8px] bg-[#FCFCFC] p-[18px] overflow-hidden"
+                className="w-full h-full rounded-[14px] bg-[#FCFCFC] p-[18px] overflow-hidden"
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR VISION</p>
@@ -593,20 +593,20 @@ export function AboutDesktopPage() {
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.65, delay: 0.1 + i * 0.12, ease: EASE }}
-                    className="rounded-[8px] p-px"
+                    className="rounded-[14px] p-px"
                     style={{
                       background: aboutCoreValueStroke,
                       boxShadow: aboutCoreValueShadow,
                     }}
                   >
-                    <div className="rounded-[8px] bg-[#010101] px-10 py-[26px] backdrop-blur-[61.5px]">
+                    <div className="rounded-[14px] bg-[#010101] px-10 py-[26px] backdrop-blur-[61.5px]">
                       <h3 className="text-[24px] font-semibold tracking-[0.14em] text-[#FCFCFC]">
                         {value.title}
                       </h3>
                       <ul className="mt-4 space-y-2">
                         {value.points.map((point, j) => (
                           <li key={j} className="flex items-start gap-3 leading-[1.5] tracking-[0.06em] text-[#FCFCFC]/70" style={{ fontSize: "16px" }}>
-                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-[6px] bg-[#FCFCFC]/70" />
+                            <span className="mt-[5px] h-[6px] w-[6px] flex-shrink-0 rounded-[10px] bg-[#FCFCFC]/70" />
                             {point}
                           </li>
                         ))}
@@ -638,7 +638,7 @@ export function AboutDesktopPage() {
                 <button
                   type="button"
                   onClick={prev}
-                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[10px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
                   aria-label="Previous milestone"
                 >
                   <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
@@ -651,15 +651,15 @@ export function AboutDesktopPage() {
                   {/* Stacked photos */}
                   <div className="absolute inset-x-0 top-0" style={{ height: "200px" }}>
                     {/* Left — behind card */}
-                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "8px", left: 0, top: "55px", zIndex: 0 }}>
+                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "14px", left: 0, top: "55px", zIndex: 0 }}>
                       <Image src={milestone.stackImages[0]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                     {/* Center — raised high, above sides */}
-                    <div className="absolute overflow-hidden" style={{ width: "320px", height: "285px", borderRadius: "8px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
+                    <div className="absolute overflow-hidden" style={{ width: "320px", height: "285px", borderRadius: "14px", left: "50%", top: 0, transform: "translateX(-50%)", zIndex: 5 }}>
                       <Image src={milestone.stackImages[1]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                     {/* Right — behind card */}
-                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "8px", right: 0, top: "55px", zIndex: 0 }}>
+                    <div className="absolute overflow-hidden" style={{ width: "220px", height: "185px", borderRadius: "14px", right: 0, top: "55px", zIndex: 0 }}>
                       <Image src={milestone.stackImages[2]} alt={`${milestone.title} project photo`} fill sizes="220px" className="object-cover" />
                     </div>
                   </div>
@@ -672,7 +672,7 @@ export function AboutDesktopPage() {
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{ duration: 0.45, ease: EASE }}
                     style={{
-                      borderRadius: "8px",
+                      borderRadius: "14px",
                       backgroundColor: "rgba(252,252,252,0.2)",
                       boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                       backdropFilter: "blur(61.5px)",
@@ -701,7 +701,7 @@ export function AboutDesktopPage() {
                 <button
                   type="button"
                   onClick={next}
-                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[6px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[10px] bg-[#2D2D2D] text-[#FCFCFC] transition-colors hover:bg-[#0052A5]"
                   aria-label="Next milestone"
                 >
                   <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
@@ -730,7 +730,7 @@ export function AboutDesktopPage() {
                       style={{
                         width: "190px",
                         height: "235px",
-                        borderRadius: "8px",
+                        borderRadius: "14px",
                         backgroundColor: "#EFEFEF",
                         boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                         overflow: "hidden",
@@ -739,7 +739,7 @@ export function AboutDesktopPage() {
                     >
                       <div
                         className="relative flex-shrink-0"
-                        style={{ width: "190px", height: "148px", borderRadius: "8px 8px 0 0", overflow: "hidden" }}
+                        style={{ width: "190px", height: "148px", borderRadius: "14px 14px 0 0", overflow: "hidden" }}
                       >
                         <Image src={project.image} alt={project.name} fill className="object-cover" />
                       </div>
@@ -769,7 +769,7 @@ export function AboutDesktopPage() {
                         <button
                           type="button"
                           onClick={() => setPageIndex(i)}
-                          className="rounded-[4px] transition-all flex-shrink-0"
+                          className="rounded-[8px] transition-all flex-shrink-0"
                           aria-label={`Go to ${m.year}`}
                           style={{
                             width: "16px",
@@ -805,7 +805,7 @@ export function AboutDesktopPage() {
         </div>
 
         <div style={{ marginTop: "50px", marginBottom: "50px", marginLeft: "-10px", width: "1200px" }}>
-          <div style={{ position: "relative", borderRadius: "6px", overflow: "hidden" }}>
+          <div style={{ position: "relative", borderRadius: "10px", overflow: "hidden" }}>
             <Image
               src="/images/about-milestones-building.png"
               alt="Company milestones building"
@@ -836,14 +836,14 @@ export function AboutDesktopPage() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.05 }}
                 transition={{ duration: 0.65, delay: 0.08 + i * 0.1, ease: EASE }}
-                className="w-full rounded-[8px] bg-[rgba(252,252,252,0.4)] px-[16px] py-[10px] backdrop-blur-[61.5px]"
+                className="w-full rounded-[14px] bg-[rgba(252,252,252,0.4)] px-[16px] py-[10px] backdrop-blur-[61.5px]"
                 style={{ boxShadow: aboutTeamCardShadow }}
               >
                 {/* Photo + name/description row */}
                 <div className="flex gap-[18px]">
                   {/* Left: photo + stats */}
                   <div className="flex w-[220px] shrink-0 flex-col gap-[12px]">
-                    <div className="zag-ticks relative h-[200px] w-[180px] overflow-hidden rounded-[8px]">
+                    <div className="zag-ticks relative h-[200px] w-[180px] overflow-hidden rounded-[14px]">
                       <Image
                         src={member.image}
                         alt={member.name}
@@ -913,12 +913,12 @@ export function AboutDesktopPage() {
           </Reveal>
           <div className="mt-8 flex gap-4">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Work with Us
               </CtaButton>
             </Reveal>
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Get In Touch
               </CtaButton>
             </Reveal>

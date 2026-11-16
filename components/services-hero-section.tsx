@@ -327,9 +327,9 @@ export function ServicesHeroSection() {
                   transition={{ duration: 0.5, delay: 0.08 + idx * 0.07, ease: EASE }}
                 >
                   {isOpen ? (
-                    <div className="rounded-[8px]">
+                    <div className="rounded-[14px]">
                       <div
-                        className="rounded-[8px] lg:rounded-[8px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                        className="rounded-[14px] lg:rounded-[14px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                         style={{
                           boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                           backdropFilter: "blur(61.5px)",
@@ -345,7 +345,7 @@ export function ServicesHeroSection() {
                         </button>
 
                         {service.image && (
-                          <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[6px] lg:hidden">
+                          <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:hidden">
                             <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                           </div>
                         )}
@@ -373,7 +373,7 @@ export function ServicesHeroSection() {
                         {service.tags.length > 0 && (
                           <div className="mt-4 flex flex-wrap gap-[6px]">
                             {service.tags.map((tag) => (
-                              <span key={tag} className="rounded-[4px] bg-[#0052A5] px-3 py-[4px] text-[9px] font-medium tracking-[0.06em] text-white">
+                              <span key={tag} className="rounded-[8px] bg-[#0052A5] px-3 py-[4px] text-[9px] font-medium tracking-[0.06em] text-white">
                                 {tag}
                               </span>
                             ))}
@@ -383,7 +383,7 @@ export function ServicesHeroSection() {
                     </div>
                   ) : (
                     <button
-                      className="flex h-[28px] w-full items-center justify-between rounded-[8px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
+                      className="flex h-[28px] w-full items-center justify-between rounded-[14px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
                       style={{ background: CLOSED_FILL }}
                       onClick={() => setOpenId(service.id)}
                     >
@@ -466,7 +466,7 @@ export function ServicesHeroSection() {
                   >
                     {isOpen ? (
                       <div
-                          className="rounded-[8px] bg-[#FCFCFC] px-4 pb-4 pt-3"
+                          className="rounded-[14px] bg-[#FCFCFC] px-4 pb-4 pt-3"
                           style={{
                             boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
                             backdropFilter: "blur(61.5px)",
@@ -480,7 +480,7 @@ export function ServicesHeroSection() {
                             <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />
                           </button>
                           {service.image && (
-                            <div className="relative mt-3 h-[220px] w-full overflow-hidden rounded-[6px]">
+                            <div className="relative mt-3 h-[220px] w-full overflow-hidden rounded-[10px]">
                               <Image src={service.image} alt={service.title} fill sizes="50vw" className="object-cover" />
                             </div>
                           )}
@@ -505,7 +505,7 @@ export function ServicesHeroSection() {
                           {service.tags.length > 0 && (
                             <div className="mt-4 flex flex-wrap gap-[6px]">
                               {service.tags.map((tag) => (
-                                <span key={tag} className="rounded-[4px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white" style={{ fontSize: "14px" }}>
+                                <span key={tag} className="rounded-[8px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white" style={{ fontSize: "14px" }}>
                                   {tag}
                                 </span>
                               ))}
@@ -514,7 +514,7 @@ export function ServicesHeroSection() {
                         </div>
                     ) : (
                       <button
-                        className="flex h-[28px] w-full items-center justify-between rounded-[8px] px-3 transition-all hover:opacity-80 hover:scale-[1.005] lg:h-[53px]"
+                        className="flex h-[28px] w-full items-center justify-between rounded-[14px] px-3 transition-all hover:opacity-80 hover:scale-[1.005] lg:h-[53px]"
                         style={{ background: CLOSED_FILL }}
                         onClick={() => setOpenId(service.id)}
                       >

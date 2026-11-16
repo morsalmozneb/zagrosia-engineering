@@ -38,7 +38,7 @@ function ContactPill({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-[5px] rounded-[4px] bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
+      className="flex items-center gap-[5px] rounded-[8px] bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
       style={{ width: "75px", height: "20px" }}
     >
       <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
@@ -163,7 +163,7 @@ function ScrollableText({ text }: { text: string }) {
 function TeamCard({ member }: { member: TeamMember }) {
   return (
     <article
-      className="rounded-[8px] p-4"
+      className="rounded-[14px] p-4"
       style={{
         backgroundColor: "#FCFCFC",
         boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",

@@ -36,7 +36,7 @@ const ArticleCard = ({ article, index }: { article: typeof articles[0]; index: n
     transition={{ duration: 0.6, delay: 0.08 + index * 0.12, ease: EASE }}
   >
     {/* Mobile */}
-    <article className="flex overflow-hidden lg:hidden" style={{ width: "319px", height: "89px", borderRadius: "8px", backgroundColor: "#FCFCFC", boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
+    <article className="flex overflow-hidden lg:hidden" style={{ width: "319px", height: "89px", borderRadius: "14px", backgroundColor: "#FCFCFC", boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}>
       <div className="flex flex-col justify-center flex-1 min-w-0 px-3 py-2">
         <h3 className="font-medium leading-[1.2] tracking-[0.08em] text-[#2d2d2d] mb-1" style={{ fontSize: "11px" }}>
           {article.title}
@@ -45,14 +45,14 @@ const ArticleCard = ({ article, index }: { article: typeof articles[0]; index: n
           {article.description}
         </p>
       </div>
-      <div className="relative flex-shrink-0 overflow-hidden" style={{ width: "100px", borderRadius: "0 8px 8px 0" }}>
+      <div className="relative flex-shrink-0 overflow-hidden" style={{ width: "100px", borderRadius: "0 14px 14px 0" }}>
         <Image src={article.image} alt={article.title} fill className="object-cover object-center" />
       </div>
     </article>
 
     {/* Desktop */}
     <article
-      className="hidden lg:flex items-stretch rounded-[8px] bg-[#fcfcfc] overflow-hidden"
+      className="hidden lg:flex items-stretch rounded-[14px] bg-[#fcfcfc] overflow-hidden"
       style={{
         boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)",
         backdropFilter: "blur(61.5px)",
@@ -96,7 +96,7 @@ export function EngineeringBlog() {
           <div className="mt-8">
             <CtaButton
               href="/blog"
-              className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
             >
               View All Articles
@@ -121,7 +121,7 @@ export function EngineeringBlog() {
         <Reveal variant="scaleUp" delay={0.2} duration={0.5}>
           <CtaButton
             href="/blog"
-            className="inline-flex items-center justify-center zag-cta rounded-[6px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             style={{ fontSize: "16px" }}
           >
             View All Articles
