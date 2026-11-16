@@ -7,6 +7,7 @@ import { AboutPageHeader } from "@/components/about-page-header"
 import { Footer } from "@/components/footer"
 import { Reveal } from "@/components/scroll-reveal"
 import { splitTitle, type Project } from "@/lib/projects-data"
+import { ProjectGallery } from "@/components/project-gallery"
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 const CARD_BORDER = "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)"
@@ -161,6 +162,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </div>
           </div>
         </section>
+
+        {/* SITE PHOTOS */}
+        {project.gallery && project.gallery.length > 0 ? <ProjectGallery photos={project.gallery} title={project.title} /> : null}
 
         {/* ENGINEERING FOCUS */}
         {project.focus ? (

@@ -16,6 +16,7 @@ export type Project = {
   title: string // UPPERCASE, shown in cards and as page heading
   location: string
   image: string
+  gallery?: string[] // extra photos shown in the project page gallery
   attribution: "zagrosia" | "principal"
   badge: string
   tags: string[]
@@ -40,7 +41,7 @@ const NOTE_EARLIER =
 
 const I3 = "i3 Building Science and Consulting Inc."
 
-export const projects: Project[] = [
+const archivedProjects: Project[] = [
   /* ───────── Zagrosia assignments ───────── */
   {
     id: 1,
@@ -626,6 +627,18 @@ export const projects: Project[] = [
     note: NOTE_EARLIER,
   },
 ]
+
+import { handoverProjects } from "./projects-handover"
+
+/**
+ * Set to true to show the earlier (pre-handover) projects again after the new ones.
+ * They are kept in the code below, not deleted.
+ */
+export const SHOW_ARCHIVED_PROJECTS = false
+
+export const projects: Project[] = SHOW_ARCHIVED_PROJECTS
+  ? [...handoverProjects, ...archivedProjects.map((p) => ({ ...p, id: p.id + 100, featured: false }))]
+  : handoverProjects
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug)

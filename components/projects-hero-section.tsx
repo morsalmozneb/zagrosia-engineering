@@ -290,7 +290,7 @@ export function ProjectsHeroSection() {
           {/* Body */}
           <Reveal delay={0.2} duration={0.65}>
             <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-              Selected structural engineering projects and principal experience — from fire-damage assessments and temporary shoring to residential, racking and industrial design.
+              Selected structural engineering projects and principal experience — from parkade, roof and building-envelope reviews to scaffold field reviews and concrete-frame residential design.
             </p>
           </Reveal>
 
