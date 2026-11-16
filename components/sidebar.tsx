@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence, useAnimation } from "framer-motion"
 
-import { isHiddenHref } from "@/lib/hidden-sections"
+import { isHiddenHref, HIDE_AI_LAB_ACADEMY_BLOG } from "@/lib/hidden-sections"
 
 const navItems = [
   { label: "HOME",     href: "/",         icon: "/icons/icon-home.svg"     },
@@ -74,7 +74,7 @@ export function Sidebar() {
             }}
             transition={panelSpring}
             className="relative flex flex-col items-center rounded-[20px] backdrop-blur-md py-2 overflow-hidden"
-            style={{ height: SIDEBAR_H }}
+            style={{ height: HIDE_AI_LAB_ACADEMY_BLOG ? "auto" : SIDEBAR_H, paddingBottom: HIDE_AI_LAB_ACADEMY_BLOG ? 12 : undefined }}
           >
             {/* Shimmer sweep */}
             <motion.div
