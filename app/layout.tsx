@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   keywords: [
     "structural engineering BC",
     "structural engineer Vancouver",
+    "structural engineer Port Coquitlam",
     "seismic assessment BC",
     "P.Eng British Columbia",
     "building rehabilitation engineer",
@@ -111,14 +112,14 @@ const jsonLd = {
   email: "info@zagrosia.ca",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Vancouver",
+    addressLocality: "Port Coquitlam",
     addressRegion: "BC",
     addressCountry: "CA",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 49.2827,
-    longitude: -123.1207,
+    latitude: 49.2628,
+    longitude: -122.7811,
   },
   areaServed: [
     { "@type": "State", name: "British Columbia", sameAs: "https://en.wikipedia.org/wiki/British_Columbia" },
