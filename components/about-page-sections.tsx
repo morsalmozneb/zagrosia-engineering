@@ -82,7 +82,7 @@ const education = ["M.Sc. Structural Engineering", "B.Sc. Civil Engineering"]
 const certifications = [
   "Structural Engineering Certificate (SEABC)",
   "Construction Operation Certificate",
-  "P.Eng. Candidacy - Ethical Law Exam Completed",
+  "Professional Engineer (P.Eng.)",
 ]
 
 export function AboutProfileSection() {

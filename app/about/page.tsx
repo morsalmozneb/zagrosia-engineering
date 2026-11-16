@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Zagrosia Engineering Inc.",
     description:
-      "35+ years of structural engineering expertise in BC, Alberta & Saskatchewan. Licensed P.Eng, seismic specialists, and builders of AI-powered engineering tools.",
+      "35+ years of structural engineering expertise in BC, Alberta & Saskatchewan. Licensed P.Eng, and seismic specialists.",
     url: "https://www.zagrosia.ca/about",
   },
 }
@@ -27,7 +27,7 @@ const jsonLd = {
       "@type": "AboutPage",
       name: "About Zagrosia Engineering Inc.",
       url: "https://www.zagrosia.ca/about",
-      description: "35+ years of structural engineering expertise in BC, Alberta & Saskatchewan. Licensed P.Eng, seismic specialists, and builders of AI-powered engineering tools.",
+      description: "35+ years of structural engineering expertise in BC, Alberta & Saskatchewan. Licensed P.Eng, and seismic specialists.",
       mainEntity: {
         "@type": "ProfessionalService",
         name: "Zagrosia Engineering Inc.",

@@ -15,8 +15,6 @@ const services = [
   "Racking Systems",
   "Building Envelope",
   "Specialty Reviews",
-  "AI Automation",
-  "EGBC Exam Prep",
 ]
 
 const contactItems = [
@@ -225,7 +223,7 @@ export function ContactSection() {
           </Reveal>
           <Reveal delay={0.2} duration={0.65}>
             <p className="text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-              Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
+              Whether you need structural design, building assessment, seismic review, or racking and masonry engineering, we&apos;re ready. Let&apos;s build something exceptional.
             </p>
           </Reveal>
         </div>
@@ -294,7 +292,7 @@ export function ContactSection() {
               </Reveal>
               <Reveal delay={0.2} duration={0.65}>
                 <p className="mt-5 max-w-[700px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
-                  Whether you need structural design, building assessment, custom automation tools, or EGBC exam prep, we&apos;re ready. Let&apos;s build something exceptional.
+                  Whether you need structural design, building assessment, seismic review, or racking and masonry engineering, we&apos;re ready. Let&apos;s build something exceptional.
                 </p>
               </Reveal>
             </div>

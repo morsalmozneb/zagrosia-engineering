@@ -15,7 +15,7 @@ const team = [
     name: "SEYED HASSAN MOZNEB",
     image: "/images/Homayoun-pic-2.png",
     experience: "35+",
-    degrees: ["M.Sc.", "B.Sc"],
+    degrees: ["P.Eng.", "M.Sc.", "B.Sc"],
     linkedIn: "https://www.linkedin.com/in/seyed-hassan-mozneb/",
     email: "mailto:Shmozneb@zagrosia.ca",
     resume: "/files/resume-homayoun.pdf",
@@ -53,7 +53,7 @@ const team = [
     email: "mailto:Morsalm@zagrosia.ca",
     resume: "/files/resume-morsal.pdf",
     description:
-      "UX/UI Designer and Web Developer combining a Bachelor of Information Technology with current studies in New Media Design & Web Development at BCIT. Skilled in user research, wireframing, interactive prototyping, and front-end development (HTML5, CSS, JavaScript). Designs responsive websites, Figma design systems, and brand identity systems from concept through deployment. Experienced collaborating across multidisciplinary teams on tight deadlines.",
+      "UX/UI Designer and Web Developer combining a Bachelor of Information Technology with a Diploma in New Media Design & Web Development from BCIT. Skilled in user research, wireframing, interactive prototyping, and front-end development (HTML5, CSS, JavaScript). Designs responsive websites, Figma design systems, and brand identity systems from concept through deployment. Experienced collaborating across multidisciplinary teams on tight deadlines.",
   },
   {
     name: "FARNAZ GHOLAMI",
@@ -435,7 +435,7 @@ export function AboutDesktopPage() {
                 {[
                   "Structural Engineering Certificate (SEABC)",
                   "Construction Operation Certificate",
-                  "P.Eng. Candidacy - Ethical Law Exam Completed",
+                  "Professional Engineer (P.Eng.)",
                 ].map((item, i) => (
                   <motion.li
                     key={item}

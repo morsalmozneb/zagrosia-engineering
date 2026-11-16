@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Zagrosia Engineering Inc.",
   },
   description:
-    "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, racking systems, and AI-powered engineering tools. 35+ years of expertise.",
+    "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, and racking systems. 35+ years of expertise.",
   keywords: [
     "structural engineering BC",
     "structural engineer Vancouver",
@@ -41,7 +41,6 @@ export const metadata: Metadata = {
     "structural design Alberta",
     "racking system engineer",
     "building envelope assessment",
-    "EGBC exam prep",
     "engineering firm BC",
     "Zagrosia Engineering",
     "i3 Building Science",
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "Zagrosia Engineering Inc.",
     title: "Zagrosia Engineering Inc. | Structural Engineers in BC, Alberta & Saskatchewan",
     description:
-      "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, and AI-powered engineering tools.",
+      "Licensed structural engineers (P.Eng) in BC, Alberta, and Saskatchewan. Seismic assessments, structural design, and building rehabilitation.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -73,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Zagrosia Engineering Inc. | Structural Engineers in BC",
     description:
-      "Licensed P.Eng structural engineers in BC, Alberta & Saskatchewan. Seismic assessments, design, and AI-powered tools.",
+      "Licensed P.Eng structural engineers in BC, Alberta & Saskatchewan. Seismic assessments, structural design, and building rehabilitation.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -107,7 +106,7 @@ const jsonLd = {
   logo: `${BASE_URL}/images/zagrosia-logo.svg`,
   image: `${BASE_URL}/images/og-image.jpg`,
   description:
-    "Licensed P.Eng structural engineering firm serving BC, Alberta, and Saskatchewan. Specializing in seismic assessment, structural design, building rehabilitation, masonry engineering, racking systems, and AI-powered engineering tools. 35+ years of combined expertise.",
+    "Licensed P.Eng structural engineering firm serving BC, Alberta, and Saskatchewan. Specializing in seismic assessment, structural design, building rehabilitation, masonry engineering, and racking systems. 35+ years of combined expertise.",
   telephone: "+1-778-317-1043",
   email: "info@zagrosia.ca",
   address: {

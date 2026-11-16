@@ -41,7 +41,7 @@ export function Footer() {
 
           <h3 className="mb-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC]">Engineered to Solve</h3>
           <p className="mb-6 text-[13px] leading-[1.55] tracking-[0.1em] text-[#FCFCFC]/78">
-            A next-generation structural engineering ecosystem, combining 35+ years of expertise with AI automation, education, and industry partnerships across Western Canada.
+            A next-generation structural engineering ecosystem, combining 35+ years of expertise and industry partnerships across Western Canada.
           </p>
         </Reveal>
 
@@ -126,7 +126,7 @@ export function Footer() {
         </div>
         <h3 className="mb-5 text-[12px] font-medium tracking-[0.14em] text-[#FCFCFC] -mt-[50px]">Engineered to Solve</h3>
         <p className="mb-[20px] max-w-[305px] text-[11px] leading-[1.46] tracking-[0.14em] text-[#FCFCFC]/78">
-          A next-generation structural engineering ecosystem, combining 35+ years of expertise with AI automation, education, and industry partnerships across Western Canada.
+          A next-generation structural engineering ecosystem, combining 35+ years of expertise and industry partnerships across Western Canada.
         </p>
         <div className="mb-12 flex text-[11px] leading-[1.25] tracking-[0.13em] text-[#FCFCFC]/80">
           <div className="pr-4"><span className="font-medium text-[#FCFCFC]">P.ENG</span><br />British Columbia</div>

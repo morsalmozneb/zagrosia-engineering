@@ -64,7 +64,7 @@ const team: TeamMember[] = [
     name: "HOMAYOUN MOZNEB",
     image: "/images/Homayoun-pic-2.png",
     experience: "35+",
-    degrees: ["M.Sc.", "B.Sc"],
+    degrees: ["P.Eng.", "M.Sc.", "B.Sc"],
     linkedIn: "https://www.linkedin.com/in/seyed-hassan-mozneb/",
     email: "mailto:Shmozneb@zagrosia.ca",
     description:
@@ -98,7 +98,7 @@ const team: TeamMember[] = [
     linkedIn: "https://www.linkedin.com/in/morsal-mozneb",
     email: "mailto:Morsalm@zagrosia.ca",
     description:
-      "UX/UI Designer and Web Developer combining a Bachelor of Information Technology with current studies in New Media Design & Web Development at BCIT. Skilled in user research, wireframing, interactive prototyping, and front-end development. Experienced in designing and building digital products that are accessible, visually refined, and technically sound.",
+      "UX/UI Designer and Web Developer combining a Bachelor of Information Technology with a Diploma in New Media Design & Web Development from BCIT. Skilled in user research, wireframing, interactive prototyping, and front-end development. Experienced in designing and building digital products that are accessible, visually refined, and technically sound.",
   },
   {
     name: "FARNAZ GHOLAMI",

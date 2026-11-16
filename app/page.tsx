@@ -4,12 +4,12 @@ import Image from "next/image"
 export const metadata: Metadata = {
   title: "Structural Engineers in BC, Alberta & Saskatchewan",
   description:
-    "Zagrosia Engineering Inc. — licensed P.Eng structural engineers serving BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, racking systems, and AI-powered engineering tools.",
+    "Zagrosia Engineering Inc. — licensed P.Eng structural engineers serving BC, Alberta, and Saskatchewan. Seismic assessments, structural design, building rehabilitation, and racking systems.",
   alternates: { canonical: "https://www.zagrosia.ca" },
   openGraph: {
     title: "Zagrosia Engineering Inc. | Structural Engineers in Western Canada",
     description:
-      "Licensed P.Eng structural engineers in BC, Alberta & Saskatchewan. 35+ years of expertise in seismic assessment, structural design, and AI-powered engineering tools.",
+      "Licensed P.Eng structural engineers in BC, Alberta & Saskatchewan. 35+ years of expertise in seismic assessment, structural design, and building rehabilitation.",
     url: "https://www.zagrosia.ca",
   },
 }
