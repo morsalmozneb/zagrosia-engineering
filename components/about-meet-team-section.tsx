@@ -62,7 +62,7 @@ interface TeamMember {
 const team: TeamMember[] = [
   {
     name: "HOMAYOUN MOZNEB",
-    image: "/images/Homayoun-pic-2.png",
+    image: "/images/Homayoun-team.jpg",
     experience: "35+",
     degrees: ["P.Eng.", "M.Sc.", "B.Sc"],
     linkedIn: "https://www.linkedin.com/in/seyed-hassan-mozneb/",
@@ -72,7 +72,7 @@ const team: TeamMember[] = [
   },
   {
     name: "MEHDI MOZNEB",
-    image: "/images/Mehdi-pic.png",
+    image: "/images/Mehdi-team.jpg",
     experience: "11+",
     degrees: ["B.Sc"],
     linkedIn: "https://www.linkedin.com/in/mehdimozneb/",
@@ -82,7 +82,7 @@ const team: TeamMember[] = [
   },
   {
     name: "ATENA JAHANGARD",
-    image: "/images/Atena-pic.png",
+    image: "/images/Atena-team.jpg",
     experience: "9+",
     degrees: ["B.Sc"],
     linkedIn: "#",
@@ -92,7 +92,7 @@ const team: TeamMember[] = [
   },
   {
     name: "MORSAL MOZNEB",
-    image: "/images/Morsal-pic.png",
+    image: "/images/Morsal-team.jpg",
     experience: "13+",
     degrees: ["B.IT"],
     linkedIn: "https://www.linkedin.com/in/morsal-mozneb",
@@ -102,7 +102,7 @@ const team: TeamMember[] = [
   },
   {
     name: "FARNAZ GHOLAMI",
-    image: "/images/Farnaz-pic.png",
+    image: "/images/Farnaz-team.jpg",
     experience: "8+",
     degrees: ["B.Sc"],
     linkedIn: "https://www.linkedin.com/in/farnaz-gholami-4165b9345/",

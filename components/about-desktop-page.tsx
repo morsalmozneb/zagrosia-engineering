@@ -13,7 +13,7 @@ const EASE = [0.0, 0.0, 0.2, 1] as const
 const team = [
   {
     name: "SEYED HASSAN MOZNEB",
-    image: "/images/Homayoun-pic-2.png",
+    image: "/images/Homayoun-team.jpg",
     experience: "35+",
     degrees: ["P.Eng.", "M.Sc.", "B.Sc"],
     linkedIn: "https://www.linkedin.com/in/seyed-hassan-mozneb/",
@@ -24,7 +24,7 @@ const team = [
   },
   {
     name: "MEHDI MOZNEB",
-    image: "/images/Mehdi-pic.png",
+    image: "/images/Mehdi-team.jpg",
     experience: "11+",
     degrees: ["B.Sc"],
     linkedIn: "https://www.linkedin.com/in/mehdimozneb/",
@@ -35,7 +35,7 @@ const team = [
   },
   {
     name: "ATENA JAHANGARD",
-    image: "/images/Atena-pic.png",
+    image: "/images/Atena-team.jpg",
     experience: "9+",
     degrees: ["B.Sc"],
     linkedIn: "#",
@@ -46,7 +46,7 @@ const team = [
   },
   {
     name: "MORSAL MOZNEB",
-    image: "/images/Morsal-pic.png",
+    image: "/images/Morsal-team.jpg",
     experience: "13+",
     degrees: ["B.IT"],
     linkedIn: "https://www.linkedin.com/in/morsal-mozneb",
@@ -57,7 +57,7 @@ const team = [
   },
   {
     name: "FARNAZ GHOLAMI",
-    image: "/images/Farnaz-pic.png",
+    image: "/images/Farnaz-team.jpg",
     experience: "8+",
     degrees: ["B.Sc"],
     linkedIn: "https://www.linkedin.com/in/farnaz-gholami-4165b9345/",
