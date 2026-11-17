@@ -12,7 +12,7 @@ const milestones = [
     year: "1989",
     title: "B.Sc. Civil Engineering",
     description: "Foundational expertise in concrete, steel & masonry systems",
-    stackImages: ["/images/company-milestone-1.jpg", "/images/company-milestone-2.jpg", "/images/company-milestone-3.jpg"],
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-2.png", "/images/company-milestone-3.png"],
     projects: [
       { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.jpg" },
       { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.jpg" },
@@ -24,7 +24,7 @@ const milestones = [
     year: "1993",
     title: "M.Sc. Structural Engineering",
     description: "Led complex rehabilitation and new construction projects across Canada",
-    stackImages: ["/images/company-milestone-2.jpg", "/images/company-milestone-3.jpg", "/images/company-milestone-4.jpg"],
+    stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
       { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.jpg" },
       { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.jpg" },
@@ -36,7 +36,7 @@ const milestones = [
     year: "1993–1995",
     title: "Structural Designer",
     description: "Designed steel and concrete petrochemical structures, fabrication drawings, and technical reports",
-    stackImages: ["/images/company-milestone-3.jpg", "/images/company-milestone-1.jpg", "/images/company-milestone-2.jpg"],
+    stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-1.png", "/images/company-milestone-2.png"],
     projects: [
       { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.jpg" },
       { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.jpg" },
@@ -48,7 +48,7 @@ const milestones = [
     year: "1995–2002",
     title: "Head of Civil & Structural Dept.",
     description: "Led design and restoration of critical concrete and marine structures",
-    stackImages: ["/images/company-milestone-4.jpg", "/images/company-milestone-2.jpg", "/images/company-milestone-1.jpg"],
+    stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
       { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.jpg" },
       { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.jpg" },
@@ -60,7 +60,7 @@ const milestones = [
     year: "2002–2003",
     title: "Structural Designer",
     description: "Advanced structural design for industrial and commercial developments",
-    stackImages: ["/images/company-milestone-1.jpg", "/images/company-milestone-3.jpg", "/images/company-milestone-4.jpg"],
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
       { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.jpg" },
       { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.jpg" },
@@ -72,7 +72,7 @@ const milestones = [
     year: "2003–2017",
     title: "CEO & Senior Structural Engineer",
     description: "Led structural design and project management for residential and commercial developments",
-    stackImages: ["/images/company-milestone-2.jpg", "/images/company-milestone-4.jpg", "/images/company-milestone-3.jpg"],
+    stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-4.png", "/images/company-milestone-3.png"],
     projects: [
       { name: "High-Rise", type: "Residential · Iran", period: "2004–2008", image: "/images/projects/residential-high-rise-construction-iran/01-hero.jpg" },
       { name: "Concrete Frame", type: "Residential · Iran", period: "2007–2011", image: "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg" },
@@ -84,7 +84,7 @@ const milestones = [
     year: "2018–2019",
     title: "Construction Operation Certificate, BCIT",
     description: "Led structural design and project delivery for residential, industrial, and institutional projects",
-    stackImages: ["/images/company-milestone-3.jpg", "/images/company-milestone-2.jpg", "/images/company-milestone-1.jpg"],
+    stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
       { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.jpg" },
       { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.jpg" },
@@ -96,7 +96,7 @@ const milestones = [
     year: "2019–2022",
     title: "Structural Engineering Certificate (SEABC)",
     description: "Led design and restoration of critical concrete and marine structures",
-    stackImages: ["/images/company-milestone-4.jpg", "/images/company-milestone-1.jpg", "/images/company-milestone-3.jpg"],
+    stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-1.png", "/images/company-milestone-3.png"],
     projects: [
       { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.jpg" },
       { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.jpg" },
@@ -108,7 +108,7 @@ const milestones = [
     year: "2019–Present",
     title: "Professional Structural Engineer",
     description: "Leading structural design and project delivery for residential, industrial, and institutional projects",
-    stackImages: ["/images/company-milestone-1.jpg", "/images/company-milestone-4.jpg", "/images/company-milestone-2.jpg"],
+    stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-4.png", "/images/company-milestone-2.png"],
     projects: [
       { name: "Envelope Review", type: "Building Envelope", period: "2026", image: "/images/projects/building-envelope-rehabilitation-field-review-vancouver/01-hero.jpg" },
       { name: "Parkade Review", type: "Parkade · Langley", period: "2025", image: "/images/projects/parkade-structural-review-langley/01-hero.jpg" },

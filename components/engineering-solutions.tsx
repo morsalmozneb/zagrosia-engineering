@@ -247,9 +247,9 @@ export function EngineeringSolutions() {
         <Image
           src="/images/curved-building.png"
           alt="Modern curved architectural building"
-          width={1600}
-          height={900}
-          className="w-full h-auto"
+          width={1200}
+          height={600}
+          className="w-full object-cover"
           priority
         />
       </Reveal>

@@ -402,7 +402,7 @@ export function ServicesHeroSection() {
         <Reveal variant="fadeBlur" delay={0.1} duration={0.85} className="-mx-6 overflow-visible" style={{ marginTop: "-4px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/services-building-mobile.jpg"
+            src="/images/services-building-mobile.png"
             alt="Teal glass building"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
@@ -535,7 +535,7 @@ export function ServicesHeroSection() {
         {/* Building image */}
         <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pb-[60px] mt-[-180px]">
           <Image
-            src="/images/services-building.jpg"
+            src="/images/services-building-cutout.png"
             alt="Teal glass building"
             width={1200}
             height={800}

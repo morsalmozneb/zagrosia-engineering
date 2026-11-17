@@ -57,7 +57,7 @@ export function ProjectsSection() {
     <section id="projects" className="relative overflow-hidden bg-[#132647] text-white lg:overflow-visible">
       <div className="lg:block hidden">
         <Image
-          src="/images/projects-rectangle-55.jpg"
+          src="/images/projects-rectangle-55.png"
           alt=""
           fill
           className="object-cover"

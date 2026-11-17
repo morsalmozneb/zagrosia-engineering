@@ -309,7 +309,7 @@ export function AboutCoreValuesSection() {
     <section className="relative overflow-hidden bg-[#000000] text-[#FCFCFC]">
       <Reveal variant="fadeBlur" delay={0.05} duration={0.9} className="relative h-[400px] w-full overflow-hidden bg-[#FCFCFC] lg:bg-transparent">
         <Image
-          src="/images/about-core-values-building.jpg"
+          src="/images/about-core-values-building.png"
           alt="Core values architectural building"
           fill
           className="object-cover object-top"
