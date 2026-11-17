@@ -156,10 +156,10 @@ const milestones = [
     description: "Advanced structural design for industrial and commercial developments",
     stackImages: ["/images/company-milestone-1.jpg", "/images/company-milestone-3.jpg", "/images/company-milestone-4.jpg"],
     projects: [
-      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-1.jpg" },
-      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-2.jpg" },
-      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-3.jpg" },
-      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-4.jpg" },
+      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.jpg" },
+      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.jpg" },
+      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-7.jpg" },
+      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-10.jpg" },
     ],
   },
   {
@@ -168,10 +168,10 @@ const milestones = [
     description: "Led structural design and project management for residential and commercial developments",
     stackImages: ["/images/company-milestone-2.jpg", "/images/company-milestone-4.jpg", "/images/company-milestone-3.jpg"],
     projects: [
-      { name: "Residential Tower", type: "Residential", period: "2003–2017", image: "/images/Project-Card-5.jpg" },
-      { name: "Commercial Dev", type: "Commercial", period: "2003–2017", image: "/images/Project-Card-6.jpg" },
-      { name: "Industrial Rack", type: "Industrial", period: "2003–2017", image: "/images/Project-Card-7.jpg" },
-      { name: "Seismic Retrofit", type: "Rehabilitation", period: "2003–2017", image: "/images/Project-Card-8.jpg" },
+      { name: "High-Rise", type: "Residential · Iran", period: "2004–2008", image: "/images/projects/residential-high-rise-construction-iran/01-hero.jpg" },
+      { name: "Concrete Frame", type: "Residential · Iran", period: "2007–2011", image: "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg" },
+      { name: "Extension", type: "Residential · Iran", period: "2007–2011", image: "/images/projects/two-storey-vertical-extension-iran/01-hero.jpg" },
+      { name: "Complex", type: "Residential · Iran", period: "2003–2017", image: "/images/projects/residential-complex-construction-iran/01-hero.jpg" },
     ],
   },
   {
@@ -180,9 +180,9 @@ const milestones = [
     description: "Led structural design and project delivery for residential, industrial, and institutional projects",
     stackImages: ["/images/company-milestone-3.jpg", "/images/company-milestone-2.jpg", "/images/company-milestone-1.jpg"],
     projects: [
-      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-9.jpg" },
-      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-10.jpg" },
-      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-11.jpg" },
+      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.jpg" },
+      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.jpg" },
+      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-9.jpg" },
       { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.jpg" },
     ],
   },
@@ -192,10 +192,10 @@ const milestones = [
     description: "Led design and restoration of critical concrete and marine structures",
     stackImages: ["/images/company-milestone-4.jpg", "/images/company-milestone-1.jpg", "/images/company-milestone-3.jpg"],
     projects: [
-      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-13.jpg" },
+      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.jpg" },
       { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.jpg" },
-      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-15.jpg" },
-      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-16.jpg" },
+      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-13.jpg" },
+      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-6.jpg" },
     ],
   },
   {
@@ -204,10 +204,10 @@ const milestones = [
     description: "Leading structural design and project delivery for residential, industrial, and institutional projects",
     stackImages: ["/images/company-milestone-1.jpg", "/images/company-milestone-4.jpg", "/images/company-milestone-2.jpg"],
     projects: [
-      { name: "Seismic Assessment", type: "Assessment", period: "2019–Present", image: "/images/Project-Card-1.jpg" },
-      { name: "AI Engineering", type: "Innovation", period: "2019–Present", image: "/images/Project-Card-2.jpg" },
-      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–Present", image: "/images/Project-Card-3.jpg" },
-      { name: "EGBC Compliance", type: "Certification", period: "2019–Present", image: "/images/Project-Card-4.jpg" },
+      { name: "Envelope Review", type: "Building Envelope", period: "2026", image: "/images/projects/building-envelope-rehabilitation-field-review-vancouver/01-hero.jpg" },
+      { name: "Parkade Review", type: "Parkade · Langley", period: "2025", image: "/images/projects/parkade-structural-review-langley/01-hero.jpg" },
+      { name: "Townhouse Study", type: "Residential · Surrey", period: "2025", image: "/images/projects/townhouse-complex-condition-assessment-surrey/01-hero.jpg" },
+      { name: "Warranty Review", type: "Residential · Coquitlam", period: "2026", image: "/images/projects/ten-year-warranty-review-coquitlam/01-hero.jpg" },
     ],
   },
 ]
