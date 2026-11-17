@@ -15,7 +15,7 @@ const services = [
   {
     id: 1,
     title: "Structural Design for Concrete, Steel, Wood, and Masonry Buildings",
-    image: "/images/services-building.png",
+    image: "/images/services-building.jpg",
     intro: "Zagrosia provides practical structural design services for new buildings, additions, renovations, and building modifications using concrete, steel, wood, and masonry systems.",
     bullets: [
       "Structural design for concrete, steel, wood, and masonry systems",
@@ -30,7 +30,7 @@ const services = [
   {
     id: 2,
     title: "Foundation and Retaining Wall Design",
-    image: "/images/about-milestones-building.png",
+    image: "/images/about-milestones-building.jpg",
     intro: "Zagrosia provides foundation and retaining wall design services for buildings, site structures, equipment supports, additions, and repair projects.",
     bullets: [
       "Shallow foundation design",
@@ -45,7 +45,7 @@ const services = [
   {
     id: 3,
     title: "Masonry, CMU Wall, Brick Veneer, and Attachment Design",
-    image: "/images/about-core-values-building.png",
+    image: "/images/about-core-values-building.jpg",
     intro: "Zagrosia provides engineering support for masonry walls, CMU construction, brick veneer attachments, lateral supports, and masonry-related building components.",
     bullets: [
       "CMU wall design and detailing",
@@ -105,7 +105,7 @@ const services = [
   {
     id: 7,
     title: "Structural Repair Design and Upgrade Support",
-    image: "/images/about-milestones-building.png",
+    image: "/images/about-milestones-building.jpg",
     intro: "Zagrosia provides structural repair and upgrade design for existing buildings and building components where structural elements are damaged, deteriorated, modified, or overloaded.",
     bullets: [
       "Structural repair design",
@@ -135,7 +135,7 @@ const services = [
   {
     id: 9,
     title: "Rooftop Mechanical and Electrical Equipment Supports",
-    image: "/images/services-building.png",
+    image: "/images/services-building.jpg",
     intro: "Zagrosia provides structural engineering support for rooftop mechanical and electrical equipment installations, including rooftop units, exhaust fans, duct supports, pipe supports, equipment curbs, and support frames.",
     bullets: [
       "Rooftop equipment load review",
@@ -150,7 +150,7 @@ const services = [
   {
     id: 10,
     title: "Structural Openings and Building Alteration Support",
-    image: "/images/about-core-values-building.png",
+    image: "/images/about-core-values-building.jpg",
     intro: "Zagrosia provides engineering support for structural openings and building alterations in existing buildings, including walls, floors, roofs, and structural framing.",
     bullets: [
       "Review of proposed openings in existing structures",
@@ -180,7 +180,7 @@ const services = [
   {
     id: 12,
     title: "Guardrails, Stairs, Balconies, and Awnings",
-    image: "/images/about-core-values-building.png",
+    image: "/images/about-core-values-building.jpg",
     intro: "Zagrosia provides structural design and review services for guardrails, stairs, balconies, awnings, and exterior architectural components.",
     bullets: [
       "Guardrail design and anchorage review",
@@ -210,7 +210,7 @@ const services = [
   {
     id: 14,
     title: "Helical Pile Foundations, Small Bridges, and Walkways",
-    image: "/images/about-milestones-building.png",
+    image: "/images/about-milestones-building.jpg",
     intro: "Zagrosia provides structural design support for helical pile foundations and small site structures, including walkways, small bridges, platforms, and light support structures.",
     bullets: [
       "Helical pile foundation design",
@@ -255,7 +255,7 @@ const services = [
   {
     id: 17,
     title: "Practical Engineering Support for Owners, Contractors, and Consultants",
-    image: "/images/services-building.png",
+    image: "/images/services-building.jpg",
     intro: "Zagrosia's work is focused on practical structural engineering for real building conditions — whether an owner needs to understand a crack, a contractor needs a support detail, or a consultant needs structural input for a larger assessment.",
     bullets: [
       "Practical structural engineering consultation",
@@ -402,7 +402,7 @@ export function ServicesHeroSection() {
         <Reveal variant="fadeBlur" delay={0.1} duration={0.85} className="-mx-6 overflow-visible" style={{ marginTop: "-4px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/services-building-mobile.png"
+            src="/images/services-building-mobile.jpg"
             alt="Teal glass building"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
@@ -535,7 +535,7 @@ export function ServicesHeroSection() {
         {/* Building image */}
         <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pb-[60px] mt-[-180px]">
           <Image
-            src="/images/services-building.png"
+            src="/images/services-building.jpg"
             alt="Teal glass building"
             width={1200}
             height={800}

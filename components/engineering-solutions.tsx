@@ -14,7 +14,7 @@ const services = [
   {
     id: 1,
     title: "Structural Design",
-    image: "/images/services-building.png",
+    image: "/images/services-building.jpg",
     intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
@@ -44,7 +44,7 @@ const services = [
   {
     id: 3,
     title: "Building Rehabilitation",
-    image: "/images/about-milestones-building.png",
+    image: "/images/about-milestones-building.jpg",
     intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
     bullets: [
       "Condition assessment and structural investigation",
@@ -89,7 +89,7 @@ const services = [
   {
     id: 6,
     title: "Specialty Reviews",
-    image: "/images/about-core-values-building.png",
+    image: "/images/about-core-values-building.jpg",
     intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
     bullets: [
       "Independent structural peer review",
@@ -247,9 +247,9 @@ export function EngineeringSolutions() {
         <Image
           src="/images/curved-building.png"
           alt="Modern curved architectural building"
-          width={1200}
-          height={600}
-          className="w-full object-cover"
+          width={1600}
+          height={900}
+          className="w-full h-auto"
           priority
         />
       </Reveal>

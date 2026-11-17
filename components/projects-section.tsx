@@ -57,7 +57,7 @@ export function ProjectsSection() {
     <section id="projects" className="relative overflow-hidden bg-[#132647] text-white lg:overflow-visible">
       <div className="lg:block hidden">
         <Image
-          src="/images/projects-rectangle-55.png"
+          src="/images/projects-rectangle-55.jpg"
           alt=""
           fill
           className="object-cover"
@@ -70,7 +70,7 @@ export function ProjectsSection() {
         <div className="relative w-full overflow-hidden" style={{ height: "200px" }}>
           {/* Building photo */}
           <Image
-            src="/images/projects-building-top.png"
+            src="/images/projects-building-top.jpg"
             alt="Projects architectural background"
             fill
             className="object-cover object-top"
@@ -193,7 +193,7 @@ export function ProjectsSection() {
       <div className="hidden lg:block">
         {/* Desktop building background image */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-          <Image src="/images/projects-building-top.png" alt="" fill className="object-cover object-top" aria-hidden="true" priority />
+          <Image src="/images/projects-building-top.jpg" alt="" fill className="object-cover object-top" aria-hidden="true" priority />
         </div>
         {/* Full-section gradient overlay */}
         <div
