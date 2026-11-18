@@ -480,7 +480,7 @@ export function ServicesHeroSection() {
                             <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />
                           </button>
                           {service.image && (
-                            <div className="relative mt-3 h-[220px] w-full overflow-hidden rounded-[10px]">
+                            <div className="relative mt-3 w-full aspect-[7/3] overflow-hidden rounded-[10px]">
                               <Image src={service.image} alt={service.title} fill sizes="50vw" className="object-cover" />
                             </div>
                           )}
@@ -532,17 +532,19 @@ export function ServicesHeroSection() {
           </div>
         </div>
 
-        {/* Building image */}
-        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pb-[60px] mt-[-180px]">
-          <Image
-            src="/images/services-building-cutout.png"
-            alt="Teal glass building"
-            width={1200}
-            height={800}
-            className="block h-auto w-full"
-            style={{ objectFit: "contain", objectPosition: "left bottom" }}
-          />
-          <div className="h-[3px] w-[1100px] bg-[#000000]" />
+        {/* Building image — contained, aligned to the content edge, no overlap with the accordion */}
+        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pt-16 pb-[96px]">
+          <div style={{ marginLeft: "var(--desktop-grid-content-start)", width: "min(1000px, calc(100% - var(--desktop-grid-content-start)))" }}>
+            <Image
+              src="/images/services-building-cutout.png"
+              alt="Teal glass building"
+              width={1200}
+              height={800}
+              className="block h-auto w-full"
+              style={{ objectFit: "contain", objectPosition: "left bottom" }}
+            />
+            <div className="h-[3px] w-full bg-[#000000]" />
+          </div>
         </Reveal>
       </div>
     </section>

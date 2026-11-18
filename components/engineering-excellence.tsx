@@ -10,7 +10,7 @@ const EASE = [0.0, 0.0, 0.2, 1] as const
 
 export function EngineeringExcellence() {
   return (
-    <section className="bg-[#fcfcfc] px-6 pt-10 pb-0 lg:px-0 lg:pt-0 lg:pb-0 lg:mb-0 mb-8">
+    <section className="bg-[#fcfcfc] px-6 pt-10 pb-0 lg:px-0 lg:pt-0 lg:pb-24 lg:mb-0 mb-8">
 
       {/* ── MOBILE layout ── */}
       <div className="relative h-[427px] overflow-hidden lg:hidden">
@@ -85,7 +85,7 @@ export function EngineeringExcellence() {
 
         {/* Left: text */}
         <div
-          className="sidebar-content flex flex-col justify-center py-12"
+          className="sidebar-content flex flex-col justify-center py-16"
           style={{ paddingLeft: "var(--desktop-grid-content-start)", paddingRight: "60px" }}
         >
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
@@ -130,7 +130,7 @@ export function EngineeringExcellence() {
         >
           {/* Photo */}
           <div className="flex justify-center">
-            <div className="relative" style={{ width: "320px", height: "400px" }}>
+            <div className="relative aspect-[4/5] w-[320px]">
               <Image
                 src="/images/homayoun-pic.png"
                 alt="Seyed Hassan Mozneb"
@@ -150,7 +150,7 @@ export function EngineeringExcellence() {
             />
           </div>
           {/* Stats below the line */}
-          <div className="flex justify-center gap-[90px] pt-6">
+          <div className="flex justify-center gap-[90px] pt-8">
             {[{ end: 35, suffix: "+", label: "Experience" }, { end: 200, suffix: "+", label: "Projects" }].map((stat, i) => (
               <motion.div
                 key={stat.label}

@@ -111,7 +111,7 @@ export function EngineeringSolutions() {
     <section id="services" className="bg-[#FCFCFC] text-[#2D2D2D]">
 
       {/* TOP: Accordion */}
-      <div className="sidebar-content px-6 pb-10 pt-12 lg:pt-20 lg:pb-14 zag-desktop-content-pad">
+      <div className="sidebar-content px-6 pb-10 pt-12 lg:pt-24 lg:pb-20 zag-desktop-content-pad">
         <div className="relative pl-5 lg:max-w-[940px]">
 
           {/* Vertical fading line — draws in from top */}
@@ -145,7 +145,7 @@ export function EngineeringSolutions() {
           </Reveal>
 
           {/* Accordion — each row staggers in */}
-          <div className="w-full space-y-[6px] lg:max-w-[916px]">
+          <div className="w-full space-y-[6px] lg:space-y-2 lg:max-w-[916px]">
             {services.map((service, i) => {
               const isOpen = service.id === openId
               return (
@@ -176,7 +176,7 @@ export function EngineeringSolutions() {
                       </button>
 
                       {service.image && (
-                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:h-[220px]">
+                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:h-auto lg:aspect-[7/3]">
                           <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                         </div>
                       )}
@@ -243,15 +243,17 @@ export function EngineeringSolutions() {
       </div>
 
       {/* BOTTOM: Building image — slides in from right with blur */}
-      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="overflow-hidden -mt-10">
-        <Image
-          src="/images/curved-building.png"
-          alt="Modern curved architectural building"
-          width={1200}
-          height={600}
-          className="w-full object-cover"
-          priority
-        />
+      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="overflow-hidden -mt-10 lg:mt-0 lg:pl-[var(--desktop-grid-content-start)] lg:pb-24">
+        <div className="lg:relative lg:aspect-[2.32/1] lg:overflow-hidden lg:rounded-l-[14px]">
+          <Image
+            src="/images/curved-building.png"
+            alt="Modern curved architectural building"
+            width={1200}
+            height={600}
+            className="w-full object-cover lg:absolute lg:inset-0 lg:h-full"
+            priority
+          />
+        </div>
       </Reveal>
     </section>
   )
