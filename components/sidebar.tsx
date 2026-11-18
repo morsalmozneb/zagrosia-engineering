@@ -359,7 +359,7 @@ export function Sidebar() {
 
       {/* ── TOP BAR ── */}
       <div
-        className="pointer-events-none fixed right-6 top-[26px] z-[9999] hidden justify-start lg:flex"
+        className="pointer-events-none fixed right-6 top-[40px] z-[9999] hidden justify-start lg:flex"
         // starts to the right of the logo (logo left edge + its 136px width + a 28px gap)
         style={{ left: "calc(23px + max(20px, calc(var(--desktop-grid-content-start, 0px) + 4px)) + 136px + 28px)" }}
       >
@@ -386,10 +386,10 @@ export function Sidebar() {
                     onMouseEnter={() => setHovered(item.href)}
                     onFocus={() => setHovered(item.href)}
                     onClick={() => setOpen(false)}
-                    className={`zag-heading relative flex items-center gap-2 text-[11.5px] leading-none tracking-[0.03em] transition-colors duration-300 ease-out ${
+                    className={`zag-heading relative flex items-center gap-1.5 text-[8.5px] leading-none tracking-[0.03em] transition-colors duration-300 ease-out ${
                       isActive ? "text-[#0052A5]" : "text-[#0D2C60]/75"
                     }`}
-                    style={{ height: 33, padding: "0 10px", borderRadius: 10, fontWeight: isActive ? 850 : 600 }}
+                    style={{ height: 33, padding: "0 9px", borderRadius: 10, fontWeight: isActive ? 850 : 600 }}
                   >
                     {isActive && (
                       <motion.span
@@ -415,10 +415,10 @@ export function Sidebar() {
                     <img
                       src={item.icon}
                       alt=""
-                      className="relative hidden min-[1500px]:block"
+                      className="relative block"
                       style={{
-                        width: isActive ? 19 : 17,
-                        height: isActive ? 19 : 17,
+                        width: isActive ? 17 : 15,
+                        height: isActive ? 17 : 15,
                         objectFit: "contain",
                         filter: isActive ? ACTIVE_ICON_FILTER : "none",
                         transition: "all 300ms ease-out",
@@ -433,13 +433,13 @@ export function Sidebar() {
                 <Link
                   href={contactItem.href}
                   onClick={() => setOpen(false)}
-                  className="zag-heading group ml-1 flex items-center gap-2 text-[11.5px] leading-none tracking-[0.04em] text-white transition-all duration-300 ease-out hover:brightness-110"
+                  className="zag-heading group ml-1 flex items-center gap-1.5 text-[8.5px] leading-none tracking-[0.03em] text-white transition-all duration-300 ease-out hover:brightness-110"
                   style={{ height: 33, padding: "0 14px", borderRadius: 10, fontWeight: 850, backgroundColor: "#0052A5" }}
                 >
                   {contactItem.label}
                   <svg
-                    width="11"
-                    height="11"
+                    width="9"
+                    height="9"
                     viewBox="0 0 14 14"
                     fill="none"
                     className="transition-transform duration-300 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
