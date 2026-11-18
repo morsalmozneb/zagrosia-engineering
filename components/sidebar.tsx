@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+import { motion, AnimatePresence, useAnimation } from "framer-motion"
 
-import { isHiddenHref } from "@/lib/hidden-sections"
+import { isHiddenHref, HIDE_AI_LAB_ACADEMY_BLOG } from "@/lib/hidden-sections"
 
 const allItems = [
   { label: "HOME",     href: "/",         icon: "/icons/icon-home.svg"     },
@@ -18,6 +19,7 @@ const allItems = [
   { label: "CONTACT",  href: "/contact",  icon: "/icons/icon-contact.svg"  },
 ].filter((item) => !isHiddenHref(item.href))
 
+const railItems = allItems
 const navItems = allItems.filter((i) => i.href !== "/contact")
 const contactItem = allItems.find((i) => i.href === "/contact")
 
@@ -28,14 +30,289 @@ const ACTIVE_ICON_FILTER =
 // Shared look: identical to the mobile header box
 const glass = {
   borderRadius: 14,
-  backgroundColor: "rgba(148,184,220,0.5)",
-  boxShadow: "0px 4px 19.6px 0px rgba(148,184,220,0.34)",
-  backdropFilter: "blur(61.5px)",
-  WebkitBackdropFilter: "blur(61.5px)",
+  backgroundColor: "rgba(255,255,255,0.95)",
+  boxShadow: "0 12px 48px rgba(13,44,96,0.16), 0 2px 10px rgba(13,44,96,0.10)",
+  backdropFilter: "blur(20px)",
+  WebkitBackdropFilter: "blur(20px)",
 } as const
 
 const ease = { duration: 0.3, ease: "easeOut" } as const
 const SCROLL_AT = 40
+
+const COLLAPSED_W = 45
+const EXPANDED_W  = 162
+const SIDEBAR_H   = 470
+const OPEN_ROW_W  = 148
+
+const panelSpring = { type: "spring" as const, stiffness: 160, damping: 38, mass: 1.2 }
+
+function SideRail({ onOpenTop }: { onOpenTop: () => void }) {
+  const [expanded, setExpanded] = useState(false)
+  const [tooltip,  setTooltip]  = useState<{ label: string; x: number; y: number } | null>(null)
+  const [slideKey, setSlideKey] = useState(0)
+  const pathname        = usePathname()
+  const shimmerControls = useAnimation()
+
+  useEffect(() => {
+    setSlideKey((k) => k + 1)
+  }, [pathname])
+
+  useEffect(() => {
+    if (expanded) {
+      shimmerControls.set({ x: "-100%" })
+      shimmerControls.start({
+        x: "260%",
+        transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] },
+      })
+    }
+  }, [expanded, shimmerControls])
+
+  return (
+    <>
+      {/* ── Outer anchor ── */}
+      <div
+        className="hidden lg:block"
+        style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", zIndex: 9999 }}
+      >
+        <motion.div
+          key={slideKey}
+          initial={{ x: -80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+        >
+
+          {/* ── Panel ── */}
+          <motion.div
+            animate={{
+              width: expanded ? EXPANDED_W : COLLAPSED_W,
+              boxShadow: expanded
+                ? "0 12px 48px rgba(13,44,96,0.26), 0 2px 10px rgba(13,44,96,0.12)"
+                : "0 4px 24px rgba(13,44,96,0.14)",
+              backgroundColor: expanded
+                ? "rgba(184,190,200,0.94)"
+                : "rgba(184,190,200,0.82)",
+            }}
+            transition={panelSpring}
+            onClick={(e) => { if (!(e.target as HTMLElement).closest("a, button")) onOpenTop() }}
+            className="relative flex flex-col items-center rounded-[14px] backdrop-blur-md py-4 overflow-hidden"
+            style={{ height: HIDE_AI_LAB_ACADEMY_BLOG ? "auto" : SIDEBAR_H, paddingBottom: HIDE_AI_LAB_ACADEMY_BLOG ? 18 : undefined }}
+          >
+            {/* Shimmer sweep */}
+            <motion.div
+              animate={shimmerControls}
+              className="pointer-events-none absolute inset-0 z-10"
+              style={{
+                background:
+                  "linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.38) 50%, transparent 75%)",
+                borderRadius: 20,
+              }}
+            />
+
+            {/* ── Logo ── */}
+            <div
+              className={`relative z-20 mb-3 flex w-full items-center px-1 ${expanded ? "justify-start" : "justify-center"}`}
+              style={
+                expanded
+                  ? { minHeight: 24, paddingLeft: 7, paddingRight: 7 }
+                  : { minHeight: 24 }
+              }
+            >
+              <AnimatePresence mode="wait">
+                {expanded ? (
+                  <motion.div
+                    key="logo-open"
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -6 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                  >
+                    <Link href="/" aria-label="Go to homepage" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
+                      <Image src="/images/Sidebar-Logo-Open.png" alt="Zagrosia Engineering" width={115} height={30} className="h-auto" priority />
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="logo-closed"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                  >
+                    <Link href="/" aria-label="Go to homepage" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) } }}>
+                      <Image src="/images/Sidebar-Logo-Closed.png" alt="Zagrosia" width={30} height={24} className="h-auto" priority />
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Divider */}
+            <div
+              className="mb-2 w-full"
+              style={expanded ? { paddingLeft: 7, paddingRight: 7 } : { paddingLeft: 8, paddingRight: 8 }}
+            >
+              <div className="h-px bg-[#0D2C60]/15" />
+            </div>
+
+            {/* ── Nav ── */}
+            <nav className="relative z-20 flex w-full flex-col items-center gap-[14px] px-0 pt-3">
+              {railItems.map((item, index) => {
+                const isActive  = pathname === item.href
+                const itemDelay = expanded ? index * 0.055 : 0
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    className={`rounded-[10px] transition-colors duration-150 overflow-hidden ${
+                      expanded
+                        ? isActive ? "bg-[#0052A5]/15" : "hover:bg-[#0052A5]/10"
+                        : ""
+                    }`}
+                    style={
+                      expanded
+                        ? {
+                            display: "grid",
+                            gridTemplateColumns: "35px 1fr",
+                            alignItems: "center",
+                            gap: 10,
+                            height: 35,
+                            width: OPEN_ROW_W,
+                            marginInline: "auto",
+                          }
+                        : {
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: 35,
+                            height: 35,
+                          }
+                    }
+                    onMouseLeave={() => setTooltip(null)}
+                    onClick={() => setTooltip(null)}
+                  >
+                    {/* Icon wrapper — fixed 35×35 */}
+                    <div
+                      className={`flex items-center justify-center rounded-[8px] transition-all duration-200 ease-out ${
+                        !expanded
+                          ? isActive
+                            ? "bg-[#0052A5]/15 opacity-100"
+                            : "hover:bg-[#0052A5]/15 opacity-70 hover:opacity-100"
+                          : ""
+                      }`}
+                      style={{ width: 35, height: 35, flexShrink: 0 }}
+                      onMouseEnter={(e) => {
+                        if (!expanded) {
+                          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+                          setTooltip({ label: item.label, x: rect.right + 14, y: rect.top + rect.height / 2 })
+                        }
+                      }}
+                    >
+                      <motion.div
+                        style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+                        animate={
+                          expanded
+                            ? { scale: [1, 1.12, 0.96, 1], y: [0, -2, 0] }
+                            : { scale: 1, y: 0 }
+                        }
+                        transition={
+                          expanded
+                            ? { delay: itemDelay, duration: 0.5, ease: "easeOut" }
+                            : { duration: 0.25 }
+                        }
+                      >
+                        <Image src={item.icon} alt={item.label} width={19} height={19} />
+                      </motion.div>
+                    </div>
+
+                    {/* Label — expanded mode only */}
+                    <AnimatePresence>
+                      {expanded && (
+                        <motion.span
+                          key={`lbl-${item.label}`}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -8 }}
+                          transition={{ duration: 0.22, ease: "easeOut", delay: itemDelay + 0.08 }}
+                          style={{ whiteSpace: "nowrap" }}
+                          className={`text-[9.5px] font-semibold tracking-[0.16em] ${
+                            isActive ? "text-[#0D2C60]" : "text-[#0D2C60]/75"
+                          }`}
+                        >
+                          {item.label}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </Link>
+                )
+              })}
+            </nav>
+          </motion.div>
+
+          {/* ── Toggle ── */}
+          <motion.button
+            onClick={() => { setExpanded((v) => !v); setTooltip(null) }}
+            aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.88 }}
+            transition={{ type: "spring", stiffness: 500, damping: 22 }}
+            style={{ position: "absolute", right: -13, top: 36, zIndex: 10, cursor: "pointer" }}
+            className="flex h-[22px] w-[22px] items-center justify-center rounded-[10px] bg-white/90 shadow-md hover:bg-white"
+          >
+            <motion.svg
+              width="7" height="7" viewBox="0 0 10 10" fill="none"
+              animate={{ rotate: expanded ? 180 : 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 24 }}
+            >
+              <path d="M3 2L7 5L3 8" stroke="#0D2C60" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          </motion.button>
+
+        </motion.div>
+      </div>
+
+      {/* ── Tooltip ── */}
+      {/* top = icon vertical center; y:"-50%" centers the whole tooltip on that point.  */}
+      {/* y is passed to Framer Motion (not CSS style) so it composes correctly with x. */}
+      <AnimatePresence>
+        {tooltip && !expanded && (
+          <motion.div
+            key={tooltip.label}
+            initial={{ opacity: 0, x: -6,  y: "-50%" }}
+            animate={{ opacity: 1, x: 0,   y: "-50%" }}
+            exit={{    opacity: 0, x: -4,   y: "-50%" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="hidden lg:flex items-center gap-1.5 pointer-events-none"
+            style={{
+              position: "fixed",
+              left: tooltip.x,
+              top: tooltip.y,   // icon's exact vertical center
+              zIndex: 10000,
+            }}
+          >
+            {/* Arrow — alignSelf:center pins it to the tooltip container's midline */}
+            <div
+              className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[6px] border-r-[#0052A5]"
+              style={{ alignSelf: "center" }}
+            />
+            <div
+              className="rounded-[8px] bg-[#0052A5] px-3 shadow-lg"
+              style={{ display: "flex", alignItems: "center", height: 28 }}
+            >
+              <span
+                className="text-[9px] tracking-[0.18em] text-white whitespace-nowrap"
+                style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, lineHeight: 1 }}
+              >
+                {tooltip.label}
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
 
 export function Sidebar() {
   const [scrolled, setScrolled] = useState(false)
@@ -106,7 +383,7 @@ export function Sidebar() {
                     onFocus={() => setHovered(item.href)}
                     onClick={() => setOpen(false)}
                     className={`zag-heading relative flex items-center gap-2 text-[11.5px] leading-none tracking-[0.04em] transition-colors duration-300 ease-out ${
-                      isActive ? "text-[#0052A5]" : "text-[#2D2D2D]"
+                      isActive ? "text-[#0052A5]" : "text-[#0D2C60]/75"
                     }`}
                     style={{ height: 33, padding: "0 12px", borderRadius: 10, fontWeight: isActive ? 850 : 600 }}
                   >
@@ -116,7 +393,7 @@ export function Sidebar() {
                         className="absolute inset-0"
                         style={{
                           borderRadius: 10,
-                          backgroundColor: "rgba(0,82,165,0.09)",
+                          backgroundColor: "rgba(0,82,165,0.10)",
                           boxShadow: "inset 0 0 0 1px rgba(0,82,165,0.18)",
                         }}
                         transition={ease}
@@ -172,58 +449,8 @@ export function Sidebar() {
         </AnimatePresence>
       </div>
 
-      {/* ── SIDE RAIL (shown once the page is scrolled) ── */}
-      <div className="pointer-events-none fixed bottom-0 left-6 top-0 z-[9999] hidden items-center lg:flex">
-        <AnimatePresence>
-          {showRail && (
-            <motion.button
-              key="rail"
-              type="button"
-              aria-label="Open navigation"
-              title="Open navigation"
-              onClick={() => setOpen(true)}
-              initial={{ x: -40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -40, opacity: 0 }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              transition={ease}
-              className="pointer-events-auto flex cursor-pointer flex-col items-center"
-              style={{ width: 45, padding: "16px 0", gap: 14, ...glass }}
-            >
-              {allItems.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <span
-                    key={item.href}
-                    className="flex items-center justify-center"
-                    style={{
-                      width: 35,
-                      height: 35,
-                      borderRadius: 10,
-                      backgroundColor: isActive ? "rgba(0,82,165,0.09)" : "transparent",
-                      boxShadow: isActive ? "inset 0 0 0 1px rgba(0,82,165,0.18)" : "none",
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.icon}
-                      alt=""
-                      style={{
-                        width: isActive ? 20 : 18,
-                        height: isActive ? 20 : 18,
-                        objectFit: "contain",
-                        opacity: isActive ? 1 : 0.75,
-                        filter: isActive ? ACTIVE_ICON_FILTER : "none",
-                      }}
-                    />
-                  </span>
-                )
-              })}
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </div>
+      {/* ── SIDE BAR (the original left sidebar, shown once the page is scrolled) ── */}
+      {showRail && <SideRail onOpenTop={() => setOpen(true)} />}
     </>
   )
 }
