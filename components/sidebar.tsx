@@ -23,17 +23,13 @@ const railItems = allItems
 const navItems = allItems.filter((i) => i.href !== "/contact")
 const contactItem = allItems.find((i) => i.href === "/contact")
 
-// Same blue tint the mobile menu uses for the active icon
-const ACTIVE_ICON_FILTER =
-  "brightness(0) saturate(100%) invert(21%) sepia(94%) saturate(1200%) hue-rotate(202deg) brightness(90%)"
-
 // Shared look: identical to the mobile header box
 const glass = {
   borderRadius: 14,
-  backgroundColor: "rgba(255,255,255,0.95)",
-  boxShadow: "0 12px 48px rgba(13,44,96,0.16), 0 2px 10px rgba(13,44,96,0.10)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
+  backgroundColor: "rgba(184,190,200,0.82)",
+  boxShadow: "0 4px 24px rgba(13,44,96,0.14)",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
 } as const
 
 const ease = { duration: 0.3, ease: "easeOut" } as const
@@ -373,33 +369,35 @@ export function Sidebar() {
               exit={{ y: -16, opacity: 0 }}
               transition={ease}
               onMouseLeave={() => setHovered(null)}
-              className="pointer-events-auto flex items-center gap-1 px-[6px]"
+              className="pointer-events-auto flex items-center gap-1 px-[5px]"
               style={{ height: 45, ...glass }}
             >
-              {navItems.map((item) => {
+              {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => {
                 const isActive = pathname === item.href
                 const isHover = hovered === item.href
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-label={item.label}
                     onMouseEnter={() => setHovered(item.href)}
                     onFocus={() => setHovered(item.href)}
                     onClick={() => setOpen(false)}
-                    className={`zag-heading relative flex items-center gap-1.5 text-[8.5px] leading-none tracking-[0.03em] transition-colors duration-300 ease-out ${
-                      isActive ? "text-[#0052A5]" : "text-[#0D2C60]/75"
-                    }`}
-                    style={{ height: 33, padding: "0 9px", borderRadius: 10, fontWeight: isActive ? 850 : 600 }}
+                    className="relative overflow-hidden transition-colors duration-150"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      height: 35,
+                      paddingRight: 12,
+                      borderRadius: 10,
+                    }}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-active"
                         className="absolute inset-0"
-                        style={{
-                          borderRadius: 10,
-                          backgroundColor: "rgba(0,82,165,0.10)",
-                          boxShadow: "inset 0 0 0 1px rgba(0,82,165,0.18)",
-                        }}
+                        style={{ borderRadius: 10, backgroundColor: "rgba(0,82,165,0.15)" }}
                         transition={ease}
                       />
                     )}
@@ -407,47 +405,27 @@ export function Sidebar() {
                       <motion.span
                         layoutId="nav-hover"
                         className="absolute inset-0"
-                        style={{ borderRadius: 10, backgroundColor: "rgba(0,82,165,0.06)" }}
+                        style={{ borderRadius: 10, backgroundColor: "rgba(0,82,165,0.10)" }}
                         transition={ease}
                       />
                     )}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.icon}
-                      alt=""
-                      className="relative block"
-                      style={{
-                        width: isActive ? 17 : 15,
-                        height: isActive ? 17 : 15,
-                        objectFit: "contain",
-                        filter: isActive ? ACTIVE_ICON_FILTER : "none",
-                        transition: "all 300ms ease-out",
-                      }}
-                    />
-                    <span className="relative">{item.label}</span>
+                    {/* Icon tile — 35×35 like the side bar */}
+                    <span
+                      className="relative flex items-center justify-center"
+                      style={{ width: 35, height: 35, flexShrink: 0 }}
+                    >
+                      <Image src={item.icon} alt="" width={19} height={19} />
+                    </span>
+                    <span
+                      className={`relative whitespace-nowrap text-[9.5px] font-semibold tracking-[0.16em] ${
+                        isActive ? "text-[#0D2C60]" : "text-[#0D2C60]/75"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
                   </Link>
                 )
               })}
-
-              {contactItem && (
-                <Link
-                  href={contactItem.href}
-                  onClick={() => setOpen(false)}
-                  className="zag-heading group ml-1 flex items-center gap-1.5 text-[8.5px] leading-none tracking-[0.03em] text-white transition-all duration-300 ease-out hover:brightness-110"
-                  style={{ height: 33, padding: "0 14px", borderRadius: 10, fontWeight: 850, backgroundColor: "#0052A5" }}
-                >
-                  {contactItem.label}
-                  <svg
-                    width="9"
-                    height="9"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    className="transition-transform duration-300 ease-out group-hover:-translate-y-px group-hover:translate-x-px"
-                  >
-                    <path d="M3.5 10.5L10.5 3.5M5 3.5H10.5V9" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              )}
             </motion.nav>
           )}
         </AnimatePresence>
