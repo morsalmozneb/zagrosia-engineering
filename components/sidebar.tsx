@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
@@ -27,16 +27,36 @@ const ACTIVE_ICON_FILTER =
 
 export function Sidebar() {
   const [hovered, setHovered] = useState<string | null>(null)
+  const [faded, setFaded] = useState(false)
+  const [navHover, setNavHover] = useState(false)
   const pathname = usePathname()
+
+  // Fade the bar to a faint ghost while the page is scrolled, so it never
+  // covers the content; it returns to full strength at the top or on hover.
+  useEffect(() => {
+    const onScroll = () => setFaded(window.scrollY > 40)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    setFaded(window.scrollY > 40)
+  }, [pathname])
+
+  const opacity = faded && !navHover ? 0.16 : 1
 
   return (
     <div className="pointer-events-none fixed inset-x-0 top-[26px] z-[9999] hidden justify-center lg:flex">
       <motion.nav
         aria-label="Main navigation"
         initial={{ y: -16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        animate={{ y: 0, opacity }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        onMouseLeave={() => setHovered(null)}
+        onMouseEnter={() => setNavHover(true)}
+        onMouseLeave={() => { setHovered(null); setNavHover(false) }}
+        onFocusCapture={() => setNavHover(true)}
+        onBlurCapture={() => setNavHover(false)}
         className="pointer-events-auto flex items-center gap-1 px-[6px]"
         style={{
           height: 45,
