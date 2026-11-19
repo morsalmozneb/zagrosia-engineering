@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
@@ -42,7 +42,7 @@ const OPEN_ROW_W  = 148
 
 const panelSpring = { type: "spring" as const, stiffness: 160, damping: 38, mass: 1.2 }
 
-function SideRail({ onOpenTop }: { onOpenTop: () => void }) {
+function SideRail({ onOpenTop, fromMorph = false, hidden = false }: { onOpenTop: () => void; fromMorph?: boolean; hidden?: boolean }) {
   const [expanded, setExpanded] = useState(false)
   const [tooltip,  setTooltip]  = useState<{ label: string; x: number; y: number } | null>(null)
   const [slideKey, setSlideKey] = useState(0)
@@ -68,17 +68,18 @@ function SideRail({ onOpenTop }: { onOpenTop: () => void }) {
       {/* ── Outer anchor ── */}
       <div
         className="hidden lg:block"
-        style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", zIndex: 9999 }}
+        style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", zIndex: 9999, visibility: hidden ? "hidden" : "visible" }}
       >
         <motion.div
           key={slideKey}
-          initial={{ x: -80, opacity: 0 }}
+          initial={fromMorph ? { opacity: 0 } : { x: -80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ type: "tween", duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+          transition={fromMorph ? { duration: 0.3, ease: "easeOut" } : { type: "tween", duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
         >
 
           {/* ── Panel ── */}
           <motion.div
+            id="zag-rail-panel"
             animate={{
               width: expanded ? EXPANDED_W : COLLAPSED_W,
               boxShadow: expanded
@@ -310,11 +311,83 @@ function SideRail({ onOpenTop }: { onOpenTop: () => void }) {
   )
 }
 
+const MORPH_MS = 1100
+
+// The top bar shrinks down to the logo, slides to the left and grows into the side bar.
+function MorphGhost({
+  from, to, onDone,
+}: {
+  from: { left: number; top: number; width: number; height: number }
+  to: { left: number; top: number; width: number; height: number }
+  onDone: () => void
+}) {
+  const times = [0, 0.3, 1]
+  const move = { duration: MORPH_MS / 1000, times, ease: "easeInOut" as const }
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed z-[9999] hidden overflow-hidden lg:block"
+      style={{ ...glass, left: from.left, top: from.top, width: from.width, height: from.height }}
+      initial={false}
+      animate={{
+        left: [from.left, from.left, to.left],
+        top: [from.top, from.top, to.top],
+        width: [from.width, 150, to.width],
+        height: [from.height, from.height, to.height],
+        opacity: [1, 1, 1, 0],
+      }}
+      transition={{
+        left: move, top: move, width: move, height: move,
+        opacity: { duration: MORPH_MS / 1000, times: [0, 0.7, 0.88, 1] },
+      }}
+      onAnimationComplete={onDone}
+    >
+      {/* Items fade out first */}
+      <motion.div
+        className="absolute right-[5px] top-0 flex h-full items-center gap-1"
+        animate={{ opacity: [1, 0, 0] }}
+        transition={{ duration: MORPH_MS / 1000, times: [0, 0.18, 1] }}
+      >
+        {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => (
+          <span key={item.href} className="flex items-center" style={{ gap: 8, height: 35, paddingRight: 12 }}>
+            <span className="flex items-center justify-center" style={{ width: 35, height: 35 }}>
+              <Image src={item.icon} alt="" width={19} height={19} />
+            </span>
+            <span className="whitespace-nowrap text-[9.5px] font-semibold tracking-[0.16em] text-[#0D2C60]/75">{item.label}</span>
+          </span>
+        ))}
+      </motion.div>
+      {/* Full logo -> small logo */}
+      <motion.div
+        className="absolute left-[18px] top-0 flex h-full items-center"
+        animate={{ opacity: [1, 1, 0] }}
+        transition={{ duration: MORPH_MS / 1000, times: [0, 0.4, 0.6] }}
+      >
+        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[112px]" />
+      </motion.div>
+      <motion.div
+        className="absolute left-0 right-0 top-4 flex justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0, 1] }}
+        transition={{ duration: MORPH_MS / 1000, times: [0, 0.55, 0.8] }}
+      >
+        <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} className="h-auto" />
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export function Sidebar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false) // top bar re-opened from the side rail
   const [hovered, setHovered] = useState<string | null>(null)
   const pathname = usePathname()
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const lastRect = useRef<{ left: number; top: number; width: number; height: number } | null>(null)
+  const [morph, setMorph] = useState<null | { from: { left: number; top: number; width: number; height: number }; to: { left: number; top: number; width: number; height: number } | null }>(null)
+  const [railReady, setRailReady] = useState(false)
+  const prevShowTop = useRef(true)
+  const mountedAt = useRef(Date.now())
 
   useEffect(() => {
     const onScroll = () => {
@@ -342,6 +415,44 @@ export function Sidebar() {
   const showTop = !scrolled || open
   const showRail = scrolled && !open
 
+  // remember where the top bar is, so the morph can start exactly there
+  useLayoutEffect(() => {
+    if (showTop && wrapRef.current) {
+      const r = wrapRef.current.getBoundingClientRect()
+      if (r.width > 0 && r.height > 0) lastRect.current = { left: r.left, top: r.top, width: r.width, height: r.height }
+    }
+  })
+
+  // top bar -> side bar: start the morph (desktop only)
+  useEffect(() => {
+    const wasTop = prevShowTop.current
+    prevShowTop.current = showTop
+    if (wasTop && !showTop && lastRect.current && window.innerWidth >= 1024 && Date.now() - mountedAt.current > 1000) {
+      setRailReady(false)
+      setMorph({ from: lastRect.current, to: null })
+    }
+    if (showTop) setMorph(null)
+  }, [showTop])
+
+  // once the (hidden) side bar is mounted, measure where it sits
+  useLayoutEffect(() => {
+    if (morph && !morph.to) {
+      const el = document.getElementById("zag-rail-panel")
+      if (el) {
+        const r = el.getBoundingClientRect()
+        setMorph({ from: morph.from, to: { left: r.left, top: r.top, width: r.width, height: r.height } })
+      } else {
+        setMorph(null)
+      }
+    }
+  }, [morph])
+
+  useEffect(() => {
+    if (!morph?.to) return
+    const t = setTimeout(() => setRailReady(true), MORPH_MS * 0.82)
+    return () => clearTimeout(t)
+  }, [morph?.to])
+
   return (
     <>
       {/* ── Click-away layer while the top bar is re-opened ── */}
@@ -355,6 +466,7 @@ export function Sidebar() {
 
       {/* ── TOP BAR ── */}
       <div
+        ref={wrapRef}
         className="pointer-events-none fixed top-[40px] z-[9999] hidden lg:flex"
         // spans exactly the content column (same left/right edges as the page content);
         // on narrower screens it never gets smaller than 760px
@@ -370,7 +482,7 @@ export function Sidebar() {
               aria-label="Main navigation"
               initial={{ y: -16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -16, opacity: 0 }}
+              exit={{ opacity: 0, transition: { duration: 0 } }}
               transition={ease}
               onMouseLeave={() => setHovered(null)}
               className="pointer-events-auto flex w-full items-center justify-between pl-[18px] pr-[5px]"
@@ -442,7 +554,16 @@ export function Sidebar() {
       </div>
 
       {/* ── SIDE BAR (the original left sidebar, shown once the page is scrolled) ── */}
-      {showRail && <SideRail onOpenTop={() => setOpen(true)} />}
+      {showRail && (
+        <SideRail
+          onOpenTop={() => setOpen(true)}
+          fromMorph={!!morph}
+          hidden={!!morph && !railReady}
+        />
+      )}
+      {morph?.to && (
+        <MorphGhost from={morph.from} to={morph.to} onDone={() => { setRailReady(true); setMorph(null) }} />
+      )}
     </>
   )
 }
