@@ -107,7 +107,7 @@ export function HeroSection() {
 
               <span style={{ display: "block", overflow: "hidden", marginTop: "4px" }}>
                 <motion.span
-                  className="block text-[#A9B1BD] text-[32px] leading-[1.05] font-extrabold"
+                  className="block text-[#0150a9] text-[32px] leading-[1.05] font-extrabold"
                   initial={{ y: "105%" }}
                   animate={{ y: started ? "0%" : "105%" }}
                   transition={{ duration: 0.65, delay: 0.15, ease: EASE_OUT }}
@@ -209,7 +209,7 @@ export function HeroSection() {
 
             <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
               <motion.span
-                className="block text-[#A9B1BD]"
+                className="block text-[#0150a9]"
                 style={{ fontSize: "65px", lineHeight: 1.01 }}
                 initial={{ y: "105%" }}
                 animate={{ y: started ? "0%" : "105%" }}
