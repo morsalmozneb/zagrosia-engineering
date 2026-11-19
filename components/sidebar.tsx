@@ -385,7 +385,7 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
           opacity: { duration: dur, times: rt([0, 0.6, 0.82, 1]), ease: "linear" },
         }}
       >
-        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[136px]" />
+        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[136px]" style={{ transform: "translateY(6px)" }} />
       </motion.div>
       <motion.div
         className="absolute flex justify-center"
@@ -541,7 +541,7 @@ export function Sidebar() {
             >
               {/* Logo lives inside the bar */}
               <Link href="/" aria-label="Go to homepage" onClick={() => setOpen(false)} className="flex shrink-0 items-center">
-                <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={148} height={36} className="h-auto w-[136px]" priority />
+                <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={148} height={36} className="h-auto w-[136px]" style={{ transform: "translateY(6px)" }} priority />
               </Link>
               <div className="flex items-center gap-1">
               {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => {
