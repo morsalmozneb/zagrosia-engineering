@@ -156,9 +156,9 @@ export function EngineeringSolutions() {
             </p>
           </Reveal>
 
-          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:gap-9">
+          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-9">
             {/* Media panel — shows the picture (later: video) of the selected service */}
-            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:sticky lg:top-24 lg:mb-0 lg:h-auto lg:self-start lg:aspect-[4/4.4]">
+            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:col-start-1 lg:row-start-1 lg:mb-0 lg:h-auto lg:self-stretch">
               <AnimatePresence mode="sync" initial={false}>
                 {services.filter((x) => x.id === (openId || 1)).map((service) => (
                   <motion.div
@@ -195,7 +195,7 @@ export function EngineeringSolutions() {
             </div>
 
             {/* Accordion — each row staggers in */}
-            <div>
+            <div className="lg:col-start-2 lg:row-start-1">
               <div className="w-full space-y-[8px] lg:space-y-3">
                 {services.map((service, i) => {
                   const isOpen = service.id === openId
@@ -223,7 +223,7 @@ export function EngineeringSolutions() {
                         >
                           <span className="flex items-baseline gap-4 lg:gap-6" style={{ color: NAVY }}>
                             <span className="text-[14px] font-bold tracking-[0.04em] lg:text-[20px]">{num}</span>
-                            <span className="text-[14px] font-semibold tracking-[0.02em] lg:text-[20px]">{service.title}</span>
+                            <span className="text-[14px] font-semibold tracking-[0.02em] lg:text-[18px]">{service.title}</span>
                           </span>
                           {isOpen ? (
                             <MinusCircle size={22} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
@@ -242,12 +242,12 @@ export function EngineeringSolutions() {
                               className="overflow-hidden"
                             >
                               <div className="px-4 pb-4 lg:px-5 lg:pb-5" style={{ color: NAVY }}>
-                                <p className="leading-[1.65] tracking-[0.02em] lg:text-[15px]" style={{ fontSize: "12px" }}>
+                                <p className="text-[12px] leading-[1.65] tracking-[0.02em] lg:text-[15px]">
                                   {service.intro}
                                 </p>
                                 <ul className="mt-3 space-y-[4px]">
                                   {service.bullets.map((b) => (
-                                    <li key={b} className="flex items-start gap-2 leading-[1.55] tracking-[0.02em] lg:text-[14px]" style={{ fontSize: "12px" }}>
+                                    <li key={b} className="flex items-start gap-2 text-[12px] leading-[1.55] tracking-[0.02em] lg:text-[15px]">
                                       <span className="mt-[7px] h-[5px] w-[5px] flex-shrink-0 rounded-full" style={{ background: BRAND_BLUE }} />
                                       <span>{b}</span>
                                     </li>
@@ -269,9 +269,10 @@ export function EngineeringSolutions() {
                   )
                 })}
               </div>
+            </div>
 
-              {/* Learn More CTA */}
-              <Reveal variant="scaleUp" delay={0.3} duration={0.55}>
+            {/* Learn More CTA */}
+              <Reveal variant="scaleUp" delay={0.3} duration={0.55} className="lg:col-start-2 lg:row-start-2">
                 <div className="mt-7">
                   <CtaButton
                     href="/services"
@@ -283,7 +284,6 @@ export function EngineeringSolutions() {
                   </CtaButton>
                 </div>
               </Reveal>
-            </div>
           </div>
 
         </div>
