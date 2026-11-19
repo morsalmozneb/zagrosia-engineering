@@ -403,3 +403,18 @@ html { scroll-behavior: smooth; }
     transition: none !important;
   }
 }
+
+
+/* Hero video: fades into the black page on the left and at the bottom (desktop), and at the bottom (mobile) */
+.hero-video-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 72%, transparent 100%);
+}
+@media (min-width: 1024px) {
+  .hero-video-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 18%, #000 38%), linear-gradient(to bottom, #000 78%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 18%, #000 38%), linear-gradient(to bottom, #000 78%, transparent 100%);
+    mask-composite: intersect;
+  }
+}

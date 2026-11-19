@@ -63,18 +63,19 @@ export function HeroSection() {
 
       {/* ── VIDEO ── */}
       <video
-        autoPlay loop muted playsInline preload="auto"
+        autoPlay muted playsInline preload="auto"
+        poster="/videos/hero-green-mountains-poster.jpg"
         disablePictureInPicture disableRemotePlayback
-        className="hero-video hero-bg video-wrapper absolute top-0 left-0 right-0 h-screen w-full object-cover lg:-top-[190px] lg:bottom-auto lg:h-[1060px]"
-        style={{ objectPosition: "70% 0%" }}
+        className="hero-video hero-bg video-wrapper hero-video-mask absolute right-0 top-[29vh] h-[58vh] w-full object-cover lg:left-auto lg:top-0 lg:h-auto lg:w-[72%]"
+        style={{ objectPosition: "88% 0%" }}
       >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        <source src="/videos/hero-green-mountains.mp4" type="video/mp4" />
       </video>
 
       {/* ── OVERLAY mobile ── */}
       <div
         className="lg:hidden absolute inset-0 pointer-events-none z-10"
-        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.16) 24%, rgba(0,0,0,0.36) 46%, rgba(0,0,0,0.68) 64%, rgba(0,0,0,0.92) 82%, rgba(0,0,0,1) 100%)" }}
+        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.18) 68%, rgba(0,0,0,0.7) 86%, rgba(0,0,0,1) 100%)" }}
       />
 
       {/* ── OVERLAY desktop ── */}
@@ -106,7 +107,7 @@ export function HeroSection() {
 
               <span style={{ display: "block", overflow: "hidden", marginTop: "4px" }}>
                 <motion.span
-                  className="block text-[#2D2D2D] text-[32px] leading-[1.05] font-extrabold"
+                  className="block text-[#A9B1BD] text-[32px] leading-[1.05] font-extrabold"
                   initial={{ y: "105%" }}
                   animate={{ y: started ? "0%" : "105%" }}
                   transition={{ duration: 0.65, delay: 0.15, ease: EASE_OUT }}
@@ -208,7 +209,7 @@ export function HeroSection() {
 
             <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
               <motion.span
-                className="block text-[#2D2D2D]"
+                className="block text-[#A9B1BD]"
                 style={{ fontSize: "65px", lineHeight: 1.01 }}
                 initial={{ y: "105%" }}
                 animate={{ y: started ? "0%" : "105%" }}
