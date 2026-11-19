@@ -63,7 +63,7 @@ export function HeroSection() {
 
       {/* ── VIDEO ── */}
       <video
-        autoPlay muted playsInline preload="auto"
+        autoPlay loop muted playsInline preload="auto"
         poster="/videos/hero-green-mountains-poster.jpg"
         disablePictureInPicture disableRemotePlayback
         className="hero-video hero-bg video-wrapper hero-video-mask absolute right-0 top-[29vh] h-[58vh] w-full object-cover lg:left-auto lg:top-0 lg:h-auto lg:w-[72%]"
