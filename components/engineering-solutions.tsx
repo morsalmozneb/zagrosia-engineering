@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { PlusCircle, MinusCircle, ArrowRight } from "lucide-react"
+import { PlusCircle, MinusCircle } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Reveal, StaggerReveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
@@ -276,11 +276,9 @@ export function EngineeringSolutions() {
                 <div className="mt-7">
                   <CtaButton
                     href="/services"
-                    className="inline-flex items-center justify-center gap-3 zag-cta rounded-[10px] text-white font-semibold tracking-[0.04em] transition-colors hover:brightness-110 h-[40px] px-5 text-[12px] lg:h-[52px] lg:px-7 lg:text-[18px]"
-                    style={{ background: BRAND_BLUE }}
+                    className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                   >
                     Learn More
-                    <ArrowRight size={20} strokeWidth={2} />
                   </CtaButton>
                 </div>
               </Reveal>
