@@ -217,7 +217,7 @@ export function EngineeringSolutions() {
                         }}
                       >
                         <button
-                          className="flex min-h-[46px] w-full items-center justify-between px-4 text-left lg:min-h-[60px] lg:px-5"
+                          className="flex h-[28px] w-full items-center justify-between px-4 text-left lg:h-[53px] lg:px-5"
                           onClick={() => setOpenId(isOpen ? 0 : service.id)}
                           aria-expanded={isOpen}
                         >
@@ -226,9 +226,9 @@ export function EngineeringSolutions() {
                             <span className="text-[14px] font-semibold tracking-[0.02em] lg:text-[20px]">{service.title}</span>
                           </span>
                           {isOpen ? (
-                            <MinusCircle size={26} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
+                            <MinusCircle size={22} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
                           ) : (
-                            <PlusCircle size={26} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
+                            <PlusCircle size={22} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
                           )}
                         </button>
 
