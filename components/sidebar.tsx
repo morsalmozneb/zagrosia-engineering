@@ -42,7 +42,7 @@ const OPEN_ROW_W  = 148
 
 const panelSpring = { type: "spring" as const, stiffness: 160, damping: 38, mass: 1.2 }
 
-function SideRail({ onOpenTop, fromMorph = false, hidden = false }: { onOpenTop: () => void; fromMorph?: boolean; hidden?: boolean }) {
+function SideRail({ onOpenTop, hidden = false }: { onOpenTop: () => void; hidden?: boolean }) {
   const [expanded, setExpanded] = useState(false)
   const [tooltip,  setTooltip]  = useState<{ label: string; x: number; y: number } | null>(null)
   const [slideKey, setSlideKey] = useState(0)
@@ -71,10 +71,9 @@ function SideRail({ onOpenTop, fromMorph = false, hidden = false }: { onOpenTop:
         style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", zIndex: 9999, visibility: hidden ? "hidden" : "visible" }}
       >
         <motion.div
-          key={slideKey}
-          initial={fromMorph ? { opacity: 0 } : { x: -80, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={fromMorph ? { duration: 0.3, ease: "easeOut" } : { type: "tween", duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: hidden ? 0 : 1 }}
+          transition={{ duration: hidden ? 0 : 0.3, ease: "easeOut" }}
         >
 
           {/* ── Panel ── */}
@@ -311,41 +310,60 @@ function SideRail({ onOpenTop, fromMorph = false, hidden = false }: { onOpenTop:
   )
 }
 
-const MORPH_MS = 1100
+const MORPH_MS = 1250
+
+type Box = { left: number; top: number; width: number; height: number }
 
 // The top bar shrinks down to the logo, slides to the left and grows into the side bar.
-function MorphGhost({
-  from, to, onDone,
-}: {
-  from: { left: number; top: number; width: number; height: number }
-  to: { left: number; top: number; width: number; height: number }
-  onDone: () => void
-}) {
-  const times = [0, 0.3, 1]
-  const move = { duration: MORPH_MS / 1000, times, ease: "easeInOut" as const }
+// Only a flat layer is reshaped (clip-path) and moved (transform): no layout, no blur,
+// so it stays smooth even on slower machines.
+function MorphGhost({ from, to, onDone }: { from: Box; to: Box; onDone: () => void }) {
+  const PILL_W = 150
+  // bounding box that contains every shape of the animation
+  const U = {
+    left: Math.min(from.left, to.left),
+    top: Math.min(from.top, to.top),
+    right: Math.max(from.left + from.width, to.left + to.width),
+    bottom: Math.max(from.top + from.height, to.top + to.height),
+  }
+  const W = U.right - U.left
+  const H = U.bottom - U.top
+  const inset = (b: Box) =>
+    `inset(${b.top - U.top}px ${U.right - (b.left + b.width)}px ${U.bottom - (b.top + b.height)}px ${b.left - U.left}px round 14px)`
+  const s0: Box = from
+  const s1: Box = { left: from.left, top: from.top, width: PILL_W, height: from.height }
+  const s2: Box = { left: to.left, top: from.top, width: PILL_W, height: from.height }
+  const s3: Box = to
+  const dur = MORPH_MS / 1000
+  const times = [0, 0.26, 0.62, 1]
+  const e = [[0.65, 0, 0.35, 1], [0.65, 0, 0.35, 1], [0.65, 0, 0.35, 1]] as any
+  const slideX = to.left - from.left
+
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed z-[9999] hidden overflow-hidden lg:block"
-      style={{ ...glass, left: from.left, top: from.top, width: from.width, height: from.height }}
+      className="pointer-events-none fixed z-[9999] hidden lg:block"
+      style={{
+        left: U.left, top: U.top, width: W, height: H,
+        backgroundColor: "rgba(184,190,200,0.9)",
+        willChange: "clip-path, opacity",
+      }}
       animate={{
-        left: [from.left, from.left, to.left],
-        top: [from.top, from.top, to.top],
-        width: [from.width, 150, to.width],
-        height: [from.height, from.height, to.height],
+        clipPath: [inset(s0), inset(s1), inset(s2), inset(s3)],
         opacity: [1, 1, 1, 0],
       }}
       transition={{
-        left: move, top: move, width: move, height: move,
-        opacity: { duration: MORPH_MS / 1000, times: [0, 0.7, 0.88, 1] },
+        clipPath: { duration: dur, times, ease: e },
+        opacity: { duration: dur, times: [0, 0.78, 0.9, 1], ease: "linear" },
       }}
       onAnimationComplete={onDone}
     >
-      {/* Items fade out first */}
+      {/* Items: fade out while the bar shrinks */}
       <motion.div
-        className="absolute right-[5px] top-0 flex h-full items-center gap-1"
+        className="absolute flex items-center gap-1"
+        style={{ right: U.right - (from.left + from.width) + 5, top: from.top - U.top, height: from.height }}
         animate={{ opacity: [1, 0, 0] }}
-        transition={{ duration: MORPH_MS / 1000, times: [0, 0.18, 1] }}
+        transition={{ duration: dur, times: [0, 0.14, 1], ease: "linear" }}
       >
         {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => (
           <span key={item.href} className="flex items-center" style={{ gap: 8, height: 35, paddingRight: 12 }}>
@@ -356,19 +374,24 @@ function MorphGhost({
           </span>
         ))}
       </motion.div>
-      {/* Full logo -> small logo */}
+      {/* Full logo travels with the pill, then dissolves into the small logo */}
       <motion.div
-        className="absolute left-[18px] top-0 flex h-full items-center"
-        animate={{ opacity: [1, 1, 0] }}
-        transition={{ duration: MORPH_MS / 1000, times: [0, 0.28, 0.42] }}
+        className="absolute flex items-center"
+        style={{ left: from.left - U.left + 18, top: from.top - U.top, height: from.height, willChange: "transform, opacity" }}
+        animate={{ x: [0, 0, slideX, slideX], opacity: [1, 1, 0, 0] }}
+        transition={{
+          x: { duration: dur, times, ease: e },
+          opacity: { duration: dur, times: [0, 0.6, 0.82, 1], ease: "linear" },
+        }}
       >
         <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[112px]" />
       </motion.div>
       <motion.div
-        className="absolute left-0 right-0 top-4 flex justify-center"
+        className="absolute flex justify-center"
+        style={{ left: to.left - U.left, width: to.width, top: to.top - U.top + 16 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0, 1] }}
-        transition={{ duration: MORPH_MS / 1000, times: [0, 0.6, 0.85] }}
+        transition={{ duration: dur, times: [0, 0.6, 0.82], ease: "linear" }}
       >
         <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} className="h-auto" />
       </motion.div>
@@ -460,6 +483,12 @@ export function Sidebar() {
 
   return (
     <>
+      {/* Pre-decode the side bar logos so the first morph never stalls */}
+      <div aria-hidden style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", opacity: 0, pointerEvents: "none" }}>
+        <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} priority />
+        <Image src="/images/Sidebar-Logo-Open.png" alt="" width={115} height={30} priority />
+      </div>
+
       {/* ── Click-away layer while the top bar is re-opened ── */}
       {open && (
         <div
@@ -559,13 +588,11 @@ export function Sidebar() {
       </div>
 
       {/* ── SIDE BAR (the original left sidebar, shown once the page is scrolled) ── */}
-      {showRail && (
-        <SideRail
-          onOpenTop={() => setOpen(true)}
-          fromMorph={!!morph}
-          hidden={!!morph && !railReady}
-        />
-      )}
+      {/* always mounted (invisible while the top bar is showing) so nothing heavy happens at scroll time */}
+      <SideRail
+        onOpenTop={() => setOpen(true)}
+        hidden={!showRail || (!!morph && !railReady)}
+      />
       {morph?.to && (
         <MorphGhost from={morph.from} to={morph.to} onDone={() => { setRailReady(true); setMorph(null) }} />
       )}
