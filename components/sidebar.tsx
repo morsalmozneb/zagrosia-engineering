@@ -360,7 +360,7 @@ function MorphGhost({
       <motion.div
         className="absolute left-[18px] top-0 flex h-full items-center"
         animate={{ opacity: [1, 1, 0] }}
-        transition={{ duration: MORPH_MS / 1000, times: [0, 0.4, 0.6] }}
+        transition={{ duration: MORPH_MS / 1000, times: [0, 0.28, 0.42] }}
       >
         <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[112px]" />
       </motion.div>
@@ -368,7 +368,7 @@ function MorphGhost({
         className="absolute left-0 right-0 top-4 flex justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0, 1] }}
-        transition={{ duration: MORPH_MS / 1000, times: [0, 0.55, 0.8] }}
+        transition={{ duration: MORPH_MS / 1000, times: [0, 0.6, 0.85] }}
       >
         <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} className="h-auto" />
       </motion.div>
