@@ -355,9 +355,13 @@ export function Sidebar() {
 
       {/* ── TOP BAR ── */}
       <div
-        className="pointer-events-none fixed right-6 top-[40px] z-[9999] hidden justify-start lg:flex"
-        // starts to the right of the logo (logo left edge + its 136px width + a 28px gap)
-        style={{ left: "calc(23px + max(20px, calc(var(--desktop-grid-content-start, 0px) + 4px)) + 136px + 28px)" }}
+        className="pointer-events-none fixed top-[40px] z-[9999] hidden lg:flex"
+        // spans exactly the content column (same left/right edges as the page content);
+        // on narrower screens it never gets smaller than 760px
+        style={{
+          left: "min(var(--desktop-grid-content-start, 216px), max(24px, calc((100vw - 760px) / 2)))",
+          right: "min(var(--desktop-grid-content-start, 216px), max(24px, calc((100vw - 760px) / 2)))",
+        }}
       >
         <AnimatePresence>
           {showTop && (
@@ -369,9 +373,14 @@ export function Sidebar() {
               exit={{ y: -16, opacity: 0 }}
               transition={ease}
               onMouseLeave={() => setHovered(null)}
-              className="pointer-events-auto flex items-center gap-1 px-[5px]"
+              className="pointer-events-auto flex w-full items-center justify-between pl-[18px] pr-[5px]"
               style={{ height: 45, ...glass }}
             >
+              {/* Logo lives inside the bar */}
+              <Link href="/" aria-label="Go to homepage" onClick={() => setOpen(false)} className="flex shrink-0 items-center">
+                <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={148} height={36} className="h-auto w-[112px]" priority />
+              </Link>
+              <div className="flex items-center gap-1">
               {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => {
                 const isActive = pathname === item.href
                 const isHover = hovered === item.href
@@ -426,6 +435,7 @@ export function Sidebar() {
                   </Link>
                 )
               })}
+              </div>
             </motion.nav>
           )}
         </AnimatePresence>
