@@ -287,14 +287,15 @@ function SideRail({ onOpenTop, hidden = false }: { onOpenTop: () => void; hidden
   )
 }
 
-const MORPH_MS = 1250
+const MORPH_MS = 1300
 
 type Box = { left: number; top: number; width: number; height: number }
 
-// Top bar <-> side bar. Forward: the top bar shrinks to the logo, slides left and grows into the
-// side bar. Reverse: the side bar slides right and unfolds into the top bar.
+// Top bar <-> side bar. Forward: the top bar shrinks to the logo and glides, in one continuous
+// movement, to the side bar's spot where it grows into the side bar. Reverse: the same, backwards.
 // Only a flat layer is reshaped (clip-path) and moved (transform): no layout, no blur.
 function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse: boolean; onDone: () => void }) {
+  const pathname = usePathname()
   const PILL_W = 172
   const bar = reverse ? to : from
   const rail = reverse ? from : to
@@ -309,17 +310,26 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
   const H = U.bottom - U.top
   const inset = (b: Box) =>
     `inset(${b.top - U.top}px ${U.right - (b.left + b.width)}px ${U.bottom - (b.top + b.height)}px ${b.left - U.left}px round 14px)`
-  const shapes: Box[] = [
-    bar,
-    { left: bar.left, top: bar.top, width: PILL_W, height: bar.height },
-    { left: rail.left, top: bar.top, width: PILL_W, height: bar.height },
-    rail,
-  ]
-  if (reverse) shapes.reverse()
+
   const dur = MORPH_MS / 1000
-  const times = [0, 0.26, 0.62, 1]
-  const e = [[0.65, 0, 0.35, 1], [0.65, 0, 0.35, 1], [0.65, 0, 0.35, 1]] as any
-  const slideX = rail.left - bar.left
+  const KNEE = 0.3
+  // the pill is already on its way left when the shrinking ends, so there is no stop in between
+  const pill: Box = {
+    left: bar.left - (bar.left - rail.left) * 0.12,
+    top: bar.top + (rail.top - bar.top) * 0.04,
+    width: PILL_W,
+    height: bar.height,
+  }
+  const flip = (c: number[]) => [1 - c[2], 1 - c[3], 1 - c[0], 1 - c[1]]
+  const e1 = [0.4, 0, 0.8, 0.8]
+  const e2 = [0.2, 0.6, 0.2, 1]
+  const shapes = reverse ? [rail, pill, bar] : [bar, pill, rail]
+  const clipTimes = reverse ? [0, 1 - KNEE, 1] : [0, KNEE, 1]
+  const clipEase = (reverse ? [flip(e2), flip(e1)] : [e1, e2]) as any
+  const xs = [0, pill.left - bar.left, rail.left - bar.left]
+  const logoX = reverse ? [...xs].reverse() : xs
+  const ys = [0, pill.top - bar.top, rail.top - bar.top]
+  const logoY = reverse ? [...ys].reverse() : ys
   const R = (a: number[]) => (reverse ? [...a].reverse() : a)
   const rt = (t: number[]) => (reverse ? t.map((v) => 1 - v).reverse() : t)
 
@@ -337,12 +347,12 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
         opacity: [1, 1, 1, 0],
       }}
       transition={{
-        clipPath: { duration: dur, times, ease: e },
-        opacity: { duration: dur, times: reverse ? [0, 0.86, 0.95, 1] : [0, 0.78, 0.9, 1], ease: "linear" },
+        clipPath: { duration: dur, times: clipTimes, ease: clipEase },
+        opacity: { duration: dur, times: reverse ? [0, 0.86, 0.95, 1] : [0, 0.82, 0.92, 1], ease: "linear" },
       }}
       onAnimationComplete={onDone}
     >
-      {/* Items: fade out while the bar shrinks (forward only; the real bar brings its own in reverse) */}
+      {/* Menu items: fade out while the bar shrinks (forward only; the real bar brings its own in reverse) */}
       {!reverse && (
         <motion.div
           className="absolute flex items-center gap-1"
@@ -360,29 +370,37 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
           ))}
         </motion.div>
       )}
-      {/* Reverse only: the side bar's icons fade out as it starts to move */}
-      {reverse && (
-        <motion.div
-          className="absolute"
-          style={{ left: rail.left - U.left + 5, top: rail.top - U.top + 73 }}
-          animate={{ opacity: [1, 0, 0] }}
-          transition={{ duration: dur, times: [0, 0.16, 1], ease: "linear" }}
-        >
-          {railItems.map((item, i) => (
-            <span key={item.href} className="flex items-center justify-center" style={{ width: 35, height: 35, marginTop: i === 0 ? 0 : 14 }}>
-              <Image src={item.icon} alt="" width={19} height={19} style={{ opacity: 0.7 }} />
-            </span>
-          ))}
-        </motion.div>
-      )}
-      {/* Full logo travels with the pill; small logo lives in the side bar */}
+
+      {/* Side bar icons: they are inside the shape while it grows, so nothing pops in at the end */}
+      <motion.div
+        className="absolute"
+        style={{ left: rail.left - U.left + 5, top: rail.top - U.top + 73 }}
+        animate={{ opacity: R([0, 0, 1, 1]) }}
+        transition={{ duration: dur, times: rt([0, 0.5, 0.9, 1]), ease: "linear" }}
+      >
+        {railItems.map((item, i) => (
+          <span
+            key={item.href}
+            className="flex items-center justify-center"
+            style={{
+              width: 35, height: 35, marginTop: i === 0 ? 0 : 14, borderRadius: 8,
+              backgroundColor: pathname === item.href ? "rgba(0,82,165,0.15)" : "transparent",
+            }}
+          >
+            <Image src={item.icon} alt="" width={19} height={19} style={{ opacity: pathname === item.href ? 1 : 0.7 }} />
+          </span>
+        ))}
+      </motion.div>
+
+      {/* Full logo travels with the pill; the shrinking edge wipes it down to the mountain emblem */}
       <motion.div
         className="absolute flex items-center"
         style={{ left: bar.left - U.left + 16, top: bar.top - U.top, height: bar.height, willChange: "transform, opacity" }}
-        animate={{ x: R([0, 0, slideX, slideX]), opacity: R([1, 1, 0, 0]) }}
+        animate={{ x: logoX, y: logoY, opacity: R([1, 1, 0, 0]) }}
         transition={{
-          x: { duration: dur, times, ease: e },
-          opacity: { duration: dur, times: rt([0, 0.6, 0.82, 1]), ease: "linear" },
+          x: { duration: dur, times: clipTimes, ease: clipEase },
+          y: { duration: dur, times: clipTimes, ease: clipEase },
+          opacity: { duration: dur, times: rt([0, 0.86, 0.96, 1]), ease: "linear" },
         }}
       >
         <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[136px]" style={{ transform: "translateY(6px)" }} />
@@ -390,9 +408,8 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
       <motion.div
         className="absolute flex justify-center"
         style={{ left: rail.left - U.left, width: COLLAPSED_W, top: rail.top - U.top + 16 }}
-        initial={{ opacity: reverse ? 1 : 0 }}
-        animate={{ opacity: reverse ? [1, 1, 0] : [0, 0, 1] }}
-        transition={{ duration: dur, times: reverse ? [0, 0.18, 0.4] : [0, 0.6, 0.82], ease: "linear" }}
+        animate={{ opacity: R([0, 0, 1, 1]) }}
+        transition={{ duration: dur, times: rt([0, 0.86, 0.96, 1]), ease: "linear" }}
       >
         <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} className="h-auto" />
       </motion.div>
@@ -494,7 +511,7 @@ export function Sidebar() {
   useEffect(() => {
     if (!morph?.to) return
     const reverse = morph.reverse
-    const t = setTimeout(() => (reverse ? setNavReady(true) : setRailReady(true)), MORPH_MS * (reverse ? 0.84 : 0.82))
+    const t = setTimeout(() => (reverse ? setNavReady(true) : setRailReady(true)), MORPH_MS * (reverse ? 0.84 : 0.8))
     return () => clearTimeout(t)
   }, [morph?.to, morph?.reverse])
 
