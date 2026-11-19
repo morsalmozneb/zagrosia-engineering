@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Header } from "./header"
 import { motion, useReducedMotion } from "framer-motion"
 import { CtaButton } from "@/components/cta-button"
@@ -59,7 +58,7 @@ export function HeroSection() {
       } as const)
 
   return (
-    <section className="relative overflow-hidden bg-black lg:min-h-[1460px]">
+    <section className="relative overflow-hidden bg-black lg:min-h-screen">
 
       {/* ── VIDEO ── */}
       <video
@@ -81,7 +80,7 @@ export function HeroSection() {
       {/* ── OVERLAY desktop ── */}
       <div
         className="hidden lg:block absolute pointer-events-none z-10"
-        style={{ top: 0, left: 0, right: 0, height: "920px", background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.04) 40%, rgba(0,0,0,0.22) 62%, rgba(0,0,0,0.70) 78%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)" }}
+        style={{ top: 0, left: 0, right: 0, bottom: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.04) 40%, rgba(0,0,0,0.22) 62%, rgba(0,0,0,0.70) 78%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)" }}
       />
 
       {/* ── HEADER ── */}
@@ -179,13 +178,6 @@ export function HeroSection() {
           </div>
 
         </div>
-      </div>
-
-      {/* ══════════════════════════════════════════
-          DESKTOP — BUILDING IMAGE
-      ══════════════════════════════════════════ */}
-      <div className="hidden lg:block absolute pointer-events-none" style={{ left: 0, top: "840px", bottom: 0, width: "75%", zIndex: 20 }}>
-        <Image src="/images/architectural-building.png" alt="Modern architectural building" fill className="object-cover" style={{ objectPosition: "left top" }} priority />
       </div>
 
       {/* ══════════════════════════════════════════
