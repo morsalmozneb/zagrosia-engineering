@@ -2,19 +2,31 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { PlusCircle, MinusCircle } from "lucide-react"
-import { motion, useReducedMotion } from "framer-motion"
+import { PlusCircle, MinusCircle, ArrowRight } from "lucide-react"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Reveal, StaggerReveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
-const CLOSED_FILL = "linear-gradient(to right, rgba(45,45,45,1) 0%, rgba(115,115,115,0.22) 100%)"
+const ROW_FILL = "linear-gradient(to right, rgba(225,236,250,0.95) 0%, rgba(214,226,242,0.95) 100%)"
+const ROW_FILL_ACTIVE = "linear-gradient(to right, rgba(199,222,252,1) 0%, rgba(222,234,250,1) 100%)"
+const BRAND_BLUE = "#0150a9"
+const NAVY = "#161f43"
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-const services = [
+// Each service can get its own video: set `video: "/videos/services/xxx.mp4"` and it replaces the picture.
+const services: {
+  id: number
+  title: string
+  image: string
+  video?: string
+  intro: string
+  bullets: string[]
+  tags: string[]
+}[] = [
   {
     id: 1,
     title: "Structural Design",
-    image: "/images/services-building.jpg",
+    image: "/images/services-building.png",
     intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
@@ -44,7 +56,7 @@ const services = [
   {
     id: 3,
     title: "Building Rehabilitation",
-    image: "/images/about-milestones-building.jpg",
+    image: "/images/about-milestones-building.png",
     intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
     bullets: [
       "Condition assessment and structural investigation",
@@ -89,7 +101,7 @@ const services = [
   {
     id: 6,
     title: "Specialty Reviews",
-    image: "/images/about-core-values-building.jpg",
+    image: "/images/about-core-values-building.png",
     intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
     bullets: [
       "Independent structural peer review",
@@ -112,14 +124,14 @@ export function EngineeringSolutions() {
 
       {/* TOP: Accordion */}
       <div className="sidebar-content px-6 pb-10 pt-12 lg:pt-24 lg:pb-20 zag-desktop-content-pad">
-        <div className="relative pl-5 lg:max-w-[940px]">
+        <div className="relative pl-5">
 
           {/* Vertical fading line — draws in from top */}
           <motion.div
             className="absolute left-0 top-0 w-[1.5px]"
             style={{
               height: "100%",
-              background: "linear-gradient(to bottom, rgba(45,45,45,1) 0%, rgba(45,45,45,0.8) 30%, rgba(45,45,45,0.4) 65%, rgba(45,45,45,0) 100%)",
+              background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
               transformOrigin: "top",
             }}
             initial={reducedMotion ? false : { scaleY: 0 }}
@@ -144,101 +156,136 @@ export function EngineeringSolutions() {
             </p>
           </Reveal>
 
-          {/* Accordion — each row staggers in */}
-          <div className="w-full space-y-[6px] lg:space-y-2 lg:max-w-[916px]">
-            {services.map((service, i) => {
-              const isOpen = service.id === openId
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: false, amount: 0.05 }}
-                  transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
-                >
-                  {isOpen ? (
-                    <div
-                      className="rounded-[14px] bg-[#FCFCFC] px-4 pb-4 pt-3"
-                      style={{
-                        boxShadow: "0px 4px 19.6px 0px rgba(0,0,0,0.34)",
-                        backdropFilter: "blur(61.5px)",
-                        WebkitBackdropFilter: "blur(61.5px)",
-                      }}
+          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:gap-9">
+            {/* Media panel — shows the picture (later: video) of the selected service */}
+            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:sticky lg:top-24 lg:mb-0 lg:h-auto lg:self-start lg:aspect-[4/4.4]">
+              <AnimatePresence mode="sync" initial={false}>
+                {services.filter((x) => x.id === (openId || 1)).map((service) => (
+                  <motion.div
+                    key={service.id}
+                    className="absolute inset-0"
+                    initial={reducedMotion ? false : { opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.55, ease: EASE }}
+                  >
+                    {service.video ? (
+                      <video
+                        key={service.video}
+                        src={service.video}
+                        poster={service.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    )}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              <span
+                className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-[13px] font-semibold text-white backdrop-blur-sm lg:h-10 lg:w-10 lg:text-[14px]"
+                style={{ borderColor: BRAND_BLUE, background: "rgba(1,80,169,0.55)" }}
+              >
+                {String(openId || 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Accordion — each row staggers in */}
+            <div>
+              <div className="w-full space-y-[8px] lg:space-y-3">
+                {services.map((service, i) => {
+                  const isOpen = service.id === openId
+                  const num = String(service.id).padStart(2, "0")
+                  return (
+                    <motion.div
+                      key={service.id}
+                      initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+                      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      viewport={{ once: false, amount: 0.05 }}
+                      transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
                     >
-                      <button
-                        className="flex w-full items-start justify-between"
-                        onClick={() => setOpenId(0)}
+                      <div
+                        className="overflow-hidden rounded-[14px] border transition-colors"
+                        style={{
+                          background: isOpen ? ROW_FILL_ACTIVE : ROW_FILL,
+                          borderColor: isOpen ? "rgba(1,80,169,0.25)" : "rgba(1,80,169,0.10)",
+                          boxShadow: isOpen ? "0 6px 18px rgba(1,80,169,0.14)" : "none",
+                        }}
                       >
-                        <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D] lg:text-[24px]">
-                          {service.id}. {service.title}
-                        </span>
-                        <MinusCircle size={22} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
-                      </button>
+                        <button
+                          className="flex min-h-[46px] w-full items-center justify-between px-4 text-left lg:min-h-[60px] lg:px-5"
+                          onClick={() => setOpenId(isOpen ? 0 : service.id)}
+                          aria-expanded={isOpen}
+                        >
+                          <span className="flex items-baseline gap-4 lg:gap-6" style={{ color: NAVY }}>
+                            <span className="text-[14px] font-bold tracking-[0.04em] lg:text-[20px]">{num}</span>
+                            <span className="text-[14px] font-semibold tracking-[0.02em] lg:text-[20px]">{service.title}</span>
+                          </span>
+                          {isOpen ? (
+                            <MinusCircle size={26} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
+                          ) : (
+                            <PlusCircle size={26} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
+                          )}
+                        </button>
 
-                      {service.image && (
-                        <div className="relative mt-3 h-[140px] w-full overflow-hidden rounded-[10px] lg:h-auto lg:aspect-[7/3]">
-                          <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                        </div>
-                      )}
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.4, ease: EASE }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-4 pb-4 lg:px-5 lg:pb-5" style={{ color: NAVY }}>
+                                <p className="leading-[1.65] tracking-[0.02em] lg:text-[15px]" style={{ fontSize: "12px" }}>
+                                  {service.intro}
+                                </p>
+                                <ul className="mt-3 space-y-[4px]">
+                                  {service.bullets.map((b) => (
+                                    <li key={b} className="flex items-start gap-2 leading-[1.55] tracking-[0.02em] lg:text-[14px]" style={{ fontSize: "12px" }}>
+                                      <span className="mt-[7px] h-[5px] w-[5px] flex-shrink-0 rounded-full" style={{ background: BRAND_BLUE }} />
+                                      <span>{b}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                                <div className="mt-3 flex flex-wrap gap-[6px]">
+                                  {service.tags.map((tag) => (
+                                    <span key={tag} className="rounded-[8px] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[12px]" style={{ fontSize: "9px", background: BRAND_BLUE }}>
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
 
-                      <p className="mt-3 leading-[1.7] tracking-[0.06em] text-[#2D2D2D] lg:text-[16px]" style={{ fontSize: "12px" }}>
-                        {service.intro}
-                      </p>
-
-                      {service.bullets.length > 0 && (
-                        <>
-                          <p className="mt-4 font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
-                            What We Offer
-                          </p>
-                          <ul className="mt-2 space-y-[5px]">
-                            {service.bullets.map((b) => (
-                              <li key={b} className="flex items-start gap-2 leading-[1.65] tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
-                                <span className="mt-[3px] text-[8px]">•</span>
-                                <span>{b}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-
-                      {service.tags.length > 0 && (
-                        <div className="mt-4 flex flex-wrap gap-[6px]">
-                          {service.tags.map((tag) => (
-                            <span key={tag} className="rounded-[8px] bg-[#0052A5] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[14px]" style={{ fontSize: "9px" }}>
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <button
-                      className="flex h-[28px] w-full items-center justify-between rounded-[14px] px-3 transition-opacity hover:opacity-90 lg:h-[53px]"
-                      style={{ background: CLOSED_FILL }}
-                      onClick={() => setOpenId(service.id)}
-                    >
-                      <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
-                        {service.id}. {service.title}
-                      </span>
-                      <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
-                    </button>
-                  )}
-                </motion.div>
-              )
-            })}
+              {/* Learn More CTA */}
+              <Reveal variant="scaleUp" delay={0.3} duration={0.55}>
+                <div className="mt-7">
+                  <CtaButton
+                    href="/services"
+                    className="inline-flex items-center justify-center gap-3 zag-cta rounded-[10px] text-white font-semibold tracking-[0.04em] transition-colors hover:brightness-110 h-[40px] px-5 text-[12px] lg:h-[52px] lg:px-7 lg:text-[18px]"
+                    style={{ background: BRAND_BLUE }}
+                  >
+                    Learn More
+                    <ArrowRight size={20} strokeWidth={2} />
+                  </CtaButton>
+                </div>
+              </Reveal>
+            </div>
           </div>
 
-          {/* Learn More CTA */}
-          <Reveal variant="scaleUp" delay={0.3} duration={0.55}>
-            <div className="mt-7">
-              <CtaButton
-                href="/services"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              >
-                Learn More
-              </CtaButton>
-            </div>
-          </Reveal>
         </div>
       </div>
 
