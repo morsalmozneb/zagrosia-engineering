@@ -295,7 +295,7 @@ type Box = { left: number; top: number; width: number; height: number }
 // side bar. Reverse: the side bar slides right and unfolds into the top bar.
 // Only a flat layer is reshaped (clip-path) and moved (transform): no layout, no blur.
 function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse: boolean; onDone: () => void }) {
-  const PILL_W = 150
+  const PILL_W = 172
   const bar = reverse ? to : from
   const rail = reverse ? from : to
   // bounding box that contains every shape of the animation
@@ -378,14 +378,14 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
       {/* Full logo travels with the pill; small logo lives in the side bar */}
       <motion.div
         className="absolute flex items-center"
-        style={{ left: bar.left - U.left + 18, top: bar.top - U.top, height: bar.height, willChange: "transform, opacity" }}
+        style={{ left: bar.left - U.left + 16, top: bar.top - U.top, height: bar.height, willChange: "transform, opacity" }}
         animate={{ x: R([0, 0, slideX, slideX]), opacity: R([1, 1, 0, 0]) }}
         transition={{
           x: { duration: dur, times, ease: e },
           opacity: { duration: dur, times: rt([0, 0.6, 0.82, 1]), ease: "linear" },
         }}
       >
-        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[112px]" />
+        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[136px]" />
       </motion.div>
       <motion.div
         className="absolute flex justify-center"
@@ -536,12 +536,12 @@ export function Sidebar() {
               exit={{ opacity: 0, transition: { duration: 0 } }}
               transition={ease}
               onMouseLeave={() => setHovered(null)}
-              className="pointer-events-auto flex w-full items-center justify-between pl-[18px] pr-[5px]"
+              className="pointer-events-auto flex w-full items-center justify-between pl-[16px] pr-[5px]"
               style={{ height: 45, ...glass }}
             >
               {/* Logo lives inside the bar */}
               <Link href="/" aria-label="Go to homepage" onClick={() => setOpen(false)} className="flex shrink-0 items-center">
-                <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={148} height={36} className="h-auto w-[112px]" priority />
+                <Image src="/images/zagrosia-logo.svg" alt="Zagrosia Engineering Inc." width={148} height={36} className="h-auto w-[136px]" priority />
               </Link>
               <div className="flex items-center gap-1">
               {[...navItems, ...(contactItem ? [contactItem] : [])].map((item) => {
