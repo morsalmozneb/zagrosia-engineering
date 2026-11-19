@@ -328,7 +328,6 @@ function MorphGhost({
       aria-hidden
       className="pointer-events-none fixed z-[9999] hidden overflow-hidden lg:block"
       style={{ ...glass, left: from.left, top: from.top, width: from.width, height: from.height }}
-      initial={false}
       animate={{
         left: [from.left, from.left, to.left],
         top: [from.top, from.top, to.top],
@@ -386,7 +385,6 @@ export function Sidebar() {
   const lastRect = useRef<{ left: number; top: number; width: number; height: number } | null>(null)
   const [morph, setMorph] = useState<null | { from: { left: number; top: number; width: number; height: number }; to: { left: number; top: number; width: number; height: number } | null }>(null)
   const [railReady, setRailReady] = useState(false)
-  const prevShowTop = useRef(true)
   const mountedAt = useRef(Date.now())
 
   useEffect(() => {
@@ -423,16 +421,23 @@ export function Sidebar() {
     }
   })
 
-  // top bar -> side bar: start the morph (desktop only)
-  useEffect(() => {
-    const wasTop = prevShowTop.current
-    prevShowTop.current = showTop
-    if (wasTop && !showTop && lastRect.current && window.innerWidth >= 1024 && Date.now() - mountedAt.current > 1000) {
+  // top bar -> side bar: start the morph (desktop only). Done during render so the
+  // side bar mounts hidden from its very first frame (no old fade-in before the morph).
+  const [prevTop, setPrevTop] = useState(true)
+  if (prevTop !== showTop) {
+    setPrevTop(showTop)
+    if (showTop) {
+      setMorph(null)
+    } else if (
+      lastRect.current &&
+      typeof window !== "undefined" &&
+      window.innerWidth >= 1024 &&
+      Date.now() - mountedAt.current > 1000
+    ) {
       setRailReady(false)
       setMorph({ from: lastRect.current, to: null })
     }
-    if (showTop) setMorph(null)
-  }, [showTop])
+  }
 
   // once the (hidden) side bar is mounted, measure where it sits
   useLayoutEffect(() => {
