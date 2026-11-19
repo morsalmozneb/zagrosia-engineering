@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { PlusCircle, MinusCircle } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
@@ -125,6 +125,46 @@ export function EngineeringSolutions() {
   const [openId, setOpenId] = useState<number>(0)
   const reducedMotion = useReducedMotion()
 
+  // Which service's media is on top, and which one sits underneath while the new one fades in
+  const activeId = openId || 1
+  const lastRef = useRef(activeId)
+  const underRef = useRef(activeId)
+  if (lastRef.current !== activeId) {
+    underRef.current = lastRef.current
+    lastRef.current = activeId
+  }
+  const underId = underRef.current
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({})
+
+  // Only the visible videos play; the new one always starts from the beginning
+  useEffect(() => {
+    const t = setTimeout(() => {
+      Object.entries(videoRefs.current).forEach(([id, v]) => {
+        if (v && Number(id) !== activeId) v.pause()
+      })
+    }, 700)
+    const v = videoRefs.current[activeId]
+    if (v) {
+      try { v.currentTime = 0 } catch {}
+      v.play().catch(() => {})
+    }
+    return () => clearTimeout(t)
+  }, [activeId])
+
+  // After a row opens, bring it fully into view so the visitor never has to hunt for the text
+  useEffect(() => {
+    if (!openId) return
+    const t = setTimeout(() => {
+      const el = document.getElementById(`service-row-${openId}`)
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      if (r.top < 90 || r.bottom > window.innerHeight - 20) {
+        window.scrollTo({ top: window.scrollY + r.top - 100, behavior: "smooth" })
+      }
+    }, 450)
+    return () => clearTimeout(t)
+  }, [openId])
+
   return (
     <section id="services" className="bg-[#FCFCFC] text-[#2D2D2D]">
 
@@ -165,38 +205,42 @@ export function EngineeringSolutions() {
           <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-9">
             {/* Media panel — shows the picture (later: video) of the selected service */}
             <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:col-start-1 lg:row-start-1 lg:mb-0 lg:h-[378px] lg:self-start">
-              <AnimatePresence mode="sync" initial={false}>
-                {services.filter((x) => x.id === (openId || 1)).map((service) => (
-                  <motion.div
+              {services.map((service) => {
+                const isActive = service.id === activeId
+                const isUnder = service.id === underId && !isActive
+                return (
+                  <div
                     key={service.id}
                     className="absolute inset-0"
-                    initial={reducedMotion ? false : { opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.55, ease: EASE }}
+                    style={{
+                      opacity: isActive || isUnder ? 1 : 0,
+                      zIndex: isActive ? 2 : isUnder ? 1 : 0,
+                      transition: isActive && !reducedMotion ? "opacity 0.7s ease" : "none",
+                    }}
                   >
                     {service.video ? (
                       <video
-                        key={service.video}
+                        ref={(el) => { videoRefs.current[service.id] = el }}
                         src={service.video}
                         poster={service.image}
-                        autoPlay
+                        autoPlay={service.id === 1}
                         loop
                         muted
                         playsInline
+                        preload="auto"
                         className="h-full w-full object-cover"
                       />
                     ) : (
                       <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     )}
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                  </div>
+                )
+              })}
               <span
                 className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-[13px] font-semibold text-white backdrop-blur-sm lg:h-10 lg:w-10 lg:text-[14px]"
                 style={{ borderColor: BRAND_BLUE, background: "rgba(1,80,169,0.55)" }}
               >
-                {String(openId || 1).padStart(2, "0")}
+                {String(activeId).padStart(2, "0")}
               </span>
             </div>
 
@@ -215,6 +259,7 @@ export function EngineeringSolutions() {
                       transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
                     >
                       <div
+                        id={`service-row-${service.id}`}
                         className="overflow-hidden rounded-[14px] border transition-colors"
                         style={{
                           background: isOpen ? ROW_FILL_ACTIVE : ROW_FILL,
