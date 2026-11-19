@@ -80,7 +80,7 @@ function SideRail({ onOpenTop, hidden = false }: { onOpenTop: () => void; hidden
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: hidden ? 0 : 1 }}
-          transition={{ duration: hidden ? 0 : 0.3, ease: "easeOut" }}
+          transition={{ duration: hidden ? 0 : 0.2, ease: "easeOut" }}
         >
           <div style={{ position: "relative", width: EXPANDED_W }}>
             {/* Shadow: its own empty layer, so the panel never repaints a shadow */}
@@ -330,6 +330,23 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
   const logoX = reverse ? [...xs].reverse() : xs
   const ys = [0, pill.top - bar.top, rail.top - bar.top]
   const logoY = reverse ? [...ys].reverse() : ys
+  // logo artwork: 136 wide box, emblem ink centre and the small side bar logo's ink centre (measured)
+  const LOGO_W = 136
+  const LOGO_H = 79.4
+  const EMB_CX = 27
+  const EMB_CY = 34.4
+  const EMB_SCALE = 0.55
+  const logoTop = bar.top - U.top + (bar.height - LOGO_H) / 2 + 6
+  const targetX = rail.left - U.left + 22.75 // where the small logo's centre sits
+  const targetY = rail.top - U.top + 28
+  const fx = targetX - (bar.left - U.left + 16 + EMB_CX)
+  const fy = targetY - (logoTop + EMB_CY)
+  const exs = [0, pill.left - bar.left, fx]
+  const eys = [0, pill.top - bar.top, fy]
+  const ess = [1, 1, EMB_SCALE]
+  const emblemX = reverse ? [...exs].reverse() : exs
+  const emblemY = reverse ? [...eys].reverse() : eys
+  const emblemS = reverse ? [...ess].reverse() : ess
   const R = (a: number[]) => (reverse ? [...a].reverse() : a)
   const rt = (t: number[]) => (reverse ? t.map((v) => 1 - v).reverse() : t)
 
@@ -344,11 +361,11 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
       }}
       animate={{
         clipPath: shapes.map(inset),
-        opacity: [1, 1, 1, 0],
+        opacity: reverse ? [1, 1, 1, 0] : [1, 1, 0],
       }}
       transition={{
         clipPath: { duration: dur, times: clipTimes, ease: clipEase },
-        opacity: { duration: dur, times: reverse ? [0, 0.86, 0.95, 1] : [0, 0.82, 0.92, 1], ease: "linear" },
+        opacity: { duration: dur, times: reverse ? [0, 0.86, 0.95, 1] : [0, 0.9, 1], ease: "linear" },
       }}
       onAnimationComplete={onDone}
     >
@@ -392,26 +409,38 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
         ))}
       </motion.div>
 
-      {/* Full logo travels with the pill; the shrinking edge wipes it down to the mountain emblem */}
+      {/* Wordmark: travels with the pill and fades out early, before the shrinking edge reaches it */}
       <motion.div
-        className="absolute flex items-center"
-        style={{ left: bar.left - U.left + 16, top: bar.top - U.top, height: bar.height, willChange: "transform, opacity" }}
+        className="absolute"
+        style={{
+          left: bar.left - U.left + 16, top: logoTop, width: LOGO_W, height: LOGO_H,
+          clipPath: "inset(0 0 0 39%)", willChange: "transform, opacity",
+        }}
         animate={{ x: logoX, y: logoY, opacity: R([1, 1, 0, 0]) }}
         transition={{
           x: { duration: dur, times: clipTimes, ease: clipEase },
           y: { duration: dur, times: clipTimes, ease: clipEase },
-          opacity: { duration: dur, times: rt([0, 0.86, 0.96, 1]), ease: "linear" },
+          opacity: { duration: dur, times: rt([0, 0.27, 0.4, 1]), ease: "linear" },
         }}
       >
-        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} className="h-auto w-[136px]" style={{ transform: "translateY(6px)" }} />
+        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} style={{ width: LOGO_W, height: LOGO_H }} />
       </motion.div>
+
+      {/* Emblem: the same mountain emblem glides into the side bar's logo spot (it lands exactly on it) */}
       <motion.div
-        className="absolute flex justify-center"
-        style={{ left: rail.left - U.left, width: COLLAPSED_W, top: rail.top - U.top + 16 }}
-        animate={{ opacity: R([0, 0, 1, 1]) }}
-        transition={{ duration: dur, times: rt([0, 0.86, 0.96, 1]), ease: "linear" }}
+        className="absolute"
+        style={{
+          left: bar.left - U.left + 16, top: logoTop, width: LOGO_W, height: LOGO_H,
+          clipPath: "inset(0 61% 0 0)", transformOrigin: `${EMB_CX}px ${EMB_CY}px`, willChange: "transform",
+        }}
+        animate={{ x: emblemX, y: emblemY, scale: emblemS }}
+        transition={{
+          x: { duration: dur, times: clipTimes, ease: clipEase },
+          y: { duration: dur, times: clipTimes, ease: clipEase },
+          scale: { duration: dur, times: clipTimes, ease: clipEase },
+        }}
       >
-        <Image src="/images/Sidebar-Logo-Closed.png" alt="" width={30} height={24} className="h-auto" />
+        <Image src="/images/zagrosia-logo.svg" alt="" width={148} height={36} style={{ width: LOGO_W, height: LOGO_H }} />
       </motion.div>
     </motion.div>
   )
@@ -511,7 +540,7 @@ export function Sidebar() {
   useEffect(() => {
     if (!morph?.to) return
     const reverse = morph.reverse
-    const t = setTimeout(() => (reverse ? setNavReady(true) : setRailReady(true)), MORPH_MS * (reverse ? 0.84 : 0.8))
+    const t = setTimeout(() => (reverse ? setNavReady(true) : setRailReady(true)), MORPH_MS * (reverse ? 0.84 : 0.86))
     return () => clearTimeout(t)
   }, [morph?.to, morph?.reverse])
 
