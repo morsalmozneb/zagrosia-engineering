@@ -116,7 +116,7 @@ const services: {
 ]
 
 export function EngineeringSolutions() {
-  const [openId, setOpenId] = useState<number>(1)
+  const [openId, setOpenId] = useState<number>(0)
   const reducedMotion = useReducedMotion()
 
   return (
@@ -158,7 +158,7 @@ export function EngineeringSolutions() {
 
           <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-9">
             {/* Media panel — shows the picture (later: video) of the selected service */}
-            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:col-start-1 lg:row-start-1 lg:mb-0 lg:h-auto lg:self-stretch">
+            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:col-start-1 lg:row-start-1 lg:mb-0 lg:h-[378px] lg:self-start">
               <AnimatePresence mode="sync" initial={false}>
                 {services.filter((x) => x.id === (openId || 1)).map((service) => (
                   <motion.div
@@ -217,7 +217,7 @@ export function EngineeringSolutions() {
                         }}
                       >
                         <button
-                          className="flex h-[28px] w-full items-center justify-between px-4 text-left lg:h-[53px] lg:px-5"
+                          className="flex h-[26px] w-full items-center justify-between px-4 text-left lg:h-[51px] lg:px-5"
                           onClick={() => setOpenId(isOpen ? 0 : service.id)}
                           aria-expanded={isOpen}
                         >
