@@ -9,6 +9,9 @@ import { CtaButton } from "@/components/cta-button"
 
 const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
+// Maps each homepage service to its matching entry on the /services page
+const SERVICE_PAGE_ID: Record<number, number> = { 1: 1, 2: 6, 3: 7, 4: 11, 5: 3, 6: 5 }
+
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
 // Each service can get its own video: set `video: "/videos/services/xxx.mp4"` and it replaces the picture.
@@ -300,12 +303,6 @@ export function EngineeringSolutions() {
                       </div>
                     )
                   })}
-                  <span
-                    className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border text-[13px] font-semibold text-white backdrop-blur-sm"
-                    style={{ borderColor: "rgba(255,255,255,0.35)", background: "rgba(1,80,169,0.55)" }}
-                  >
-                    {String(activeId).padStart(2, "0")}
-                  </span>
                 </div>
 
                 {/* Text */}
@@ -318,10 +315,7 @@ export function EngineeringSolutions() {
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.3, ease: EASE }}
                     >
-                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] lg:text-[12px]" style={{ color: BRAND_BLUE }}>
-                        Service {String(activeId).padStart(2, "0")}
-                      </p>
-                      <h3 className="mt-2 text-[22px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[30px]">
+                      <h3 className="text-[22px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[30px]">
                         {eyebrow} {restWords.join(" ")}
                       </h3>
                       <div className="mt-3 h-[3px] w-12 rounded-full" style={{ background: BRAND_BLUE }} />
@@ -335,7 +329,7 @@ export function EngineeringSolutions() {
                       </div>
                       <div className="mt-6">
                         <CtaButton
-                          href="/services"
+                          href={`/services#service-${SERVICE_PAGE_ID[activeId] ?? 1}`}
                           className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                         >
                           Learn More

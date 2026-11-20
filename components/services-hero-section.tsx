@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { PlusCircle, MinusCircle } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
@@ -273,6 +273,20 @@ export function ServicesHeroSection() {
   const reducedMotion = useReducedMotion()
   const [openId, setOpenId] = useState<number>(1)
 
+  // Open and scroll to the service named in the URL (e.g. /services#service-6)
+  useEffect(() => {
+    const m = window.location.hash.match(/^#service-(\d+)$/)
+    if (!m) return
+    const id = Number(m[1])
+    setOpenId(id)
+    const t = window.setTimeout(() => {
+      const els = Array.from(document.querySelectorAll<HTMLElement>(`[data-service-id="${id}"]`))
+      const el = els.find((e) => e.offsetParent !== null)
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: "smooth" })
+    }, 500)
+    return () => window.clearTimeout(t)
+  }, [])
+
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
       <div className="lg:hidden px-6 pb-10 pt-24">
@@ -321,6 +335,7 @@ export function ServicesHeroSection() {
               return (
                 <motion.div
                   key={service.id}
+                  data-service-id={service.id}
                   initial={reducedMotion ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.05 }}
@@ -459,6 +474,7 @@ export function ServicesHeroSection() {
                 return (
                   <motion.div
                     key={service.id}
+                    data-service-id={service.id}
                     initial={reducedMotion ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     viewport={{ once: false, amount: 0.05 }}
