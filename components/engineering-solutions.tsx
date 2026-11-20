@@ -26,8 +26,8 @@ const services: {
   {
     id: 1,
     title: "Structural Design",
-    image: "/videos/services/structural-design-poster.jpg",
-    video: "/videos/services/structural-design.mp4",
+    image: "/videos/services/structural-design-v2-poster.jpg",
+    video: "/videos/services/structural-design-v2.mp4",
     intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
     bullets: [
       "Residential structures (single-family, multi-family, townhomes)",
@@ -42,8 +42,8 @@ const services: {
   {
     id: 2,
     title: "Seismic Assessment",
-    image: "/videos/services/seismic-assessment-poster.jpg",
-    video: "/videos/services/seismic-assessment.mp4",
+    image: "/videos/services/seismic-assessment-v2-poster.jpg",
+    video: "/videos/services/seismic-assessment-v2.mp4",
     intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.",
     bullets: [
       "Seismic hazard and site classification analysis",
@@ -58,8 +58,8 @@ const services: {
   {
     id: 3,
     title: "Building Rehabilitation",
-    image: "/videos/services/building-rehabilitation-poster.jpg",
-    video: "/videos/services/building-rehabilitation.mp4",
+    image: "/videos/services/building-rehabilitation-v2-poster.jpg",
+    video: "/videos/services/building-rehabilitation-v2.mp4",
     intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
     bullets: [
       "Condition assessment and structural investigation",
@@ -74,8 +74,8 @@ const services: {
   {
     id: 4,
     title: "Heavy Racking",
-    image: "/videos/services/heavy-racking-poster.jpg",
-    video: "/videos/services/heavy-racking.mp4",
+    image: "/videos/services/heavy-racking-v2-poster.jpg",
+    video: "/videos/services/heavy-racking-v2.mp4",
     intro: "Industrial racking systems engineering — design, seismic review, and code compliance for warehouses and distribution centres.",
     bullets: [
       "Selective and drive-in pallet racking design",
@@ -90,8 +90,8 @@ const services: {
   {
     id: 5,
     title: "Building Envelope",
-    image: "/videos/services/building-envelope-poster.jpg",
-    video: "/videos/services/building-envelope.mp4",
+    image: "/videos/services/building-envelope-v2-poster.jpg",
+    video: "/videos/services/building-envelope-v2.mp4",
     intro: "Structural integration and performance assessments for building envelopes — moisture control, cladding systems, and longevity.",
     bullets: [
       "Exterior cladding and curtain wall structural review",
@@ -106,8 +106,8 @@ const services: {
   {
     id: 6,
     title: "Specialty Reviews",
-    image: "/videos/services/specialty-reviews-poster.jpg",
-    video: "/videos/services/specialty-reviews.mp4",
+    image: "/videos/services/specialty-reviews-v2-poster.jpg",
+    video: "/videos/services/specialty-reviews-v2.mp4",
     intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
     bullets: [
       "Independent structural peer review",
