@@ -212,10 +212,9 @@ export function EngineeringSolutions() {
           </Reveal>
 
           {/* Service tabs */}
-          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[10px] lg:grid-cols-6 lg:gap-2">
+          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[8px] lg:grid-cols-3 lg:gap-[10px]">
             {services.map((service, i) => {
               const isOpen = service.id === openId
-              const num = String(service.id).padStart(2, "0")
               return (
                 <motion.button
                   key={service.id}
@@ -227,7 +226,7 @@ export function EngineeringSolutions() {
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
-                  className="group relative flex h-[64px] flex-col justify-between overflow-hidden rounded-[12px] border px-3 py-2 text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[72px] lg:px-[10px] lg:py-[9px]"
+                  className="group relative flex min-h-[40px] items-center justify-between overflow-hidden rounded-[10px] border px-3 py-[6px] text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[40px] lg:px-4 lg:py-0"
                   style={{
                     background: isOpen ? BRAND_BLUE : "linear-gradient(135deg, rgba(232,240,252,0.95) 0%, rgba(218,230,246,0.95) 100%)",
                     borderColor: isOpen ? BRAND_BLUE : "rgba(1,80,169,0.14)",
@@ -235,20 +234,12 @@ export function EngineeringSolutions() {
                     color: isOpen ? "#fff" : NAVY,
                   }}
                 >
-                  <span className="flex items-center justify-between">
-                    <span
-                      className="text-[10px] font-bold tracking-[0.18em] lg:text-[11px]"
-                      style={{ color: isOpen ? "rgba(255,255,255,0.7)" : BRAND_BLUE }}
-                    >
-                      {num}
-                    </span>
-                    {isOpen ? (
-                      <MinusCircle size={16} strokeWidth={1.8} className="flex-shrink-0" style={{ color: "#fff" }} />
-                    ) : (
-                      <PlusCircle size={16} strokeWidth={1.8} className="flex-shrink-0 transition-transform duration-300 group-hover:rotate-90" style={{ color: BRAND_BLUE }} />
-                    )}
-                  </span>
-                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.005em] lg:text-[14px]">{service.title}</span>
+                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.title}</span>
+                  {isOpen ? (
+                    <MinusCircle size={18} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
+                  ) : (
+                    <PlusCircle size={18} strokeWidth={1.8} className="ml-2 flex-shrink-0 transition-transform duration-300 group-hover:rotate-90" style={{ color: BRAND_BLUE }} />
+                  )}
                 </motion.button>
               )
             })}
