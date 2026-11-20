@@ -4,138 +4,16 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { PlusCircle, MinusCircle, Check } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
+import { allServices } from "./services-data"
 
 const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-export type Detail = { id: number; title: string; intro: string; bullets: string[]; tags: string[] }
+const services = allServices
 
-// Each service can get its own video: set `video: "/videos/services/xxx.mp4"` and it replaces the picture.
-const categories: {
-  id: number
-  key: string
-  detailIds: number[]
-  title: string
-  image: string
-  video?: string
-  intro: string
-  bullets: string[]
-  tags: string[]
-}[] = [
-  {
-    id: 1,
-    key: "structural-design",
-    detailIds: [1, 2, 4, 9, 12, 13, 14, 15],
-    title: "Structural Design",
-    image: "/videos/services/structural-design-v2-poster.jpg",
-    video: "/videos/services/structural-design-v2.mp4",
-    intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
-    bullets: [
-      "Residential structures (single-family, multi-family, townhomes)",
-      "Commercial buildings (offices, retail, mixed-use)",
-      "Industrial facilities and warehouses",
-      "Foundation design and analysis",
-      "Steel, concrete, wood, and masonry structures",
-      "Structural drawings and specifications",
-    ],
-    tags: ["Steel", "Concrete", "Wood", "Masonry", "BCBC 2024", "NBCC"],
-  },
-  {
-    id: 2,
-    key: "seismic-assessment",
-    detailIds: [6],
-    title: "Seismic Assessment",
-    image: "/videos/services/seismic-assessment-v2-poster.jpg",
-    video: "/videos/services/seismic-assessment-v2.mp4",
-    intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.",
-    bullets: [
-      "Seismic hazard and site classification analysis",
-      "Existing building vulnerability assessments",
-      "Retrofit design and structural strengthening",
-      "Post-earthquake damage evaluation",
-      "Compliance with BCBC 2024 and NBCC seismic provisions",
-      "Detailed reporting and engineering recommendations",
-    ],
-    tags: ["BCBC 2024", "NBCC", "Seismic", "Retrofit", "Risk Assessment"],
-  },
-  {
-    id: 3,
-    key: "building-rehabilitation",
-    detailIds: [7, 10],
-    title: "Building Rehabilitation",
-    image: "/videos/services/building-rehabilitation-v2-poster.jpg",
-    video: "/videos/services/building-rehabilitation-v2.mp4",
-    intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
-    bullets: [
-      "Condition assessment and structural investigation",
-      "Repair design for concrete, steel, and masonry",
-      "Seismic and code-compliance upgrades",
-      "Structural reinforcement and strengthening",
-      "Heritage and existing building retrofits",
-      "Long-term rehabilitation planning and reporting",
-    ],
-    tags: ["Rehabilitation", "Retrofit", "Concrete", "Masonry", "EGBC"],
-  },
-  {
-    id: 4,
-    key: "heavy-racking",
-    detailIds: [11],
-    title: "Heavy Racking",
-    image: "/videos/services/heavy-racking-v2-poster.jpg",
-    video: "/videos/services/heavy-racking-v2.mp4",
-    intro: "Industrial racking systems engineering — design, seismic review, and code compliance for warehouses and distribution centres.",
-    bullets: [
-      "Selective and drive-in pallet racking design",
-      "Seismic bracing and anchor design",
-      "Load capacity and operational safety review",
-      "Site-specific seismic compliance (BCBC / NBCC)",
-      "Racking system inspection and certification",
-      "Full engineering drawing packages",
-    ],
-    tags: ["Industrial", "Steel", "Seismic", "BCBC 2024", "Warehousing"],
-  },
-  {
-    id: 5,
-    key: "building-envelope",
-    detailIds: [3],
-    title: "Building Envelope",
-    image: "/videos/services/building-envelope-v2-poster.jpg",
-    video: "/videos/services/building-envelope-v2.mp4",
-    intro: "Structural integration and performance assessments for building envelopes — moisture control, cladding systems, and longevity.",
-    bullets: [
-      "Exterior cladding and curtain wall structural review",
-      "Moisture and air barrier assessment",
-      "Window and glazing system structural analysis",
-      "Roof structure and waterproofing coordination",
-      "Facade inspection and failure investigation",
-      "Performance improvement recommendations",
-    ],
-    tags: ["Envelope", "Cladding", "Glazing", "Waterproofing", "Building Science"],
-  },
-  {
-    id: 6,
-    key: "specialty-reviews",
-    detailIds: [5, 8, 16, 17],
-    title: "Specialty Reviews",
-    image: "/videos/services/specialty-reviews-v2-poster.jpg",
-    video: "/videos/services/specialty-reviews-v2.mp4",
-    intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
-    bullets: [
-      "Independent structural peer review",
-      "Third-party engineering assessments",
-      "Expert technical opinions and reports",
-      "Construction progress and compliance review",
-      "Dispute resolution and forensic engineering support",
-      "Custom consulting for unique structural challenges",
-    ],
-    tags: ["Peer Review", "Forensic", "Consulting", "Inspection", "EGBC"],
-  },
-]
-
-export function ServicesTabs({ details }: { details: Detail[] }) {
+export function ServicesTabs() {
   const [openId, setOpenId] = useState<number>(0)
-  const [openSub, setOpenSub] = useState<number>(0)
   const reducedMotion = useReducedMotion()
   const gridRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -144,7 +22,7 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
   const shownRef = useRef(1)
   if (openId) shownRef.current = openId
   const activeId = shownRef.current
-  const active = categories.find((x) => x.id === activeId) ?? categories[0]
+  const active = services.find((x) => x.id === activeId) ?? services[0]
 
   // Which service's video sits underneath while the next one fades in
   const lastRef = useRef(activeId)
@@ -171,16 +49,13 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
     return () => clearTimeout(t)
   }, [activeId, openId])
 
-  // Open the group named in the URL (e.g. /services#cat-heavy-racking)
+  // Open the service named in the URL (e.g. /services#service-6)
   useEffect(() => {
-    const m = window.location.hash.match(/^#cat-([a-z-]+)$/)
+    const m = window.location.hash.match(/^#service-(\d+)$/)
     if (!m) return
-    const c = categories.find((x) => x.key === m[1])
-    if (c) setOpenId(c.id)
+    const id = Number(m[1])
+    if (services.some((x) => x.id === id)) setOpenId(id)
   }, [])
-
-  // Switching group closes any expanded service
-  useEffect(() => { setOpenSub(0) }, [activeId])
 
   // After the panel opens, make sure the whole thing is on screen
   useEffect(() => {
@@ -198,14 +73,12 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
     return () => clearTimeout(t)
   }, [openId])
 
-  const [eyebrow, ...restWords] = active.title.split(" ")
-  const activeDetails = active.detailIds.map((id) => details.find((d) => d.id === id)!).filter(Boolean)
 
   return (
     <div>
           {/* Service tabs */}
           <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[8px] lg:grid-cols-3 lg:gap-[10px]">
-            {categories.map((service, i) => {
+            {services.map((service, i) => {
               const isOpen = service.id === openId
               return (
                 <motion.button
@@ -226,7 +99,7 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
                     color: isOpen ? "#fff" : NAVY,
                   }}
                 >
-                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.title}</span>
+                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.short}</span>
                   {isOpen ? (
                     <MinusCircle size={18} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
                   ) : (
@@ -262,7 +135,7 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
                   className="relative aspect-square w-full overflow-hidden rounded-[18px] bg-[#071a33]"
                   style={{ boxShadow: "0 12px 30px rgba(7,26,51,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
                 >
-                  {categories.map((service) => {
+                  {services.map((service) => {
                     const isActive = service.id === activeId
                     const isUnder = service.id === underId && !isActive
                     return (
@@ -286,8 +159,10 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
                             preload="metadata"
                             className="h-full w-full object-cover"
                           />
-                        ) : (
+                        ) : service.image ? (
                           <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                        ) : (
+                          <div className="h-full w-full" style={{ background: "linear-gradient(160deg, #0150a9 0%, #161f43 100%)" }} />
                         )}
                       </div>
                     )
@@ -305,10 +180,11 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
                       transition={{ duration: 0.3, ease: EASE }}
                     >
                       <h3 className="text-[22px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[30px]">
-                        {eyebrow} {restWords.join(" ")}
+                        {active.title}
                       </h3>
                       <div className="mt-3 h-[3px] w-12 rounded-full" style={{ background: BRAND_BLUE }} />
                       <p className="mt-4 text-[13px] leading-[1.7] tracking-[0.01em] opacity-90 lg:text-[15px]">{active.intro}</p>
+                      <p className="mt-3 text-[13px] leading-[1.7] tracking-[0.01em] opacity-90 lg:text-[15px]">{active.more}</p>
                       <div className="mt-5 flex flex-wrap gap-[6px]">
                         {active.tags.map((tag) => (
                           <span key={tag} className="rounded-[8px] px-3 py-[4px] text-[10px] font-medium tracking-[0.06em] text-white lg:text-[12px]" style={{ background: BRAND_BLUE }}>
@@ -321,65 +197,30 @@ export function ServicesTabs({ details }: { details: Detail[] }) {
                 </div>
               </div>
 
-              {/* Services included in this group */}
+              {/* What we offer */}
               <div className="mt-5 border-t pt-5 lg:mt-6 lg:pt-6" style={{ borderColor: "rgba(1,80,169,0.12)", color: NAVY }}>
                 <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.22em] lg:text-[12px]" style={{ color: BRAND_BLUE }}>
                   What We Offer
                 </p>
-                <div className="space-y-[8px]">
-                  {activeDetails.map((d) => {
-                    const subOpen = openSub === d.id
-                    return (
-                      <div
-                        key={d.id}
-                        className="rounded-[12px] border"
-                        style={{
-                          borderColor: subOpen ? "rgba(1,80,169,0.35)" : "rgba(1,80,169,0.14)",
-                          background: subOpen ? "#FFFFFF" : "rgba(232,240,252,0.55)",
-                        }}
-                      >
-                        <button
-                          type="button"
-                          onClick={() => setOpenSub(subOpen ? 0 : d.id)}
-                          aria-expanded={subOpen}
-                          className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
-                        >
-                          <span className="text-[14px] font-semibold leading-[1.3] lg:text-[16px]">{d.title}</span>
-                          {subOpen ? (
-                            <MinusCircle size={18} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
-                          ) : (
-                            <PlusCircle size={18} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
-                          )}
-                        </button>
-                        <AnimatePresence initial={false}>
-                          {subOpen && (
-                            <motion.div
-                              initial={reducedMotion ? false : { height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.35, ease: EASE }}
-                              className="overflow-hidden"
-                            >
-                              <div className="px-4 pb-4">
-                                <p className="text-[13px] leading-[1.7] opacity-90 lg:text-[15px]">{d.intro}</p>
-                                <ul className="mt-3 grid gap-x-8 gap-y-[8px] lg:grid-cols-2">
-                                  {d.bullets.map((b) => (
-                                    <li key={b} className="flex items-start gap-3 text-[13px] leading-[1.5] lg:text-[15px]">
-                                      <span className="mt-[2px] flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full" style={{ background: "rgba(1,80,169,0.12)" }}>
-                                        <Check size={11} strokeWidth={3} style={{ color: BRAND_BLUE }} />
-                                      </span>
-                                      <span>{b}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    )
-                  })}
-                </div>
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.ul
+                    key={activeId}
+                    className="grid gap-x-8 gap-y-[10px] lg:grid-cols-2"
+                    initial={reducedMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                  >
+                    {active.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-[13px] leading-[1.5] lg:text-[15px]">
+                        <span className="mt-[2px] flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full" style={{ background: "rgba(1,80,169,0.12)" }}>
+                          <Check size={11} strokeWidth={3} style={{ color: BRAND_BLUE }} />
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </motion.ul>
+                </AnimatePresence>
               </div>
             </div>
           </motion.div>

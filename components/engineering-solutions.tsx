@@ -6,128 +6,14 @@ import { PlusCircle, MinusCircle, Check } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Reveal, StaggerReveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
+import { allServices, HOME_SERVICE_IDS } from "./services-data"
 
 const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
-// Maps each homepage service to its matching group on the /services page
-const SERVICE_PAGE_CATEGORY: Record<number, string> = {
-  1: "structural-design",
-  2: "seismic-assessment",
-  3: "building-rehabilitation",
-  4: "heavy-racking",
-  5: "building-envelope",
-  6: "specialty-reviews",
-}
-
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-// Each service can get its own video: set `video: "/videos/services/xxx.mp4"` and it replaces the picture.
-const services: {
-  id: number
-  title: string
-  image: string
-  video?: string
-  intro: string
-  bullets: string[]
-  tags: string[]
-}[] = [
-  {
-    id: 1,
-    title: "Structural Design",
-    image: "/videos/services/structural-design-v2-poster.jpg",
-    video: "/videos/services/structural-design-v2.mp4",
-    intro: "Full-scope structural design for residential, commercial, and industrial projects — engineered to code and built to last.",
-    bullets: [
-      "Residential structures (single-family, multi-family, townhomes)",
-      "Commercial buildings (offices, retail, mixed-use)",
-      "Industrial facilities and warehouses",
-      "Foundation design and analysis",
-      "Steel, concrete, wood, and masonry structures",
-      "Structural drawings and specifications",
-    ],
-    tags: ["Steel", "Concrete", "Wood", "Masonry", "BCBC 2024", "NBCC"],
-  },
-  {
-    id: 2,
-    title: "Seismic Assessment",
-    image: "/videos/services/seismic-assessment-v2-poster.jpg",
-    video: "/videos/services/seismic-assessment-v2.mp4",
-    intro: "Comprehensive seismic evaluations following BCBC, NBCC, and EGBC standards to assess and mitigate structural risk.",
-    bullets: [
-      "Seismic hazard and site classification analysis",
-      "Existing building vulnerability assessments",
-      "Retrofit design and structural strengthening",
-      "Post-earthquake damage evaluation",
-      "Compliance with BCBC 2024 and NBCC seismic provisions",
-      "Detailed reporting and engineering recommendations",
-    ],
-    tags: ["BCBC 2024", "NBCC", "Seismic", "Retrofit", "Risk Assessment"],
-  },
-  {
-    id: 3,
-    title: "Building Rehabilitation",
-    image: "/videos/services/building-rehabilitation-v2-poster.jpg",
-    video: "/videos/services/building-rehabilitation-v2.mp4",
-    intro: "Expert structural upgrades and rehabilitation for aging, distressed, or non-compliant buildings.",
-    bullets: [
-      "Condition assessment and structural investigation",
-      "Repair design for concrete, steel, and masonry",
-      "Seismic and code-compliance upgrades",
-      "Structural reinforcement and strengthening",
-      "Heritage and existing building retrofits",
-      "Long-term rehabilitation planning and reporting",
-    ],
-    tags: ["Rehabilitation", "Retrofit", "Concrete", "Masonry", "EGBC"],
-  },
-  {
-    id: 4,
-    title: "Heavy Racking",
-    image: "/videos/services/heavy-racking-v2-poster.jpg",
-    video: "/videos/services/heavy-racking-v2.mp4",
-    intro: "Industrial racking systems engineering — design, seismic review, and code compliance for warehouses and distribution centres.",
-    bullets: [
-      "Selective and drive-in pallet racking design",
-      "Seismic bracing and anchor design",
-      "Load capacity and operational safety review",
-      "Site-specific seismic compliance (BCBC / NBCC)",
-      "Racking system inspection and certification",
-      "Full engineering drawing packages",
-    ],
-    tags: ["Industrial", "Steel", "Seismic", "BCBC 2024", "Warehousing"],
-  },
-  {
-    id: 5,
-    title: "Building Envelope",
-    image: "/videos/services/building-envelope-v2-poster.jpg",
-    video: "/videos/services/building-envelope-v2.mp4",
-    intro: "Structural integration and performance assessments for building envelopes — moisture control, cladding systems, and longevity.",
-    bullets: [
-      "Exterior cladding and curtain wall structural review",
-      "Moisture and air barrier assessment",
-      "Window and glazing system structural analysis",
-      "Roof structure and waterproofing coordination",
-      "Facade inspection and failure investigation",
-      "Performance improvement recommendations",
-    ],
-    tags: ["Envelope", "Cladding", "Glazing", "Waterproofing", "Building Science"],
-  },
-  {
-    id: 6,
-    title: "Specialty Reviews",
-    image: "/videos/services/specialty-reviews-v2-poster.jpg",
-    video: "/videos/services/specialty-reviews-v2.mp4",
-    intro: "Specialized structural peer reviews, independent engineering consultations, and technical opinions for complex or unique projects.",
-    bullets: [
-      "Independent structural peer review",
-      "Third-party engineering assessments",
-      "Expert technical opinions and reports",
-      "Construction progress and compliance review",
-      "Dispute resolution and forensic engineering support",
-      "Custom consulting for unique structural challenges",
-    ],
-    tags: ["Peer Review", "Forensic", "Consulting", "Inspection", "EGBC"],
-  },
-]
+// The six homepage services (picked from the 17 on the Services page)
+const services = HOME_SERVICE_IDS.map((id) => allServices.find((s) => s.id === id)!)
 
 export function EngineeringSolutions() {
   const [openId, setOpenId] = useState<number>(0)
@@ -182,7 +68,6 @@ export function EngineeringSolutions() {
     return () => clearTimeout(t)
   }, [openId])
 
-  const [eyebrow, ...restWords] = active.title.split(" ")
 
   return (
     <section id="services" className="bg-[#FCFCFC] text-[#2D2D2D]">
@@ -244,7 +129,7 @@ export function EngineeringSolutions() {
                     color: isOpen ? "#fff" : NAVY,
                   }}
                 >
-                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.title}</span>
+                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.short}</span>
                   {isOpen ? (
                     <MinusCircle size={18} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
                   ) : (
@@ -304,8 +189,10 @@ export function EngineeringSolutions() {
                             preload="auto"
                             className="h-full w-full object-cover"
                           />
-                        ) : (
+                        ) : service.image ? (
                           <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                        ) : (
+                          <div className="h-full w-full" style={{ background: "linear-gradient(160deg, #0150a9 0%, #161f43 100%)" }} />
                         )}
                       </div>
                     )
@@ -323,7 +210,7 @@ export function EngineeringSolutions() {
                       transition={{ duration: 0.3, ease: EASE }}
                     >
                       <h3 className="text-[22px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[30px]">
-                        {eyebrow} {restWords.join(" ")}
+                        {active.title}
                       </h3>
                       <div className="mt-3 h-[3px] w-12 rounded-full" style={{ background: BRAND_BLUE }} />
                       <p className="mt-4 text-[13px] leading-[1.7] tracking-[0.01em] opacity-90 lg:text-[15px]">{active.intro}</p>
@@ -336,7 +223,7 @@ export function EngineeringSolutions() {
                       </div>
                       <div className="mt-6">
                         <CtaButton
-                          href={`/services#cat-${SERVICE_PAGE_CATEGORY[activeId] ?? "structural-design"}`}
+                          href={`/services#service-${activeId}`}
                           className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                         >
                           Learn More
