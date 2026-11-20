@@ -2,6 +2,7 @@
 // `video` / `image` are optional: a service without one shows a plain brand panel until its video is added.
 export type ServiceItem = {
   id: number
+  short: string // short label for the tab
   title: string
   image?: string
   video?: string
@@ -17,6 +18,7 @@ export const HOME_SERVICE_IDS = [1, 2, 5, 6, 7, 11]
 export const allServices: ServiceItem[] = [
   {
     "id": 1,
+    "short": "Structural Design",
     "title": "Structural Design for Concrete, Steel, Wood, and Masonry Buildings",
     "image": "/videos/services/structural-design-v2-poster.jpg",
     "video": "/videos/services/structural-design-v2.mp4",
@@ -41,6 +43,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 2,
+    "short": "Foundations & Walls",
     "title": "Foundation and Retaining Wall Design",
     "intro": "Zagrosia provides foundation and retaining wall design services for buildings, site structures, equipment supports, additions, and repair projects. Our design approach considers soil support conditions, gravity and lateral loading, drainage-related concerns, constructability, and coordination with the overall building or site layout.",
     "more": "This service is useful when a project requires new foundations, foundation upgrades, local support pads, retaining structures, underpinning concepts, or practical design support for site constraints. We work with project teams to provide clear and buildable structural details that can be used for construction planning and permit coordination where required.",
@@ -61,6 +64,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 3,
+    "short": "Masonry & CMU Walls",
     "title": "Masonry, CMU Wall, Brick Veneer, and Attachment Design",
     "image": "/videos/services/building-envelope-v2-poster.jpg",
     "video": "/videos/services/building-envelope-v2.mp4",
@@ -83,6 +87,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 4,
+    "short": "Steel Connections",
     "title": "Steel Connection Design and Special Steel Structures",
     "image": "/videos/services/specialty-reviews-v2-poster.jpg",
     "video": "/videos/services/specialty-reviews-v2.mp4",
@@ -105,6 +110,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 5,
+    "short": "Building Assessments",
     "title": "Existing Building Structural Assessments",
     "intro": "Zagrosia provides structural assessment services for existing buildings where owners, strata corporations, property managers, contractors, or consultants need a professional engineering opinion. Existing buildings often require review before renovations, repairs, equipment upgrades, envelope work, change of use, or continued operation.",
     "more": "Our assessment process focuses on understanding the structural system, visible conditions, load path, areas of distress, and practical next steps. The goal is to help clients understand whether further investigation, repair, strengthening, or design work is required.",
@@ -125,6 +131,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 6,
+    "short": "Seismic & Retrofit",
     "title": "Seismic Assessment and Retrofit Support for Existing Buildings",
     "image": "/videos/services/seismic-assessment-v2-poster.jpg",
     "video": "/videos/services/seismic-assessment-v2.mp4",
@@ -148,6 +155,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 7,
+    "short": "Repair & Upgrades",
     "title": "Structural Repair Design and Upgrade Support",
     "image": "/videos/services/building-rehabilitation-v2-poster.jpg",
     "video": "/videos/services/building-rehabilitation-v2.mp4",
@@ -170,6 +178,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 8,
+    "short": "Damage & Insurance",
     "title": "Insurance and Property Damage Structural Reviews",
     "intro": "Zagrosia provides structural engineering reviews for property damage related to fire, flood, water leakage, vehicle impact, settlement, framing damage, or other loss events. This service is intended to help adjusters, building consultants, owners, and contractors understand the structural effect of the reported damage and identify practical repair requirements.",
     "more": "Our focus is on the engineering scope: what structural elements appear to be affected, what repair or further review may be required, and what minimum structural work may be needed to restore performance. Coverage decisions, cost allocation, and policy interpretation remain outside the engineering scope.",
@@ -190,6 +199,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 9,
+    "short": "Rooftop Equipment",
     "title": "Rooftop Mechanical and Electrical Equipment Supports",
     "intro": "Zagrosia provides structural engineering support for rooftop mechanical and electrical equipment installations, including rooftop units, exhaust fans, duct supports, pipe supports, equipment curbs, and support frames. Existing roofs often require review before new equipment is installed, especially where equipment loads, openings, vibration, anchorage, or seismic restraint requirements may affect the structure.",
     "more": "Our work focuses on determining how the equipment loads are transferred to the existing roof system and what support details are required. Depending on the roof type, this may involve wood framing, steel deck, concrete roof slabs, curbs, sleepers, local reinforcement, or coordination with mechanical layouts.",
@@ -210,6 +220,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 10,
+    "short": "Openings & Alterations",
     "title": "Structural Openings and Building Alteration Support",
     "intro": "Zagrosia provides engineering support for structural openings and building alterations in existing buildings. Openings in walls, floors, roofs, and structural framing can affect load paths and may require headers, lintels, reinforcement, new framing, or temporary support during construction.",
     "more": "This service is suitable for renovation projects, tenant improvements, mechanical upgrades, doorway or window modifications, roof penetrations, and equipment access requirements. We help clients understand what can be modified, what must be supported, and what details are required for safe and practical construction.",
@@ -230,6 +241,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 11,
+    "short": "Racking Reviews",
     "title": "Racking System Safety and Capacity Reviews",
     "image": "/videos/services/heavy-racking-v2-poster.jpg",
     "video": "/videos/services/heavy-racking-v2.mp4",
@@ -253,6 +265,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 12,
+    "short": "Guardrails & Stairs",
     "title": "Guardrails, Stairs, Balconies, and Awnings",
     "intro": "Zagrosia provides structural design and review services for guardrails, stairs, balconies, awnings, and exterior architectural components. These elements often involve both safety and appearance, so they require practical engineering details that can be coordinated with architects, fabricators, contractors, and owners.",
     "more": "This service is suitable for new installations, upgrades, repairs, replacements, and retrofit work in residential, commercial, strata, and industrial settings. Zagrosia can provide support for member sizing, anchorage, connections, shop drawing coordination, and field review where required.",
@@ -274,6 +287,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 13,
+    "short": "Shop Drawings",
     "title": "Shop Drawings and Fabrication Support",
     "intro": "Zagrosia provides shop drawing and fabrication support for guardrails, awnings, steel structures, support frames, brackets, and other structural components. This service is intended for fabricators, manufacturers, contractors, and installation teams that need clear drawings and connection details suitable for production and site coordination.",
     "more": "Our shop drawing support focuses on practical buildability. We help clarify member sizes, connection layouts, anchor locations, dimensions, and installation requirements so that the fabricated product can be coordinated with the project conditions.",
@@ -295,6 +309,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 14,
+    "short": "Helical Piles & Bridges",
     "title": "Helical Pile Foundations, Small Bridges, and Walkways",
     "intro": "Zagrosia provides structural design support for helical pile foundations and small site structures, including walkways, small bridges, platforms, and light support structures. Helical piles can be useful where conventional foundations are difficult, access is limited, soil conditions require deeper support, or construction needs to be efficient and minimally disruptive.",
     "more": "This service is suitable for contractors, property owners, site developers, and consultants working on small to medium structural projects. Zagrosia can provide foundation layout concepts, pile loading requirements, connection details, and coordination with installers or geotechnical recommendations where required.",
@@ -315,6 +330,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 15,
+    "short": "Scaffolding Design",
     "title": "Scaffolding and Temporary Works Design",
     "intro": "Zagrosia provides engineering support for scaffolding, temporary access systems, temporary bracing, and construction-stage support requirements. Temporary works are often critical to construction safety and sequencing, especially where workers need access to elevated areas or where existing structures require temporary support during repair or alteration.",
     "more": "This service is suitable for contractors, scaffold suppliers, restoration teams, and construction managers who need engineered drawings or review for temporary systems. Zagrosia focuses on practical, site-specific solutions that support safe access and construction coordination.",
@@ -334,6 +350,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 16,
+    "short": "Field Review",
     "title": "Field Review and Construction Support",
     "intro": "Zagrosia provides field review and construction support to help bridge the gap between structural drawings and actual site conditions. Construction projects often require clarification, coordination, and practical engineering input when existing conditions differ from expectations or when contractors need timely direction.",
     "more": "Our field review services help owners, contractors, and project teams document visible conditions, confirm construction progress related to structural work, and identify items that may require clarification, repair, or design adjustment. This support can be provided as part of design work, repair implementation, or construction-phase coordination.",
@@ -354,6 +371,7 @@ export const allServices: ServiceItem[] = [
   },
   {
     "id": 17,
+    "short": "Engineering Support",
     "title": "Practical Engineering Support for Owners, Contractors, and Consultants",
     "intro": "Zagrosia’s work is focused on practical structural engineering for real building conditions. Many projects do not fit neatly into one category: an owner may need to understand a crack, a contractor may need a support detail, a fabricator may need a connection, or a consultant may need structural input for a larger building assessment.",
     "more": "Our approach is to understand the actual project need, review the available information, and provide a clear engineering path forward. Whether the requirement is a report, sketch, calculation, repair detail, field review, or shop drawing, Zagrosia aims to provide practical support that helps the client move the project forward.",

@@ -90,6 +90,29 @@ export function EngineeringSolutions() {
             transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
           />
 
+          {/* P.Eng. seal */}
+          <svg
+            viewBox="0 0 120 120"
+            role="img"
+            aria-label="Professional Engineer, signed and sealed"
+            className="pointer-events-none absolute right-0 top-0 h-[64px] w-[64px] lg:h-[92px] lg:w-[92px]"
+          >
+            <defs>
+              <path id="peng-seal-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
+              <path id="peng-seal-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
+            </defs>
+            <g fill="none" stroke={BRAND_BLUE}>
+              <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
+              <circle cx="60" cy="60" r="52" strokeWidth="1" />
+              <circle cx="60" cy="60" r="33" strokeWidth="1" />
+            </g>
+            <g fill={BRAND_BLUE} fontFamily="Inter, Arial, sans-serif" fontWeight="700">
+              <text fontSize="8" letterSpacing="0.9"><textPath href="#peng-seal-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
+              <text fontSize="8" letterSpacing="1.2"><textPath href="#peng-seal-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
+              <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
+            </g>
+          </svg>
+
           {/* Heading */}
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
             <h2 className="zag-heading mb-5 font-medium uppercase leading-[1.1] text-[20px] lg:font-normal lg:text-[32px] lg:leading-[1.1]">
@@ -104,43 +127,6 @@ export function EngineeringSolutions() {
             <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.04em] text-[#2D2D2D] lg:text-[18px]" style={{ lineHeight: 1.65 }}>
               From new structural design to complex rehabilitation, every engagement backed by 35+ years of expertise.
             </p>
-          </Reveal>
-
-          {/* P.Eng. credential — the founder holds the stamp */}
-          <Reveal variant="fadeUp" delay={0.28} duration={0.7}>
-            <div
-              className="mb-7 overflow-hidden rounded-[18px] p-5 lg:mb-9 lg:flex lg:items-center lg:gap-8 lg:p-7"
-              style={{ background: "linear-gradient(135deg, #0150a9 0%, #161f43 100%)", boxShadow: "0 18px 44px rgba(22,31,67,0.22)" }}
-            >
-              <svg viewBox="0 0 120 120" role="img" aria-label="Professional Engineer, signed and sealed" className="mx-auto h-[108px] w-[108px] flex-shrink-0 lg:h-[136px] lg:w-[136px]">
-                <defs>
-                  <path id="peng-seal-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
-                  <path id="peng-seal-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
-                </defs>
-                <g fill="none" stroke="#fff">
-                  <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
-                  <circle cx="60" cy="60" r="52" strokeWidth="1" />
-                  <circle cx="60" cy="60" r="33" strokeWidth="1" />
-                </g>
-                <g fill="#fff" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
-                  <text fontSize="8" letterSpacing="0.9"><textPath href="#peng-seal-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
-                  <text fontSize="8" letterSpacing="1.2"><textPath href="#peng-seal-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
-                  <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
-                </g>
-              </svg>
-              <div className="mt-5 text-center text-white lg:mt-0 lg:text-left">
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#3a9be8] lg:text-[12px]">Led by a licensed Professional Engineer</p>
-                <h3 className="mt-2 text-[20px] font-semibold leading-[1.2] lg:text-[28px]">Your engineering documents are signed and sealed by our founder, a P.Eng.</h3>
-                <p className="mt-3 text-[13px] leading-[1.7] opacity-90 lg:text-[16px]">
-                  Seyed Hassan Mozneb, P.Eng., M.Sc., B.Sc., Principal &amp; Senior Structural Engineer, holds the professional stamp and signs and seals the engineering documents your project requires.
-                </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-[8px] lg:justify-start">
-                  {["Sealed drawings", "Engineering reports", "Safety & compliance letters"].map((c) => (
-                    <span key={c} className="rounded-full border border-white/30 bg-white/10 px-3 py-[5px] text-[11px] font-medium tracking-[0.04em] lg:text-[13px]">{c}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </Reveal>
 
           {/* Service tabs */}
