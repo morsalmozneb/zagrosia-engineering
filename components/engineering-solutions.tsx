@@ -212,7 +212,7 @@ export function EngineeringSolutions() {
           </Reveal>
 
           {/* Service tabs */}
-          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[10px] lg:grid-cols-3 lg:gap-3">
+          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[10px] lg:grid-cols-6 lg:gap-2">
             {services.map((service, i) => {
               const isOpen = service.id === openId
               const num = String(service.id).padStart(2, "0")
@@ -227,7 +227,7 @@ export function EngineeringSolutions() {
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
-                  className="group relative flex h-[64px] items-center justify-between overflow-hidden rounded-[14px] border px-3 text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[76px] lg:px-5"
+                  className="group relative flex h-[64px] flex-col justify-between overflow-hidden rounded-[12px] border px-3 py-2 text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[72px] lg:px-[10px] lg:py-[9px]"
                   style={{
                     background: isOpen ? BRAND_BLUE : "linear-gradient(135deg, rgba(232,240,252,0.95) 0%, rgba(218,230,246,0.95) 100%)",
                     borderColor: isOpen ? BRAND_BLUE : "rgba(1,80,169,0.14)",
@@ -235,20 +235,20 @@ export function EngineeringSolutions() {
                     color: isOpen ? "#fff" : NAVY,
                   }}
                 >
-                  <span className="flex flex-col gap-[2px] lg:gap-1">
+                  <span className="flex items-center justify-between">
                     <span
-                      className="text-[10px] font-bold tracking-[0.18em] lg:text-[12px]"
+                      className="text-[10px] font-bold tracking-[0.18em] lg:text-[11px]"
                       style={{ color: isOpen ? "rgba(255,255,255,0.7)" : BRAND_BLUE }}
                     >
                       {num}
                     </span>
-                    <span className="text-[13px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[18px]">{service.title}</span>
+                    {isOpen ? (
+                      <MinusCircle size={16} strokeWidth={1.8} className="flex-shrink-0" style={{ color: "#fff" }} />
+                    ) : (
+                      <PlusCircle size={16} strokeWidth={1.8} className="flex-shrink-0 transition-transform duration-300 group-hover:rotate-90" style={{ color: BRAND_BLUE }} />
+                    )}
                   </span>
-                  {isOpen ? (
-                    <MinusCircle size={22} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
-                  ) : (
-                    <PlusCircle size={22} strokeWidth={1.8} className="ml-2 flex-shrink-0 transition-transform duration-300 group-hover:rotate-90" style={{ color: BRAND_BLUE }} />
-                  )}
+                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.005em] lg:text-[14px]">{service.title}</span>
                 </motion.button>
               )
             })}
