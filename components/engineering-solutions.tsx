@@ -9,8 +9,15 @@ import { CtaButton } from "@/components/cta-button"
 
 const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
-// Maps each homepage service to its matching entry on the /services page
-const SERVICE_PAGE_ID: Record<number, number> = { 1: 1, 2: 6, 3: 7, 4: 11, 5: 3, 6: 5 }
+// Maps each homepage service to its matching group on the /services page
+const SERVICE_PAGE_CATEGORY: Record<number, string> = {
+  1: "structural-design",
+  2: "seismic-assessment",
+  3: "building-rehabilitation",
+  4: "heavy-racking",
+  5: "building-envelope",
+  6: "specialty-reviews",
+}
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
@@ -329,7 +336,7 @@ export function EngineeringSolutions() {
                       </div>
                       <div className="mt-6">
                         <CtaButton
-                          href={`/services#service-${SERVICE_PAGE_ID[activeId] ?? 1}`}
+                          href={`/services#cat-${SERVICE_PAGE_CATEGORY[activeId] ?? "structural-design"}`}
                           className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                         >
                           Learn More
@@ -367,6 +374,15 @@ export function EngineeringSolutions() {
               </div>
             </div>
           </motion.div>
+
+          <div className="mt-6 lg:mt-8">
+            <CtaButton
+              href="/services"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            >
+              View All Services
+            </CtaButton>
+          </div>
         </div>
       </div>
 

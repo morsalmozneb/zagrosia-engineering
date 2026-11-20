@@ -269,9 +269,43 @@ const services = [
   },
 ]
 
+// The 17 services, grouped under the six homepage categories
+const CATEGORIES = [
+  { key: "structural-design", title: "Structural Design", ids: [1, 2, 4, 9, 12, 13, 14, 15] },
+  { key: "seismic-assessment", title: "Seismic Assessment", ids: [6] },
+  { key: "building-rehabilitation", title: "Building Rehabilitation", ids: [7, 10] },
+  { key: "heavy-racking", title: "Heavy Racking", ids: [11] },
+  { key: "building-envelope", title: "Building Envelope", ids: [3] },
+  { key: "specialty-reviews", title: "Specialty Reviews", ids: [5, 8, 16, 17] },
+]
+
+const orderedServices = CATEGORIES.flatMap((cat) =>
+  cat.ids.map((id, i) => ({
+    ...services.find((s) => s.id === id)!,
+    category: cat.key,
+    categoryTitle: cat.title,
+    firstOfCategory: i === 0,
+  })),
+).map((s, i) => ({ ...s, n: i + 1 }))
+
 export function ServicesHeroSection() {
   const reducedMotion = useReducedMotion()
   const [openId, setOpenId] = useState<number>(1)
+
+  // Open and scroll to the group named in the URL (e.g. /services#cat-heavy-racking)
+  useEffect(() => {
+    const m = window.location.hash.match(/^#cat-([a-z-]+)$/)
+    if (!m) return
+    const first = orderedServices.find((x) => x.category === m[1] && x.firstOfCategory)
+    if (!first) return
+    setOpenId(first.id)
+    const t = window.setTimeout(() => {
+      const els = Array.from(document.querySelectorAll<HTMLElement>(`[data-category="${m[1]}"]`))
+      const el = els.find((e) => e.offsetParent !== null)
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: "smooth" })
+    }, 500)
+    return () => window.clearTimeout(t)
+  }, [])
 
   // Open and scroll to the service named in the URL (e.g. /services#service-6)
   useEffect(() => {
@@ -330,7 +364,7 @@ export function ServicesHeroSection() {
           </Reveal>
 
           <div className="space-y-[6px]">
-            {services.map((service, idx) => {
+            {orderedServices.map((service, idx) => {
               const isOpen = service.id === openId
               return (
                 <motion.div
@@ -341,6 +375,14 @@ export function ServicesHeroSection() {
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.5, delay: 0.08 + idx * 0.07, ease: EASE }}
                 >
+                  {service.firstOfCategory && (
+                    <p
+                      data-category={service.category}
+                      className="mb-[8px] mt-[22px] text-[11px] font-bold uppercase tracking-[0.2em] text-[#0052A5]"
+                    >
+                      {service.categoryTitle}
+                    </p>
+                  )}
                   {isOpen ? (
                     <div className="rounded-[14px]">
                       <div
@@ -354,7 +396,7 @@ export function ServicesHeroSection() {
                       >
                         <button className="flex w-full items-start justify-between" onClick={() => setOpenId(0)}>
                           <span className="flex-1 pr-2 text-left text-[14px] font-semibold tracking-[0.1em] text-[#2D2D2D]">
-                            {service.id}. {service.title}
+                            {service.n}. {service.title}
                           </span>
                           <MinusCircle size={22} strokeWidth={2} className="mt-[2px] flex-shrink-0 text-[#2D2D2D]" />
                         </button>
@@ -403,7 +445,7 @@ export function ServicesHeroSection() {
                       onClick={() => setOpenId(service.id)}
                     >
                       <span className="text-[14px] font-medium tracking-[0.1em] text-white lg:text-[24px]">
-                        {service.id}. {service.title}
+                        {service.n}. {service.title}
                       </span>
                       <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
                     </button>
@@ -469,7 +511,7 @@ export function ServicesHeroSection() {
 
             {/* Accordion */}
             <div className="w-full space-y-[6px] lg:max-w-[916px]">
-              {services.map((service, deskIdx) => {
+              {orderedServices.map((service, deskIdx) => {
                 const isOpen = service.id === openId
                 return (
                   <motion.div
@@ -480,6 +522,14 @@ export function ServicesHeroSection() {
                     viewport={{ once: false, amount: 0.05 }}
                     transition={{ duration: 0.5, delay: 0.08 + deskIdx * 0.07, ease: EASE }}
                   >
+                    {service.firstOfCategory && (
+                      <p
+                        data-category={service.category}
+                        className="mb-[10px] mt-[34px] text-[14px] font-bold uppercase tracking-[0.22em] text-[#0052A5]"
+                      >
+                        {service.categoryTitle}
+                      </p>
+                    )}
                     {isOpen ? (
                       <div
                           className="rounded-[14px] bg-[#FCFCFC] px-4 pb-4 pt-3"
@@ -491,7 +541,7 @@ export function ServicesHeroSection() {
                         >
                           <button className="flex w-full items-center justify-between" onClick={() => setOpenId(0)}>
                             <span className="flex-1 pr-4 text-left font-semibold tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "24px" }}>
-                              {service.id}. {service.title}
+                              {service.n}. {service.title}
                             </span>
                             <MinusCircle size={22} strokeWidth={2} className="text-[#2D2D2D] flex-shrink-0" />
                           </button>
@@ -535,7 +585,7 @@ export function ServicesHeroSection() {
                         onClick={() => setOpenId(service.id)}
                       >
                         <span className="font-medium tracking-[0.1em] text-white" style={{ fontSize: "24px" }}>
-                          {service.id}. {service.title}
+                          {service.n}. {service.title}
                         </span>
                         <PlusCircle size={20} strokeWidth={2} className="text-white flex-shrink-0" />
                       </button>
