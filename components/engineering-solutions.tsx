@@ -2,13 +2,11 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { PlusCircle, MinusCircle } from "lucide-react"
+import { PlusCircle, MinusCircle, Check } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Reveal, StaggerReveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
-const ROW_FILL = "linear-gradient(to right, rgba(225,236,250,0.95) 0%, rgba(214,226,242,0.95) 100%)"
-const ROW_FILL_ACTIVE = "linear-gradient(to right, rgba(199,222,252,1) 0%, rgba(222,234,250,1) 100%)"
 const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
 const EASE = [0.0, 0.0, 0.2, 1] as const
@@ -124,9 +122,16 @@ const services: {
 export function EngineeringSolutions() {
   const [openId, setOpenId] = useState<number>(0)
   const reducedMotion = useReducedMotion()
+  const gridRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
 
-  // Which service's media is on top, and which one sits underneath while the new one fades in
-  const activeId = openId || 1
+  // The panel keeps showing the last opened service while it closes
+  const shownRef = useRef(1)
+  if (openId) shownRef.current = openId
+  const activeId = shownRef.current
+  const active = services.find((x) => x.id === activeId) ?? services[0]
+
+  // Which service's video sits underneath while the next one fades in
   const lastRef = useRef(activeId)
   const underRef = useRef(activeId)
   if (lastRef.current !== activeId) {
@@ -136,39 +141,43 @@ export function EngineeringSolutions() {
   const underId = underRef.current
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({})
 
-  // Only the visible videos play; the new one always starts from the beginning
+  // Only the visible video plays, and a newly chosen one always starts from the beginning
   useEffect(() => {
     const t = setTimeout(() => {
       Object.entries(videoRefs.current).forEach(([id, v]) => {
-        if (v && Number(id) !== activeId) v.pause()
+        if (v && (Number(id) !== activeId || !openId)) v.pause()
       })
     }, 700)
     const v = videoRefs.current[activeId]
-    if (v) {
+    if (v && openId) {
       try { v.currentTime = 0 } catch {}
       v.play().catch(() => {})
     }
     return () => clearTimeout(t)
-  }, [activeId])
+  }, [activeId, openId])
 
-  // After a row opens, bring it fully into view so the visitor never has to hunt for the text
+  // After the panel opens, make sure the whole thing is on screen
   useEffect(() => {
     if (!openId) return
     const t = setTimeout(() => {
-      const el = document.getElementById(`service-row-${openId}`)
-      if (!el) return
-      const r = el.getBoundingClientRect()
-      if (r.top < 90 || r.bottom > window.innerHeight - 20) {
-        window.scrollTo({ top: window.scrollY + r.top - 100, behavior: "smooth" })
+      const grid = gridRef.current
+      const panel = panelRef.current
+      if (!grid || !panel) return
+      const g = grid.getBoundingClientRect()
+      const pr = panel.getBoundingClientRect()
+      if (pr.bottom > window.innerHeight - 20 || g.top < 80) {
+        window.scrollTo({ top: window.scrollY + g.top - 96, behavior: "smooth" })
       }
-    }, 450)
+    }, 550)
     return () => clearTimeout(t)
   }, [openId])
+
+  const [eyebrow, ...restWords] = active.title.split(" ")
 
   return (
     <section id="services" className="bg-[#FCFCFC] text-[#2D2D2D]">
 
-      {/* TOP: Accordion */}
+      {/* TOP: Service tabs + detail panel */}
       <div className="sidebar-content px-6 pb-10 pt-12 lg:pt-24 lg:pb-20 zag-desktop-content-pad">
         <div className="relative pl-5">
 
@@ -202,139 +211,177 @@ export function EngineeringSolutions() {
             </p>
           </Reveal>
 
-          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-9">
-            {/* Media panel — shows the picture (later: video) of the selected service */}
-            <div className="relative mb-4 h-[230px] w-full overflow-hidden rounded-[18px] bg-[#071a33] lg:col-start-1 lg:row-start-1 lg:mb-0 lg:h-[378px] lg:self-start">
-              {services.map((service) => {
-                const isActive = service.id === activeId
-                const isUnder = service.id === underId && !isActive
-                return (
-                  <div
-                    key={service.id}
-                    className="absolute inset-0"
-                    style={{
-                      opacity: isActive || isUnder ? 1 : 0,
-                      zIndex: isActive ? 2 : isUnder ? 1 : 0,
-                      transition: isActive && !reducedMotion ? "opacity 0.7s ease" : "none",
-                    }}
-                  >
-                    {service.video ? (
-                      <video
-                        ref={(el) => { videoRefs.current[service.id] = el }}
-                        src={service.video}
-                        poster={service.image}
-                        autoPlay={service.id === 1}
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                    )}
-                  </div>
-                )
-              })}
-              <span
-                className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 text-[13px] font-semibold text-white backdrop-blur-sm lg:h-10 lg:w-10 lg:text-[14px]"
-                style={{ borderColor: BRAND_BLUE, background: "rgba(1,80,169,0.55)" }}
-              >
-                {String(activeId).padStart(2, "0")}
-              </span>
-            </div>
-
-            {/* Accordion — each row staggers in */}
-            <div className="lg:col-start-2 lg:row-start-1">
-              <div className="w-full space-y-[8px] lg:space-y-3">
-                {services.map((service, i) => {
-                  const isOpen = service.id === openId
-                  const num = String(service.id).padStart(2, "0")
-                  return (
-                    <motion.div
-                      key={service.id}
-                      initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
-                      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      viewport={{ once: false, amount: 0.05 }}
-                      transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
+          {/* Service tabs */}
+          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[10px] lg:grid-cols-3 lg:gap-3">
+            {services.map((service, i) => {
+              const isOpen = service.id === openId
+              const num = String(service.id).padStart(2, "0")
+              return (
+                <motion.button
+                  key={service.id}
+                  role="tab"
+                  aria-selected={isOpen}
+                  aria-controls="service-panel"
+                  onClick={() => setOpenId(isOpen ? 0 : service.id)}
+                  initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: false, amount: 0.05 }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
+                  className="group relative flex h-[64px] items-center justify-between overflow-hidden rounded-[14px] border px-3 text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[76px] lg:px-5"
+                  style={{
+                    background: isOpen ? BRAND_BLUE : "linear-gradient(135deg, rgba(232,240,252,0.95) 0%, rgba(218,230,246,0.95) 100%)",
+                    borderColor: isOpen ? BRAND_BLUE : "rgba(1,80,169,0.14)",
+                    boxShadow: isOpen ? "0 10px 24px rgba(1,80,169,0.28)" : "none",
+                    color: isOpen ? "#fff" : NAVY,
+                  }}
+                >
+                  <span className="flex flex-col gap-[2px] lg:gap-1">
+                    <span
+                      className="text-[10px] font-bold tracking-[0.18em] lg:text-[12px]"
+                      style={{ color: isOpen ? "rgba(255,255,255,0.7)" : BRAND_BLUE }}
                     >
-                      <div
-                        id={`service-row-${service.id}`}
-                        className="overflow-hidden rounded-[14px] border transition-colors"
-                        style={{
-                          background: isOpen ? ROW_FILL_ACTIVE : ROW_FILL,
-                          borderColor: isOpen ? "rgba(1,80,169,0.25)" : "rgba(1,80,169,0.10)",
-                          boxShadow: isOpen ? "0 6px 18px rgba(1,80,169,0.14)" : "none",
-                        }}
-                      >
-                        <button
-                          className="flex h-[26px] w-full items-center justify-between px-4 text-left lg:h-[51px] lg:px-5"
-                          onClick={() => setOpenId(isOpen ? 0 : service.id)}
-                          aria-expanded={isOpen}
-                        >
-                          <span className="flex items-baseline gap-4 lg:gap-6" style={{ color: NAVY }}>
-                            <span className="text-[14px] font-bold tracking-[0.04em] lg:text-[20px]">{num}</span>
-                            <span className="text-[14px] font-semibold tracking-[0.02em] lg:text-[18px]">{service.title}</span>
-                          </span>
-                          {isOpen ? (
-                            <MinusCircle size={22} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
-                          ) : (
-                            <PlusCircle size={22} strokeWidth={1.8} className="flex-shrink-0" style={{ color: BRAND_BLUE }} />
-                          )}
-                        </button>
-
-                        <AnimatePresence initial={false}>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.4, ease: EASE }}
-                              className="overflow-hidden"
-                            >
-                              <div className="px-4 pb-4 lg:px-5 lg:pb-5" style={{ color: NAVY }}>
-                                <p className="text-[12px] leading-[1.65] tracking-[0.02em] lg:text-[15px]">
-                                  {service.intro}
-                                </p>
-                                <ul className="mt-3 space-y-[4px]">
-                                  {service.bullets.map((b) => (
-                                    <li key={b} className="flex items-start gap-2 text-[12px] leading-[1.55] tracking-[0.02em] lg:text-[15px]">
-                                      <span className="mt-[7px] h-[5px] w-[5px] flex-shrink-0 rounded-full" style={{ background: BRAND_BLUE }} />
-                                      <span>{b}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                                <div className="mt-3 flex flex-wrap gap-[6px]">
-                                  {service.tags.map((tag) => (
-                                    <span key={tag} className="rounded-[8px] px-3 py-[4px] font-medium tracking-[0.06em] text-white lg:text-[12px]" style={{ fontSize: "9px", background: BRAND_BLUE }}>
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* Learn More CTA */}
-              <Reveal variant="scaleUp" delay={0.3} duration={0.55} className="lg:col-start-2 lg:row-start-2">
-                <div className="mt-7">
-                  <CtaButton
-                    href="/services"
-                    className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                  >
-                    Learn More
-                  </CtaButton>
-                </div>
-              </Reveal>
+                      {num}
+                    </span>
+                    <span className="text-[13px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[18px]">{service.title}</span>
+                  </span>
+                  {isOpen ? (
+                    <MinusCircle size={22} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
+                  ) : (
+                    <PlusCircle size={22} strokeWidth={1.8} className="ml-2 flex-shrink-0 transition-transform duration-300 group-hover:rotate-90" style={{ color: BRAND_BLUE }} />
+                  )}
+                </motion.button>
+              )
+            })}
           </div>
 
+          {/* Detail panel — opens underneath the tabs */}
+          <motion.div
+            id="service-panel"
+            role="tabpanel"
+            initial={false}
+            animate={{ height: openId ? "auto" : 0, opacity: openId ? 1 : 0, marginTop: openId ? 16 : 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.55, ease: EASE }}
+            className="-mx-3 -mb-10 overflow-hidden px-3 pb-10"
+            aria-hidden={!openId}
+          >
+            <div
+              ref={panelRef}
+              className="rounded-[22px] border p-4 lg:p-6"
+              style={{
+                background: "linear-gradient(160deg, #FFFFFF 0%, #F3F7FD 100%)",
+                borderColor: "rgba(1,80,169,0.14)",
+                boxShadow: "0 18px 44px rgba(22,31,67,0.10)",
+              }}
+            >
+              <div className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-7">
+                {/* Video */}
+                <div
+                  className="relative aspect-square w-full overflow-hidden rounded-[18px] bg-[#071a33]"
+                  style={{ boxShadow: "0 12px 30px rgba(7,26,51,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
+                >
+                  {services.map((service) => {
+                    const isActive = service.id === activeId
+                    const isUnder = service.id === underId && !isActive
+                    return (
+                      <div
+                        key={service.id}
+                        className="absolute inset-0"
+                        style={{
+                          opacity: isActive || isUnder ? 1 : 0,
+                          zIndex: isActive ? 2 : isUnder ? 1 : 0,
+                          transition: isActive && !reducedMotion ? "opacity 0.7s ease" : "none",
+                        }}
+                      >
+                        {service.video ? (
+                          <video
+                            ref={(el) => { videoRefs.current[service.id] = el }}
+                            src={service.video}
+                            poster={service.image}
+                            loop
+                            muted
+                            playsInline
+                            preload="auto"
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <Image src={service.image} alt={service.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                        )}
+                      </div>
+                    )
+                  })}
+                  <span
+                    className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border text-[13px] font-semibold text-white backdrop-blur-sm"
+                    style={{ borderColor: "rgba(255,255,255,0.35)", background: "rgba(1,80,169,0.55)" }}
+                  >
+                    {String(activeId).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Text */}
+                <div className="flex min-w-0 flex-col justify-center" style={{ color: NAVY }}>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={activeId}
+                      initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.3, ease: EASE }}
+                    >
+                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] lg:text-[12px]" style={{ color: BRAND_BLUE }}>
+                        Service {String(activeId).padStart(2, "0")}
+                      </p>
+                      <h3 className="mt-2 text-[22px] font-semibold leading-[1.15] tracking-[0.01em] lg:text-[30px]">
+                        {eyebrow} {restWords.join(" ")}
+                      </h3>
+                      <div className="mt-3 h-[3px] w-12 rounded-full" style={{ background: BRAND_BLUE }} />
+                      <p className="mt-4 text-[13px] leading-[1.7] tracking-[0.01em] opacity-90 lg:text-[15px]">{active.intro}</p>
+                      <div className="mt-5 flex flex-wrap gap-[6px]">
+                        {active.tags.map((tag) => (
+                          <span key={tag} className="rounded-[8px] px-3 py-[4px] text-[10px] font-medium tracking-[0.06em] text-white lg:text-[12px]" style={{ background: BRAND_BLUE }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-6">
+                        <CtaButton
+                          href="/services"
+                          className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                        >
+                          Learn More
+                        </CtaButton>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* What we offer */}
+              <div className="mt-5 border-t pt-5 lg:mt-6 lg:pt-6" style={{ borderColor: "rgba(1,80,169,0.12)", color: NAVY }}>
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.22em] lg:text-[12px]" style={{ color: BRAND_BLUE }}>
+                  What We Offer
+                </p>
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.ul
+                    key={activeId}
+                    className="grid gap-x-8 gap-y-[10px] lg:grid-cols-2"
+                    initial={reducedMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                  >
+                    {active.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-[13px] leading-[1.5] lg:text-[15px]">
+                        <span className="mt-[2px] flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full" style={{ background: "rgba(1,80,169,0.12)" }}>
+                          <Check size={11} strokeWidth={3} style={{ color: BRAND_BLUE }} />
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </motion.ul>
+                </AnimatePresence>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
