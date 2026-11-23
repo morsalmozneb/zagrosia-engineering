@@ -114,18 +114,18 @@ export function ServicesTabs() {
   const cta = (
     <CtaButton
       href="/contact"
-      className="inline-flex h-[52px] items-center justify-center gap-3 rounded-[12px] px-8 text-[16px] font-semibold tracking-[0.02em] text-white lg:h-[56px] lg:text-[18px]"
+      className="inline-flex h-[44px] items-center justify-center gap-2 rounded-[10px] px-5 text-[14px] font-semibold tracking-[0.02em] text-white"
       style={{ background: BRAND_BLUE }}
     >
-      Discuss your project <ArrowRight size={20} strokeWidth={2.4} />
+      Discuss your project <ArrowRight size={16} strokeWidth={2.4} />
     </CtaButton>
   )
 
   return (
     <div className="@container" style={{ color: NAVY }}>
       {/* Categories + P.Eng seal */}
-      <div className="flex items-end justify-between gap-4 border-b" style={{ borderColor: "rgba(1,80,169,0.22)" }}>
-        <div ref={catRowRef} role="tablist" aria-label="Service categories" className="relative -mb-px flex min-w-0 flex-wrap gap-x-5 @[640px]:flex-nowrap @[640px]:gap-x-[clamp(8px,2.2cqw,40px)]">
+      <div className="flex items-end border-b" style={{ borderColor: "rgba(1,80,169,0.22)" }}>
+        <div ref={catRowRef} role="tablist" aria-label="Service categories" className="relative -mb-px flex w-full min-w-0 flex-wrap justify-between gap-x-5 @[640px]:flex-nowrap">
           {CATEGORIES.map((c, ci) => {
             const on = ci === catIndex
             return (
@@ -134,7 +134,7 @@ export function ServicesTabs() {
                 role="tab"
                 aria-selected={on}
                 onClick={() => choose(c.ids[0])}
-                className="relative whitespace-nowrap px-1 pb-3 pt-3 text-[15px] tracking-[0.01em] transition-colors @[640px]:px-0 @[640px]:pb-4 @[640px]:text-[clamp(11px,1.7cqw,19px)]"
+                className="relative whitespace-nowrap px-1 pb-3 pt-3 text-[15px] tracking-[0.01em] transition-colors @[640px]:px-0 @[640px]:pb-4 @[640px]:text-[clamp(11px,1.95cqw,20px)]"
                 style={{ color: on ? BRAND_BLUE : NAVY, fontWeight: on ? 600 : 400 }}
               >
                 {c.name}
@@ -151,16 +151,6 @@ export function ServicesTabs() {
           })}
         </div>
 
-        <motion.div
-          key={`seal-${activeId}`}
-          className="mb-3 flex-shrink-0"
-          initial={reducedMotion ? false : { scale: 1.45, opacity: 0, rotate: -22 }}
-          animate={{ scale: 1, opacity: 1, rotate: -8 }}
-          transition={{ type: "spring", stiffness: 340, damping: 17, delay: 0.1 }}
-        >
-          <span className="block lg:hidden"><Seal size={64} /></span>
-          <span className="hidden lg:block"><Seal size={80} /></span>
-        </motion.div>
       </div>
 
       {/* Services in this category */}
@@ -175,7 +165,7 @@ export function ServicesTabs() {
               aria-selected={on}
               aria-controls="service-panel"
               onClick={() => choose(id)}
-              className="whitespace-nowrap rounded-[14px] border-2 px-4 text-[14px] transition-all duration-300 @[640px]:h-[clamp(40px,5.4cqw,50px)] @[640px]:min-w-0 @[640px]:flex-1 @[640px]:px-[0.6cqw] @[640px]:text-[clamp(11px,1.55cqw,17px)]"
+              className="whitespace-nowrap rounded-[14px] border-2 px-4 text-[14px] transition-all duration-300 @[640px]:h-[clamp(40px,5.4cqw,50px)] @[640px]:min-w-0 @[640px]:flex-1 @[640px]:px-[0.6cqw] @[640px]:text-[clamp(11px,1.6cqw,17px)]"
               style={{
                 height: 44,
                 background: on ? "rgba(1,80,169,0.10)" : "rgba(1,80,169,0.06)",
@@ -231,6 +221,18 @@ export function ServicesTabs() {
               )
             })}
 
+            {/* P.Eng seal, stamped on the corner of the video */}
+            <motion.div
+              key={`seal-${activeId}`}
+              className="pointer-events-none absolute bottom-3 right-3 z-10 lg:bottom-4 lg:right-4"
+              initial={reducedMotion ? false : { scale: 1.5, opacity: 0, rotate: -24 }}
+              animate={{ scale: 1, opacity: 1, rotate: -8 }}
+              transition={{ type: "spring", stiffness: 340, damping: 17, delay: 0.1 }}
+            >
+              <span className="block lg:hidden"><Seal size={64} /></span>
+              <span className="hidden lg:block"><Seal size={84} /></span>
+            </motion.div>
+
             {/* Play / pause */}
             <button
               onClick={() => setPlaying((p) => !p)}
@@ -247,7 +249,7 @@ export function ServicesTabs() {
             </button>
           </div>
 
-          <div className="mt-6 hidden lg:block">{cta}</div>
+          <div className="mt-5 hidden lg:block">{cta}</div>
         </div>
 
         {/* Text */}
