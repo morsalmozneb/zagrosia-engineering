@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { CtaButton } from "@/components/cta-button"
 import { allServices } from "./services-data"
@@ -16,30 +16,17 @@ const services = allServices
 
 // The 17 services, grouped like a drawing register: one letter per discipline
 const CATEGORIES = [
-  { code: "A", name: "Design & Foundations", ids: [1, 2, 3, 4, 14] },
-  { code: "B", name: "Assessment & Retrofit", ids: [5, 6, 7, 8] },
-  { code: "C", name: "Alterations & Equipment", ids: [9, 10, 11, 12] },
-  { code: "D", name: "Construction Support", ids: [13, 15, 16, 17] },
+  { name: "Design & Foundations", ids: [1, 2, 3, 4, 14] },
+  { name: "Assessment & Retrofit", ids: [5, 6, 7, 8] },
+  { name: "Alterations & Equipment", ids: [9, 10, 11, 12] },
+  { name: "Construction Support", ids: [13, 15, 16, 17] },
 ]
 
-// service id -> its category and sheet code (A-01, A-02 ...)
-const META: Record<number, { cat: number; sheet: string }> = {}
-CATEGORIES.forEach((c, ci) =>
-  c.ids.forEach((id, i) => {
-    META[id] = { cat: ci, sheet: `${c.code}-${String(i + 1).padStart(2, "0")}` }
-  })
-)
+// service id -> its category
+const META: Record<number, { cat: number }> = {}
+CATEGORIES.forEach((c, ci) => c.ids.forEach((id) => { META[id] = { cat: ci } }))
 
 const ORDER = CATEGORIES.flatMap((c) => c.ids)
-
-// Corner crosshair, like the registration marks on a printed drawing sheet
-function Cross({ className }: { className: string }) {
-  return (
-    <svg viewBox="0 0 14 14" className={`pointer-events-none absolute h-[14px] w-[14px] ${className}`} aria-hidden="true">
-      <path d="M7 0V14M0 7H14" stroke={BRAND_BLUE} strokeWidth="1" opacity="0.5" fill="none" />
-    </svg>
-  )
-}
 
 // The engineer's seal, stamped onto each sheet
 function Seal({ size }: { size: number }) {
@@ -69,8 +56,7 @@ export function ServicesTabs() {
   const reducedMotion = useReducedMotion()
 
   const active = services.find((x) => x.id === activeId) ?? services[0]
-  const meta = META[activeId]
-  const category = CATEGORIES[meta.cat]
+  const category = CATEGORIES[META[activeId].cat]
   const position = ORDER.indexOf(activeId)
 
   // Which service's video sits underneath while the next one fades in
@@ -113,57 +99,48 @@ export function ServicesTabs() {
   const step = (dir: 1 | -1) => choose(ORDER[(position + dir + ORDER.length) % ORDER.length])
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-10" style={{ color: NAVY }}>
-      {/* ───────── Drawing index ───────── */}
+    <div className="grid gap-5 lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-10" style={{ color: NAVY }}>
+      {/* ───────── All services ───────── */}
       <div className="lg:sticky lg:top-[104px] lg:self-start">
-        <div className="mb-4 hidden items-baseline justify-between lg:flex">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.26em]" style={{ color: BRAND_BLUE }}>
-            Drawing index
-          </p>
-          <p className="font-mono text-[11px] tracking-[0.1em] opacity-50">17 sheets</p>
-        </div>
+        <p className="mb-5 hidden text-[13px] font-bold uppercase tracking-[0.26em] lg:block" style={{ color: BRAND_BLUE }}>
+          All services
+        </p>
 
-        {/* Mobile: choose a discipline first */}
+        {/* Mobile: choose a category first */}
         <div className="mb-3 grid grid-cols-2 gap-2 lg:hidden">
           {CATEGORIES.map((c, ci) => {
-            const on = meta.cat === ci
+            const on = META[activeId].cat === ci
             return (
               <button
-                key={c.code}
+                key={c.name}
                 onClick={() => choose(c.ids[0])}
-                className="flex items-center gap-2 rounded-[8px] border px-3 py-[9px] text-left transition-colors"
+                className="rounded-[10px] border px-3 py-[10px] text-left text-[12px] font-semibold leading-[1.2] transition-colors"
                 style={{
                   background: on ? BRAND_BLUE : "#fff",
                   borderColor: on ? BRAND_BLUE : "rgba(1,80,169,0.22)",
                   color: on ? "#fff" : NAVY,
                 }}
               >
-                <span className="font-mono text-[11px] font-bold opacity-80">{c.code}</span>
-                <span className="text-[12px] font-semibold leading-[1.15]">{c.name}</span>
+                {c.name}
               </button>
             )
           })}
         </div>
 
-        <div role="tablist" aria-orientation="vertical" className="lg:space-y-7">
+        <div role="tablist" aria-orientation="vertical" className="lg:space-y-8">
           {CATEGORIES.map((c, ci) => {
-            const showOnMobile = meta.cat === ci
+            const showOnMobile = META[activeId].cat === ci
             return (
-              <div key={c.code} className={`${showOnMobile ? "block" : "hidden"} lg:block`}>
-                <div className="mb-2 hidden items-center gap-3 lg:flex">
-                  <span
-                    className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] border font-mono text-[11px] font-bold"
-                    style={{ borderColor: BRAND_BLUE, color: BRAND_BLUE }}
-                  >
-                    {c.code}
-                  </span>
-                  <span className="text-[12px] font-bold uppercase tracking-[0.16em]" style={{ color: BRAND_BLUE }}>
+              <div key={c.name} className={`${showOnMobile ? "block" : "hidden"} lg:block`}>
+                <div className="mb-3 hidden items-center gap-3 lg:flex">
+                  <span className="h-[7px] w-[7px] rounded-full" style={{ background: LIGHT_BLUE }} />
+                  <span className="text-[12px] font-bold uppercase tracking-[0.18em]" style={{ color: "rgba(22,31,67,0.62)" }}>
                     {c.name}
                   </span>
+                  <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, rgba(1,80,169,0.3), rgba(1,80,169,0))" }} />
                 </div>
-                <div className="mb-2 hidden h-px w-full lg:block" style={{ background: "linear-gradient(90deg, rgba(1,80,169,0.55), rgba(1,80,169,0.08))" }} />
 
-                <div className="flex flex-wrap gap-2 lg:block lg:space-y-[2px]">
+                <div className="flex flex-wrap gap-2 lg:block lg:space-y-1">
                   {c.ids.map((id) => {
                     const s = services.find((x) => x.id === id)!
                     const on = id === activeId
@@ -172,34 +149,26 @@ export function ServicesTabs() {
                         key={id}
                         role="tab"
                         aria-selected={on}
-                        aria-controls="service-sheet"
+                        aria-controls="service-card"
                         onClick={() => choose(id)}
-                        className="group relative flex items-center gap-3 rounded-full border bg-white px-3 py-[7px] text-left transition-colors lg:w-full lg:rounded-[6px] lg:border-0 lg:bg-transparent lg:px-3 lg:py-[8px]"
-                        style={{ borderColor: on ? BRAND_BLUE : "rgba(1,80,169,0.22)" }}
+                        className="group relative flex items-center rounded-full border px-4 py-[8px] text-left transition-colors lg:w-full lg:rounded-[10px] lg:border-0 lg:px-4 lg:py-[10px]"
+                        style={{
+                          background: on ? BRAND_BLUE : undefined,
+                          borderColor: on ? BRAND_BLUE : "rgba(1,80,169,0.22)",
+                        }}
                       >
-                        {on && (
-                          <motion.span
-                            layoutId={reducedMotion ? undefined : "index-active"}
-                            transition={{ type: "spring", stiffness: 420, damping: 36 }}
-                            className="absolute inset-0 rounded-full lg:rounded-[6px]"
-                            style={{ background: "rgba(1,80,169,0.10)" }}
-                          />
-                        )}
-                        {on && <span className="absolute bottom-[6px] left-0 top-[6px] hidden w-[3px] rounded-full lg:block" style={{ background: BRAND_BLUE }} />}
-                        <span className="relative hidden w-[34px] flex-shrink-0 font-mono text-[11px] tracking-[0.04em] lg:block" style={{ color: on ? BRAND_BLUE : "rgba(22,31,67,0.45)" }}>
-                          {META[id].sheet}
-                        </span>
+                        {!on && <span className="absolute inset-0 rounded-full bg-white transition-colors lg:rounded-[10px] lg:bg-transparent lg:group-hover:bg-[rgba(1,80,169,0.07)]" />}
                         <span
-                          className="relative text-[13px] leading-[1.2] transition-transform duration-300 group-hover:translate-x-[2px] lg:text-[15px]"
-                          style={{ fontWeight: on ? 700 : 500, color: on ? BRAND_BLUE : NAVY }}
+                          className="relative text-[13px] leading-[1.2] transition-transform duration-300 lg:text-[16px] lg:group-hover:translate-x-[3px]"
+                          style={{ fontWeight: on ? 700 : 500, color: on ? "#fff" : NAVY, transform: on ? "none" : undefined }}
                         >
                           {s.short}
                         </span>
                         <ArrowRight
-                          size={14}
+                          size={16}
                           strokeWidth={2.2}
-                          className="relative ml-auto hidden flex-shrink-0 transition-opacity lg:block"
-                          style={{ color: BRAND_BLUE, opacity: on ? 1 : 0 }}
+                          className="relative ml-auto hidden flex-shrink-0 lg:block"
+                          style={{ color: "#fff", opacity: on ? 1 : 0 }}
                         />
                       </button>
                     )
@@ -211,95 +180,87 @@ export function ServicesTabs() {
         </div>
       </div>
 
-      {/* ───────── The sheet ───────── */}
-      <div id="service-sheet" role="tabpanel" className="relative min-w-0">
-        <Cross className="-left-[7px] -top-[7px]" />
-        <Cross className="-right-[7px] -top-[7px]" />
-        <Cross className="-bottom-[7px] -left-[7px]" />
-        <Cross className="-bottom-[7px] -right-[7px]" />
-
+      {/* ───────── Service card ───────── */}
+      <div id="service-card" role="tabpanel" className="min-w-0">
         <div
-          className="relative rounded-[4px] border p-4 lg:p-6"
-          style={{
-            background: "#FDFEFF",
-            backgroundImage:
-              "linear-gradient(rgba(1,80,169,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(1,80,169,0.045) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-            borderColor: "rgba(1,80,169,0.38)",
-            boxShadow: "0 22px 50px rgba(22,31,67,0.10)",
-          }}
+          className="overflow-hidden rounded-[22px] border bg-white"
+          style={{ borderColor: "rgba(1,80,169,0.14)", boxShadow: "0 28px 60px rgba(22,31,67,0.13)" }}
         >
-          <div className="pointer-events-none absolute inset-[5px] rounded-[2px] border" style={{ borderColor: "rgba(1,80,169,0.14)" }} />
-
-          {/* Sheet header */}
-          <div className="relative mb-4 flex items-center justify-between gap-3">
-            <p className="min-w-0 truncate font-mono text-[10px] font-semibold uppercase tracking-[0.2em] lg:text-[11px]" style={{ color: BRAND_BLUE }}>
-              Sheet {meta.sheet}
-              <span className="mx-2 opacity-40">/</span>
-              <span className="opacity-70">{category.name}</span>
-            </p>
-            <div className="flex flex-shrink-0 items-center gap-2">
-              <span className="font-mono text-[11px] tracking-[0.1em] opacity-50">
-                {String(position + 1).padStart(2, "0")}/17
-              </span>
-              <button
-                onClick={() => step(-1)}
-                aria-label="Previous service"
-                className="flex h-[28px] w-[28px] items-center justify-center rounded-full border transition-colors hover:bg-[#0150a9] hover:text-white"
-                style={{ borderColor: "rgba(1,80,169,0.35)", color: BRAND_BLUE }}
-              >
-                <ChevronLeft size={16} strokeWidth={2.2} />
-              </button>
-              <button
-                onClick={() => step(1)}
-                aria-label="Next service"
-                className="flex h-[28px] w-[28px] items-center justify-center rounded-full border transition-colors hover:bg-[#0150a9] hover:text-white"
-                style={{ borderColor: "rgba(1,80,169,0.35)", color: BRAND_BLUE }}
-              >
-                <ChevronRight size={16} strokeWidth={2.2} />
-              </button>
+          {/* Header: category, title, P.Eng stamp */}
+          <div className="relative px-5 pb-5 pt-5 lg:px-8 lg:pb-6 lg:pt-7">
+            <div className="mb-3 flex items-center justify-between gap-3 pr-[88px] lg:pr-[132px]">
+              <p className="flex min-w-0 items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] lg:text-[12px]" style={{ color: BRAND_BLUE }}>
+                <span className="h-[7px] w-[7px] flex-shrink-0 rounded-full" style={{ background: LIGHT_BLUE }} />
+                <span className="leading-[1.3]">{category.name}</span>
+              </p>
+              <div className="hidden flex-shrink-0 items-center gap-2 lg:flex">
+                <button
+                  onClick={() => step(-1)}
+                  aria-label="Previous service"
+                  className="flex h-[30px] w-[30px] items-center justify-center rounded-full border transition-colors hover:bg-[#0150a9] hover:text-white"
+                  style={{ borderColor: "rgba(1,80,169,0.3)", color: BRAND_BLUE }}
+                >
+                  <ChevronLeft size={16} strokeWidth={2.2} />
+                </button>
+                <button
+                  onClick={() => step(1)}
+                  aria-label="Next service"
+                  className="flex h-[30px] w-[30px] items-center justify-center rounded-full border transition-colors hover:bg-[#0150a9] hover:text-white"
+                  style={{ borderColor: "rgba(1,80,169,0.3)", color: BRAND_BLUE }}
+                >
+                  <ChevronRight size={16} strokeWidth={2.2} />
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Title + stamp */}
-          <div className="relative mb-4 min-h-[64px] pr-[84px] lg:mb-5 lg:min-h-[92px] lg:pr-[120px]">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={activeId}
-                initial={reducedMotion ? false : { opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.28, ease: EASE }}
-              >
-                <h3 className="text-[21px] font-semibold leading-[1.15] tracking-[0.005em] lg:text-[30px]">{active.title}</h3>
-                <div className="mt-3 flex items-center gap-[6px]">
-                  <span className="h-[3px] w-12 rounded-full" style={{ background: BRAND_BLUE }} />
-                  <span className="h-[3px] w-[6px] rounded-full" style={{ background: LIGHT_BLUE }} />
-                </div>
-              </motion.div>
-            </AnimatePresence>
+            <div className="min-h-[72px] pr-[88px] lg:min-h-[96px] lg:pr-[132px]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.h3
+                  key={activeId}
+                  className="text-[22px] font-semibold leading-[1.15] tracking-[0.005em] lg:text-[32px]"
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.28, ease: EASE }}
+                >
+                  {active.title}
+                </motion.h3>
+              </AnimatePresence>
+            </div>
 
             <motion.div
               key={`seal-${activeId}`}
-              className="absolute -top-1 right-0 lg:-top-2"
+              className="absolute right-4 top-4 lg:right-7 lg:top-6"
               initial={reducedMotion ? false : { scale: 1.45, opacity: 0, rotate: -22 }}
               animate={{ scale: 1, opacity: 1, rotate: -8 }}
               transition={{ type: "spring", stiffness: 340, damping: 17, delay: 0.12 }}
-              style={{ mixBlendMode: "multiply" }}
             >
-              <span className="block lg:hidden"><Seal size={72} /></span>
-              <span className="hidden lg:block"><Seal size={104} /></span>
+              <span className="block lg:hidden"><Seal size={74} /></span>
+              <span className="hidden lg:block"><Seal size={112} /></span>
             </motion.div>
           </div>
 
-          {/* Video, framed like a figure on the sheet */}
-          <div className="relative grid grid-cols-[6px_minmax(0,1fr)] grid-rows-[6px_auto] gap-[6px]">
-            <div className="col-start-2 row-start-1" style={{ backgroundImage: "repeating-linear-gradient(90deg, rgba(1,80,169,0.5) 0 1px, transparent 1px 12px)" }} />
-            <div className="col-start-1 row-start-2" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(1,80,169,0.5) 0 1px, transparent 1px 12px)" }} />
-
+          {/* Video stage */}
+          <div
+            className="relative p-4 lg:p-7"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(58,155,232,0.34) 0%, rgba(58,155,232,0) 70%), radial-gradient(ellipse 70% 50% at 50% 110%, rgba(1,80,169,0.45) 0%, rgba(1,80,169,0) 70%), linear-gradient(165deg, #0c1c44 0%, #161f43 55%, #0a1330 100%)",
+            }}
+          >
             <div
-              className="relative col-start-2 row-start-2 aspect-square w-full overflow-hidden rounded-[3px] bg-[#071a33]"
-              style={{ boxShadow: "0 14px 34px rgba(7,26,51,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
+              className="pointer-events-none absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+                maskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%)",
+                WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%)",
+              }}
+            />
+            <div
+              className="relative aspect-square w-full overflow-hidden rounded-[16px] bg-[#071a33]"
+              style={{ boxShadow: "0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(120,190,255,0.28), 0 0 70px rgba(58,155,232,0.22)" }}
             >
               {services.map((service) => {
                 const isActive = service.id === activeId
@@ -333,73 +294,55 @@ export function ServicesTabs() {
                   </div>
                 )
               })}
-
-              {/* Viewfinder corners */}
-              {["left-3 top-3 border-l-2 border-t-2", "right-3 top-3 border-r-2 border-t-2", "bottom-3 left-3 border-b-2 border-l-2", "bottom-3 right-3 border-b-2 border-r-2"].map((c) => (
-                <span key={c} className={`pointer-events-none absolute z-10 h-[18px] w-[18px] ${c}`} style={{ borderColor: "rgba(120,190,255,0.75)" }} />
-              ))}
             </div>
-          </div>
-
-          {/* Title block */}
-          <div className="relative mt-4 grid grid-cols-2 border lg:grid-cols-[110px_1fr_1.5fr]" style={{ borderColor: "rgba(1,80,169,0.3)", background: "rgba(255,255,255,0.7)" }}>
-            {[
-              { label: "Sheet", value: meta.sheet, mono: true },
-              { label: "Discipline", value: category.name },
-              { label: "Basis", value: active.tags.join("  ·  "), wide: true },
-            ].map((cell, i) => (
-              <div
-                key={cell.label}
-                className={`px-3 py-[9px] ${cell.wide ? "col-span-2 border-t lg:col-span-1 lg:border-t-0" : ""} ${i > 0 && !cell.wide ? "border-l" : ""} ${cell.wide ? "lg:border-l" : ""}`}
-                style={{ borderColor: "rgba(1,80,169,0.3)" }}
-              >
-                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.22em]" style={{ color: BRAND_BLUE }}>{cell.label}</p>
-                <p className={`mt-[3px] text-[12px] font-semibold leading-[1.35] lg:text-[13px] ${cell.mono ? "font-mono tracking-[0.06em]" : ""}`}>{cell.value}</p>
-              </div>
-            ))}
           </div>
 
           {/* Description underneath */}
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={activeId}
-              className="relative mt-5 lg:mt-6"
+              className="px-5 pb-6 pt-6 lg:px-8 lg:pb-8 lg:pt-8"
               initial={reducedMotion ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.3, ease: EASE }}
             >
-              <p className="text-[14px] leading-[1.75] tracking-[0.005em] lg:text-[16.5px]">{active.intro}</p>
-              <p className="mt-3 text-[13px] leading-[1.75] tracking-[0.005em] opacity-75 lg:text-[15px]">{active.more}</p>
-
-              <div className="mt-6 flex items-center gap-3">
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.26em] lg:text-[11px]" style={{ color: BRAND_BLUE }}>Scope of work</p>
-                <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, rgba(1,80,169,0.45), rgba(1,80,169,0.05))" }} />
+              <div className="flex flex-wrap gap-[6px]">
+                {active.tags.map((tag) => (
+                  <span key={tag} className="rounded-full px-3 py-[5px] text-[11px] font-semibold tracking-[0.05em] lg:text-[12px]" style={{ background: "rgba(1,80,169,0.09)", color: BRAND_BLUE }}>
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <ol className="mt-3 grid gap-x-8 lg:grid-cols-2">
-                {active.bullets.map((b, i) => (
-                  <li key={b} className="flex items-start gap-3 border-b py-[10px] text-[13px] leading-[1.5] lg:text-[14.5px]" style={{ borderColor: "rgba(1,80,169,0.12)" }}>
-                    <span className="mt-[2px] font-mono text-[11px] font-semibold tracking-[0.04em]" style={{ color: BRAND_BLUE }}>
-                      {String(i + 1).padStart(2, "0")}
+
+              <p className="mt-4 text-[14px] leading-[1.75] tracking-[0.005em] lg:text-[16.5px]">{active.intro}</p>
+              <p className="mt-3 text-[13px] leading-[1.75] tracking-[0.005em] opacity-70 lg:text-[15px]">{active.more}</p>
+
+              <p className="mb-3 mt-7 text-[12px] font-bold uppercase tracking-[0.22em]" style={{ color: BRAND_BLUE }}>What we offer</p>
+              <ul className="grid gap-x-8 gap-y-[11px] lg:grid-cols-2">
+                {active.bullets.map((b) => (
+                  <li key={b} className="flex items-start gap-3 text-[13px] leading-[1.5] lg:text-[14.5px]">
+                    <span className="mt-[2px] flex h-[19px] w-[19px] flex-shrink-0 items-center justify-center rounded-full" style={{ background: BRAND_BLUE }}>
+                      <Check size={11} strokeWidth={3.2} color="#fff" />
                     </span>
                     <span>{b}</span>
                   </li>
                 ))}
-              </ol>
+              </ul>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <CtaButton
                   href="/contact"
-                  className="inline-flex h-[44px] items-center justify-center gap-2 rounded-[10px] px-6 text-[13px] font-medium tracking-[0.08em] text-white transition-colors hover:bg-[#161f43] lg:h-[46px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex h-[46px] items-center justify-center gap-2 rounded-[10px] px-7 text-[13px] font-medium tracking-[0.08em] text-white lg:text-[14px]"
                   style={{ background: BRAND_BLUE }}
                 >
                   Discuss your project <ArrowRight size={16} strokeWidth={2.2} />
                 </CtaButton>
                 <button
                   onClick={() => step(1)}
-                  className="group inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors hover:text-[#0150a9]"
+                  className="group inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.04em] transition-colors hover:text-[#0150a9]"
                 >
-                  Next sheet
+                  Next service
                   <ArrowRight size={14} strokeWidth={2.2} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </div>
