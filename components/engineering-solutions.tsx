@@ -5,6 +5,7 @@ import Image from "next/image"
 import { PlusCircle, MinusCircle, Check, ShieldCheck } from "lucide-react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Reveal, StaggerReveal } from "./scroll-reveal"
+import { BlueprintSeparator } from "./blueprint-separator"
 import { CtaButton } from "@/components/cta-button"
 import { allServices, HOME_SERVICE_IDS } from "./services-data"
 
@@ -299,18 +300,8 @@ export function EngineeringSolutions() {
         </div>
       </div>
 
-      {/* BOTTOM: full-width blueprint-to-building strip that separates this section from the next one */}
-      <Reveal delay={0.1} duration={0.9}>
-        <div className="relative mt-6 aspect-[2.4/1] w-full overflow-hidden border-b-[3px] border-[#0052A5] lg:mb-16 lg:mt-0 lg:aspect-[5.2/1]">
-          <Image
-            src="/images/home-separator.jpg"
-            alt="Modern residential building shown as a blueprint on the left and as the finished building on the right"
-            fill
-            sizes="100vw"
-            className="object-cover object-[50%_38%]"
-          />
-        </div>
-      </Reveal>
+      {/* BOTTOM: blueprint-to-building strip that separates this section from the next one */}
+      <BlueprintSeparator />
     </section>
   )
 }
