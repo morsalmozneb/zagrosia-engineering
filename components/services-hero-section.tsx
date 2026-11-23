@@ -73,7 +73,7 @@ export function ServicesHeroSection() {
         <div className="pt-[148px] pb-14 zag-desktop-content-pad">
 
           {/* Same structure as home page Engineering Solutions */}
-          <div className="relative pl-5 lg:max-w-[940px]">
+          <div className="relative pl-5 lg:max-w-[1240px]">
 
             {/* Vertical fading line — runs through heading + accordion */}
             <motion.div
