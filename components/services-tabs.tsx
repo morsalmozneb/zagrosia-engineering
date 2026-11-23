@@ -122,10 +122,10 @@ export function ServicesTabs() {
   )
 
   return (
-    <div style={{ color: NAVY }}>
+    <div className="@container" style={{ color: NAVY }}>
       {/* Categories + P.Eng seal */}
       <div className="flex items-end justify-between gap-4 border-b" style={{ borderColor: "rgba(1,80,169,0.22)" }}>
-        <div ref={catRowRef} role="tablist" aria-label="Service categories" className="relative -mb-px flex min-w-0 gap-6 overflow-x-auto lg:gap-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div ref={catRowRef} role="tablist" aria-label="Service categories" className="relative -mb-px flex min-w-0 flex-wrap gap-x-5 @[640px]:flex-nowrap @[640px]:gap-x-[clamp(8px,2.2cqw,40px)]">
           {CATEGORIES.map((c, ci) => {
             const on = ci === catIndex
             return (
@@ -134,7 +134,7 @@ export function ServicesTabs() {
                 role="tab"
                 aria-selected={on}
                 onClick={() => choose(c.ids[0])}
-                className="relative flex-shrink-0 whitespace-nowrap px-1 pb-4 pt-3 text-[15px] tracking-[0.02em] transition-colors lg:px-3 lg:text-[19px]"
+                className="relative whitespace-nowrap px-1 pb-3 pt-3 text-[15px] tracking-[0.01em] transition-colors @[640px]:px-0 @[640px]:pb-4 @[640px]:text-[clamp(11px,1.7cqw,19px)]"
                 style={{ color: on ? BRAND_BLUE : NAVY, fontWeight: on ? 600 : 400 }}
               >
                 {c.name}
@@ -159,12 +159,12 @@ export function ServicesTabs() {
           transition={{ type: "spring", stiffness: 340, damping: 17, delay: 0.1 }}
         >
           <span className="block lg:hidden"><Seal size={64} /></span>
-          <span className="hidden lg:block"><Seal size={96} /></span>
+          <span className="hidden lg:block"><Seal size={80} /></span>
         </motion.div>
       </div>
 
       {/* Services in this category */}
-      <div ref={svcRowRef} role="tablist" aria-label={category.name} className="relative mt-5 flex gap-3 overflow-x-auto pb-1 lg:mt-6 lg:gap-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div ref={svcRowRef} role="tablist" aria-label={category.name} className="relative mt-5 flex flex-wrap gap-2 @[640px]:mt-6 @[640px]:flex-nowrap @[640px]:gap-[clamp(6px,1cqw,16px)]">
         {category.ids.map((id) => {
           const s = services.find((x) => x.id === id)!
           const on = id === activeId
@@ -175,7 +175,7 @@ export function ServicesTabs() {
               aria-selected={on}
               aria-controls="service-panel"
               onClick={() => choose(id)}
-              className="flex-shrink-0 whitespace-nowrap rounded-[14px] border-2 px-5 text-[14px] transition-all duration-300 lg:h-[50px] lg:flex-1 lg:px-4 lg:text-[17px]"
+              className="whitespace-nowrap rounded-[14px] border-2 px-4 text-[14px] transition-all duration-300 @[640px]:h-[clamp(40px,5.4cqw,50px)] @[640px]:min-w-0 @[640px]:flex-1 @[640px]:px-[0.6cqw] @[640px]:text-[clamp(11px,1.55cqw,17px)]"
               style={{
                 height: 44,
                 background: on ? "rgba(1,80,169,0.10)" : "rgba(1,80,169,0.06)",
