@@ -217,8 +217,9 @@ button, a, [role="button"] {
     --desktop-grid-gap: 16px;
     --desktop-grid-column-width: calc((var(--desktop-grid-max) - (11 * var(--desktop-grid-gap))) / var(--desktop-grid-columns));
     --desktop-grid-frame-offset: max(0px, calc((100vw - var(--desktop-grid-max)) / 2));
-    --desktop-grid-content-start: calc(var(--desktop-grid-frame-offset) + (2 * var(--desktop-grid-column-width)) + (2 * var(--desktop-grid-gap)));
-    --desktop-grid-content-span: calc((8 * var(--desktop-grid-column-width)) + (7 * var(--desktop-grid-gap)));
+    --desktop-grid-content-start: calc(var(--desktop-grid-frame-offset) + 184px);
+    --desktop-grid-content-end: calc(var(--desktop-grid-frame-offset) + 64px);
+    --desktop-grid-content-span: calc(var(--desktop-grid-max) - 184px - 64px);
   }
 
   .zag-desktop-frame {
@@ -236,7 +237,7 @@ button, a, [role="button"] {
   .zag-desktop-content-pad {
     box-sizing: border-box;
     padding-left: var(--desktop-grid-content-start);
-    padding-right: var(--desktop-grid-content-start);
+    padding-right: var(--desktop-grid-content-end);
   }
 
   .zag-desktop-content-start {

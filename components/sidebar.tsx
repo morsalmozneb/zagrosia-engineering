@@ -569,7 +569,7 @@ export function Sidebar() {
         // on narrower screens it never gets smaller than 760px
         style={{
           left: "min(var(--desktop-grid-content-start, 216px), max(24px, calc((100vw - 760px) / 2)))",
-          right: "min(var(--desktop-grid-content-start, 216px), max(24px, calc((100vw - 760px) / 2)))",
+          right: "min(var(--desktop-grid-content-end, 64px), max(24px, calc((100vw - 760px) / 2)))",
         }}
       >
         <AnimatePresence>
