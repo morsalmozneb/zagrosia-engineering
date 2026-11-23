@@ -299,16 +299,15 @@ export function EngineeringSolutions() {
         </div>
       </div>
 
-      {/* BOTTOM: Building image — slides in from right with blur */}
-      <Reveal variant="fadeRight" delay={0.1} duration={0.9} className="overflow-hidden -mt-10 lg:mt-0 lg:pl-[var(--desktop-grid-content-start)] lg:pb-24">
-        <div className="lg:relative lg:aspect-[2.32/1] lg:overflow-hidden lg:rounded-l-[14px]">
+      {/* BOTTOM: full-width blueprint-to-building strip that separates this section from the next one */}
+      <Reveal delay={0.1} duration={0.9}>
+        <div className="relative mt-6 aspect-[2.4/1] w-full overflow-hidden border-b-[3px] border-[#0052A5] lg:mb-16 lg:mt-0 lg:aspect-[5.2/1]">
           <Image
-            src="/images/curved-building.png"
-            alt="Modern curved architectural building"
-            width={1200}
-            height={600}
-            className="w-full object-cover lg:absolute lg:inset-0 lg:h-full"
-            priority
+            src="/images/home-separator.jpg"
+            alt="Modern residential building shown as a blueprint on the left and as the finished building on the right"
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_38%]"
           />
         </div>
       </Reveal>
