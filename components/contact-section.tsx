@@ -80,16 +80,16 @@ export function ContactSection() {
 
   const formFields = (mobile: boolean) => {
     const inputClass = mobile
-      ? "w-full rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-[11px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]"
+      ? "w-full rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-[14px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]"
       : "w-full rounded-[8px] border border-[#D8D8D8] bg-white px-4 py-3 text-[14px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]"
     const labelClass = mobile
-      ? "mb-1 block text-[11px] font-semibold tracking-[0.08em] text-[#2D2D2D]"
+      ? "mb-1 block text-[14px] font-semibold tracking-[0.08em] text-[#2D2D2D]"
       : "mb-2 block text-[14px] font-semibold tracking-[0.08em] text-[#2D2D2D]"
     const dropdownItemClass = mobile
-      ? "block w-full px-3 py-2.5 text-left text-[11px] tracking-[0.05em] hover:bg-[#F5F7FA]"
+      ? "block w-full px-3 py-2.5 text-left text-[14px] tracking-[0.05em] hover:bg-[#F5F7FA]"
       : "block w-full px-4 py-3 text-left text-[14px] tracking-[0.05em] hover:bg-[#F5F7FA]"
     const dropdownBtnClass = mobile
-      ? "flex w-full items-center justify-between rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-left text-[11px] tracking-[0.05em] text-[#2D2D2D] outline-none focus:border-[#0052A5]"
+      ? "flex w-full items-center justify-between rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-left text-[14px] tracking-[0.05em] text-[#2D2D2D] outline-none focus:border-[#0052A5]"
       : "flex w-full items-center justify-between rounded-[8px] border border-[#D8D8D8] bg-white px-4 py-3 text-left text-[14px] tracking-[0.05em] text-[#2D2D2D] outline-none focus:border-[#0052A5]"
     const dropdownMenuClass = mobile
       ? "absolute left-0 right-0 top-full z-10 mt-1 rounded-[5px] border border-[#D8D8D8] bg-white shadow-md"
@@ -169,7 +169,7 @@ export function ContactSection() {
         <div className={mobile ? "" : "mb-5"}>
           <label className={labelClass}>Project Details</label>
           <textarea required name="message" placeholder="Briefly describe your project or journey..." rows={5} value={message} onChange={(e) => setMessage(e.target.value)}
-            className={`${mobile ? "w-full resize-none rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-[11px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]" : "w-full resize-none rounded-[8px] border border-[#D8D8D8] bg-white px-4 py-3 text-[14px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]"}`}
+            className={`${mobile ? "w-full resize-none rounded-[5px] border border-[#D8D8D8] bg-white px-3 py-2.5 text-[14px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]" : "w-full resize-none rounded-[8px] border border-[#D8D8D8] bg-white px-4 py-3 text-[14px] tracking-[0.05em] text-[#2D2D2D] placeholder-[#BBBBBB] outline-none focus:border-[#0052A5] focus:ring-1 focus:ring-[#0052A5]"}`}
           />
         </div>
 
@@ -178,7 +178,7 @@ export function ContactSection() {
         )}
 
         <CtaButton as="button" type="submit" disabled={submitting}
-          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-[8px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
+          className={`${mobile ? "mt-5 inline-flex w-full" : "inline-flex"} items-center justify-center rounded-[8px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px] disabled:opacity-60`}
           style={{ fontSize: mobile ? "14px" : "16px" }}
         >
           {submitting ? "Sending..." : "Send Message"}
@@ -193,7 +193,7 @@ export function ContactSection() {
 
         {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+          <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">GET IN TOUCH</p>
         </Reveal>
 
         {/* Vertical line + heading + body */}
@@ -237,7 +237,7 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal variant="fadeUp" delay={0.08} duration={0.6}>
-          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">CONTACT INFO</p>
+          <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">CONTACT INFO</p>
         </Reveal>
 
         <div className="space-y-[8px]">
@@ -255,8 +255,8 @@ export function ContactSection() {
                 {item.icon}
               </div>
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0052A5]">{item.label}</p>
-                <p className="mt-[2px] text-[11px] font-medium tracking-[0.04em] text-[#2D2D2D]">{item.value}</p>
+                <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#0052A5]">{item.label}</p>
+                <p className="mt-[2px] text-[12px] font-medium tracking-[0.04em] text-[#2D2D2D]">{item.value}</p>
               </div>
             </motion.a>
           ))}
@@ -283,7 +283,7 @@ export function ContactSection() {
               </Reveal>
               <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
                 <h1
-                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
                   style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
                 >
                   <span className="mb-[8px] block text-[#2D2D2D]">START YOUR PROJECT</span>
@@ -291,7 +291,7 @@ export function ContactSection() {
                 </h1>
               </Reveal>
               <Reveal delay={0.2} duration={0.65}>
-                <p className="mt-5 max-w-[700px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                <p className="mt-5 max-w-[700px] leading-[1.6] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
                   Whether you need structural design, building assessment, seismic review, or racking and masonry engineering, we&apos;re ready. Let&apos;s build something exceptional.
                 </p>
               </Reveal>
@@ -332,7 +332,7 @@ export function ContactSection() {
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0052A5]">{item.label}</p>
+                    <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#0052A5]">{item.label}</p>
                     <p className="mt-[4px] text-[14px] font-medium tracking-[0.04em] text-[#2D2D2D]">{item.value}</p>
                   </div>
                 </motion.a>

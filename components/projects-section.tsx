@@ -70,7 +70,7 @@ export function ProjectsSection() {
         <div className="relative w-full overflow-hidden" style={{ height: "200px" }}>
           {/* Building photo */}
           <Image
-            src="/images/projects-building-top.jpg"
+            src="/images/projects-building-top.png"
             alt="Projects architectural background"
             fill
             className="object-cover object-top"
@@ -140,22 +140,22 @@ export function ProjectsSection() {
                         <Image src={project.image} alt={project.title.replace(/\n/g, " ")} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                       </div>
                       <div className="px-4 pb-4 pt-3">
-                        <h3 className="whitespace-pre-line leading-[1.25] tracking-[0.16em] text-[#3a3a3a]" style={{ fontSize: "14px" }}>{project.title}</h3>
+                        <h3 className="whitespace-pre-line leading-[1.25] tracking-[0.05em] text-[#3a3a3a]" style={{ fontSize: "14px" }}>{project.title}</h3>
                         <p className="mt-3 leading-[1.42] tracking-[0.11em] text-[#5a5a5a]" style={{ fontSize: "12px" }}>{project.description}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
                           {project.tags.map((tag) => (
-                            <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[9px] py-[3px] leading-none tracking-[0.12em] text-[#6b7380]" style={{ fontSize: "8px" }}>{tag}</span>
+                            <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[9px] py-[3px] leading-none tracking-[0.12em] text-[#6b7380]" style={{ fontSize: "12px" }}>{tag}</span>
                           ))}
                         </div>
-                        <div className="mt-4 flex items-center gap-1.5 tracking-[0.12em] text-[#6e7684]" style={{ fontSize: "10px" }}>
+                        <div className="mt-4 flex items-center gap-1.5 tracking-[0.12em] text-[#6e7684]" style={{ fontSize: "12px" }}>
                           <MapPin size={12} strokeWidth={1.8} />
                           <span>{project.location}</span>
                         </div>
                         <div className="mt-4">
                           <CtaButton
                             href="/projects"
-                            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                            style={{ fontSize: "9.5px", width: "100px", height: "30px" }}
+                            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                            style={{ fontSize: "12px", width: "130px", height: "36px" }}
                           >
                             View Project
                           </CtaButton>
@@ -181,7 +181,7 @@ export function ProjectsSection() {
           </div>
 
           <div className="mt-8 flex justify-center pb-10">
-            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               View All Projects
             </CtaButton>
           </div>
@@ -193,7 +193,7 @@ export function ProjectsSection() {
       <div className="hidden lg:block">
         {/* Desktop building background image */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-          <Image src="/images/projects-building-top.jpg" alt="" fill className="object-cover object-top" aria-hidden="true" priority />
+          <Image src="/images/projects-building-top.png" alt="" fill className="object-cover object-top" aria-hidden="true" priority />
         </div>
         {/* Full-section gradient overlay */}
         <div
@@ -204,10 +204,10 @@ export function ProjectsSection() {
         <div className="relative" style={{ zIndex: 2 }}>
           <div className="sidebar-content pb-8 pt-14 zag-desktop-content-pad">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className="zag-heading text-[32px] leading-none text-white">PROJECTS</h2>
+              <h2 className="zag-heading text-[28px] leading-none text-white">PROJECTS</h2>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
-              <p className="mt-4 leading-[1.6] tracking-[0.16em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>
+              <p className="mt-4 leading-[1.6] tracking-[0.02em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>
                 Structural engineering projects across Western Canada — seismic compliant, code-driven, precision-engineered.
               </p>
             </Reveal>
@@ -287,17 +287,17 @@ export function ProjectsSection() {
                     transition={{ duration: 0.3, ease: EASE }}
                   >
                     <h3 className="text-[13px] font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[prevIndex].title}</h3>
-                    <p className="mt-2 text-[10px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[prevIndex].description}</p>
+                    <p className="mt-2 text-[12px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[prevIndex].description}</p>
                     <div className="mt-3 flex flex-wrap gap-[5px]">
                       {projects[prevIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[8px] py-[3px] text-[12px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-4 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
+                      <div className="flex items-center gap-1.5 text-[12px] tracking-[0.1em] text-[#6e7684]">
                         <MapPin size={11} strokeWidth={1.8} /><span>{projects[prevIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -344,18 +344,18 @@ export function ProjectsSection() {
                     exit="exit"
                     transition={{ duration: 0.38, delay: 0.06, ease: EASE }}
                   >
-                    <h3 style={{ fontSize: "22px" }} className="font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[desktopIndex].title}</h3>
-                    <p className="mt-3 leading-[1.55] tracking-[0.07em] text-[#5a5a5a]" style={{ fontSize: "16px" }}>{projects[desktopIndex].description}</p>
+                    <h3 style={{ fontSize: "20px" }} className="font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[desktopIndex].title}</h3>
+                    <p className="mt-3 leading-[1.55] tracking-[0.02em] text-[#5a5a5a]" style={{ fontSize: "16px" }}>{projects[desktopIndex].description}</p>
                     <div className="mt-4 flex flex-wrap gap-[6px]">
                       {projects[desktopIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[10px] py-[4px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[10px] py-[4px] text-[12px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-5 flex items-center justify-between">
                       <div className="flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "16px" }}>
                         <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -399,17 +399,17 @@ export function ProjectsSection() {
                     transition={{ duration: 0.3, ease: EASE }}
                   >
                     <h3 className="text-[13px] font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[nextIndex].title}</h3>
-                    <p className="mt-2 text-[10px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[nextIndex].description}</p>
+                    <p className="mt-2 text-[12px] leading-[1.5] tracking-[0.06em] text-[#5a5a5a]">{projects[nextIndex].description}</p>
                     <div className="mt-3 flex flex-wrap gap-[5px]">
                       {projects[nextIndex].tags.map((tag) => (
-                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[8px] py-[3px] text-[9px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
+                        <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[8px] py-[3px] text-[12px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
                     <div className="mt-4 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] text-[#6e7684]">
+                      <div className="flex items-center gap-1.5 text-[12px] tracking-[0.1em] text-[#6e7684]">
                         <MapPin size={11} strokeWidth={1.8} /><span>{projects[nextIndex].location}</span>
                       </div>
-                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
+                      <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -432,7 +432,7 @@ export function ProjectsSection() {
 
           {/* All Projects button */}
           <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-8 flex justify-center pb-4">
-            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               All Projects
             </CtaButton>
           </Reveal>

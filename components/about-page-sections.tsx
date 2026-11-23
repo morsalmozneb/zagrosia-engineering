@@ -13,7 +13,7 @@ export function AboutHeroSection() {
   return (
     <section className="relative overflow-hidden bg-[#FCFCFC] px-6 pb-0 pt-24">
       <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-        <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">WHO WE ARE</p>
+        <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">WHO WE ARE</p>
       </Reveal>
 
       <div className="relative pl-[12px]">
@@ -147,7 +147,7 @@ export function AboutProfileSection() {
         <div className="pt-4">
           <div className="mb-7">
             <Reveal variant="fadeLeft" delay={0.1} duration={0.65}>
-              <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "18px", fontWeight: 600 }}>EDUCATION</h2>
+              <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "17px", fontWeight: 600 }}>EDUCATION</h2>
             </Reveal>
             <ul className="space-y-3 tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>
               {education.map((item, i) => (
@@ -166,7 +166,7 @@ export function AboutProfileSection() {
 
           <div>
             <Reveal variant="fadeLeft" delay={0.1} duration={0.65}>
-              <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "18px", fontWeight: 600 }}>CERTIFICATIONS</h2>
+              <h2 className="zag-heading mb-4 leading-none text-[#FCFCFC]" style={{ fontSize: "17px", fontWeight: 600 }}>CERTIFICATIONS</h2>
             </Reveal>
             <ul className="space-y-3 leading-[1.34] tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>
               {certifications.map((item, i) => (
@@ -190,7 +190,7 @@ export function AboutProfileSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 View Resume
               </CtaButton>
@@ -199,7 +199,7 @@ export function AboutProfileSection() {
               <CtaButton
                 href="/contact"
                 className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] tracking-[0.06em] transition-colors hover:bg-[#94B8DC] hover:border-[#94B8DC]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 Contact
               </CtaButton>
@@ -365,7 +365,7 @@ export function AboutCoreValuesSection() {
                   WebkitBackdropFilter: "blur(61.5px)",
                 }}
               >
-                <h3 className="tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "16px", fontWeight: 450 }}>
+                <h3 className="tracking-[0.05em] text-[#FCFCFC]" style={{ fontSize: "16px", fontWeight: 450 }}>
                   {value.title}
                 </h3>
                 <p className="mt-3 max-w-[290px] leading-[1.36] tracking-[0.14em] text-[#FCFCFC]" style={{ fontSize: "12px" }}>

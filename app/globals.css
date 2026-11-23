@@ -268,13 +268,13 @@ button, a, [role="button"] {
 
   /* 2. Home hero: Engineering Excellence paragraph */
   .pt-\[154px\] p.font-mono {
-    font-size: 18px !important;
+    font-size: 17px !important;
     line-height: 1.65 !important;
   }
 
   /* 3. Home hero: Bridging structural paragraph (p only, not h1) */
   .pt-\[154px\] p.font-sans {
-    font-size: 18px !important;
+    font-size: 17px !important;
     line-height: 1.6 !important;
   }
 
@@ -290,7 +290,7 @@ button, a, [role="button"] {
 
   /* 6. Services open accordion — body paragraphs */
   .backdrop-blur-\[30px\] > p {
-    font-size: 18px !important;
+    font-size: 17px !important;
     line-height: 1.65 !important;
   }
 
@@ -303,7 +303,7 @@ button, a, [role="button"] {
 
   /* Intro description paragraph (has whitespace-nowrap at 11px — fix both) */
   .sidebar-content p.whitespace-nowrap {
-    font-size: 18px !important;
+    font-size: 17px !important;
     white-space: normal !important;
     line-height: 1.65 !important;
   }

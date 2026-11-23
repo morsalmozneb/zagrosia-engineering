@@ -57,13 +57,13 @@ export function EngineeringExcellence() {
               <p className="font-semibold tracking-[0.08em]" style={{ fontSize: "14px" }}>
                 <CountUp end={35} suffix="+" duration={1.4} />
               </p>
-              <p className="mt-1 tracking-[0.18em] text-[#4a4a4a]" style={{ fontSize: "10px" }}>Experience</p>
+              <p className="mt-1 tracking-[0.1em] text-[#4a4a4a]" style={{ fontSize: "12px" }}>Experience</p>
             </div>
             <div>
               <p className="font-semibold tracking-[0.08em]" style={{ fontSize: "14px" }}>
                 <CountUp end={200} suffix="+" duration={1.6} />
               </p>
-              <p className="mt-1 tracking-[0.18em] text-[#4a4a4a]" style={{ fontSize: "10px" }}>Projects</p>
+              <p className="mt-1 tracking-[0.1em] text-[#4a4a4a]" style={{ fontSize: "12px" }}>Projects</p>
             </div>
           </div>
         </motion.div>
@@ -72,8 +72,8 @@ export function EngineeringExcellence() {
         <Reveal variant="scaleUp" delay={0.35} duration={0.5} className="absolute left-0 top-[387px]">
           <CtaButton
             href="/about"
-            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+            style={{ fontSize: "12px", width: "172px", height: "46px" }}
           >
             Learn More
           </CtaButton>
@@ -89,7 +89,7 @@ export function EngineeringExcellence() {
           style={{ paddingLeft: "var(--desktop-grid-content-start)", paddingRight: "60px" }}
         >
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
-            <h2 className="zag-heading mb-8 text-[32px] leading-[1.1] text-[#2d2d2d]">
+            <h2 className="zag-heading mb-8 text-[28px] leading-[1.1] text-[#2d2d2d]">
               ENGINEERING
               <br />
               EXCELLENCE
@@ -99,13 +99,13 @@ export function EngineeringExcellence() {
           </Reveal>
 
           <Reveal delay={0.2} duration={0.65}>
-            <p className="mb-6 leading-[1.75] tracking-[0.12em] text-[#3a3a3a]" style={{ fontSize: "16px" }}>
+            <p className="mb-6 leading-[1.75] tracking-[0.02em] text-[#3a3a3a]" style={{ fontSize: "16px" }}>
               Seyed Hassan Mozneb brings 35+ years of structural engineering expertise, combining traditional engineering excellence with modern AI-driven workflows.
             </p>
           </Reveal>
 
           <Reveal delay={0.3} duration={0.65}>
-            <p className="mb-10 leading-[1.75] tracking-[0.12em] text-[#3a3a3a]" style={{ fontSize: "16px" }}>
+            <p className="mb-10 leading-[1.75] tracking-[0.02em] text-[#3a3a3a]" style={{ fontSize: "16px" }}>
               Specializing in seismic assessments, building rehabilitation, industrial racking systems, and specialty structural reviews, his work is guided by BCBC, NBCC, and EGBC standards.
             </p>
           </Reveal>
@@ -113,7 +113,7 @@ export function EngineeringExcellence() {
           <Reveal variant="scaleUp" delay={0.42} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>
@@ -162,7 +162,7 @@ export function EngineeringExcellence() {
                 <p className="text-[28px] font-semibold tracking-[0.06em] text-[#2d2d2d]">
                   <CountUp end={stat.end} suffix={stat.suffix} duration={1.5} />
                 </p>
-                <p className="mt-1 text-[11px] tracking-[0.18em] text-[#4a4a4a]">{stat.label}</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#4a4a4a]">{stat.label}</p>
               </motion.div>
             ))}
           </div>

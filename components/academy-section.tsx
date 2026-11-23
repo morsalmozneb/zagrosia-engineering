@@ -82,7 +82,7 @@ export function AcademySection() {
 
         {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">KNOWLEDGE PLATFORM</p>
+          <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">KNOWLEDGE PLATFORM</p>
         </Reveal>
 
         {/* Vertical line + heading + body */}
@@ -160,8 +160,8 @@ export function AcademySection() {
                           <CtaButton
                             key={action}
                             href="#"
-                            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                            style={{ fontSize: "8px", height: "28px", width: "100px" }}
+                            className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                            style={{ fontSize: "12px", height: "28px", width: "100px" }}
                           >
                             {action}
                           </CtaButton>
@@ -175,7 +175,7 @@ export function AcademySection() {
                     style={{ background: CLOSED_FILL }}
                     onClick={() => setOpenMobileItemId(item.id)}
                   >
-                    <span className="text-[11px] font-medium tracking-[0.1em] text-white">
+                    <span className="text-[12px] font-medium tracking-[0.1em] text-white">
                       {item.title}
                     </span>
                     <PlusCircle size={20} strokeWidth={2} className="flex-shrink-0 text-white" />
@@ -191,8 +191,8 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
             <CtaButton
               href="#"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              style={{ fontSize: "12px", width: "172px", height: "46px" }}
             >
               Join Waitlist
             </CtaButton>
@@ -200,8 +200,8 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
             <CtaButton
               href="#"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-              style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              style={{ fontSize: "12px", width: "172px", height: "46px" }}
             >
               Learn More
             </CtaButton>
@@ -211,7 +211,7 @@ export function AcademySection() {
         {/* Mobile bottom CTA */}
         <div className="mt-14">
           <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-            <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+            <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">GET IN TOUCH</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
             <h2
@@ -230,8 +230,8 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 Contact Us
               </CtaButton>
@@ -239,8 +239,8 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 Get In Touch
               </CtaButton>
@@ -274,7 +274,7 @@ export function AcademySection() {
 
             <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
               <h1
-                className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
                 style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
               >
                 <span className="mb-[8px] block text-[#2D2D2D]">PASS THE EGBC EXAM</span>
@@ -282,7 +282,7 @@ export function AcademySection() {
               </h1>
             </Reveal>
 
-            <div className="mt-[28px] max-w-[904px] space-y-[14px] leading-[1.35] tracking-[0.18em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+            <div className="mt-[28px] max-w-[904px] space-y-[14px] leading-[1.35] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
               <Reveal delay={0.2} duration={0.65}>
                 <p>
                   Canada&apos;s most comprehensive EGBC National Professional Practice
@@ -327,10 +327,10 @@ export function AcademySection() {
                     >
                       <div className="flex items-start justify-between gap-8">
                         <div className="min-w-0">
-                          <h3 className="text-[20px] font-semibold tracking-[0.14em] text-[#2D2D2D]">
+                          <h3 className="text-[20px] font-semibold tracking-[0.05em] text-[#2D2D2D]">
                             {item.title}
                           </h3>
-                          <p className="mt-[14px] max-w-[746px] leading-[1.38] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                          <p className="mt-[14px] max-w-[746px] leading-[1.38] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                             {item.description}
                           </p>
 
@@ -340,7 +340,7 @@ export function AcademySection() {
                                 <CtaButton
                                   key={action}
                                   href="#"
-                                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                                   style={{ fontSize: "16px" }}
                                   onClick={(event) => event.stopPropagation()}
                                 >
@@ -378,7 +378,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
               <CtaButton
                 href="#"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "16px" }}
               >
                 Join Waitlist
@@ -387,7 +387,7 @@ export function AcademySection() {
             <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
               <CtaButton
                 href="#"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 style={{ fontSize: "16px" }}
               >
                 Learn More
@@ -401,7 +401,7 @@ export function AcademySection() {
       <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
         <div className="zag-desktop-content-pad pt-[30px] pb-[80px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+            <h2 className="text-[28px] uppercase leading-[1.1] tracking-[0.04em] text-[#2D2D2D]">
               HAVE QUESTIONS ABOUT THE ACADEMY?
             </h2>
           </Reveal>
@@ -413,7 +413,7 @@ export function AcademySection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>

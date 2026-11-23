@@ -136,13 +136,13 @@ export function HeroSection() {
               35 YEARS
             </motion.span>
 
-            <div className="mt-[50px] space-y-[10px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[50px] space-y-[10px] text-[#FCFCFC] text-[12px] tracking-[0.1em] font-sans">
               <motion.p {...fadeUp(T.msc)}>P.ENG BC</motion.p>
               <motion.p {...fadeUp(T.egbc)}>P.ENG ALBERTA</motion.p>
               <motion.p {...fadeUp({ delay: T.egbc.delay + 0.12, duration: 0.45 })}>P.ENG SASK</motion.p>
             </div>
 
-            <div className="mt-[90px] space-y-[10px] text-[#FCFCFC] text-[9.5px] tracking-[0.24em] font-sans">
+            <div className="mt-[90px] space-y-[10px] text-[#FCFCFC] text-[12px] tracking-[0.1em] font-sans">
               <motion.p {...fadeUp({ delay: T.msc.delay + 0.24, duration: 0.45 })}>M.Sc. STRUCTURAL</motion.p>
               <motion.p {...fadeUp({ delay: T.egbc.delay + 0.24, duration: 0.45 })}>EGBC COMPLIANT</motion.p>
             </div>
@@ -161,7 +161,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnA, 12)}>
                 <CtaButton
                   href="/projects"
-                  className="inline-flex items-center justify-center zag-cta rounded-[10px] bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[10px] bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   View Projects
                 </CtaButton>
@@ -169,7 +169,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnB, 12)}>
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Contact Us
                 </CtaButton>
@@ -193,7 +193,7 @@ export function HeroSection() {
           <h1 className="font-sans font-bold tracking-tight">
             <motion.span
               className="block text-[#FCFCFC]"
-              style={{ fontSize: "65px", lineHeight: 1.02 }}
+              style={{ fontSize: "52px", lineHeight: 1.02 }}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: vis, y: started ? 0 : 12 }}
               transition={{ duration: 0.55, ease: EASE_OUT }}
@@ -202,7 +202,7 @@ export function HeroSection() {
             <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
               <motion.span
                 className="block text-[#0150a9]"
-                style={{ fontSize: "65px", lineHeight: 1.01 }}
+                style={{ fontSize: "52px", lineHeight: 1.01 }}
                 initial={{ y: "105%" }}
                 animate={{ y: started ? "0%" : "105%" }}
                 transition={{ duration: 0.65, delay: 0.15, ease: EASE_OUT }}
@@ -210,7 +210,7 @@ export function HeroSection() {
             </span>
           </h1>
 
-          <p className="mt-6 text-[#FCFCFC] font-light" style={{ fontSize: "36px", letterSpacing: "0.34em" }}>
+          <p className="mt-6 text-[#FCFCFC] font-light" style={{ fontSize: "28px", letterSpacing: "0.2em" }}>
             {INTEL_LETTERS.map((l, i) => (
               <motion.span key={`d-${i}`} style={{ display: "inline-block" }}
                 initial={{ opacity: 0, y: 8 }} animate={{ opacity: vis, y: started ? 0 : 8 }}
@@ -234,26 +234,26 @@ export function HeroSection() {
             />
 
             {/* 2. 35 YEARS */}
-            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "24px", letterSpacing: "0.2em" }} {...fadeUp(T.years)}>
+            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "20px", letterSpacing: "0.14em" }} {...fadeUp(T.years)}>
               35 YEARS
             </motion.p>
 
             {/* 3. M.Sc. STRUCTURAL */}
-            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "18px", letterSpacing: "0.22em", marginTop: "76px" }} {...fadeUp(T.msc)}>
+            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "16px", letterSpacing: "0.14em", marginTop: "76px" }} {...fadeUp(T.msc)}>
               M.Sc. STRUCTURAL
             </motion.p>
 
             {/* 3b. EGBC COMPLIANT */}
-            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "18px", letterSpacing: "0.22em", marginTop: "38px" }} {...fadeUp(T.egbc)}>
+            <motion.p className="text-[#FCFCFC]" style={{ fontSize: "16px", letterSpacing: "0.14em", marginTop: "38px" }} {...fadeUp(T.egbc)}>
               EGBC COMPLIANT
             </motion.p>
 
             {/* 4. Description */}
             <motion.div style={{ marginTop: "76px" }} {...fadeUp(T.desc, 14)}>
-              <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "18px", lineHeight: 1.65, letterSpacing: "0.02em" }}>
+              <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "17px", lineHeight: 1.65, letterSpacing: "0.02em" }}>
                 Engineering Excellence · Intelligent Structural Design · Seismic Expertise · AI-Driven Innovation
               </p>
-              <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "18px", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "14px" }}>
+              <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "17px", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "14px" }}>
                 Bridging structural engineering with advanced automation and modern digital workflows.
               </p>
             </motion.div>
@@ -263,7 +263,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnA, 12)}>
                 <CtaButton
                   href="/projects"
-                  className="inline-flex items-center justify-center zag-cta rounded-[10px] bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[10px] bg-[#FCFCFC] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   View Projects
                 </CtaButton>
@@ -271,7 +271,7 @@ export function HeroSection() {
               <motion.div {...fadeUp(T.btnB, 12)}>
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Contact Us
                 </CtaButton>

@@ -8,7 +8,7 @@ export function AboutWhereWeWorkSection() {
     <section className="bg-[#FCFCFC] px-5 pb-14 pt-10 text-[#2D2D2D]">
 
       <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-        <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
+        <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">
           WHERE WE WORK
         </p>
       </Reveal>
@@ -41,7 +41,7 @@ export function AboutWhereWeWorkSection() {
           <CtaButton
             href="/contact"
             className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            style={{ fontSize: "12px", width: "172px", height: "46px" }}
           >
             Work with Us
           </CtaButton>
@@ -50,7 +50,7 @@ export function AboutWhereWeWorkSection() {
           <CtaButton
             href="/contact"
             className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] tracking-[0.06em] text-[#2D2D2D] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white"
-            style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+            style={{ fontSize: "12px", width: "172px", height: "46px" }}
           >
             Get In Touch
           </CtaButton>

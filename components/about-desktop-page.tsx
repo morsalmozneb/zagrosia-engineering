@@ -108,10 +108,10 @@ const milestones = [
     description: "Foundational expertise in concrete, steel & masonry systems",
     stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-2.png", "/images/company-milestone-3.png"],
     projects: [
-      { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.jpg" },
-      { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.jpg" },
-      { name: "Residential Complex", type: "Residential", period: "1989–1999", image: "/images/Project-Card-3.jpg" },
-      { name: "Industrial Facility", type: "Industrial", period: "1989–1999", image: "/images/Project-Card-4.jpg" },
+      { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.png" },
+      { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.png" },
+      { name: "Residential Complex", type: "Residential", period: "1989–1999", image: "/images/Project-Card-3.png" },
+      { name: "Industrial Facility", type: "Industrial", period: "1989–1999", image: "/images/Project-Card-4.png" },
     ],
   },
   {
@@ -120,10 +120,10 @@ const milestones = [
     description: "Led complex rehabilitation and new construction projects across Canada",
     stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
-      { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.jpg" },
-      { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.jpg" },
-      { name: "Steel Design", type: "Industrial", period: "1993", image: "/images/Project-Card-7.jpg" },
-      { name: "Civil Works", type: "Infrastructure", period: "1993", image: "/images/Project-Card-8.jpg" },
+      { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.png" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.png" },
+      { name: "Steel Design", type: "Industrial", period: "1993", image: "/images/Project-Card-7.png" },
+      { name: "Civil Works", type: "Infrastructure", period: "1993", image: "/images/Project-Card-8.png" },
     ],
   },
   {
@@ -132,10 +132,10 @@ const milestones = [
     description: "Designed steel and concrete petrochemical structures, fabrication drawings, and technical reports",
     stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-1.png", "/images/company-milestone-2.png"],
     projects: [
-      { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.jpg" },
-      { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.jpg" },
-      { name: "Fabrication Works", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-11.jpg" },
-      { name: "Technical Reports", type: "Engineering", period: "1993–1995", image: "/images/Project-Card-12.jpg" },
+      { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.png" },
+      { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.png" },
+      { name: "Fabrication Works", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-11.png" },
+      { name: "Technical Reports", type: "Engineering", period: "1993–1995", image: "/images/Project-Card-12.png" },
     ],
   },
   {
@@ -144,10 +144,10 @@ const milestones = [
     description: "Led design and restoration of critical concrete and marine structures",
     stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
-      { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.jpg" },
-      { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.jpg" },
-      { name: "Civil Works", type: "Infrastructure", period: "1995–2002", image: "/images/Project-Card-15.jpg" },
-      { name: "Restoration", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-16.jpg" },
+      { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.png" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.png" },
+      { name: "Civil Works", type: "Infrastructure", period: "1995–2002", image: "/images/Project-Card-15.png" },
+      { name: "Restoration", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-16.png" },
     ],
   },
   {
@@ -156,10 +156,10 @@ const milestones = [
     description: "Advanced structural design for industrial and commercial developments",
     stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
-      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.jpg" },
-      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.jpg" },
-      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-7.jpg" },
-      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-10.jpg" },
+      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.png" },
+      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.png" },
+      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-7.png" },
+      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-10.png" },
     ],
   },
   {
@@ -180,10 +180,10 @@ const milestones = [
     description: "Led structural design and project delivery for residential, industrial, and institutional projects",
     stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
-      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.jpg" },
-      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.jpg" },
-      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-9.jpg" },
-      { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.jpg" },
+      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.png" },
+      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.png" },
+      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-9.png" },
+      { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.png" },
     ],
   },
   {
@@ -192,10 +192,10 @@ const milestones = [
     description: "Led design and restoration of critical concrete and marine structures",
     stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-1.png", "/images/company-milestone-3.png"],
     projects: [
-      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.jpg" },
-      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.jpg" },
-      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-13.jpg" },
-      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-6.jpg" },
+      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.png" },
+      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.png" },
+      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-13.png" },
+      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-6.png" },
     ],
   },
   {
@@ -307,7 +307,7 @@ export function AboutDesktopPage() {
 
               <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
                 <h1
-                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
                   style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
                 >
                   <span className="mb-[8px] block text-[#2D2D2D]">STRUCTURAL</span>
@@ -318,12 +318,12 @@ export function AboutDesktopPage() {
 
               <div className="mt-7 max-w-[760px] space-y-4 pb-[24px]">
                 <Reveal delay={0.2} duration={0.65}>
-                  <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                  <p className="leading-[1.72] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
                     At Zagrosia Engineering, we believe structural engineering is more than calculations and drawings. It is about understanding how structures behave, how they perform throughout their service life, and how thoughtful engineering solutions can improve safety, functionality, resilience, and long-term value.
                   </p>
                 </Reveal>
                 <Reveal delay={0.28} duration={0.65}>
-                  <p className="leading-[1.72] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                  <p className="leading-[1.72] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
                     We provide structural engineering services for residential, commercial, industrial, and institutional projects, delivering practical, code-compliant, and constructible solutions tailored to each project&apos;s unique requirements. From new construction to existing building rehabilitation, our work is guided by sound engineering judgment, technical excellence, and a commitment to public safety.
                   </p>
                 </Reveal>
@@ -398,7 +398,7 @@ export function AboutDesktopPage() {
                         transition={{ duration: 0.55, delay, ease: EASE }}
                       >
                         <p className="text-[32px] font-semibold leading-none tracking-[0.08em] text-[#FCFCFC]">{value}</p>
-                        <p className="mt-3 text-[11px] tracking-[0.2em] text-[#FCFCFC]">{label}</p>
+                        <p className="mt-3 text-[12px] tracking-[0.1em] text-[#FCFCFC]">{label}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -410,7 +410,7 @@ export function AboutDesktopPage() {
           <div className="mt-10 max-w-[430px]">
             <div className="mb-10">
               <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">EDUCATION</h2>
+                <h2 className="zag-heading mb-4 text-[28px] leading-none tracking-[0.04em] text-[#FCFCFC]">EDUCATION</h2>
               </Reveal>
               <ul className="space-y-3 text-[16px] leading-[1.65] tracking-[0.16em] text-[#FCFCFC]">
                 {["M.Sc. Structural Engineering", "B.Sc. Civil Engineering"].map((item, i) => (
@@ -429,7 +429,7 @@ export function AboutDesktopPage() {
 
             <div>
               <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                <h2 className="zag-heading mb-4 text-[32px] leading-none tracking-[0.22em] text-[#FCFCFC]">CERTIFICATIONS</h2>
+                <h2 className="zag-heading mb-4 text-[28px] leading-none tracking-[0.04em] text-[#FCFCFC]">CERTIFICATIONS</h2>
               </Reveal>
               <ul className="space-y-3 text-[16px] leading-[1.6] tracking-[0.16em] text-[#FCFCFC]">
                 {[
@@ -452,12 +452,12 @@ export function AboutDesktopPage() {
 
             <div className="mt-9 flex gap-4">
               <Reveal variant="scaleUp" delay={0.1} duration={0.55}>
-                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/files/resume-homayoun.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   View Resume
                 </CtaButton>
               </Reveal>
               <Reveal variant="scaleUp" delay={0.2} duration={0.55}>
-                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+                <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                   Contact
                 </CtaButton>
               </Reveal>
@@ -475,7 +475,7 @@ export function AboutDesktopPage() {
 
           {/* Heading */}
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className="zag-heading mb-10 text-[34px] leading-[1.18] tracking-[0.11em] text-[#2D2D2D]">
+            <h2 className="zag-heading mb-10 text-[28px] leading-[1.18] tracking-[0.04em] text-[#2D2D2D]">
               OUR MISSION
               <br />
               &amp;
@@ -501,7 +501,7 @@ export function AboutDesktopPage() {
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR MISSION</p>
-                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                <p className="leading-[1.55] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                   To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients&apos; goals, and contribute to the resilience and sustainability of the built environment.
                 </p>
               </div>
@@ -521,7 +521,7 @@ export function AboutDesktopPage() {
                 style={{ boxShadow: "0 4px 19.6px 0px rgba(0,0,0,0.34)", backdropFilter: "blur(61.5px)", WebkitBackdropFilter: "blur(61.5px)" }}
               >
                 <p className="mb-4 text-[20px] font-bold tracking-[0.26em] text-[#2D2D2D]">OUR VISION</p>
-                <p className="leading-[1.55] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                <p className="leading-[1.55] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                   To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.
                 </p>
               </div>
@@ -579,7 +579,7 @@ export function AboutDesktopPage() {
 
               <div className="mb-6">
                 <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                  <h2 className="zag-heading text-[32px] leading-none tracking-[0.14em] text-[#FCFCFC]">
+                  <h2 className="zag-heading text-[28px] leading-none tracking-[0.04em] text-[#FCFCFC]">
                     OUR CORE VALUES
                   </h2>
                 </Reveal>
@@ -600,7 +600,7 @@ export function AboutDesktopPage() {
                     }}
                   >
                     <div className="rounded-[14px] bg-[#010101] px-10 py-[26px] backdrop-blur-[61.5px]">
-                      <h3 className="text-[24px] font-semibold tracking-[0.14em] text-[#FCFCFC]">
+                      <h3 className="text-[20px] font-semibold tracking-[0.05em] text-[#FCFCFC]">
                         {value.title}
                       </h3>
                       <ul className="mt-4 space-y-2">
@@ -627,7 +627,7 @@ export function AboutDesktopPage() {
         <div className="sidebar-content w-full zag-desktop-content-pad">
           <div className="mx-auto max-w-[860px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className="zag-heading text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">
+              <h2 className="zag-heading text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">
                 COMPANY MILESTONES
               </h2>
             </Reveal>
@@ -682,7 +682,7 @@ export function AboutDesktopPage() {
                     }}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="leading-[1.2] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "22px", fontWeight: 500 }}>
+                      <h3 className="leading-[1.2] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "20px", fontWeight: 500 }}>
                         {milestone.title}
                       </h3>
                       <span
@@ -692,7 +692,7 @@ export function AboutDesktopPage() {
                         {milestone.year}
                       </span>
                     </div>
-                    <p className="leading-[1.5] tracking-[0.08em] text-[#4f4f4f]" style={{ fontSize: "16px", marginTop: "24px" }}>
+                    <p className="leading-[1.5] tracking-[0.02em] text-[#4f4f4f]" style={{ fontSize: "16px", marginTop: "24px" }}>
                       {milestone.description}
                     </p>
                   </motion.div>
@@ -791,7 +791,7 @@ export function AboutDesktopPage() {
                     {milestones.map((m, i) => (
                       <div key={i} className="flex items-start" style={{ flex: i < milestones.length - 1 ? "1" : "0 0 auto" }}>
                         <div style={{ width: "16px", display: "flex", justifyContent: "center", overflow: "visible" }}>
-                          <span style={{ fontSize: "11px", color: i === pageIndex ? "#0052A5" : "#6B7280", whiteSpace: "nowrap", fontWeight: i === pageIndex ? 700 : 400, letterSpacing: "0.05em" }}>
+                          <span style={{ fontSize: "12px", color: i === pageIndex ? "#0052A5" : "#6B7280", whiteSpace: "nowrap", fontWeight: i === pageIndex ? 700 : 400, letterSpacing: "0.05em" }}>
                             {["1989","1993","1995","2002","2003","2017","2019","2022","Present"][i]}
                           </span>
                         </div>
@@ -825,7 +825,7 @@ export function AboutDesktopPage() {
       <section className="sidebar-content bg-[#FCFCFC] pb-[72px] pt-[26px] zag-desktop-content-pad">
         <div className="mx-auto max-w-[860px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className="zag-heading mb-[24px] text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">MEET OUR TEAM</h2>
+            <h2 className="zag-heading mb-[24px] text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">MEET OUR TEAM</h2>
           </Reveal>
 
           <div className="flex flex-col gap-5">
@@ -870,10 +870,10 @@ export function AboutDesktopPage() {
 
                   {/* Right: name + description + buttons */}
                   <div className="flex min-w-0 flex-1 flex-col pt-[6px]">
-                    <h3 className="text-[24px] font-semibold leading-none tracking-[0.16em] text-[#2D2D2D]">
+                    <h3 className="text-[20px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">
                       {member.name}
                     </h3>
-                    <p className="mt-[12px] leading-[1.55] tracking-[0.10em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+                    <p className="mt-[12px] leading-[1.55] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                       {member.description}
                     </p>
                     <div className="mt-[14px] flex gap-[8px]">
@@ -898,12 +898,12 @@ export function AboutDesktopPage() {
             <p className="mb-4 text-[20px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]">WHERE WE WORK</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h2 className="font-sans text-[32px] font-light uppercase leading-[1.08] tracking-[0.12em] text-[#2D2D2D]">
+            <h2 className="font-sans text-[28px] font-light uppercase leading-[1.08] tracking-[0.04em] text-[#2D2D2D]">
               SERVING WESTERN CANADA
             </h2>
           </Reveal>
           <Reveal delay={0.2} duration={0.65}>
-            <p className="mt-6 leading-[1.8] tracking-[0.10em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+            <p className="mt-6 leading-[1.8] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
               Zagrosia Engineering is licensed and insured to provide structural engineering services across<br />
               <span className="font-semibold">British Columbia</span>,{" "}
               <span className="font-semibold">Alberta</span>, and{" "}
@@ -913,12 +913,12 @@ export function AboutDesktopPage() {
           </Reveal>
           <div className="mt-8 flex gap-4">
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Work with Us
               </CtaButton>
             </Reveal>
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]">
+              <CtaButton href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
                 Get In Touch
               </CtaButton>
             </Reveal>

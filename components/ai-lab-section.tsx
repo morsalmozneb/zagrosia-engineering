@@ -125,7 +125,7 @@ function DesktopToolCard({
       <DesktopPlayBadge />
 
       <div className="absolute inset-x-0 bottom-0 px-[29px] pb-[28px] pt-[24px] text-white">
-        <h3 className={`font-semibold uppercase leading-[1.28] tracking-[0.14em] text-white ${heightClass === "h-[494px]" ? "text-[24px]" : "text-[15px]"}`}>
+        <h3 className={`font-semibold uppercase leading-[1.28] tracking-[0.05em] text-white ${heightClass === "h-[494px]" ? "text-[20px]" : "text-[15px]"}`}>
           {tool.titleLines.map((line) => (
             <span key={line} className="block">
               {line}
@@ -159,7 +159,7 @@ export function AILabSection() {
 
         {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INNOVATION</p>
+          <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">INNOVATION</p>
         </Reveal>
 
         {/* Vertical line + heading + body */}
@@ -264,13 +264,13 @@ export function AILabSection() {
                 <h3 className="mb-1 text-[14px] font-semibold leading-tight tracking-[0.08em] text-white uppercase">
                   {tool.title}
                 </h3>
-                <p className="mb-3 text-[10px] leading-[1.65] tracking-[0.06em] text-white/85">
+                <p className="mb-3 text-[12px] leading-[1.65] tracking-[0.06em] text-white/85">
                   {tool.description}
                 </p>
                 <CtaButton
                   href="#"
                   className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
-                  style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
+                  style={{ fontSize: "12px", width: "150px", height: "36px" }}
                 >
                   Watch Demo
                 </CtaButton>
@@ -303,13 +303,13 @@ export function AILabSection() {
                 className="absolute bottom-0 left-0 right-0 px-3 pb-3 pt-8"
                 style={{ background: "linear-gradient(180deg, transparent 0%, rgba(20,20,20,0.85) 45%)" }}
               >
-                <h3 className="mb-2 text-[11px] font-semibold leading-tight tracking-[0.06em] text-white uppercase">
+                <h3 className="mb-2 text-[12px] font-semibold leading-tight tracking-[0.06em] text-white uppercase">
                   {tool.title}
                 </h3>
                 <CtaButton
                   href="#"
                   className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
-                  style={{ fontSize: "9px", width: "90px", height: "26px" }}
+                  style={{ fontSize: "12px", width: "120px", height: "32px" }}
                 >
                   Watch Demo
                 </CtaButton>
@@ -323,7 +323,7 @@ export function AILabSection() {
       {/* Mobile CTA */}
       <section className="bg-[#FCFCFC] lg:hidden px-5 pb-14 pt-10">
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+          <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">GET IN TOUCH</p>
         </Reveal>
         <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
           <h2
@@ -342,7 +342,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>
@@ -350,7 +350,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.38} duration={0.5}>
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Get In Touch
             </CtaButton>
@@ -374,7 +374,7 @@ export function AILabSection() {
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
             <h1
-              className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+              className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
             >
               <span className="text-[#2D2D2D]">AI &amp; AUTOMATION</span>
@@ -384,18 +384,18 @@ export function AILabSection() {
           </Reveal>
 
           <Reveal delay={0.2} duration={0.65}>
-            <p className="relative z-10 mt-[20px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+            <p className="relative z-10 mt-[20px] leading-[1.52] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
               Where structural engineering meets artificial intelligence.
             </p>
           </Reveal>
           <Reveal delay={0.26} duration={0.65}>
-            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
               Custom Python scripts, VBA automation, and AI-powered platforms that<br />
               transform how engineering firms operate.
             </p>
           </Reveal>
           <Reveal delay={0.32} duration={0.65}>
-            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+            <p className="relative z-10 mt-[16px] leading-[1.52] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
               Click any tool below to watch a demo clip.
             </p>
           </Reveal>
@@ -428,7 +428,7 @@ export function AILabSection() {
               </h2>
             </Reveal>
             <Reveal delay={0.18} duration={0.65}>
-              <p className="mt-[10px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+              <p className="mt-[10px] leading-[1.45] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
                 Click any tool to watch a 1-1.5 min demo.
               </p>
             </Reveal>
@@ -488,7 +488,7 @@ export function AILabSection() {
           <Reveal variant="scaleUp" delay={0.28} duration={0.5} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>

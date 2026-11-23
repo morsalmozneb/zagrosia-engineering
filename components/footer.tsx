@@ -39,7 +39,7 @@ export function Footer() {
             </Link>
           </div>
 
-          <h3 className="mb-3 text-[16px] font-medium tracking-[0.12em] text-[#FCFCFC]">Engineered to Solve</h3>
+          <h3 className="mb-3 text-[16px] font-medium tracking-[0.05em] text-[#FCFCFC]">Engineered to Solve</h3>
           <p className="mb-6 text-[13px] leading-[1.55] tracking-[0.1em] text-[#FCFCFC]/78">
             A next-generation structural engineering ecosystem, combining 35+ years of expertise and industry partnerships across Western Canada.
           </p>
@@ -124,11 +124,11 @@ export function Footer() {
             <Image src="/images/Logo_Footer.png" alt="Zagrosia Engineering Inc." width={222} height={127} className="h-auto w-[222px]" />
           </Link>
         </div>
-        <h3 className="mb-5 text-[12px] font-medium tracking-[0.14em] text-[#FCFCFC] -mt-[50px]">Engineered to Solve</h3>
-        <p className="mb-[20px] max-w-[305px] text-[11px] leading-[1.46] tracking-[0.14em] text-[#FCFCFC]/78">
+        <h3 className="mb-5 text-[12px] font-medium tracking-[0.05em] text-[#FCFCFC] -mt-[50px]">Engineered to Solve</h3>
+        <p className="mb-[20px] max-w-[305px] text-[12px] leading-[1.46] tracking-[0.1em] text-[#FCFCFC]/78">
           A next-generation structural engineering ecosystem, combining 35+ years of expertise and industry partnerships across Western Canada.
         </p>
-        <div className="mb-12 flex text-[11px] leading-[1.25] tracking-[0.13em] text-[#FCFCFC]/80">
+        <div className="mb-12 flex text-[12px] leading-[1.25] tracking-[0.1em] text-[#FCFCFC]/80">
           <div className="pr-4"><span className="font-medium text-[#FCFCFC]">P.ENG</span><br />British Columbia</div>
           <div className="border-l border-[#FCFCFC]/22 px-4"><span className="font-medium text-[#FCFCFC]">P.ENG</span><br />Alberta</div>
           <div className="border-l border-[#FCFCFC]/22 pl-4"><span className="font-medium text-[#FCFCFC]">P.ENG</span><br />Saskatchewan</div>
@@ -140,7 +140,7 @@ export function Footer() {
         <div className="mb-11 flex gap-12">
           <div>
             <h4 className="mb-4 text-[13px] font-medium tracking-[0.14em] text-[#FCFCFC]">Services</h4>
-            <ul className="space-y-[10px] text-[11px] tracking-[0.15em] text-[#FCFCFC]/78">
+            <ul className="space-y-[10px] text-[12px] tracking-[0.1em] text-[#FCFCFC]/78">
               <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Structural Design</Link></li>
               <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Seismic Assessment</Link></li>
               <li><Link href="/services" className="hover:text-[#0052A5] transition-colors">Rehabilitation</Link></li>
@@ -151,7 +151,7 @@ export function Footer() {
           </div>
           <div>
             <h4 className="mb-4 text-[13px] font-medium tracking-[0.14em] text-[#FCFCFC]">Platform</h4>
-            <ul className="space-y-[10px] text-[11px] tracking-[0.15em] text-[#FCFCFC]/78">
+            <ul className="space-y-[10px] text-[12px] tracking-[0.1em] text-[#FCFCFC]/78">
               {!isHiddenHref("/ai-lab") && (<li><Link href="/ai-lab" className="hover:text-[#0052A5] transition-colors">AI Automation Lab</Link></li>)}
               {!isHiddenHref("/academy") && (<li><Link href="/academy" className="hover:text-[#0052A5] transition-colors">EGBC Exam Prep</Link></li>)}
               <li><Link href="/projects" className="hover:text-[#0052A5] transition-colors">Project Portfolio</Link></li>
@@ -175,10 +175,10 @@ export function Footer() {
 
       {/* Copyright — both layouts */}
       <div className="border-t border-[#FCFCFC]/12 pt-5 space-y-2">
-        <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/46 lg:max-w-none" style={{ fontSize: "6px" }}>
+        <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/46 lg:max-w-none" style={{ fontSize: "12px" }}>
           2025 Zagrosia Engineering Inc. — All rights reserved. Founded by Seyed Hassan Mozneb, M.Sc., P.Eng.
         </p>
-        <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/30 lg:max-w-none" style={{ fontSize: "6px" }}>
+        <p className="max-w-[310px] leading-[1.42] tracking-[0.11em] text-[#FCFCFC]/30 lg:max-w-none" style={{ fontSize: "12px" }}>
           Disclaimer: Project graphics shown on this website are illustrative placeholders. Project summaries are anonymized and do not reproduce client reports or drawings.
         </p>
       </div>

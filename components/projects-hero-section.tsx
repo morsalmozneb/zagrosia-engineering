@@ -161,7 +161,7 @@ function BadgePill({ badge, attribution, className = "" }: { badge: string; attr
       ? "bg-[#0052A5] text-white"
       : "border border-white/60 bg-white/15 text-white backdrop-blur-[6px]"
   return (
-    <span className={`inline-flex items-center rounded-[8px] px-[9px] py-[3px] text-[8px] font-semibold tracking-[0.14em] ${style} ${className}`}>
+    <span className={`inline-flex items-center rounded-[8px] px-[9px] py-[3px] text-[12px] font-semibold tracking-[0.1em] ${style} ${className}`}>
       {badge}
     </span>
   )
@@ -212,7 +212,7 @@ function DesktopProjectCardItem({
             ) : null}
             <div className="flex items-end justify-between gap-[12px]">
               <div>
-                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[8px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[8px] bg-[#0052A5] px-[7px] py-[2px] text-[12px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                   <LocationPin />
                   <span>{location}</span>
                 </div>
@@ -222,7 +222,7 @@ function DesktopProjectCardItem({
               </div>
               <span
                 className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-[8px] border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
-                style={{ fontSize: "10px" }}
+                style={{ fontSize: "12px" }}
               >
                 Learn More
               </span>
@@ -256,7 +256,7 @@ export function ProjectsHeroSection() {
       <div className="lg:hidden px-5 pb-14 pt-24">
         {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">
+          <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">
             PORTFOLIO
           </p>
         </Reveal>
@@ -299,15 +299,15 @@ export function ProjectsHeroSection() {
             <div className="mb-8 flex items-start">
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">200+</p>
-                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Projects</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Projects</p>
               </div>
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">35+</p>
-                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Experience</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Experience</p>
               </div>
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">3</p>
-                <p className="mt-1 text-[10px] tracking-[0.14em] text-[#2D2D2D]">Provinces</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Provinces</p>
               </div>
             </div>
           </Reveal>
@@ -320,7 +320,7 @@ export function ProjectsHeroSection() {
           aria-label="Toggle filters"
         >
           <FilterIcon />
-          <span className="text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">FILTER</span>
+          <span className="text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">FILTER</span>
         </button>
 
         {filterPanelOpen && (
@@ -330,14 +330,14 @@ export function ProjectsHeroSection() {
                 className="flex w-full items-center justify-between px-4 py-3 text-left"
                 onClick={() => { setExpertiseOpen(!expertiseOpen); setServicesOpen(false) }}
               >
-                <span className="text-[11px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Expertise</span>
+                <span className="text-[12px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Expertise</span>
                 <ChevronDown open={expertiseOpen} />
               </button>
               {expertiseOpen && (
                 <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
                   {expertiseItems.map((item) => (
                     <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
-                      <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
+                      <span className="text-[12px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -349,14 +349,14 @@ export function ProjectsHeroSection() {
                 className="flex w-full items-center justify-between px-4 py-3 text-left"
                 onClick={() => { setServicesOpen(!servicesOpen); setExpertiseOpen(false) }}
               >
-                <span className="text-[11px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Services</span>
+                <span className="text-[12px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Services</span>
                 <ChevronDown open={servicesOpen} />
               </button>
               {servicesOpen && (
                 <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
                   {servicesItems.map((item) => (
                     <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
-                      <span className="text-[11px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
+                      <span className="text-[12px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -368,7 +368,7 @@ export function ProjectsHeroSection() {
                 className="flex w-full items-center justify-between px-4 py-3 text-left"
                 onClick={closeAll}
               >
-                <span className="text-[11px] tracking-[0.10em] text-[#2D2D2D]">Clear Filters</span>
+                <span className="text-[12px] tracking-[0.10em] text-[#2D2D2D]">Clear Filters</span>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <path d="M1 1l8 8M9 1l-8 8" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
@@ -436,7 +436,7 @@ export function ProjectsHeroSection() {
                 />
                 {project.badge ? <BadgePill badge={project.badge} attribution={project.attribution} className="absolute left-4 top-4 z-10" /> : null}
                 <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
-                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[8px] bg-[#0052A5] px-[7px] py-[2px] text-[8px] tracking-[0.10em] text-white backdrop-blur-[6px]">
+                  <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[8px] bg-[#0052A5] px-[7px] py-[2px] text-[12px] tracking-[0.10em] text-white backdrop-blur-[6px]">
                     <LocationPin />
                     <span>{project.location}</span>
                   </div>
@@ -459,7 +459,7 @@ export function ProjectsHeroSection() {
                       <CtaButton
                         href={project.slug ? `/projects/${project.slug}` : "/contact"}
                         className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-white bg-transparent tracking-[0.06em] text-white transition-colors hover:bg-[#0052A5] hover:border-[#0052A5]"
-                        style={{ fontSize: "9.5px", width: "120px", height: "30px" }}
+                        style={{ fontSize: "12px", width: "150px", height: "36px" }}
                       >
                         Learn More
                       </CtaButton>
@@ -505,20 +505,20 @@ export function ProjectsHeroSection() {
           {/* Thin rule */}
           <div className="mx-auto mt-3 h-px w-[40px] bg-[#0052A5]/30" />
           {/* Project name */}
-          <p className="mt-2 text-center text-[11px] font-semibold tracking-[0.18em] text-[#0052A5] uppercase">
+          <p className="mt-2 text-center text-[12px] font-semibold tracking-[0.1em] text-[#0052A5] uppercase">
             {projects[activeIndex].title}
           </p>
         </div>
 
         {/* Attribution note */}
-        <p className="mt-10 text-[10px] leading-[1.7] tracking-[0.08em] text-[#2D2D2D]/60">
+        <p className="mt-10 text-[12px] leading-[1.7] tracking-[0.08em] text-[#2D2D2D]/60">
           Projects marked Principal Experience illustrate the professional experience of Seyed Hassan Mozneb, P.Eng., undertaken through other firms or before founding Zagrosia. They are not presented as projects commissioned directly to Zagrosia Engineering Inc.
         </p>
 
         {/* Mobile bottom CTA */}
         <div className="mt-[76px]">
           <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-            <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
+            <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">START YOUR PROJECT</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
             <h2
@@ -537,7 +537,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Request a Service
               </CtaButton>
@@ -545,7 +545,7 @@ export function ProjectsHeroSection() {
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
               >
                 Get In Touch
               </CtaButton>
@@ -579,7 +579,7 @@ export function ProjectsHeroSection() {
 
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
                   <h1
-                    className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                    className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
                     style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
                   >
                     <span className="mb-[8px] block text-[#2D2D2D]">SELECTED</span>
@@ -588,7 +588,7 @@ export function ProjectsHeroSection() {
                 </Reveal>
 
                 <Reveal delay={0.2} duration={0.65}>
-                  <p className="mt-[22px] leading-[1.5] tracking-[0.17em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                  <p className="mt-[22px] leading-[1.5] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
                     Selected Zagrosia assignments and the principal&apos;s professional experience.<br />
                     Open any project for its scope and engineering details.
                   </p>
@@ -651,7 +651,7 @@ export function ProjectsHeroSection() {
                     </button>
                     <div className="mt-[10px] h-px bg-[#2D2D2D]/32" />
                     {expertiseOpen ? (
-                      <div className="space-y-[8px] pt-[10px] text-[11px] tracking-[0.14em] text-[#2D2D2D]/86">
+                      <div className="space-y-[8px] pt-[10px] text-[12px] tracking-[0.1em] text-[#2D2D2D]/86">
                         {expertiseItems.map((item) => (
                           <button
                             key={item}
@@ -681,7 +681,7 @@ export function ProjectsHeroSection() {
                     </button>
                     <div className="mt-[10px] h-px bg-[#2D2D2D]/32" />
                     {servicesOpen ? (
-                      <div className="space-y-[8px] pt-[10px] text-[11px] tracking-[0.14em] text-[#2D2D2D]/86">
+                      <div className="space-y-[8px] pt-[10px] text-[12px] tracking-[0.1em] text-[#2D2D2D]/86">
                         {servicesItems.map((item) => (
                           <button
                             key={item}
@@ -733,7 +733,7 @@ export function ProjectsHeroSection() {
 
             <div className="col-span-12 mt-[78px]">
               <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+                <h2 className="text-[28px] uppercase leading-[1.1] tracking-[0.04em] text-[#2D2D2D]">
                   DO YOU WANT TO START YOUR PROJECT?
                 </h2>
               </Reveal>
@@ -745,7 +745,7 @@ export function ProjectsHeroSection() {
               <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
                 <CtaButton
                   href="/contact"
-                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                  className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
                 >
                   Request a Service
                 </CtaButton>

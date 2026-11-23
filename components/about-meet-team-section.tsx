@@ -38,7 +38,7 @@ function ContactPill({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-[5px] rounded-[8px] bg-[#94B8DC] px-2 text-[8px] font-medium tracking-[0.08em] text-[#FCFCFC]"
+      className="flex items-center gap-[5px] rounded-[8px] bg-[#94B8DC] px-2 text-[12px] font-medium tracking-[0.08em] text-[#FCFCFC]"
       style={{ width: "75px", height: "20px" }}
     >
       <span className="flex flex-shrink-0 items-center justify-center text-[#0052A5]">
@@ -194,7 +194,7 @@ function TeamCard({ member }: { member: TeamMember }) {
             <p className="font-semibold leading-none tracking-[0.06em] text-[#2D2D2D]" style={{ fontSize: "14px" }}>
               {member.experience}
             </p>
-            <p className="mt-[4px] font-normal tracking-[0.18em] text-[#2D2D2D]" style={{ fontSize: "10px" }}>
+            <p className="mt-[4px] font-normal tracking-[0.1em] text-[#2D2D2D]" style={{ fontSize: "12px" }}>
               Experience
             </p>
           </div>
@@ -221,7 +221,7 @@ function TeamCard({ member }: { member: TeamMember }) {
       </div>
 
       {/* Name */}
-      <h3 className="mt-4 font-semibold uppercase leading-none tracking-[0.16em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
+      <h3 className="mt-4 font-semibold uppercase leading-none tracking-[0.05em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>
         {member.name}
       </h3>
 

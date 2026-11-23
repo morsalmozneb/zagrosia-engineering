@@ -212,7 +212,7 @@ function SideRail({ onOpenTop, hidden = false }: { onOpenTop: () => void; hidden
                         animate={{ opacity: expanded ? 1 : 0, x: expanded ? 0 : -8 }}
                         transition={{ duration: 0.22, ease: "easeOut", delay: expanded ? itemDelay + 0.08 : 0 }}
                         style={{ whiteSpace: "nowrap" }}
-                        className={`text-[9.5px] font-semibold tracking-[0.16em] ${
+                        className={`text-[12px] font-semibold tracking-[0.1em] ${
                           isActive ? "text-[#0D2C60]" : "text-[#0D2C60]/75"
                         }`}
                       >
@@ -274,7 +274,7 @@ function SideRail({ onOpenTop, hidden = false }: { onOpenTop: () => void; hidden
               style={{ display: "flex", alignItems: "center", height: 28 }}
             >
               <span
-                className="text-[9px] tracking-[0.18em] text-white whitespace-nowrap"
+                className="text-[12px] tracking-[0.1em] text-white whitespace-nowrap"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, lineHeight: 1 }}
               >
                 {tooltip.label}
@@ -382,7 +382,7 @@ function MorphGhost({ from, to, reverse, onDone }: { from: Box; to: Box; reverse
               <span className="flex items-center justify-center" style={{ width: 35, height: 35 }}>
                 <Image src={item.icon} alt="" width={19} height={19} />
               </span>
-              <span className="whitespace-nowrap text-[9.5px] font-semibold tracking-[0.16em] text-[#0D2C60]/75">{item.label}</span>
+              <span className="whitespace-nowrap text-[12px] font-semibold tracking-[0.1em] text-[#0D2C60]/75">{item.label}</span>
             </span>
           ))}
         </motion.div>
@@ -635,7 +635,7 @@ export function Sidebar() {
                       <Image src={item.icon} alt="" width={19} height={19} />
                     </span>
                     <span
-                      className={`relative whitespace-nowrap text-[9.5px] font-semibold tracking-[0.16em] ${
+                      className={`relative whitespace-nowrap text-[12px] font-semibold tracking-[0.1em] ${
                         isActive ? "text-[#0D2C60]" : "text-[#0D2C60]/75"
                       }`}
                     >

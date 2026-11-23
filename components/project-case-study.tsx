@@ -25,7 +25,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const reducedMotion = useReducedMotion()
   const [line1, line2] = splitTitle(project.title)
   const longTitle = Math.max(line1.length, line2.length) > 14
-  const desktopTitleSize = longTitle ? "text-[40px]" : "text-[52px]"
+  const desktopTitleSize = longTitle ? "text-[34px]" : "text-[40px]"
   const summary = project.summary
 
   return (
@@ -36,13 +36,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         {/* MOBILE HERO */}
         <div className="lg:hidden px-5 pb-14 pt-24">
           <Reveal variant="fadeUp" delay={0.02} duration={0.5}>
-            <Link href="/projects" className="mb-6 inline-flex items-center gap-2 text-[10px] tracking-[0.14em] text-[#2D2D2D]/55 hover:text-[#0052A5] transition-colors">
+            <Link href="/projects" className="mb-6 inline-flex items-center gap-2 text-[12px] tracking-[0.1em] text-[#2D2D2D]/55 hover:text-[#0052A5] transition-colors">
               <svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M11 4.5H1M1 4.5L4.5 1M1 4.5L4.5 8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
               PROJECTS
             </Link>
           </Reveal>
           <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-            <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">{project.badge}</p>
+            <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">{project.badge}</p>
           </Reveal>
           <div className="relative pl-[12px]">
             <motion.div
@@ -60,7 +60,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </h1>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
-              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[8px] py-[3px] text-[8px] tracking-[0.10em] text-white">
+              <div className="mb-3 inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[8px] py-[3px] text-[12px] tracking-[0.10em] text-white">
                 <svg width="9" height="11" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                 {project.location}
               </div>
@@ -91,7 +91,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     style={{ transformOrigin: "top", background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)" }}
                   />
                   <Reveal variant="fadeUp" delay={0.02} duration={0.5}>
-                    <Link href="/projects" className="mb-6 inline-flex items-center gap-2 text-[11px] tracking-[0.14em] text-[#2D2D2D]/50 hover:text-[#0052A5] transition-colors">
+                    <Link href="/projects" className="mb-6 inline-flex items-center gap-2 text-[12px] tracking-[0.1em] text-[#2D2D2D]/50 hover:text-[#0052A5] transition-colors">
                       <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       BACK TO PROJECTS
                     </Link>
@@ -100,19 +100,19 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.26em] text-[#2D2D2D]">{project.badge}</p>
                   </Reveal>
                   <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                    <h1 className={`${desktopTitleSize} font-bold uppercase leading-[0.96] tracking-[0.06em]`} style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <h1 className={`${desktopTitleSize} font-bold uppercase leading-[1.05] tracking-[0.03em]`} style={{ fontFamily: "'Inter', sans-serif" }}>
                       <span className="mb-[8px] block text-[#2D2D2D]">{line1}</span>
                       {line2 ? <span className="block text-[#0052A5]">{line2}</span> : null}
                     </h1>
                   </Reveal>
                   <Reveal delay={0.2} duration={0.65}>
-                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[10px] py-[4px] text-[9px] tracking-[0.10em] text-white">
+                    <div className="mt-[18px] mb-[22px] inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[10px] py-[4px] text-[12px] tracking-[0.10em] text-white">
                       <svg width="10" height="12" viewBox="0 0 11 13" fill="none">{PIN}<circle cx="5.5" cy="4.9" r="1.35" fill="white" /></svg>
                       {project.location}
                     </div>
                   </Reveal>
                   <Reveal delay={0.22} duration={0.65}>
-                    <p className="leading-[1.5] tracking-[0.14em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>{summary}</p>
+                    <p className="leading-[1.5] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>{summary}</p>
                   </Reveal>
                 </div>
               </div>
@@ -135,11 +135,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-14">
                 <div>
                   <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                    <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">PROJECT OVERVIEW</h2>
+                    <h2 className="zag-heading mb-8 text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">PROJECT OVERVIEW</h2>
                   </Reveal>
                   {project.overview.map((para, i) => (
                     <Reveal key={i} variant="fadeUp" delay={0.12 + i * 0.06}>
-                      <p className="mb-5 leading-[1.65] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>{para}</p>
+                      <p className="mb-5 leading-[1.65] tracking-[0.02em] text-[#2D2D2D]" style={{ fontSize: "16px" }}>{para}</p>
                     </Reveal>
                   ))}
                 </div>
@@ -150,7 +150,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       <ul className="space-y-4">
                         {project.facts.map((fact) => (
                           <li key={fact.label} className="flex flex-col gap-[3px]">
-                            <span className="text-[10px] font-semibold tracking-[0.16em] text-[#2D2D2D]/45 uppercase">{fact.label}</span>
+                            <span className="text-[12px] font-semibold tracking-[0.1em] text-[#2D2D2D]/45 uppercase">{fact.label}</span>
                             <span className="text-[14px] tracking-[0.08em] text-[#2D2D2D] font-medium">{fact.value}</span>
                           </li>
                         ))}
@@ -173,7 +173,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <div className="mx-auto max-w-[860px]">
                 <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
                 <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                  <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">ENGINEERING FOCUS</h2>
+                  <h2 className="zag-heading mb-8 text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">ENGINEERING FOCUS</h2>
                 </Reveal>
                 <div className="lg:grid lg:grid-cols-2 lg:gap-5">
                   {project.focus.map((item, i) => (
@@ -206,7 +206,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <div className="mx-auto max-w-[860px]">
                 <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
                 <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                  <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">{project.scopeHeading ?? "SCOPE OF WORK"}</h2>
+                  <h2 className="zag-heading mb-8 text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">{project.scopeHeading ?? "SCOPE OF WORK"}</h2>
                 </Reveal>
                 <div className="space-y-3">
                   {project.scope.map((item, i) => (
@@ -242,13 +242,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             <div className="mx-auto max-w-[860px]">
               <div className="h-px w-full bg-[#2D2D2D]/10 mb-[48px]" />
               <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                <h2 className="zag-heading mb-8 text-[30px] leading-none tracking-[0.12em] text-[#2D2D2D]">ABOUT THIS PROJECT</h2>
+                <h2 className="zag-heading mb-8 text-[28px] leading-none tracking-[0.04em] text-[#2D2D2D]">ABOUT THIS PROJECT</h2>
               </Reveal>
               <Reveal variant="fadeBlur" delay={0.12}>
                 <div className="rounded-[14px] p-px" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
                   <div className="rounded-[14px] px-8 py-10" style={{ background: "linear-gradient(135deg, #0052A5 0%, #003d7a 100%)" }}>
                     <p className="mb-3 text-[14px] font-bold tracking-[0.22em] text-white/70">{project.badge}</p>
-                    <p className="leading-[1.65] tracking-[0.08em] text-white/85" style={{ fontSize: "16px" }}>{project.note}</p>
+                    <p className="leading-[1.65] tracking-[0.02em] text-white/85" style={{ fontSize: "16px" }}>{project.note}</p>
                   </div>
                 </div>
               </Reveal>
@@ -263,10 +263,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <div className="h-px w-full bg-[#2D2D2D]/10 mb-[78px]" />
               <div className="lg:hidden">
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                  <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">START YOUR PROJECT</p>
+                  <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">START YOUR PROJECT</p>
                 </Reveal>
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                  <h2 className="mb-6 uppercase leading-[1.15] tracking-[0.12em] text-[#2D2D2D]" style={{ fontSize: "20px", fontWeight: 600 }}>
+                  <h2 className="mb-6 uppercase leading-[1.15] tracking-[0.04em] text-[#2D2D2D]" style={{ fontSize: "20px", fontWeight: 600 }}>
                     DO YOU WANT TO START YOUR PROJECT?
                   </h2>
                 </Reveal>
@@ -277,16 +277,16 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </Reveal>
                 <div className="flex gap-[15px]">
                   <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Request a Service</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px]">Request a Service</Link>
                   </Reveal>
                   <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
-                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px]">Get In Touch</Link>
+                    <Link href="/contact" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px]">Get In Touch</Link>
                   </Reveal>
                 </div>
               </div>
               <div className="hidden lg:block">
                 <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-                  <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">DO YOU WANT TO START YOUR PROJECT?</h2>
+                  <h2 className="text-[28px] uppercase leading-[1.1] tracking-[0.04em] text-[#2D2D2D]">DO YOU WANT TO START YOUR PROJECT?</h2>
                 </Reveal>
                 <Reveal delay={0.18} duration={0.65}>
                   <p className="mt-[18px] text-[16px] leading-[1.45] tracking-[0.14em] text-[#2D2D2D]">
@@ -301,7 +301,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </div>
               <div className="mt-14">
                 <div className="h-px w-full mb-8" style={{ background: "rgba(45,45,45,0.1)" }} />
-                <Link href="/projects" style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "11px", letterSpacing: "0.14em", color: "rgba(45,45,45,0.5)", textDecoration: "none" }}>
+                <Link href="/projects" style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "12px", letterSpacing: "0.1em", color: "rgba(45,45,45,0.5)", textDecoration: "none" }}>
                   <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M12 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   BACK TO PROJECTS
                 </Link>

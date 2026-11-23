@@ -49,7 +49,7 @@ function MobileArticleScroll({ content }: { content: string }) {
       <div
         ref={ref}
         onScroll={handleScroll}
-        className="max-h-[200px] flex-1 overflow-y-auto pr-1 text-[10px] leading-[1.75] tracking-[0.05em] text-[#4A4A4A]"
+        className="max-h-[200px] flex-1 overflow-y-auto pr-1 text-[12px] leading-[1.75] tracking-[0.05em] text-[#4A4A4A]"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
         {content.split("\n\n").map((para, i) => (
@@ -178,7 +178,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
 
         {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-          <p className="mb-4 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">INSIGHTS</p>
+          <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">INSIGHTS</p>
         </Reveal>
 
         {/* Vertical line + heading + body */}
@@ -233,16 +233,16 @@ With focused preparation over six to eight weeks, most candidates can pass on th
               {!isOpen && (
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <span className="mb-2 inline-block rounded-[8px] border border-[#2D2D2D] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
+                    <span className="mb-2 inline-block rounded-[8px] border border-[#2D2D2D] px-3 py-[3px] text-[12px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
                       {article.category}
                     </span>
                     <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
                       {article.title}
                     </h2>
-                    <p className="mb-2 text-[9px] tracking-[0.08em] text-[#0052A5]">
+                    <p className="mb-2 text-[12px] tracking-[0.08em] text-[#0052A5]">
                       {article.date} · {article.readTime}
                     </p>
-                    <p className="text-[10px] leading-[1.6] tracking-[0.04em] text-[#666]">
+                    <p className="text-[12px] leading-[1.6] tracking-[0.04em] text-[#666]">
                       {article.summary}
                     </p>
                   </div>
@@ -269,13 +269,13 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                 <>
                   <div className="flex items-start justify-between gap-3 mb-1">
                     <div className="flex-1 min-w-0">
-                      <span className="mb-2 inline-block rounded-[8px] border border-[#0052A5] px-3 py-[3px] text-[8px] font-semibold tracking-[0.12em] text-[#0052A5]">
+                      <span className="mb-2 inline-block rounded-[8px] border border-[#0052A5] px-3 py-[3px] text-[12px] font-semibold tracking-[0.12em] text-[#0052A5]">
                         {article.category}
                       </span>
                       <h2 className="mb-1 text-[12px] font-bold leading-[1.35] tracking-[0.04em] text-[#2D2D2D]">
                         {article.title}
                       </h2>
-                      <p className="text-[9px] tracking-[0.08em] text-[#0052A5]">
+                      <p className="text-[12px] tracking-[0.08em] text-[#0052A5]">
                         {article.date} · {article.readTime}
                       </p>
                     </div>
@@ -304,7 +304,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
         {/* Mobile CTA */}
         <div className="mt-10">
           <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-            <p className="mb-3 text-[10px] font-medium tracking-[0.14em] text-[#2D2D2D]">GET IN TOUCH</p>
+            <p className="mb-3 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">GET IN TOUCH</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
             <h2
@@ -323,8 +323,8 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.28} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 Contact Us
               </CtaButton>
@@ -332,8 +332,8 @@ With focused preparation over six to eight weeks, most candidates can pass on th
             <Reveal variant="scaleUp" delay={0.38} duration={0.55}>
               <CtaButton
                 href="/contact"
-                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
-                style={{ fontSize: "9.5px", width: "142px", height: "40px" }}
+                className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+                style={{ fontSize: "12px", width: "172px", height: "46px" }}
               >
                 Get In Touch
               </CtaButton>
@@ -368,7 +368,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
               </Reveal>
               <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
                 <h1
-                  className="text-[52px] font-bold uppercase leading-[0.96] tracking-[0.06em]"
+                  className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
                   style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
                 >
                   <span className="mb-[8px] block text-[#2D2D2D]">ENGINEERING</span>
@@ -376,7 +376,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                 </h1>
               </Reveal>
               <Reveal delay={0.2} duration={0.65}>
-                <p className="mt-5 max-w-[680px] leading-[1.6] tracking-[0.08em] text-[#2D2D2D]" style={{ fontSize: "18px" }}>
+                <p className="mt-5 max-w-[680px] leading-[1.6] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
                   Technical insights and practical guidance from a practicing P.Eng. with 35+ years of experience.
                 </p>
               </Reveal>
@@ -402,13 +402,13 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <div className="flex items-start gap-4">
                       {/* Left: text */}
                       <div className="flex-1 min-w-0">
-                        <span className="mb-3 inline-block rounded-[8px] border border-[#2D2D2D] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
+                        <span className="mb-3 inline-block rounded-[8px] border border-[#2D2D2D] px-3 py-[3px] text-[12px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
                           {article.category}
                         </span>
                         <h2 className="text-[18px] font-bold leading-[1.25] tracking-[0.03em] text-[#2D2D2D]">
                           {article.title}
                         </h2>
-                        <p className="mt-2 text-[10px] tracking-[0.1em] text-[#0052A5]">
+                        <p className="mt-2 text-[12px] tracking-[0.1em] text-[#0052A5]">
                           {article.date} · {article.readTime}
                         </p>
                         <p className="mt-3 leading-[1.5] tracking-[0.06em] text-[#666]" style={{ fontSize: "14px" }}>
@@ -443,13 +443,13 @@ With focused preparation over six to eight weeks, most candidates can pass on th
                     <>
                       <div className="flex items-start justify-between gap-6 mb-1">
                         <div className="flex-1 min-w-0">
-                          <span className="mb-3 inline-block rounded-[8px] border border-[#0052A5] px-3 py-[3px] text-[9px] font-semibold tracking-[0.12em] text-[#0052A5]">
+                          <span className="mb-3 inline-block rounded-[8px] border border-[#0052A5] px-3 py-[3px] text-[12px] font-semibold tracking-[0.12em] text-[#0052A5]">
                             {article.category}
                           </span>
                           <h2 className="text-[18px] font-bold leading-[1.25] tracking-[0.03em] text-[#2D2D2D]">
                             {article.title}
                           </h2>
-                          <p className="mt-2 text-[10px] tracking-[0.1em] text-[#0052A5]">
+                          <p className="mt-2 text-[12px] tracking-[0.1em] text-[#0052A5]">
                             {article.date} · {article.readTime}
                           </p>
                         </div>
@@ -489,7 +489,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
       <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
         <div className="zag-desktop-content-pad pt-[10px] pb-[80px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className="text-[32px] uppercase leading-[1.1] tracking-[0.18em] text-[#2D2D2D]">
+            <h2 className="text-[28px] uppercase leading-[1.1] tracking-[0.04em] text-[#2D2D2D]">
               THINK WE SHOULD COVER MORE TOPICS?
             </h2>
           </Reveal>
@@ -501,7 +501,7 @@ With focused preparation over six to eight weeks, most candidates can pass on th
           <Reveal variant="scaleUp" delay={0.28} duration={0.55} className="mt-7">
             <CtaButton
               href="/contact"
-              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[11px] lg:h-[44px] lg:px-7 lg:text-[14px]"
+              className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]"
             >
               Contact Us
             </CtaButton>
