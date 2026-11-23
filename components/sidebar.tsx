@@ -36,7 +36,7 @@ const ease = { duration: 0.3, ease: "easeOut" } as const
 const SCROLL_AT = 40
 
 const COLLAPSED_W = 45
-const EXPANDED_W  = 162
+const EXPANDED_W  = 140
 const SIDEBAR_H   = 470
 const OPEN_ROW_W  = 148
 
