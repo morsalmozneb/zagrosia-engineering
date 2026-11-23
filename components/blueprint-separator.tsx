@@ -48,8 +48,6 @@ export function BlueprintSeparator() {
   const clip = useTransform(p, (v) => `inset(0 ${(1 - v) * 100}% 0 0)`)
   const lineLeft = useTransform(p, (v) => `${v * 100}%`)
   const lineOpacity = useTransform(p, [0.06, 0.12, 0.94, 1], [0, 1, 1, 0])
-  const drawnOpacity = useTransform(p, [0.15, 0.35], [1, 0])
-  const builtOpacity = useTransform(p, [0.65, 0.9], [0, 1])
   const stampOpacity = useTransform(p, [0.9, 0.97], [0, 1])
   const stampScale = useTransform(p, [0.9, 0.97, 1], [1.6, 0.94, 1])
   const stampRotate = useTransform(p, [0.9, 1], [-26, -8])
@@ -67,7 +65,7 @@ export function BlueprintSeparator() {
   return (
     <div
       ref={ref}
-      className="relative mt-6 aspect-[2.2/1] w-full overflow-hidden bg-[#06214d] lg:mb-16 lg:mt-0 lg:aspect-[4.8/1]"
+      className="relative mt-6 aspect-[1.8/1] w-full overflow-hidden bg-[#06214d] lg:mb-16 lg:mt-0 lg:aspect-[3.1/1]"
       style={{ borderBottom: `3px solid ${BRAND_BLUE}` }}
     >
       {/* 1. The blueprint: the same picture, drawn in blue */}
@@ -111,35 +109,23 @@ export function BlueprintSeparator() {
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-[10px]" style={{ backgroundImage: RULER, backgroundSize: "100% 6px, 100% 10px", backgroundRepeat: "no-repeat" }} />
       <div className="zag-ticks pointer-events-none absolute inset-3 z-20 hidden lg:block" aria-hidden />
 
-      <motion.span
-        className="pointer-events-none absolute bottom-4 left-4 z-20 rounded-[3px] border border-white/70 bg-[#06214d]/70 px-3 py-[6px] text-[12px] font-medium tracking-[0.14em] text-white backdrop-blur-sm lg:bottom-6 lg:left-[calc(var(--desktop-grid-content-start)-8px)]"
-        style={reduce ? undefined : { opacity: drawnOpacity }}
-      >
-        DRAWN
-      </motion.span>
-
-      {/* 5. Title block (like the corner of a drawing sheet) + stamped seal */}
+      {/* 5. The P.Eng seal is stamped on the finished building */}
       <motion.div
-        className="pointer-events-none absolute bottom-4 right-4 z-20 flex items-end gap-3 lg:bottom-6 lg:right-6"
-        style={reduce ? undefined : { opacity: builtOpacity }}
+        className="pointer-events-none absolute bottom-4 right-4 z-20 drop-shadow-[0_6px_14px_rgba(0,0,0,0.35)] lg:bottom-6 lg:right-6"
+        style={reduce ? undefined : { opacity: stampOpacity, scale: stampScale, rotate: stampRotate }}
       >
-        <div className="hidden border border-[#0052A5]/70 bg-white/92 sm:block" style={{ borderRadius: 3 }}>
-          <div className="border-b border-[#0052A5]/40 px-4 py-[7px] text-[12px] font-semibold tracking-[0.12em] text-[#2D2D2D]">
-            ZAGROSIA ENGINEERING INC.
-          </div>
-          <div className="flex">
-            <div className="flex-1 px-4 py-[7px] text-[12px] tracking-[0.12em] text-[#0052A5]">BUILT</div>
-            <div className="border-l border-[#0052A5]/40 px-4 py-[7px] text-[12px] tracking-[0.12em] text-[#2D2D2D]/70">ENGINEERED TO SOLVE</div>
-          </div>
-        </div>
-        <motion.div
-          style={reduce ? undefined : { opacity: stampOpacity, scale: stampScale, rotate: stampRotate }}
-          className="drop-shadow-[0_6px_14px_rgba(0,0,0,0.35)]"
-        >
-          <span className="block lg:hidden"><Seal size={64} /></span>
-          <span className="hidden lg:block"><Seal size={92} /></span>
-        </motion.div>
+        <span className="block lg:hidden"><Seal size={64} /></span>
+        <span className="hidden lg:block"><Seal size={92} /></span>
       </motion.div>
+
+      {/* 6. Project caption */}
+      <div className="pointer-events-none absolute bottom-4 left-4 z-20 flex items-stretch gap-3 lg:bottom-6 lg:left-[calc(var(--desktop-grid-content-start)-8px)]">
+        <span className="w-[3px] rounded-full bg-white/90" aria-hidden />
+        <div className="text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.55)]">
+          <p className="text-[14px] font-semibold tracking-[0.12em] lg:text-[16px]">TOWNHOUSE COMPLEX</p>
+          <p className="mt-[2px] text-[12px] tracking-[0.08em] text-white/85 lg:text-[14px]">Zagrosia Project</p>
+        </div>
+      </div>
     </div>
   )
 }
