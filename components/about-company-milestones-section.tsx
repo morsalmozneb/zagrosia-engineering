@@ -14,10 +14,10 @@ const milestones = [
     description: "Foundational expertise in concrete, steel & masonry systems",
     stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-2.png", "/images/company-milestone-3.png"],
     projects: [
-      { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.png" },
-      { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.png" },
-      { name: "Residential Complex", type: "Residential", period: "1989–1999", image: "/images/Project-Card-3.png" },
-      { name: "Industrial Facility", type: "Industrial", period: "1989–1999", image: "/images/Project-Card-4.png" },
+      { name: "Office Retrofit", type: "Commercial", period: "1989–1999", image: "/images/Project-Card-1.jpg" },
+      { name: "Bridge Design", type: "Infrastructure", period: "1989–1999", image: "/images/Project-Card-2.jpg" },
+      { name: "Residential Complex", type: "Residential", period: "1989–1999", image: "/images/Project-Card-3.jpg" },
+      { name: "Industrial Facility", type: "Industrial", period: "1989–1999", image: "/images/Project-Card-4.jpg" },
     ],
   },
   {
@@ -26,10 +26,10 @@ const milestones = [
     description: "Led complex rehabilitation and new construction projects across Canada",
     stackImages: ["/images/company-milestone-2.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
-      { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.png" },
-      { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.png" },
-      { name: "Steel Design", type: "Industrial", period: "1993", image: "/images/Project-Card-7.png" },
-      { name: "Civil Works", type: "Infrastructure", period: "1993", image: "/images/Project-Card-8.png" },
+      { name: "Marine Structure", type: "Marine", period: "1993", image: "/images/Project-Card-5.jpg" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1993", image: "/images/Project-Card-6.jpg" },
+      { name: "Steel Design", type: "Industrial", period: "1993", image: "/images/Project-Card-7.jpg" },
+      { name: "Civil Works", type: "Infrastructure", period: "1993", image: "/images/Project-Card-8.jpg" },
     ],
   },
   {
@@ -38,10 +38,10 @@ const milestones = [
     description: "Designed steel and concrete petrochemical structures, fabrication drawings, and technical reports",
     stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-1.png", "/images/company-milestone-2.png"],
     projects: [
-      { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.png" },
-      { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.png" },
-      { name: "Fabrication Works", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-11.png" },
-      { name: "Technical Reports", type: "Engineering", period: "1993–1995", image: "/images/Project-Card-12.png" },
+      { name: "Petrochemical Plant", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-9.jpg" },
+      { name: "Steel Structure", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-10.jpg" },
+      { name: "Fabrication Works", type: "Industrial", period: "1993–1995", image: "/images/Project-Card-11.jpg" },
+      { name: "Technical Reports", type: "Engineering", period: "1993–1995", image: "/images/Project-Card-12.jpg" },
     ],
   },
   {
@@ -50,10 +50,10 @@ const milestones = [
     description: "Led design and restoration of critical concrete and marine structures",
     stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
-      { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.png" },
-      { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.png" },
-      { name: "Civil Works", type: "Infrastructure", period: "1995–2002", image: "/images/Project-Card-15.png" },
-      { name: "Restoration", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-16.png" },
+      { name: "Marine Structure", type: "Marine", period: "1995–2002", image: "/images/Project-Card-13.jpg" },
+      { name: "Concrete Rehab", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-14.jpg" },
+      { name: "Civil Works", type: "Infrastructure", period: "1995–2002", image: "/images/Project-Card-15.jpg" },
+      { name: "Restoration", type: "Rehabilitation", period: "1995–2002", image: "/images/Project-Card-16.jpg" },
     ],
   },
   {
@@ -62,10 +62,10 @@ const milestones = [
     description: "Advanced structural design for industrial and commercial developments",
     stackImages: ["/images/company-milestone-1.png", "/images/company-milestone-3.png", "/images/company-milestone-4.png"],
     projects: [
-      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.png" },
-      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.png" },
-      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-7.png" },
-      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-10.png" },
+      { name: "Industrial Facility", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-4.jpg" },
+      { name: "Commercial Dev", type: "Commercial", period: "2002–2003", image: "/images/Project-Card-1.jpg" },
+      { name: "Steel Frame", type: "Industrial", period: "2002–2003", image: "/images/Project-Card-7.jpg" },
+      { name: "Structural Design", type: "Engineering", period: "2002–2003", image: "/images/Project-Card-10.jpg" },
     ],
   },
   {
@@ -86,10 +86,10 @@ const milestones = [
     description: "Led structural design and project delivery for residential, industrial, and institutional projects",
     stackImages: ["/images/company-milestone-3.png", "/images/company-milestone-2.png", "/images/company-milestone-1.png"],
     projects: [
-      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.png" },
-      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.png" },
-      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-9.png" },
-      { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.png" },
+      { name: "Residential Project", type: "Residential", period: "2018–2019", image: "/images/Project-Card-3.jpg" },
+      { name: "Institutional", type: "Institutional", period: "2018–2019", image: "/images/Project-Card-16.jpg" },
+      { name: "Industrial Works", type: "Industrial", period: "2018–2019", image: "/images/Project-Card-9.jpg" },
+      { name: "Engineering Project", type: "Engineering", period: "2018–2019", image: "/images/Project-Card-12.jpg" },
     ],
   },
   {
@@ -98,10 +98,10 @@ const milestones = [
     description: "Led design and restoration of critical concrete and marine structures",
     stackImages: ["/images/company-milestone-4.png", "/images/company-milestone-1.png", "/images/company-milestone-3.png"],
     projects: [
-      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.png" },
-      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.png" },
-      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-13.png" },
-      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-6.png" },
+      { name: "Seismic Assessment", type: "Assessment", period: "2019–2022", image: "/images/Project-Card-1.jpg" },
+      { name: "Structural Rehab", type: "Rehabilitation", period: "2019–2022", image: "/images/Project-Card-14.jpg" },
+      { name: "Marine Works", type: "Marine", period: "2019–2022", image: "/images/Project-Card-13.jpg" },
+      { name: "Concrete Design", type: "Engineering", period: "2019–2022", image: "/images/Project-Card-6.jpg" },
     ],
   },
   {
