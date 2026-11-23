@@ -54,8 +54,8 @@ export function BlueprintSeparator() {
 
   const photo = (
     <Image
-      src="/images/home-separator.jpg"
-      alt="Modern residential building shown as a blueprint on the left and as the finished building on the right"
+      src="/images/home-separator-townhouse.jpg"
+      alt="Townhouse complex built by Zagrosia, shown as an architectural blueprint on the left turning into the finished building on the right"
       fill
       sizes="100vw"
       className="object-cover object-[50%_38%]"
