@@ -26,7 +26,7 @@ const ctaSmall =
 
 const eyebrow = "text-[14px] font-bold uppercase tracking-[0.24em] text-[#0052A5]"
 const sectionHeading = "zag-heading text-[clamp(20px,3.6vh,28px)] leading-none tracking-[0.04em]"
-const sec = "relative flex min-h-[100svh] flex-col justify-center py-[clamp(20px,4.5vh,56px)]"
+const sec = "relative flex flex-col justify-center py-[clamp(48px,9vh,110px)]"
 const bodyText = "text-[clamp(13px,2.1vh,17px)] leading-[1.6] tracking-[0.01em]"
 const panelShadow = "0 4px 19.6px rgba(0,0,0,0.18)"
 
@@ -307,7 +307,7 @@ export function AboutRedesignDesktop() {
     <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
       {/* ═══ 1. HERO ═══ */}
       <section
-        className="relative h-[min(100svh,820px)] min-h-[560px] overflow-hidden text-[#FCFCFC]"
+        className="relative min-h-screen overflow-hidden text-[#FCFCFC]"
         style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 55%, #0a3f86 100%)" }}
       >
         <RidgeArt className="absolute inset-x-0 bottom-0 h-[78%] w-full" />
@@ -328,7 +328,7 @@ export function AboutRedesignDesktop() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, rgba(8,14,26,0.35) 0%, rgba(8,14,26,0.1) 45%, rgba(8,14,26,0.75) 100%)" }}
         />
-        <div className="sidebar-content zag-desktop-content-pad relative z-10 flex h-full flex-col justify-end pb-[40px]">
+        <div className="sidebar-content zag-desktop-content-pad relative z-10 pb-20 pt-[154px]">
           <div className="flex items-end justify-between gap-10">
             <div className="max-w-[700px]">
               <h1 className="font-sans font-bold tracking-tight">
@@ -503,7 +503,7 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 3. THE PRINCIPAL ═══ */}
-      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(48px,9vh,110px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
         <div className="sidebar-content zag-desktop-content-pad">
           <div className="grid max-w-[1100px] grid-cols-[clamp(260px,32vw,430px)_1fr] items-end gap-[clamp(28px,4.5vw,64px)]">
             <motion.div
