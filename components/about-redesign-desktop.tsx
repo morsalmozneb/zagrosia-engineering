@@ -272,7 +272,7 @@ function StoryVideo({ src, poster }: { src: string; poster: string }) {
   return (
     <video
       ref={ref}
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full object-cover mix-blend-multiply"
       src={src}
       poster={poster}
       muted
@@ -471,8 +471,8 @@ export function AboutRedesignDesktop() {
             transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
           >
             <div
-              className="relative mx-auto aspect-square w-full overflow-hidden rounded-[14px] border border-[#E3E7EE] bg-white"
-              style={{ maxWidth: "min(100%, 66svh)", boxShadow: "0 4px 19.6px rgba(0,0,0,0.12)" }}
+              className="relative mx-auto aspect-square w-full"
+              style={{ maxWidth: "min(100%, 66svh)" }}
             >
               <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
             </div>
@@ -481,7 +481,7 @@ export function AboutRedesignDesktop() {
               viewBox="0 0 120 120"
               role="img"
               aria-label="Professional Engineer, signed and sealed"
-              className="absolute -bottom-[22px] left-0 h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
+              className="absolute -bottom-[10px] left-[4%] h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
               style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.22)" }}
               initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
