@@ -83,6 +83,21 @@ export function EngineeringExcellence() {
           className="sidebar-content flex flex-col justify-center py-16"
           style={{ paddingLeft: "var(--desktop-grid-content-start)", paddingRight: "60px" }}
         >
+          <div className="relative pl-5">
+
+            {/* Vertical fading line — same as Engineering Solutions, draws in from top */}
+            <motion.div
+              className="absolute left-0 top-0 w-[3px] rounded-full"
+              style={{
+                height: "100%",
+                background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
+                transformOrigin: "top",
+              }}
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+            />
           <Reveal variant="fadeLeft" delay={0.05} duration={0.75}>
             <h2 className="zag-heading mb-8 text-[28px] leading-[1.1] text-[#2d2d2d]">
               ENGINEERING
@@ -113,6 +128,7 @@ export function EngineeringExcellence() {
               Contact Us
             </CtaButton>
           </Reveal>
+          </div>
         </div>
 
         {/* Right: founder photo + line + stats — slides in from right */}
