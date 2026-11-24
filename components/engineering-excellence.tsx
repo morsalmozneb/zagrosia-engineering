@@ -1,10 +1,10 @@
 "use client"
 
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
 import { CountUp } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
+import { FounderVideo } from "./founder-video"
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
@@ -35,24 +35,19 @@ export function EngineeringExcellence() {
 
         {/* Photo + line — slides in from right */}
         <motion.div
-          className="absolute right-[-10px] top-[-20px] w-[165px]"
+          className="absolute right-[-14px] top-[18px] w-[200px] bg-[#fcfcfc]"
           initial={{ opacity: 0, x: 40, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
         >
-          <div className="relative h-[400px] w-full">
-            <Image
-              src="/images/homayoun-pic-mobile.png"
-              alt="Seyed Hassan Mozneb"
-              fill
-              className="object-contain object-bottom object-center"
-            />
+          <div className="relative w-full">
+            <FounderVideo className="block aspect-[4/5] w-full object-cover object-bottom" />
           </div>
           {/* Line */}
-          <div className="h-[2px] bg-black -mt-[5px] ml-[3px]" style={{ width: "200px" }} />
+          <div className="h-[2px] bg-black -mt-[3px]" style={{ width: "200px" }} />
           {/* Stats */}
-          <div className="flex justify-between mt-3 ml-[3px] pr-[40px] text-[#2d2d2d]" style={{ width: "200px" }}>
+          <div className="flex justify-between mt-3 pr-[40px] text-[#2d2d2d]" style={{ width: "200px" }}>
             <div>
               <p className="font-semibold tracking-[0.08em]" style={{ fontSize: "14px" }}>
                 <CountUp end={35} suffix="+" duration={1.4} />
@@ -130,13 +125,8 @@ export function EngineeringExcellence() {
         >
           {/* Photo */}
           <div className="flex justify-center">
-            <div className="relative aspect-[4/5] w-[320px]">
-              <Image
-                src="/images/homayoun-pic.png"
-                alt="Seyed Hassan Mozneb"
-                fill
-                className="object-contain object-bottom"
-              />
+            <div className="relative aspect-[4/5] w-[400px]">
+              <FounderVideo className="absolute inset-0 h-full w-full object-cover object-bottom" />
             </div>
           </div>
           {/* Black line immediately under the photo — extends to right page edge */}
