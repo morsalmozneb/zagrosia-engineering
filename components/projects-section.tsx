@@ -280,11 +280,6 @@ export function ProjectsSection() {
                           {tagList[0]}
                         </span>
                     </motion.div>
-                    <motion.div className="absolute inset-0" initial={false} animate={{ opacity: active ? 0 : 1 }} transition={{ duration: 0.6, delay: active ? 0 : 0.4 }}>
-                      <span className="absolute left-3 top-3 rounded-full border border-white/40 bg-white/15 px-2.5 py-[4px] text-[10px] font-medium leading-none tracking-[0.14em] text-white backdrop-blur-md">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                    </motion.div>
                   </motion.div>
                   <div className="relative flex-1 bg-white">
                     <motion.div className="absolute inset-0 flex flex-col" initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.6, delay: active ? 0.4 : 0 }} style={{ pointerEvents: active ? "auto" : "none" }}>
