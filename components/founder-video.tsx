@@ -35,8 +35,8 @@ export function FounderVideo({ className = "" }: { className?: string }) {
     <video
       ref={ref}
       className={className}
-      src="/videos/founder-walk.mp4"
-      poster="/videos/founder-walk-poster.jpg"
+      src="/videos/founder-walk-v2.mp4"
+      poster="/videos/founder-walk-v2-poster.jpg"
       muted
       playsInline
       preload="auto"
