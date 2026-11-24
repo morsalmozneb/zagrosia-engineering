@@ -165,7 +165,7 @@ const memberInfo: Record<
   "SEYED HASSAN MOZNEB": {
     role: "Principal & Senior Structural Engineer",
     studied: "M.Sc. Isfahan University of Technology · B.Sc. Mashhad University",
-    bio: "Founder of Zagrosia. He led structural design on refineries, a nuclear power plant and apartment developments in Iran before bringing his practice to British Columbia. He works in steel, concrete, wood and masonry.",
+    bio: "Founder of Zagrosia. He led structural design on refineries, industrial facilities and apartment developments in Iran before bringing his practice to British Columbia. He works in steel, concrete, wood and masonry.",
     chips: ["P.Eng.", "Steel", "Concrete", "Wood", "Masonry"],
   },
   "MEHDI MOZNEB": {
