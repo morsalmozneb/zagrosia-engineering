@@ -234,6 +234,7 @@ export function ProjectsSection() {
               const p = projects[idx]
               const active = role === "active"
               const short = p.title.split(",")[0].toLowerCase()
+              const tagList = Array.from(new Set(p.tags))
               const go = () => goTo(idx, role === "prev" ? -1 : 1)
               const pos =
                 role === "active"
@@ -261,24 +262,48 @@ export function ProjectsSection() {
                   role={active ? undefined : "button"}
                   aria-label={active ? undefined : `View ${p.title}`}
                 >
-                  <div className={`relative w-full flex-shrink-0 overflow-hidden ${active ? "h-[52%]" : "h-[66%]"}`}>
+                  <div className={`relative w-full flex-shrink-0 overflow-hidden ${active ? "h-[46%]" : "h-[66%]"}`}>
                     <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 40vw, 560px" className="object-cover" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1c3a]/60 via-[#0b1c3a]/5 to-[#0b1c3a]/25" />
+                    {active ? (
+                      <>
+                        <span className="absolute left-4 top-4 rounded-full bg-[#1f69d7] px-3 py-[5px] text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white shadow-md">
+                          {tagList[0]}
+                        </span>
+                        <span className="absolute right-4 top-4 rounded-full border border-white/40 bg-white/15 px-3 py-[5px] text-[11px] font-medium leading-none tracking-[0.14em] text-white backdrop-blur-md">
+                          {String(idx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="absolute left-3 top-3 rounded-full border border-white/40 bg-white/15 px-2.5 py-[4px] text-[10px] font-medium leading-none tracking-[0.14em] text-white backdrop-blur-md">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                    )}
                   </div>
                   {active ? (
-                    <div className="flex flex-1 flex-col px-[clamp(16px,2.4vh,26px)] pb-[clamp(10px,2.2vh,22px)] pt-[clamp(8px,1.8vh,18px)]">
+                    <div className="flex flex-1 flex-col px-[clamp(16px,2.4vh,26px)] pb-[clamp(10px,2vh,18px)] pt-[clamp(8px,1.6vh,16px)]">
+                      <span className="mb-[clamp(4px,0.9vh,8px)] block h-[3px] w-10 rounded-full bg-[#1f69d7]" />
                       <h3 className="line-clamp-2 text-[clamp(17px,3vh,26px)] font-bold capitalize leading-[1.15] tracking-[0.01em]">{short}</h3>
-                      <p className="mt-[clamp(4px,1vh,10px)] line-clamp-3 text-[clamp(11px,1.75vh,15px)] leading-[1.45] text-[#1d2a44]">{p.description}</p>
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-                        <div className="flex min-w-0 items-center gap-2 text-[clamp(12px,1.9vh,16px)] text-[#3a64b8]">
-                          <MapPin size={16} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
+                      <p className="mt-[clamp(3px,0.8vh,8px)] line-clamp-2 text-[clamp(11px,1.75vh,15px)] leading-[1.45] text-[#3a4660]">{p.description}</p>
+                      <div className="mt-[clamp(6px,1.2vh,12px)] flex flex-wrap gap-2">
+                        {tagList.slice(0, 2).map((t) => (
+                          <span key={t} className="whitespace-nowrap rounded-full border border-[#cdd8ec] bg-[#eef3fb] px-3 py-[4px] text-[clamp(10px,1.5vh,12px)] leading-none text-[#2f56a8]">{t}</span>
+                        ))}
+                      </div>
+                      <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#e2e8f3] pt-[clamp(6px,1.4vh,12px)]">
+                        <div className="flex min-w-0 items-center gap-2 text-[clamp(12px,1.8vh,15px)] text-[#2f56a8]">
+                          <span className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-full bg-[#e6eefc]"><MapPin size={15} strokeWidth={1.8} /></span>
+                          <span className="truncate">{p.location}</span>
                         </div>
-                        <Link href="/projects" className="inline-flex flex-shrink-0 items-center gap-1.5 border-b border-[#1f69d7] pb-[2px] text-[clamp(12px,1.9vh,16px)] text-[#1f69d7]">
-                          View project <ArrowRight size={15} strokeWidth={2} />
+                        <Link href="/projects" className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-[#1f69d7] py-[8px] pl-4 pr-3 text-[clamp(12px,1.8vh,15px)] font-medium text-white transition-colors hover:bg-[#0052A5]">
+                          View project
+                          <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white/20 transition-transform group-hover:translate-x-[2px]"><ArrowRight size={14} strokeWidth={2.2} /></span>
                         </Link>
                       </div>
                     </div>
                   ) : (
                     <div className={`flex flex-1 flex-col pt-[clamp(6px,1.4vh,14px)] ${role === "prev" ? "pl-[clamp(14px,2vh,22px)] pr-[50%]" : "pl-[50%] pr-[clamp(14px,2vh,22px)]"}`}>
+                      <span className="mb-[4px] block h-[2px] w-6 rounded-full bg-[#1f69d7]" />
                       <h3 className="line-clamp-2 text-[clamp(13px,2.1vh,18px)] font-bold capitalize leading-[1.2]">{short}</h3>
                       <div className="mt-auto flex items-center gap-2 pb-[clamp(8px,1.8vh,18px)] text-[clamp(11px,1.8vh,15px)] text-[#3a5a96]">
                         <MapPin size={15} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
