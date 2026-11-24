@@ -210,7 +210,7 @@ export function ProjectsSection() {
               </Reveal>
               <Reveal delay={0.2} duration={0.65}>
                 <p className="mt-[clamp(6px,1.4vh,14px)] leading-[1.6] tracking-[0.04em] text-white/90" style={{ fontSize: "16px" }}>
-                  Structural engineering projects across Western Canada.
+                  Structural engineering projects across different countries.
                 </p>
               </Reveal>
             </div>
