@@ -224,7 +224,7 @@ export function HeroSection() {
 
             {/* 1. Vertical line */}
             <motion.div
-              className="absolute left-0 top-0 w-px pointer-events-none"
+              className="absolute left-0 top-0 w-[6px] rounded-full pointer-events-none"
               style={{
                 height: "calc(100% - 48px)",
                 background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
