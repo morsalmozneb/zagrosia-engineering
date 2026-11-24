@@ -237,14 +237,14 @@ export function ProjectsSection() {
               const go = () => goTo(i, d < 0 ? -1 : 1)
               const pos =
                 d === 0
-                  ? { left: "22%", top: "0%", height: "100%", width: "56%", opacity: 1 }
+                  ? { left: "22%", top: "0%", height: "100%", width: "56%", opacity: 1, scale: 1 }
                   : d === -1
-                    ? { left: "0%", top: "13%", height: "74%", width: "48%", opacity: 0.55 }
+                    ? { left: "0%", top: "13%", height: "74%", width: "48%", opacity: 0.55, scale: 0.93 }
                     : d === 1
-                      ? { left: "52%", top: "13%", height: "74%", width: "48%", opacity: 0.55 }
+                      ? { left: "52%", top: "13%", height: "74%", width: "48%", opacity: 0.55, scale: 0.93 }
                       : d < 0
-                        ? { left: "0%", top: "13%", height: "74%", width: "48%", opacity: 0 }
-                        : { left: "52%", top: "13%", height: "74%", width: "48%", opacity: 0 }
+                        ? { left: "-12%", top: "13%", height: "74%", width: "48%", opacity: 0, scale: 0.82 }
+                        : { left: "64%", top: "13%", height: "74%", width: "48%", opacity: 0, scale: 0.82 }
               const shown = Math.abs(d) <= 1
               return (
                 <motion.article
@@ -260,7 +260,7 @@ export function ProjectsSection() {
                   initial={false}
                   animate={pos}
                   whileHover={shown && !active ? { opacity: 0.8 } : undefined}
-                  transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
+                  transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
                   onClick={active ? undefined : go}
                   onKeyDown={active ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go() } }}
                   tabIndex={shown && !active ? 0 : undefined}
@@ -271,9 +271,11 @@ export function ProjectsSection() {
                     className="relative w-full flex-shrink-0 overflow-hidden"
                     initial={false}
                     animate={{ height: active ? "46%" : "66%" }}
-                    transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
+                    transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 40vw, 560px" className="object-cover" />
+                    <motion.div className="absolute inset-0" initial={false} animate={{ scale: active ? 1 : 1.2 }} transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}>
+                      <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 40vw, 560px" className="object-cover" />
+                    </motion.div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1c3a]/60 via-[#0b1c3a]/5 to-[#0b1c3a]/25" />
                     <motion.div className="absolute inset-0" initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.6, delay: active ? 0.4 : 0 }}>
                         <span className="absolute left-4 top-4 rounded-full bg-[#1f69d7] px-3 py-[5px] text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white shadow-md">
@@ -282,7 +284,7 @@ export function ProjectsSection() {
                     </motion.div>
                   </motion.div>
                   <div className="relative flex-1 bg-white">
-                    <motion.div className="absolute inset-0 flex flex-col" initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.6, delay: active ? 0.4 : 0 }} style={{ pointerEvents: active ? "auto" : "none" }}>
+                    <motion.div className="absolute inset-0 flex flex-col" initial={false} animate={{ opacity: active ? 1 : 0, y: active ? 0 : 24 }} transition={{ duration: 0.8, delay: active ? 0.45 : 0, ease: [0.22, 1, 0.36, 1] }} style={{ pointerEvents: active ? "auto" : "none" }}>
                     <div className="flex flex-1 flex-col px-[clamp(16px,2.4vh,26px)] pb-[clamp(10px,2vh,18px)] pt-[clamp(8px,1.6vh,16px)]">
                       <span className="mb-[clamp(4px,0.9vh,8px)] block h-[3px] w-10 rounded-full bg-[#1f69d7]" />
                       <h3 className="line-clamp-2 text-[clamp(17px,3vh,26px)] font-bold capitalize leading-[1.15] tracking-[0.01em]">{short}</h3>
@@ -301,7 +303,7 @@ export function ProjectsSection() {
                       </div>
                     </div>
                     </motion.div>
-                    <motion.div className="absolute inset-0 flex flex-col bg-[#a9b6cb]" initial={false} animate={{ opacity: active ? 0 : 1 }} transition={{ duration: 0.6, delay: active ? 0 : 0.4 }} style={{ pointerEvents: active ? "none" : "auto" }}>
+                    <motion.div className="absolute inset-0 flex flex-col bg-[#a9b6cb]" initial={false} animate={{ opacity: active ? 0 : 1, y: active ? -12 : 0 }} transition={{ duration: 0.7, delay: active ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }} style={{ pointerEvents: active ? "none" : "auto" }}>
                     <div className={`flex flex-1 flex-col pt-[clamp(6px,1.4vh,14px)] ${role === "prev" ? "pl-[clamp(14px,2vh,22px)] pr-[50%]" : "pl-[50%] pr-[clamp(14px,2vh,22px)]"}`}>
                       <span className="mb-[4px] block h-[2px] w-6 rounded-full bg-[#1f69d7]" />
                       <h3 className="line-clamp-2 text-[clamp(13px,2.1vh,18px)] font-bold capitalize leading-[1.2]">{short}</h3>
