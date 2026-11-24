@@ -202,7 +202,7 @@ export function ProjectsSection() {
         />
         {/* Top header area */}
         <div className="relative" style={{ zIndex: 2 }}>
-          <div className="sidebar-content pb-8 pt-14 zag-desktop-content-pad">
+          <div className="sidebar-content pb-2 pt-12 zag-desktop-content-pad">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
               <h2 className="zag-heading text-[28px] leading-none text-white">PROJECTS</h2>
             </Reveal>
@@ -215,13 +215,14 @@ export function ProjectsSection() {
         </div>
 
         {/* 3-card slider */}
-        <div className="sidebar-content relative py-12 overflow-hidden zag-desktop-content-pad" style={{ zIndex: 2 }}>
+        <div className="sidebar-content relative overflow-hidden pb-8 pt-6 zag-desktop-content-pad" style={{ zIndex: 2 }}>
 
+          <div className="relative">
           {/* Left arrow */}
           <motion.button
             onClick={() => goTo(prevIndex, -1)}
             className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
-            style={{ left: "150px", top: "336px" }}
+            style={{ left: "-60px", top: "55%" }}
             aria-label="Previous project"
             whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
             whileTap={{ scale: 0.93 }}
@@ -236,7 +237,7 @@ export function ProjectsSection() {
           <motion.button
             onClick={() => goTo(nextIndex, 1)}
             className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
-            style={{ right: "150px", top: "336px" }}
+            style={{ right: "-60px", top: "55%" }}
             aria-label="Next project"
             whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
             whileTap={{ scale: 0.93 }}
@@ -251,7 +252,7 @@ export function ProjectsSection() {
           <div className="flex items-start justify-start">
 
             {/* LEFT card — hover lift, crossfade content */}
-            <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginRight: "-152px", paddingTop: "52px" }}>
+            <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginRight: "-12%", paddingTop: "40px" }}>
               <motion.article
                 className="overflow-hidden rounded-[14px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
                 style={{ transformOrigin: "left center", cursor: "pointer", opacity: 0.6, scale: 0.88 }}
@@ -263,7 +264,7 @@ export function ProjectsSection() {
                 whileHover={{ opacity: 0.85, scale: 0.92, y: -6, boxShadow: "0 16px_36px_rgba(0,0,0,0.28)" }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div className="relative h-[220px] w-full overflow-hidden">
+                <div className="relative aspect-[1.3/1] w-full overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`left-img-${prevIndex}`}
@@ -305,10 +306,10 @@ export function ProjectsSection() {
             </div>
 
             {/* CENTER card — direction-aware slide+blur on navigate */}
-            <div className="relative flex-shrink-0" style={{ width: "80%", zIndex: 30, overflow: "hidden", borderRadius: "14px", boxShadow: "-2px 4px 31px 0px rgba(0,0,0,0.68)" }}>
-              <article className="bg-[#fcfcfc] text-[#2d2d2d]" style={{ height: "576px" }}>
+            <div className="relative flex-shrink-0" style={{ width: "68%", zIndex: 30, overflow: "hidden", borderRadius: "14px", boxShadow: "-2px 4px 31px 0px rgba(0,0,0,0.68)" }}>
+              <article className="bg-[#fcfcfc] text-[#2d2d2d]">
                 {/* Image with direction-aware slide */}
-                <div className="relative w-full overflow-hidden" style={{ height: "304px" }}>
+                <div className="relative aspect-[2.7/1] w-full overflow-hidden">
                   <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
                       key={`center-img-${desktopIndex}`}
@@ -332,7 +333,7 @@ export function ProjectsSection() {
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={`center-text-${desktopIndex}`}
-                    className="px-6 pb-6 pt-5"
+                    className="flex h-[248px] flex-col px-6 pb-5 pt-4"
                     custom={direction}
                     variants={{
                       enter: (d: number) => ({ x: d * 40, opacity: 0, filter: "blur(4px)" }),
@@ -344,15 +345,15 @@ export function ProjectsSection() {
                     exit="exit"
                     transition={{ duration: 0.38, delay: 0.06, ease: EASE }}
                   >
-                    <h3 style={{ fontSize: "20px" }} className="font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[desktopIndex].title}</h3>
-                    <p className="mt-3 leading-[1.55] tracking-[0.02em] text-[#5a5a5a]" style={{ fontSize: "16px" }}>{projects[desktopIndex].description}</p>
-                    <div className="mt-4 flex flex-wrap gap-[6px]">
+                    <h3 style={{ fontSize: "18px" }} className="font-semibold leading-[1.3] tracking-[0.08em] text-[#2d2d2d]">{projects[desktopIndex].title}</h3>
+                    <p className="mt-2 line-clamp-3 leading-[1.5] tracking-[0.02em] text-[#5a5a5a]" style={{ fontSize: "14px" }}>{projects[desktopIndex].description}</p>
+                    <div className="mt-3 flex flex-wrap gap-[6px]">
                       {projects[desktopIndex].tags.map((tag) => (
                         <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[10px] py-[4px] text-[12px] leading-none tracking-[0.1em] text-[#6b7380]">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-5 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "16px" }}>
+                    <div className="mt-auto flex items-center justify-between pt-3">
+                      <div className="flex items-center gap-1.5 tracking-[0.1em] text-[#6e7684]" style={{ fontSize: "14px" }}>
                         <MapPin size={12} strokeWidth={1.8} /><span>{projects[desktopIndex].location}</span>
                       </div>
                       <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">Learn More</CtaButton>
@@ -363,7 +364,7 @@ export function ProjectsSection() {
             </div>
 
             {/* RIGHT card — hover lift, crossfade content */}
-            <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginLeft: "-152px", paddingTop: "52px" }}>
+            <div className="relative flex-shrink-0" style={{ width: "28%", zIndex: 10, marginLeft: "-12%", paddingTop: "40px" }}>
               <motion.article
                 className="overflow-hidden rounded-[14px] bg-[#fcfcfc] text-[#2d2d2d] shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
                 style={{ transformOrigin: "right center", cursor: "pointer", opacity: 0.6, scale: 0.88 }}
@@ -375,7 +376,7 @@ export function ProjectsSection() {
                 whileHover={{ opacity: 0.85, scale: 0.92, y: -6, boxShadow: "0 16px 36px rgba(0,0,0,0.28)" }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div className="relative h-[220px] w-full overflow-hidden">
+                <div className="relative aspect-[1.3/1] w-full overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`right-img-${nextIndex}`}
@@ -418,8 +419,10 @@ export function ProjectsSection() {
 
           </div>
 
+          </div>{/* end relative cards wrapper */}
+
           {/* Dots */}
-          <div className="mt-8 flex justify-center gap-[8px]">
+          <div className="mt-6 flex justify-center gap-[8px]">
             {projects.map((_, index) => (
               <button
                 key={index}
@@ -431,7 +434,7 @@ export function ProjectsSection() {
           </div>
 
           {/* All Projects button */}
-          <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-8 flex justify-center pb-4">
+          <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-5 flex justify-center pb-2">
             <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               All Projects
             </CtaButton>
