@@ -14,8 +14,8 @@ const EASE = [0.22, 1, 0.36, 1] as const
 const HERO_VIDEO: string | null = "/videos/about-hero.mp4"
 const HERO_POSTER = "/videos/about-hero-poster.jpg"
 
-const STORY_VIDEO = "/videos/about-story.mp4"
-const STORY_POSTER = "/videos/about-story-poster.jpg"
+const STORY_VIDEO = "/videos/about-story"
+const STORY_POSTER = "/videos/about-story-poster.png"
 
 const ctaLight =
   "inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]"
@@ -272,15 +272,17 @@ function StoryVideo({ src, poster }: { src: string; poster: string }) {
   return (
     <video
       ref={ref}
-      className="absolute inset-0 h-full w-full object-cover mix-blend-multiply"
-      src={src}
+      className="absolute inset-0 h-full w-full object-cover"
       poster={poster}
       muted
       loop
       playsInline
       preload="auto"
       aria-label="Zagrosia Engineering logo animation"
-    />
+    >
+      <source src={`${src}.webm`} type="video/webm" />
+      <source src={`${src}.mp4`} type="video/mp4" />
+    </video>
   )
 }
 
@@ -481,7 +483,7 @@ export function AboutRedesignDesktop() {
               viewBox="0 0 120 120"
               role="img"
               aria-label="Professional Engineer, signed and sealed"
-              className="absolute -bottom-[10px] left-[4%] h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
+              className="absolute -right-[6px] -top-[18px] h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
               style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.22)" }}
               initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
