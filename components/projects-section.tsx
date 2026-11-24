@@ -244,14 +244,16 @@ export function ProjectsSection() {
               return (
                 <motion.article
                   key={`${role}-${idx}`}
-                  className={`absolute flex flex-col overflow-hidden rounded-[18px] ${active ? "bg-white text-[#132647]" : "bg-[#a9b6cb]/85 text-[#132647] backdrop-blur-sm"}`}
+                  className={`absolute flex flex-col overflow-hidden rounded-[20px] [isolation:isolate] ${active ? "bg-white text-[#132647]" : "bg-[#a9b6cb] text-[#132647]"}`}
                   style={{
                     ...pos,
+                    borderRadius: 20,
                     cursor: active ? "default" : "pointer",
                     boxShadow: active ? "0 22px 50px rgba(0,0,0,0.45)" : "0 12px 28px rgba(0,0,0,0.3)",
                   }}
-                  initial={{ opacity: 0, x: direction * 24, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, x: direction * 24 }}
+                  animate={{ opacity: active ? 1 : 0.55, x: 0 }}
+                  whileHover={active ? undefined : { opacity: 0.8 }}
                   transition={{ duration: 0.4, ease: EASE }}
                   onClick={active ? undefined : go}
                   onKeyDown={active ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go() } }}
