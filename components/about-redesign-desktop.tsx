@@ -196,8 +196,8 @@ const memberInfo: Record<
 
 
 const storyParas = [
-  "Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, industrial facilities and hundreds of homes in Iran, and ran two structural design firms of his own.",
-  "He then rebuilt his practice in British Columbia, studying Canadian construction at BCIT and structural engineering through SEABC, and has been designing and reviewing structures here since 2019.",
+  "Seyed Hassan Mozneb began his career designing structures in Iran, working on refineries, industrial facilities and hundreds of homes, and ran two structural design firms of his own.",
+  "He then rebuilt his practice in British Columbia, studying Canadian construction at BCIT and structural engineering through SEABC, and now designs and reviews structures here.",
   "Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.",
 ]
 
@@ -386,7 +386,7 @@ export function AboutRedesignDesktop() {
                   transition={{ duration: 0.55, delay: 1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "17px", lineHeight: 1.65, letterSpacing: "0.02em" }}>
-                    Structural Design · Seismic Expertise · Since 1993
+                    Structural Design · Seismic Expertise · Steel · Concrete · Wood
                   </p>
                   <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "17px", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "10px" }}>
                     Named for the Zagros Mountains: a range built by pressure, held by structure.
