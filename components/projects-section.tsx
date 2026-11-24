@@ -249,7 +249,7 @@ export function ProjectsSection() {
             </motion.button>
 
             {/* Three cards, all the same size. The middle one is the selected project. */}
-            <div className="grid grid-cols-3 items-stretch gap-6">
+            <div className="grid grid-cols-3 items-end gap-6">
               {[
                 { role: "prev", idx: prevIndex },
                 { role: "active", idx: desktopIndex },
@@ -278,7 +278,7 @@ export function ProjectsSection() {
                     role={active ? undefined : "button"}
                     aria-label={active ? undefined : `View ${p.title}`}
                   >
-                    <div className="relative w-full overflow-hidden h-[clamp(110px,26vh,230px)]">
+                    <div className={`relative w-full overflow-hidden ${active ? "h-[calc(clamp(110px,26vh,230px)+28px)]" : "h-[clamp(110px,26vh,230px)]"}`}>
                       <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 30vw, 380px" className="object-cover" />
                     </div>
                     <div className="flex flex-1 flex-col px-5 pb-[clamp(10px,2vh,20px)] pt-[clamp(8px,1.6vh,16px)]">
