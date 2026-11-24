@@ -428,7 +428,15 @@ export function AboutRedesignDesktop() {
             <div className="space-y-4">
               {storyParas.map((t, i) => (
                 <Reveal key={i} delay={0.2 + i * 0.08} duration={0.65}>
-                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">{t}</p>
+                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">
+                    {t.split(/(Seyed Hassan Mozneb|Zagrosia Engineering Inc\.)/).map((part, k) =>
+                      part === "Seyed Hassan Mozneb" || part === "Zagrosia Engineering Inc." ? (
+                        <strong key={k} className="font-bold text-[#2D2D2D]">{part}</strong>
+                      ) : (
+                        part
+                      ),
+                    )}
+                  </p>
                 </Reveal>
               ))}
             </div>
