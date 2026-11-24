@@ -249,7 +249,7 @@ export function ProjectsSection() {
             </motion.button>
 
             {/* Three cards, all the same size. The middle one is the selected project. */}
-            <div className="grid grid-cols-3 items-stretch justify-center">
+            <div className="flex items-stretch justify-center">
               {[
                 { role: "prev", idx: prevIndex },
                 { role: "active", idx: desktopIndex },
