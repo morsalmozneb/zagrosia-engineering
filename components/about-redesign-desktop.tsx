@@ -264,8 +264,9 @@ function StoryVideo({ src, poster }: { src: string; poster: string }) {
       return () => v.removeEventListener("loadedmetadata", seek)
     }
     if (inView) {
-      v.currentTime = 0
       v.play().catch(() => {})
+    } else {
+      v.pause()
     }
   }, [inView, reduced])
   return (
@@ -275,6 +276,7 @@ function StoryVideo({ src, poster }: { src: string; poster: string }) {
       src={src}
       poster={poster}
       muted
+      loop
       playsInline
       preload="auto"
       aria-label="Zagrosia Engineering logo animation"
@@ -469,8 +471,8 @@ export function AboutRedesignDesktop() {
             transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
           >
             <div
-              className="relative aspect-video w-full overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-black"
-              style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}
+              className="relative mx-auto aspect-square w-full overflow-hidden rounded-[14px] border border-[#E3E7EE] bg-white"
+              style={{ maxWidth: "min(100%, 66svh)", boxShadow: "0 4px 19.6px rgba(0,0,0,0.12)" }}
             >
               <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
             </div>
@@ -479,7 +481,7 @@ export function AboutRedesignDesktop() {
               viewBox="0 0 120 120"
               role="img"
               aria-label="Professional Engineer, signed and sealed"
-              className="absolute -bottom-[26px] -left-[30px] h-[104px] w-[104px] rounded-full bg-[#FCFCFC]"
+              className="absolute -bottom-[22px] left-0 h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
               style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.22)" }}
               initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
