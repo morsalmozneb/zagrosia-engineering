@@ -329,13 +329,13 @@ export function AboutRedesignDesktop() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, rgba(8,14,26,0.35) 0%, rgba(8,14,26,0.1) 45%, rgba(8,14,26,0.75) 100%)" }}
         />
-        <div className="sidebar-content zag-desktop-content-pad relative z-10 flex h-full flex-col justify-end pb-[64px]">
+        <div className="sidebar-content zag-desktop-content-pad relative z-10 flex h-full flex-col justify-end pb-[40px]">
           <div className="flex items-end justify-between gap-10">
             <div className="max-w-[700px]">
               <h1 className="font-sans font-bold tracking-tight">
                 <motion.span
                   className="block text-[#FCFCFC]"
-                  style={{ fontSize: "clamp(34px,6.4vh,52px)", lineHeight: 1.02 }}
+                  style={{ fontSize: "52px", lineHeight: 1.02 }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -343,7 +343,7 @@ export function AboutRedesignDesktop() {
                 <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
                   <motion.span
                     className="block text-[#0150a9]"
-                    style={{ fontSize: "clamp(34px,6.4vh,52px)", lineHeight: 1.01 }}
+                    style={{ fontSize: "52px", lineHeight: 1.01 }}
                     initial={{ y: "105%" }}
                     animate={{ y: "0%" }}
                     transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -351,17 +351,17 @@ export function AboutRedesignDesktop() {
                 </span>
               </h1>
               <motion.p
-                className="mt-[clamp(10px,2.4vh,24px)] font-light text-[#FCFCFC]"
-                style={{ fontSize: "clamp(16px,3.4vh,28px)", letterSpacing: "0.2em" }}
+                className="mt-6 font-light text-[#FCFCFC]"
+                style={{ fontSize: "28px", letterSpacing: "0.2em" }}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >BUILT LIKE A MOUNTAIN RANGE</motion.p>
-              <div className="relative mt-[clamp(14px,3.4vh,40px)] pl-8">
+              <div className="relative mt-10 pl-8">
                 <motion.div
-                  className="pointer-events-none absolute left-0 top-0 w-px"
+                  className="pointer-events-none absolute left-0 top-0 w-[6px] rounded-full"
                   style={{
-                    height: "calc(100% - 8px)",
+                    height: "calc(100% - 48px)",
                     background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
                     transformOrigin: "top",
                   }}
@@ -371,25 +371,25 @@ export function AboutRedesignDesktop() {
                 />
                 <motion.p
                   className="text-[#FCFCFC]"
-                  style={{ fontSize: "clamp(14px,2.4vh,20px)", letterSpacing: "0.14em" }}
+                  style={{ fontSize: "20px", letterSpacing: "0.14em" }}
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 >M.Sc. STRUCTURAL</motion.p>
                 <motion.p
                   className="text-[#FCFCFC]"
-                  style={{ fontSize: "clamp(12px,2vh,16px)", letterSpacing: "0.14em", marginTop: "clamp(8px,2.2vh,22px)" }}
+                  style={{ fontSize: "16px", letterSpacing: "0.14em", marginTop: "clamp(18px,4.5vh,38px)" }}
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
                 >BC · AB · SK</motion.p>
                 <motion.div
-                  style={{ marginTop: "clamp(10px,3vh,32px)" }}
+                  style={{ marginTop: "clamp(22px,6vh,76px)" }}
                   initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: 1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "clamp(13px,2.2vh,17px)", lineHeight: 1.65, letterSpacing: "0.02em" }}>
+                  <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "17px", lineHeight: 1.65, letterSpacing: "0.02em" }}>
                     Structural Design · Seismic Expertise · Since 1993
                   </p>
-                  <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "clamp(13px,2.2vh,17px)", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "10px" }}>
+                  <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "17px", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "10px" }}>
                     Named for the Zagros Mountains: a range built by pressure, held by structure.
                   </p>
                 </motion.div>
