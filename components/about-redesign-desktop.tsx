@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
@@ -14,8 +14,8 @@ const EASE = [0.22, 1, 0.36, 1] as const
 const HERO_VIDEO: string | null = "/videos/about-hero.mp4"
 const HERO_POSTER = "/videos/about-hero-poster.jpg"
 
-// Story video (right side of "Our story"). Put the Muse clip in /public/videos and set its path here (e.g. "/videos/about-story.mp4").
-const STORY_VIDEO: string | null = null
+const STORY_VIDEO = "/videos/about-story.mp4"
+const STORY_POSTER = "/videos/about-story-poster.jpg"
 
 const ctaLight =
   "inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]"
@@ -247,6 +247,41 @@ function RidgeArt({ className = "", drift = true }: { className?: string; drift?
   )
 }
 
+// Plays once each time it scrolls into view, then holds the last frame.
+function StoryVideo({ src, poster }: { src: string; poster: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const inView = useInView(ref, { amount: 0.5 })
+  const reduced = useReducedMotion()
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    if (reduced) {
+      const seek = () => {
+        v.currentTime = v.duration || 0
+      }
+      if (v.readyState >= 1) seek()
+      v.addEventListener("loadedmetadata", seek)
+      return () => v.removeEventListener("loadedmetadata", seek)
+    }
+    if (inView) {
+      v.currentTime = 0
+      v.play().catch(() => {})
+    }
+  }, [inView, reduced])
+  return (
+    <video
+      ref={ref}
+      className="absolute inset-0 h-full w-full object-cover"
+      src={src}
+      poster={poster}
+      muted
+      playsInline
+      preload="auto"
+      aria-label="Zagrosia Engineering logo animation"
+    />
+  )
+}
+
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 
 export function AboutRedesignDesktop() {
@@ -329,7 +364,7 @@ export function AboutRedesignDesktop() {
 
       {/* ═══ 2. OUR STORY ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="grid max-w-[1100px] grid-cols-[1.45fr_1fr] items-center gap-[clamp(40px,6vw,88px)]">
+        <div className="grid max-w-[1100px] grid-cols-[1.1fr_1fr] items-center gap-[clamp(36px,5vw,72px)]">
           {/* LEFT: heading + description, same type sizes as the home page */}
           <div className="relative pl-5">
             <motion.div
@@ -387,22 +422,10 @@ export function AboutRedesignDesktop() {
             transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
           >
             <div
-              className="relative aspect-[4/5] max-h-[min(66svh,560px)] w-full overflow-hidden rounded-[14px] border border-[#2D2D2D]"
-              style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", background: "linear-gradient(180deg, #0B1226 0%, #161f43 60%, #0a3f86 100%)" }}
+              className="relative aspect-video w-full overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-black"
+              style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}
             >
-              {STORY_VIDEO ? (
-                <video className="absolute inset-0 h-full w-full object-cover" src={STORY_VIDEO} autoPlay muted loop playsInline />
-              ) : (
-                <>
-                  <RidgeArt className="absolute inset-x-0 bottom-0 h-[62%] w-full" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-[#FCFCFC]/85">
-                    <span className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-[#FCFCFC]/70">
-                      <span className="ml-[3px] h-0 w-0 border-y-[9px] border-l-[15px] border-y-transparent border-l-[#FCFCFC]" />
-                    </span>
-                    <span className="text-[11px] uppercase tracking-[0.26em]">Video coming soon</span>
-                  </div>
-                </>
-              )}
+              <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
             </div>
             {/* P.Eng. seal, same mark as the home page */}
             <motion.svg
