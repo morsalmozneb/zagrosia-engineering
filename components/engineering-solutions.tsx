@@ -13,7 +13,7 @@ const BRAND_BLUE = "#0150a9"
 const NAVY = "#161f43"
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-// The six homepage services (picked from the 17 on the Services page)
+// The eight homepage services (picked from the 17 on the Services page)
 const services = HOME_SERVICE_IDS.map((id) => allServices.find((s) => s.id === id)!)
 
 export function EngineeringSolutions() {
@@ -131,7 +131,7 @@ export function EngineeringSolutions() {
           </Reveal>
 
           {/* Service tabs */}
-          <div ref={gridRef} role="tablist" className="grid grid-cols-2 gap-[8px] lg:grid-cols-3 lg:gap-[10px]">
+          <div ref={gridRef} role="tablist" className="@container grid grid-cols-2 gap-[8px] lg:grid-cols-4 lg:gap-[10px]">
             {services.map((service, i) => {
               const isOpen = service.id === openId
               return (
@@ -145,7 +145,7 @@ export function EngineeringSolutions() {
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease: EASE }}
-                  className="group relative flex min-h-[40px] items-center justify-between overflow-hidden rounded-[10px] border px-3 py-[6px] text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[40px] lg:px-4 lg:py-0"
+                  className="group relative flex min-h-[40px] items-center justify-between overflow-hidden rounded-[10px] border px-3 py-[6px] text-left transition-[background,border-color,box-shadow,color] duration-300 lg:h-[40px] lg:px-3 lg:py-0"
                   style={{
                     background: isOpen ? BRAND_BLUE : "linear-gradient(135deg, rgba(232,240,252,0.95) 0%, rgba(218,230,246,0.95) 100%)",
                     borderColor: isOpen ? BRAND_BLUE : "rgba(1,80,169,0.14)",
@@ -153,7 +153,7 @@ export function EngineeringSolutions() {
                     color: isOpen ? "#fff" : NAVY,
                   }}
                 >
-                  <span className="text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[16px]">{service.short}</span>
+                  <span className="min-w-0 text-[13px] font-semibold leading-[1.1] tracking-[0.01em] lg:text-[clamp(12px,1.4cqw,16px)]">{service.short}</span>
                   {isOpen ? (
                     <MinusCircle size={18} strokeWidth={1.8} className="ml-2 flex-shrink-0" style={{ color: "#fff" }} />
                   ) : (

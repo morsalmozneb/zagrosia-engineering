@@ -12,8 +12,8 @@ export type ServiceItem = {
   tags: string[]
 }
 
-// The six services shown on the homepage (the ones that most often need a P.Eng. seal)
-export const HOME_SERVICE_IDS = [1, 2, 5, 6, 7, 11]
+// The eight services shown on the homepage (the ones that most often need a P.Eng. seal)
+export const HOME_SERVICE_IDS = [1, 2, 5, 6, 7, 10, 8, 11]
 
 export const allServices: ServiceItem[] = [
   {
