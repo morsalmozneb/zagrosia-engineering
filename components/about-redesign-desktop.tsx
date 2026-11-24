@@ -21,12 +21,14 @@ const ctaSmall =
   "inline-flex flex-1 items-center justify-center whitespace-nowrap zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.08em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[36px] px-4 text-[12px]"
 
 const eyebrow = "text-[14px] font-bold uppercase tracking-[0.24em] text-[#0052A5]"
-const sectionHeading = "zag-heading text-[28px] leading-none tracking-[0.04em]"
+const sectionHeading = "zag-heading text-[clamp(20px,3.6vh,28px)] leading-none tracking-[0.04em]"
+const sec = "relative flex min-h-[100svh] flex-col justify-center py-[clamp(20px,4.5vh,56px)]"
+const bodyText = "text-[clamp(13px,2.1vh,17px)] leading-[1.6] tracking-[0.01em]"
 const panelShadow = "0 4px 19.6px rgba(0,0,0,0.18)"
 
 // ─── DATA (from Seyed Hassan Mozneb's portfolio / resume and the team resumes) ───────────
 
-type Site = { name: string; place: string; note: string; image: string }
+type Site = { name: string; place: string; note: string; image?: string }
 type Station = {
   label: string
   period: string
@@ -68,11 +70,11 @@ const stations: Station[] = [
       "Prepared shop fabrication drawings, carried out field reviews and wrote technical reports.",
     ],
     sites: [
-      { name: "Abadan Refinery", place: "Abadan", note: "Pipe-rack routing and elevated access platforms for maintenance and inspection.", image: "/images/projects/abadan-refinery.png" },
-      { name: "Bandar-Emam", place: "Bandar-Emam", note: "Foundations for vessels and tanks, and an earthquake-resistant control room.", image: "/images/projects/bandar-emam-petrochemical.png" },
-      { name: "Bojnourd Plant", place: "Bojnourd", note: "Foundations for rotary equipment and reactors, controlling vibration and dynamic loads.", image: "/images/projects/bojnourd-plant.png" },
-      { name: "Arak Petrochemical", place: "Arak", note: "A firefighting building and a pipe-rack expansion, designed while the plant stayed in operation.", image: "/images/projects/arak-petrochemical.png" },
-      { name: "Tabriz Project", place: "Tabriz", note: "Bridges and trestles over difficult terrain, and foundations for a storage tank farm.", image: "/images/projects/tabriz-project.png" },
+      { name: "Abadan Refinery", place: "Abadan", note: "Pipe-rack routing and elevated access platforms for maintenance and inspection." },
+      { name: "Bandar-Emam", place: "Bandar-Emam", note: "Foundations for vessels and tanks, and an earthquake-resistant control room." },
+      { name: "Bojnourd Plant", place: "Bojnourd", note: "Foundations for rotary equipment and reactors, controlling vibration and dynamic loads." },
+      { name: "Arak Petrochemical", place: "Arak", note: "A firefighting building and a pipe-rack expansion, designed while the plant stayed in operation." },
+      { name: "Tabriz Project", place: "Tabriz", note: "Bridges and trestles over difficult terrain, and foundations for a storage tank farm." },
     ],
   },
   {
@@ -80,7 +82,6 @@ const stations: Station[] = [
     period: "1995 – 2002",
     title: "Head of Civil & Structural Department",
     place: "Bushehr Nuclear Power Plant, Iran",
-    image: "/images/projects/bushehr-nuclear-power-plant.png",
     bullets: [
       "Oversaw the reactor's concrete dome and the plant's concrete chimneys.",
       "Supervised the outlet channel for the third water circuit.",
@@ -93,14 +94,14 @@ const stations: Station[] = [
     title: "CEO & Senior Structural Engineer",
     place: "Shahab Tandisan Co. & Herammehr Co., Shiraz, Iran",
     bullets: [
-      "Led the firm and structurally designed six apartment developments, 799 units in total.",
+      "Led the firm and structurally designed six apartment developments in Shiraz, 799 units in total.",
       "Designed for sustainability and seismic resistance, and ran bids, contracts and approvals.",
     ],
     sites: [
-      { name: "Apartment developments", place: "Shiraz", note: "Six developments, 799 units, from foundations to quality control.", image: "/images/projects/apartment-developments-shiraz.png" },
       { name: "High-rise", place: "Iran", note: "Residential tower under construction.", image: "/images/projects/residential-high-rise-construction-iran/01-hero.jpg" },
       { name: "Concrete frame", place: "Iran", note: "Residential concrete-frame blocks under construction.", image: "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg" },
       { name: "Residential complex", place: "Iran", note: "A residential complex of steel-framed blocks.", image: "/images/projects/residential-complex-construction-iran/01-hero.jpg" },
+      { name: "Vertical extension", place: "Iran", note: "A two-storey steel-frame extension.", image: "/images/projects/two-storey-vertical-extension-iran/01-hero.jpg" },
     ],
   },
   {
@@ -134,10 +135,10 @@ const stations: Station[] = [
       "Manages projects from concept to completion, within code, schedule and budget.",
     ],
     sites: [
-      { name: "Car elevator", place: "British Columbia", note: "A car elevator and its steel enclosure.", image: "/images/projects/car-elevator-steel-enclosure.png" },
-      { name: "Steel access bridge", place: "British Columbia", note: "A steel access bridge, designed and detailed.", image: "/images/projects/steel-access-bridge.png" },
-      { name: "Beam & slab", place: "British Columbia", note: "Concrete beam and slab replacement.", image: "/images/projects/concrete-beam-and-slab-replacement.png" },
-      { name: "Helical piles", place: "British Columbia", note: "Helical piles and suspended slabs.", image: "/images/projects/helical-piles-and-suspended-slabs.png" },
+      { name: "Car elevator", place: "British Columbia", note: "A car elevator and its steel enclosure." },
+      { name: "Steel access bridge", place: "British Columbia", note: "A steel access bridge, designed and detailed." },
+      { name: "Beam & slab", place: "British Columbia", note: "Concrete beam and slab replacement." },
+      { name: "Helical piles", place: "British Columbia", note: "Helical piles and suspended slabs." },
     ],
   },
   {
@@ -243,7 +244,7 @@ function RidgeArt({ className = "", drift = true }: { className?: string; drift?
 export function AboutRedesignDesktop() {
   const reduced = useReducedMotion()
   const [valueIndex, setValueIndex] = useState(2)
-  const [stationIndex, setStationIndex] = useState(3)
+  const [stationIndex, setStationIndex] = useState(4)
   const [siteIndex, setSiteIndex] = useState(0)
   const [teamIndex, setTeamIndex] = useState(1)
 
@@ -310,8 +311,8 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 2. OUR STORY ═══ */}
-      <section className="sidebar-content zag-desktop-content-pad py-[88px]">
-        <div className="grid max-w-[1100px] grid-cols-[1.25fr_1fr] gap-[72px]">
+      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+        <div className="grid max-w-[1100px] grid-cols-[1.25fr_1fr] gap-[clamp(32px,5vw,72px)]">
           <div className="relative pl-5">
             <motion.div
               className="absolute bottom-0 left-0 top-[4px] w-[4px] rounded-full"
@@ -322,26 +323,26 @@ export function AboutRedesignDesktop() {
               style={{ transformOrigin: "top", background: "linear-gradient(180deg, #0150a9 0%, rgba(1,80,169,0) 100%)" }}
             />
             <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <p className={`mb-4 ${eyebrow}`}>Our story</p>
+              <p className={`mb-[clamp(6px,1.6vh,16px)] ${eyebrow}`}>Our story</p>
             </Reveal>
             <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-              <h2 className="zag-heading mb-7 text-[36px] font-bold uppercase leading-[1.08] tracking-[0.03em]">
+              <h2 className="zag-heading mb-[clamp(10px,2.6vh,28px)] text-[clamp(24px,5.2vh,36px)] font-bold uppercase leading-[1.08] tracking-[0.03em]">
                 From the <span className="text-[#0052A5]">Zagros</span> to the Pacific
               </h2>
             </Reveal>
-            <div className="space-y-5">
+            <div className="space-y-[clamp(8px,1.9vh,20px)]">
               <Reveal delay={0.2} duration={0.65}>
-                <p className="text-[17px] leading-[1.72] tracking-[0.01em]">
+                <p className={bodyText}>
                   Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, a nuclear power plant and hundreds of homes in Iran, and ran two structural design firms of his own.
                 </p>
               </Reveal>
               <Reveal delay={0.28} duration={0.65}>
-                <p className="text-[17px] leading-[1.72] tracking-[0.01em]">
+                <p className={bodyText}>
                   He then rebuilt his practice in British Columbia, studying Canadian construction at BCIT and structural engineering through SEABC, and has been designing and reviewing structures here since 2019.
                 </p>
               </Reveal>
               <Reveal delay={0.34} duration={0.65}>
-                <p className="text-[17px] leading-[1.72] tracking-[0.01em]">
+                <p className={bodyText}>
                   Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.
                 </p>
               </Reveal>
@@ -355,10 +356,10 @@ export function AboutRedesignDesktop() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.09, ease: EASE }}
-                className="border-b border-[#2D2D2D]/20 py-[18px]"
+                className="border-b border-[#2D2D2D]/20 py-[clamp(8px,1.9vh,18px)]"
               >
-                <p className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{row.label}</p>
-                <p className="mt-2 text-[18px] leading-[1.35] tracking-[0.02em]">{row.value}</p>
+                <p className="text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{row.label}</p>
+                <p className="mt-1 text-[clamp(14px,2.4vh,18px)] leading-[1.35] tracking-[0.02em]">{row.value}</p>
               </motion.div>
             ))}
           </div>
@@ -366,11 +367,11 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 3. THE PRINCIPAL ═══ */}
-      <section className="relative overflow-hidden text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
         <div className="sidebar-content zag-desktop-content-pad">
-          <div className="grid max-w-[1100px] grid-cols-[430px_1fr] gap-[64px] pt-[88px]">
+          <div className="grid max-w-[1100px] grid-cols-[clamp(260px,32vw,430px)_1fr] items-end gap-[clamp(28px,4.5vw,64px)]">
             <motion.div
-              className="relative h-[600px] self-end"
+              className="relative h-[min(92svh,640px)] min-h-[440px]"
               initial={reduced ? false : { opacity: 0, x: -24, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.1 }}
@@ -378,50 +379,50 @@ export function AboutRedesignDesktop() {
             >
               <Image src="/images/homayoun-pic.png" alt="Seyed Hassan Mozneb" fill className="object-contain object-bottom" />
             </motion.div>
-            <div className="pb-[72px]">
+            <div className="self-center py-[clamp(20px,4vh,48px)]">
               <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                <p className="mb-4 text-[14px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">The principal</p>
+                <p className="mb-[clamp(6px,1.4vh,14px)] text-[clamp(11px,1.7vh,14px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">The principal</p>
               </Reveal>
               <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                <h2 className="zag-heading text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]">Seyed Hassan Mozneb</h2>
+                <h2 className="zag-heading text-[clamp(24px,5.4vh,40px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">Seyed Hassan Mozneb</h2>
               </Reveal>
               <Reveal delay={0.16} duration={0.6}>
-                <p className="mt-3 text-[13px] uppercase tracking-[0.24em] text-[#FCFCFC]/75">P.Eng. · M.Sc. · Founder of Zagrosia</p>
+                <p className="mt-2 text-[clamp(10px,1.6vh,13px)] uppercase tracking-[0.24em] text-[#FCFCFC]/75">P.Eng. · M.Sc. · Founder of Zagrosia</p>
               </Reveal>
               <Reveal delay={0.22} duration={0.65}>
-                <p className="mt-6 max-w-[560px] text-[17px] leading-[1.7] tracking-[0.01em] text-[#FCFCFC]/92">
+                <p className={`mt-[clamp(8px,2vh,22px)] max-w-[560px] text-[#FCFCFC]/92 ${bodyText}`}>
                   He has worked on both sides of the structure: designing it, and supervising it as it was built. From the reactor dome at Bushehr to six apartment developments in Shiraz, his career has moved between design office and construction site.
                 </p>
               </Reveal>
-              <div className="mt-8 grid max-w-[600px] grid-cols-2 gap-10">
+              <div className="mt-[clamp(10px,2.4vh,26px)] grid max-w-[600px] grid-cols-2 gap-[clamp(16px,3vw,40px)]">
                 <div>
-                  <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Education</h3>
-                  <ul className="space-y-2 text-[15px] leading-[1.5] tracking-[0.04em]">
+                  <h3 className="mb-2 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Education</h3>
+                  <ul className="space-y-[clamp(4px,0.9vh,8px)] text-[clamp(12px,1.9vh,15px)] leading-[1.4] tracking-[0.03em]">
                     {["M.Sc. Structural Engineering, Isfahan University of Technology", "B.Sc. Civil Engineering, Mashhad University"].map((item) => (
-                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-2">{item}</li>
+                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-[clamp(3px,0.8vh,8px)]">{item}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Certifications</h3>
-                  <ul className="space-y-2 text-[15px] leading-[1.5] tracking-[0.04em]">
+                  <h3 className="mb-2 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Certifications</h3>
+                  <ul className="space-y-[clamp(4px,0.9vh,8px)] text-[clamp(12px,1.9vh,15px)] leading-[1.4] tracking-[0.03em]">
                     {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)", "Construction Operation Certificate (BCIT)"].map((item) => (
-                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-2">{item}</li>
+                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-[clamp(3px,0.8vh,8px)]">{item}</li>
                     ))}
                   </ul>
                 </div>
               </div>
-              <div className="mt-8 grid max-w-[600px] grid-cols-2 gap-10">
+              <div className="mt-[clamp(10px,2.2vh,24px)] grid max-w-[600px] grid-cols-2 gap-[clamp(16px,3vw,40px)]">
                 <div>
-                  <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Codes</h3>
-                  <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-[#FCFCFC]/90">NBCC · CSA · ACI · AISC · ASCE</p>
+                  <h3 className="mb-1 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Codes</h3>
+                  <p className="text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.05em] text-[#FCFCFC]/90">NBCC · CSA · ACI · AISC · ASCE</p>
                 </div>
                 <div>
-                  <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Software</h3>
-                  <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-[#FCFCFC]/90">SAP2000 · ETABS · SAFE · STAAD Pro · RISA-3D · Revit · Tekla</p>
+                  <h3 className="mb-1 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Software</h3>
+                  <p className="text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.05em] text-[#FCFCFC]/90">SAP2000 · ETABS · SAFE · STAAD Pro · RISA-3D · Revit · Tekla</p>
                 </div>
               </div>
-              <div className="mt-9 flex gap-4">
+              <div className="mt-[clamp(12px,2.8vh,30px)] flex gap-4">
                 <CtaButton href={principal.resume} target="_blank" rel="noopener noreferrer" className={ctaDark}>View Resume</CtaButton>
                 <CtaButton href="/contact" className={ctaDark}>Contact</CtaButton>
               </div>
@@ -432,16 +433,16 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 4. CAREER PATH ═══ */}
-      <section className="sidebar-content zag-desktop-content-pad py-[88px]">
+      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <p className={`mb-4 ${eyebrow}`}>Experience before Zagrosia</p>
+            <p className={`mb-[clamp(4px,1.2vh,12px)] ${eyebrow}`}>Experience before Zagrosia</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-12 text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
+            <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
           </Reveal>
 
-          <div className="relative mb-10">
+          <div className="relative mb-[clamp(12px,3vh,32px)]">
             <div className="absolute left-0 right-0 top-[9px] h-[2px] bg-[#2D2D2D]" />
             <div className="relative grid" style={{ gridTemplateColumns: `repeat(${stations.length}, minmax(0, 1fr))` }}>
               {stations.map((s, i) => {
@@ -452,22 +453,22 @@ export function AboutRedesignDesktop() {
                     onClick={() => pickStation(i)}
                     aria-label={`${s.period}: ${s.title}`}
                     aria-current={active}
-                    className="group flex flex-col items-start gap-3 text-left"
+                    className="group flex flex-col items-start gap-2 text-left"
                   >
                     <span
                       className={`h-5 w-5 rounded-full border-2 transition-colors ${
                         active ? "border-[#0052A5] bg-[#0052A5]" : "border-[#2D2D2D] bg-[#FCFCFC] group-hover:border-[#0052A5]"
                       }`}
                     />
-                    <span className={`text-[13px] font-semibold uppercase tracking-[0.14em] ${active ? "text-[#0052A5]" : "text-[#6b7380]"}`}>{s.label}</span>
+                    <span className={`text-[clamp(11px,1.7vh,13px)] font-semibold uppercase tracking-[0.14em] ${active ? "text-[#0052A5]" : "text-[#6b7380]"}`}>{s.label}</span>
                   </button>
                 )
               })}
             </div>
           </div>
 
-          <div className="grid grid-cols-[1.05fr_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
-            <div className="relative min-h-[460px] overflow-hidden bg-[#0B1226]">
+          <div className="grid h-[clamp(300px,56vh,500px)] grid-cols-[1.05fr_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
+            <div className="relative overflow-hidden bg-[#0B1226]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${stationIndex}-${stationImage ?? "art"}`}
@@ -482,20 +483,20 @@ export function AboutRedesignDesktop() {
                   ) : (
                     <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 60%, #0a3f86 100%)" }}>
                       <RidgeArt className="absolute inset-x-0 bottom-0 h-[70%] w-full" drift={false} />
-                      <p className="zag-heading absolute left-8 top-8 text-[44px] font-bold leading-none tracking-[0.03em] text-[#FCFCFC]">{station.label}</p>
+                      <p className="zag-heading absolute left-[clamp(16px,2.4vw,32px)] top-[clamp(14px,3vh,32px)] text-[clamp(30px,6.4vh,52px)] font-bold leading-none tracking-[0.03em] text-[#FCFCFC]">{station.label}</p>
                     </div>
                   )}
                 </motion.div>
               </AnimatePresence>
               {site && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1226]/95 to-transparent px-8 pb-6 pt-16 text-[#FCFCFC]">
-                  <p className="text-[12px] uppercase tracking-[0.2em] text-[#5b9bf0]">{site.place}</p>
-                  <p className="mt-1 text-[20px] font-semibold uppercase tracking-[0.05em]">{site.name}</p>
-                  <p className="mt-2 max-w-[460px] text-[14px] leading-[1.55] tracking-[0.01em] text-[#FCFCFC]/85">{site.note}</p>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1226]/95 to-transparent px-[clamp(16px,2.4vw,32px)] pb-[clamp(12px,2.4vh,24px)] pt-12 text-[#FCFCFC]">
+                  <p className="text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.2em] text-[#5b9bf0]">{site.place}</p>
+                  <p className="mt-1 text-[clamp(15px,2.6vh,20px)] font-semibold uppercase tracking-[0.05em]">{site.name}</p>
+                  <p className="mt-1 max-w-[460px] text-[clamp(12px,1.8vh,14px)] leading-[1.5] tracking-[0.01em] text-[#FCFCFC]/85">{site.note}</p>
                 </div>
               )}
             </div>
-            <div className="flex flex-col justify-center border-l border-[#2D2D2D] px-10 py-9">
+            <div className="flex flex-col justify-center overflow-hidden border-l border-[#2D2D2D] px-[clamp(20px,2.8vw,40px)] py-[clamp(12px,2.6vh,32px)]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={stationIndex}
@@ -504,25 +505,25 @@ export function AboutRedesignDesktop() {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.35, ease: EASE }}
                 >
-                  <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-[#0052A5]">{station.period}</p>
-                  <h3 className="zag-heading mt-3 text-[26px] font-bold uppercase leading-[1.15] tracking-[0.03em]">{station.title}</h3>
-                  <p className="mt-2 text-[15px] tracking-[0.04em] text-[#6b7380]">{station.place}</p>
-                  <ul className="mt-5 space-y-3">
+                  <p className="text-[clamp(10px,1.6vh,13px)] font-semibold uppercase tracking-[0.2em] text-[#0052A5]">{station.period}</p>
+                  <h3 className="zag-heading mt-2 text-[clamp(17px,3.4vh,26px)] font-bold uppercase leading-[1.15] tracking-[0.03em]">{station.title}</h3>
+                  <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.03em] text-[#6b7380]">{station.place}</p>
+                  <ul className="mt-[clamp(8px,1.8vh,20px)] space-y-[clamp(5px,1.1vh,12px)]">
                     {station.bullets.map((b) => (
-                      <li key={b} className="flex gap-3 text-[15.5px] leading-[1.55] tracking-[0.01em] text-[#3a4252]">
-                        <span className="mt-[9px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#0052A5]" />
+                      <li key={b} className="flex gap-3 text-[clamp(12px,1.95vh,15.5px)] leading-[1.5] tracking-[0.01em] text-[#3a4252]">
+                        <span className="mt-[7px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#0052A5]" />
                         {b}
                       </li>
                     ))}
                   </ul>
                   {station.sites && (
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <div className="mt-[clamp(8px,1.8vh,20px)] flex flex-wrap gap-[6px]">
                       {station.sites.map((s, i) => (
                         <button
                           key={s.name}
                           onClick={() => setSiteIndex(i)}
                           aria-pressed={i === siteIndex}
-                          className={`rounded-[8px] border px-3 py-[7px] text-[12px] uppercase tracking-[0.12em] transition-colors ${
+                          className={`rounded-[8px] border px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.1em] transition-colors ${
                             i === siteIndex
                               ? "border-[#0052A5] bg-[#0052A5] text-white"
                               : "border-[#2D2D2D]/30 text-[#2D2D2D] hover:border-[#0052A5] hover:text-[#0052A5]"
@@ -541,11 +542,11 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 5. MISSION & VISION ═══ */}
-      <section className="bg-[#F3F5F8] py-[88px]">
+      <section className={`bg-[#F3F5F8] ${sec}`}>
         <div className="sidebar-content zag-desktop-content-pad">
           <div className="max-w-[1100px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-10 text-[#2D2D2D]`}>MISSION &amp; VISION</h2>
+              <h2 className={`${sectionHeading} mb-[clamp(14px,3.6vh,40px)] text-[#2D2D2D]`}>MISSION &amp; VISION</h2>
             </Reveal>
             <div className="grid grid-cols-2 gap-6">
               {[
@@ -567,10 +568,10 @@ export function AboutRedesignDesktop() {
                   className="rounded-[14px] p-px"
                   style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
                 >
-                  <div className="h-full min-h-[240px] rounded-[14px] bg-[#FCFCFC] p-8" style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}>
-                    <span className="mb-5 block h-[3px] w-10 rounded-full bg-[#0052A5]" />
-                    <p className="mb-4 text-[18px] font-bold uppercase tracking-[0.26em]">{card.label}</p>
-                    <p className="text-[17px] leading-[1.65] tracking-[0.02em]">{card.text}</p>
+                  <div className="h-full min-h-[clamp(180px,38vh,280px)] rounded-[14px] bg-[#FCFCFC] p-[clamp(18px,3.4vh,32px)]" style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}>
+                    <span className="mb-[clamp(10px,2vh,20px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
+                    <p className="mb-[clamp(8px,1.6vh,16px)] text-[clamp(14px,2.4vh,18px)] font-bold uppercase tracking-[0.26em]">{card.label}</p>
+                    <p className="text-[clamp(13px,2.15vh,17px)] leading-[1.6] tracking-[0.02em]">{card.text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -580,10 +581,10 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 6. CORE VALUES ═══ */}
-      <section className="sidebar-content zag-desktop-content-pad py-[88px]">
+      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-10 text-[#2D2D2D]`}>CORE VALUES</h2>
+            <h2 className={`${sectionHeading} mb-[clamp(14px,3.6vh,40px)] text-[#2D2D2D]`}>CORE VALUES</h2>
           </Reveal>
           <div className="grid grid-cols-[1fr_1.15fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
             <div role="tablist" aria-label="Core values" className="flex flex-col">
@@ -595,18 +596,18 @@ export function AboutRedesignDesktop() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => setValueIndex(i)}
-                    className={`flex h-[84px] items-center gap-5 border-b border-[#2D2D2D]/15 px-7 text-left transition-colors last:border-b-0 ${
+                    className={`flex h-[clamp(44px,9vh,84px)] items-center gap-5 border-b border-[#2D2D2D]/15 px-[clamp(16px,2.2vw,28px)] text-left transition-colors last:border-b-0 ${
                       active ? "bg-[#0B0E0A] text-[#FCFCFC]" : "text-[#2D2D2D] hover:bg-[#EEF2F7]"
                     }`}
                   >
-                    <span className={`text-[13px] tracking-[0.12em] ${active ? "text-[#5b9bf0]" : "text-[#6b7380]"}`}>{String(i + 1).padStart(2, "0")}</span>
-                    <span className="zag-heading flex-1 text-[19px] font-bold uppercase tracking-[0.04em]">{v.title}</span>
-                    <ArrowRight size={20} strokeWidth={1.8} className={`transition-opacity ${active ? "opacity-100" : "opacity-0"}`} />
+                    <span className={`text-[clamp(11px,1.7vh,13px)] tracking-[0.12em] ${active ? "text-[#5b9bf0]" : "text-[#6b7380]"}`}>{String(i + 1).padStart(2, "0")}</span>
+                    <span className="zag-heading flex-1 text-[clamp(13px,2.5vh,19px)] font-bold uppercase tracking-[0.04em]">{v.title}</span>
+                    <ArrowRight size={18} strokeWidth={1.8} className={`transition-opacity ${active ? "opacity-100" : "opacity-0"}`} />
                   </button>
                 )
               })}
             </div>
-            <div className="relative flex items-center border-l border-[#2D2D2D] px-14 py-10">
+            <div className="relative flex items-center border-l border-[#2D2D2D] px-[clamp(20px,3.6vw,56px)] py-[clamp(14px,3vh,40px)]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={value.title}
@@ -615,9 +616,9 @@ export function AboutRedesignDesktop() {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.4, ease: EASE }}
                 >
-                  <span className="mb-6 block h-[3px] w-12 rounded-full bg-[#0052A5]" />
-                  <h3 className="zag-heading text-[34px] font-bold uppercase leading-[1.05] tracking-[0.03em]">{value.title}</h3>
-                  <p className="mt-6 text-[19px] leading-[1.65] tracking-[0.01em] text-[#3a4252]">{value.description}</p>
+                  <span className="mb-[clamp(10px,2.4vh,24px)] block h-[3px] w-12 rounded-full bg-[#0052A5]" />
+                  <h3 className="zag-heading text-[clamp(20px,4.4vh,34px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">{value.title}</h3>
+                  <p className="mt-[clamp(8px,2vh,24px)] text-[clamp(14px,2.4vh,19px)] leading-[1.6] tracking-[0.01em] text-[#3a4252]">{value.description}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -626,15 +627,15 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 7. MEET OUR TEAM ═══ */}
-      <section className="bg-[#F3F5F8] py-[88px]">
+      <section className={`bg-[#F3F5F8] ${sec}`}>
         <div className="sidebar-content zag-desktop-content-pad">
           <div className="max-w-[1100px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-10 text-[#2D2D2D]`}>MEET OUR TEAM</h2>
+              <h2 className={`${sectionHeading} mb-[clamp(12px,3vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-[400px_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
-              <div className="relative min-h-[480px] bg-[#EEF2F7]">
+            <div className="grid h-[clamp(290px,54vh,480px)] grid-cols-[clamp(230px,30vw,400px)_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
+              <div className="relative bg-[#EEF2F7]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={member.name}
@@ -648,7 +649,7 @@ export function AboutRedesignDesktop() {
                   </motion.div>
                 </AnimatePresence>
               </div>
-              <div className="flex items-center border-l border-[#2D2D2D] px-12 py-10">
+              <div className="flex items-center overflow-hidden border-l border-[#2D2D2D] px-[clamp(20px,3.2vw,48px)] py-[clamp(10px,2.4vh,36px)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={member.name}
@@ -657,16 +658,16 @@ export function AboutRedesignDesktop() {
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.4, ease: EASE }}
                   >
-                    <h3 className="zag-heading text-[32px] font-bold uppercase leading-[1.05] tracking-[0.03em]">{member.name}</h3>
-                    <p className="mt-3 text-[13px] uppercase tracking-[0.22em] text-[#0052A5]">{info.role}</p>
-                    <p className="mt-4 text-[13px] tracking-[0.06em] text-[#6b7380]">{info.studied}</p>
-                    <p className="mt-5 text-[16px] leading-[1.65] tracking-[0.01em] text-[#3a4252]">{info.bio}</p>
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <h3 className="zag-heading text-[clamp(18px,4vh,32px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">{member.name}</h3>
+                    <p className="mt-2 text-[clamp(10px,1.6vh,13px)] uppercase tracking-[0.2em] text-[#0052A5]">{info.role}</p>
+                    <p className="mt-2 text-[clamp(11px,1.6vh,13px)] tracking-[0.04em] text-[#6b7380]">{info.studied}</p>
+                    <p className="mt-[clamp(6px,1.4vh,16px)] text-[clamp(12px,2vh,16px)] leading-[1.55] tracking-[0.01em] text-[#3a4252]">{info.bio}</p>
+                    <div className="mt-[clamp(8px,1.6vh,18px)] flex flex-wrap gap-[6px]">
                       {info.chips.map((chip) => (
-                        <span key={chip} className="rounded-[8px] border border-[#2D2D2D]/30 px-3 py-[7px] text-[12px] uppercase tracking-[0.14em] text-[#2D2D2D]">{chip}</span>
+                        <span key={chip} className="rounded-[8px] border border-[#2D2D2D]/30 px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.12em] text-[#2D2D2D]">{chip}</span>
                       ))}
                     </div>
-                    <div className="mt-6 flex gap-2">
+                    <div className="mt-[clamp(8px,1.8vh,20px)] flex gap-2">
                       {member.linkedIn !== "#" && (
                         <CtaButton href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={ctaSmall}>LinkedIn</CtaButton>
                       )}
@@ -678,7 +679,7 @@ export function AboutRedesignDesktop() {
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-5 gap-3">
+            <div className="mt-[clamp(8px,1.8vh,20px)] grid grid-cols-5 gap-3">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 return (
@@ -686,12 +687,12 @@ export function AboutRedesignDesktop() {
                     key={m.name}
                     onClick={() => setTeamIndex(i)}
                     aria-pressed={active}
-                    className={`flex flex-col gap-2 rounded-[10px] px-4 py-4 text-left transition-colors ${
+                    className={`flex flex-col gap-1 rounded-[10px] px-[clamp(10px,1.2vw,16px)] py-[clamp(8px,1.8vh,16px)] text-left transition-colors ${
                       active ? "border-2 border-[#0052A5] bg-white" : "border border-[#2D2D2D]/25 bg-white/70 hover:bg-white"
                     }`}
                   >
-                    <span className="text-[13px] font-semibold uppercase leading-[1.2] tracking-[0.06em]">{m.name}</span>
-                    <span className="text-[11px] uppercase leading-[1.35] tracking-[0.1em] text-[#6b7380]">{memberInfo[m.name].role}</span>
+                    <span className="text-[clamp(11px,1.7vh,13px)] font-semibold uppercase leading-[1.2] tracking-[0.05em]">{m.name}</span>
+                    <span className="text-[clamp(9px,1.4vh,11px)] uppercase leading-[1.3] tracking-[0.08em] text-[#6b7380]">{memberInfo[m.name].role}</span>
                   </button>
                 )
               })}
@@ -701,7 +702,7 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 8. WHERE WE WORK ═══ */}
-      <section className="sidebar-content zag-desktop-content-pad py-[88px]">
+      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
           <div className="flex items-end justify-between gap-8">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
@@ -709,7 +710,7 @@ export function AboutRedesignDesktop() {
             </Reveal>
             <CtaButton href="/projects" className={ctaLight}>View Projects</CtaButton>
           </div>
-          <div className="mt-10 grid grid-cols-3 gap-6">
+          <div className="mt-[clamp(12px,3vh,40px)] grid grid-cols-3 gap-6">
             {regions.map((r, i) => (
               <motion.div
                 key={r.code}
@@ -717,14 +718,14 @@ export function AboutRedesignDesktop() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: EASE }}
-                className={`flex min-h-[280px] flex-col rounded-[14px] border p-8 ${
+                className={`flex min-h-[clamp(170px,34vh,280px)] flex-col rounded-[14px] border p-[clamp(16px,3vh,32px)] ${
                   i === 0 ? "border-[#0052A5] bg-[#0B0E0A] text-[#FCFCFC]" : "border-[#2D2D2D] bg-white text-[#2D2D2D]"
                 }`}
                 style={{ boxShadow: panelShadow }}
               >
-                <p className={`zag-heading text-[64px] font-bold leading-none tracking-[0.04em] ${i === 0 ? "text-[#5b9bf0]" : "text-[#0052A5]"}`}>{r.code}</p>
-                <h3 className="mt-6 text-[21px] font-bold uppercase tracking-[0.08em]">{r.name}</h3>
-                <p className={`mt-3 text-[15px] leading-[1.65] tracking-[0.01em] ${i === 0 ? "text-[#FCFCFC]/85" : "text-[#3a4252]"}`}>{r.text}</p>
+                <p className={`zag-heading text-[clamp(36px,8vh,64px)] font-bold leading-none tracking-[0.04em] ${i === 0 ? "text-[#5b9bf0]" : "text-[#0052A5]"}`}>{r.code}</p>
+                <h3 className="mt-[clamp(8px,2.2vh,24px)] text-[clamp(14px,2.5vh,21px)] font-bold uppercase tracking-[0.08em]">{r.name}</h3>
+                <p className={`mt-2 text-[clamp(12px,1.95vh,15px)] leading-[1.55] tracking-[0.01em] ${i === 0 ? "text-[#FCFCFC]/85" : "text-[#3a4252]"}`}>{r.text}</p>
               </motion.div>
             ))}
           </div>
@@ -734,22 +735,22 @@ export function AboutRedesignDesktop() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="mt-6 flex items-center justify-between gap-8 rounded-[14px] border border-[#2D2D2D]/25 bg-[#F3F5F8] px-8 py-6"
+            className="mt-[clamp(10px,2vh,24px)] flex items-center justify-between gap-8 rounded-[14px] border border-[#2D2D2D]/25 bg-[#F3F5F8] px-[clamp(16px,2.4vw,32px)] py-[clamp(10px,2vh,24px)]"
           >
             <div>
-              <p className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#0052A5]">Earlier experience, abroad</p>
-              <p className="mt-2 text-[15px] leading-[1.6] tracking-[0.01em] text-[#3a4252]">
+              <p className="text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">Earlier experience, abroad</p>
+              <p className="mt-1 text-[clamp(12px,1.95vh,15px)] leading-[1.5] tracking-[0.01em] text-[#3a4252]">
                 Before Zagrosia, the principal designed and supervised structures across Iran.
               </p>
             </div>
-            <div className="flex flex-wrap justify-end gap-2">
+            <div className="flex flex-wrap justify-end gap-[6px]">
               {earlierSites.map((s) => (
-                <span key={s} className="rounded-[8px] border border-[#2D2D2D]/30 bg-white px-3 py-[7px] text-[12px] uppercase tracking-[0.14em]">{s}</span>
+                <span key={s} className="rounded-[8px] border border-[#2D2D2D]/30 bg-white px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.12em]">{s}</span>
               ))}
             </div>
           </motion.div>
 
-          <div className="mt-10 flex gap-4">
+          <div className="mt-[clamp(10px,2.4vh,32px)] flex gap-4">
             <CtaButton href="/contact" className={ctaLight}>Work with Us</CtaButton>
             <CtaButton href="/contact" className={ctaLight}>Get In Touch</CtaButton>
           </div>
