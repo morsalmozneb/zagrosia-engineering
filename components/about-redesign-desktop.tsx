@@ -331,23 +331,69 @@ export function AboutRedesignDesktop() {
         />
         <div className="sidebar-content zag-desktop-content-pad relative z-10 flex h-full flex-col justify-end pb-[64px]">
           <div className="flex items-end justify-between gap-10">
-            <div className="max-w-[720px]">
-              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                <p className="mb-5 text-[14px] font-bold uppercase tracking-[0.28em] text-[#FCFCFC]/85">Zagrosia Engineering Inc.</p>
-              </Reveal>
-              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                <h1 className="zag-heading text-[56px] font-bold uppercase leading-[1.02] tracking-[0.03em]">
-                  About <span className="text-[#5b9bf0]">Zagrosia</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={0.2} duration={0.65}>
-                <p className="mt-4 text-[18px] uppercase tracking-[0.3em] text-[#FCFCFC]">Built like a mountain range</p>
-              </Reveal>
-              <Reveal delay={0.3} duration={0.65}>
-                <p className="mt-7 max-w-[520px] border-l-2 border-[#FCFCFC] pl-5 text-[17px] leading-[1.65] tracking-[0.01em] text-[#FCFCFC]/95">
-                  Named for the Zagros Mountains: a range built by pressure, held by structure.
-                </p>
-              </Reveal>
+            <div className="max-w-[700px]">
+              <h1 className="font-sans font-bold tracking-tight">
+                <motion.span
+                  className="block text-[#FCFCFC]"
+                  style={{ fontSize: "clamp(34px,6.4vh,52px)", lineHeight: 1.02 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                >ABOUT</motion.span>
+                <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
+                  <motion.span
+                    className="block text-[#0150a9]"
+                    style={{ fontSize: "clamp(34px,6.4vh,52px)", lineHeight: 1.01 }}
+                    initial={{ y: "105%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  >ZAGROSIA</motion.span>
+                </span>
+              </h1>
+              <motion.p
+                className="mt-[clamp(10px,2.4vh,24px)] font-light text-[#FCFCFC]"
+                style={{ fontSize: "clamp(16px,3.4vh,28px)", letterSpacing: "0.2em" }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >BUILT LIKE A MOUNTAIN RANGE</motion.p>
+              <div className="relative mt-[clamp(14px,3.4vh,40px)] pl-8">
+                <motion.div
+                  className="pointer-events-none absolute left-0 top-0 w-px"
+                  style={{
+                    height: "calc(100% - 8px)",
+                    background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
+                    transformOrigin: "top",
+                  }}
+                  initial={{ scaleY: 0 }}
+                  animate={{ scaleY: 1 }}
+                  transition={{ duration: 1.1, delay: 0.5, ease: "easeInOut" }}
+                />
+                <motion.p
+                  className="text-[#FCFCFC]"
+                  style={{ fontSize: "clamp(14px,2.4vh,20px)", letterSpacing: "0.14em" }}
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                >M.Sc. STRUCTURAL</motion.p>
+                <motion.p
+                  className="text-[#FCFCFC]"
+                  style={{ fontSize: "clamp(12px,2vh,16px)", letterSpacing: "0.14em", marginTop: "clamp(8px,2.2vh,22px)" }}
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                >BC · AB · SK</motion.p>
+                <motion.div
+                  style={{ marginTop: "clamp(10px,3vh,32px)" }}
+                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "clamp(13px,2.2vh,17px)", lineHeight: 1.65, letterSpacing: "0.02em" }}>
+                    Structural Design · Seismic Expertise · Since 1993
+                  </p>
+                  <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "clamp(13px,2.2vh,17px)", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "10px" }}>
+                    Named for the Zagros Mountains: a range built by pressure, held by structure.
+                  </p>
+                </motion.div>
+              </div>
             </div>
             <div className="hidden min-w-[210px] flex-col gap-5 pb-1 xl:flex">
               {heroStats.map((s, i) => (
