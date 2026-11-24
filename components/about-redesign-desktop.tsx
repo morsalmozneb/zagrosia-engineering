@@ -205,7 +205,8 @@ const glance = [
 
 const storySteps = [
   {
-    tag: "1993 · Beginnings",
+    year: "1993",
+    label: "Beginnings",
     text: (
       <>
         Seyed Hassan Mozneb began designing structures in <Mark>1993</Mark>. Over the next two decades he worked on refineries, a nuclear power plant and hundreds of homes in <Mark>Iran</Mark>, and ran two structural design firms of his own.
@@ -213,7 +214,8 @@ const storySteps = [
     ),
   },
   {
-    tag: "2019 · British Columbia",
+    year: "2019",
+    label: "British Columbia",
     text: (
       <>
         He then rebuilt his practice in British Columbia, studying Canadian construction at <Mark>BCIT</Mark> and structural engineering through <Mark>SEABC</Mark>, and has been designing and reviewing structures here since 2019.
@@ -221,7 +223,8 @@ const storySteps = [
     ),
   },
   {
-    tag: "Today · Zagrosia",
+    year: "Today",
+    label: "Zagrosia",
     text: (
       <>
         Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.
@@ -384,159 +387,111 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 2. OUR STORY ═══ */}
-      <section
-        className={`sidebar-content zag-desktop-content-pad overflow-hidden ${sec}`}
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(1,80,169,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(1,80,169,0.045) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-        }}
-      >
-        {/* skyline that draws itself along the bottom */}
-        <svg className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] w-full" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-          <motion.path
-            d="M0 250 L120 190 L200 220 L330 120 L430 190 L560 70 L660 170 L780 100 L890 180 L1010 90 L1130 190 L1240 140 L1340 200 L1440 160"
-            fill="none"
-            stroke="#0052A5"
-            strokeOpacity="0.28"
-            strokeWidth="1.6"
-            vectorEffect="non-scaling-stroke"
-            initial={reduced ? false : { pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M0 285 L160 240 L300 270 L470 200 L620 260 L800 210 L960 265 L1120 220 L1300 268 L1440 235"
-            fill="none"
-            stroke="#5b9bf0"
-            strokeOpacity="0.3"
-            strokeWidth="1.2"
-            vectorEffect="non-scaling-stroke"
-            initial={reduced ? false : { pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 3.4, delay: 0.3, ease: "easeInOut" }}
-          />
-        </svg>
-
-        <div className="relative grid max-w-[1100px] grid-cols-[1.3fr_1fr] gap-[clamp(32px,5vw,72px)]">
-          {/* LEFT: story as a growing timeline */}
-          <div>
+      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+        <div className="grid max-w-[1100px] grid-cols-[1.3fr_1fr] gap-[clamp(32px,5vw,72px)]">
+          {/* LEFT: home-page style heading block with the fading blue line */}
+          <div className="relative pl-5">
+            <motion.div
+              className="absolute left-0 top-0 w-[3px] rounded-full"
+              style={{
+                height: "100%",
+                background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
+                transformOrigin: "top",
+              }}
+              initial={reduced ? false : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+            />
             <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <div className="mb-[clamp(6px,1.6vh,16px)] flex items-center gap-3">
-                <motion.span
-                  className="h-[2px] w-10 origin-left bg-[#0052A5]"
-                  initial={reduced ? false : { scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: EASE }}
-                />
-                <p className={eyebrow}>Our story</p>
-              </div>
+              <p className={`mb-[clamp(4px,1.2vh,12px)] ${eyebrow}`}>Our story</p>
             </Reveal>
-            <h2 className="zag-heading mb-[clamp(12px,3vh,30px)] flex flex-wrap text-[clamp(24px,5.2vh,38px)] font-bold uppercase leading-[1.1] tracking-[0.03em]">
+            <h2 className="zag-heading mb-[clamp(10px,2.6vh,26px)] flex flex-wrap text-[clamp(20px,3.8vh,28px)] leading-[1.1] text-[#2d2d2d]">
               {storyWords.map((w, i) => (
                 <span key={i} className="mr-[0.3em] inline-block overflow-hidden pb-[0.1em]">
                   <motion.span
-                    className={`relative inline-block ${w === "Zagros" ? "text-[#0052A5]" : ""}`}
-                    initial={reduced ? false : { y: "115%", rotate: 4 }}
-                    whileInView={{ y: 0, rotate: 0 }}
+                    className={`inline-block ${w === "Zagros" ? "text-[#0052A5]" : ""}`}
+                    initial={reduced ? false : { y: "115%" }}
+                    whileInView={{ y: 0 }}
                     viewport={{ once: true, amount: 0.8 }}
                     transition={{ duration: 0.75, delay: 0.1 + i * 0.09, ease: EASE }}
                   >
                     {w}
-                    {w === "Zagros" && (
-                      <motion.span
-                        className="absolute inset-x-0 bottom-[-2px] h-[3px] origin-left rounded-full bg-[#0052A5]"
-                        initial={reduced ? false : { scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.9, ease: EASE }}
-                      />
-                    )}
                   </motion.span>
                 </span>
               ))}
             </h2>
 
-            <div className="relative pl-[clamp(34px,3.2vw,46px)]">
-              <div className="absolute bottom-[6px] left-[10px] top-[6px] w-[2px] bg-[#2D2D2D]/10" />
-              <motion.div
-                className="absolute bottom-[6px] left-[10px] top-[6px] w-[2px] origin-top"
-                style={{ background: "linear-gradient(180deg, #0150a9 0%, #5b9bf0 100%)" }}
-                initial={reduced ? false : { scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 2.2, delay: 0.4, ease: "easeInOut" }}
-              />
-              <div className="space-y-[clamp(10px,2.2vh,22px)]">
-                {storySteps.map((step, i) => (
+            <div>
+              {storySteps.map((step, i) => (
+                <div key={step.year} className="relative grid grid-cols-[clamp(96px,10vw,140px)_1fr] gap-[clamp(12px,1.6vw,24px)] py-[clamp(8px,1.9vh,18px)]">
+                  <motion.span
+                    className="absolute inset-x-0 top-0 h-px origin-left bg-[#2D2D2D]/20"
+                    initial={reduced ? false : { scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.9, delay: 0.3 + i * 0.25, ease: EASE }}
+                  />
                   <motion.div
-                    key={step.tag}
-                    className="relative"
-                    initial={reduced ? false : { opacity: 0, x: -22 }}
+                    initial={reduced ? false : { opacity: 0, x: -16 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.7, delay: 0.35 + i * 0.35, ease: EASE }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.7, delay: 0.4 + i * 0.25, ease: EASE }}
                   >
-                    <motion.span
-                      className="absolute left-[calc(-1*clamp(34px,3.2vw,46px)+1px)] top-[1px] flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-[#0052A5] bg-[#FCFCFC]"
-                      initial={reduced ? false : { scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{ type: "spring", stiffness: 380, damping: 16, delay: 0.5 + i * 0.35 }}
-                    >
-                      <motion.span
-                        className="h-[8px] w-[8px] rounded-full bg-[#0052A5]"
-                        animate={reduced ? undefined : { scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
-                        transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.6, ease: "easeInOut" }}
-                      />
-                    </motion.span>
-                    <p className="mb-1 text-[clamp(10px,1.55vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{step.tag}</p>
-                    <p className={bodyText}>{step.text}</p>
+                    <p className="zag-heading text-[clamp(18px,3.4vh,26px)] leading-none tracking-[0.04em] text-[#0052A5]">{step.year}</p>
+                    <p className="mt-[6px] text-[clamp(9px,1.4vh,11px)] font-bold uppercase tracking-[0.2em] text-[#6b7380]">{step.label}</p>
                   </motion.div>
-                ))}
-              </div>
+                  <motion.p
+                    className={bodyText}
+                    initial={reduced ? false : { opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.7, delay: 0.5 + i * 0.25, ease: EASE }}
+                  >
+                    {step.text}
+                  </motion.p>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* RIGHT: at-a-glance card */}
           <motion.div
             className="relative self-center overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white"
-            style={{ boxShadow: "0 8px 30px rgba(1,80,169,0.14)" }}
-            initial={reduced ? false : { opacity: 0, y: 28, rotateX: 8 }}
-            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.18)" }}
+            initial={reduced ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           >
-            <motion.div
-              className="absolute inset-x-0 top-0 h-[4px] origin-left"
-              style={{ background: "linear-gradient(90deg, #0150a9, #5b9bf0)" }}
-              initial={reduced ? false : { scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.6, ease: EASE }}
-            />
-            <div className="relative overflow-hidden px-[clamp(16px,2vw,28px)] pb-[clamp(10px,2vh,20px)] pt-[clamp(14px,3vh,28px)]" style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 100%)" }}>
-              <svg className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] w-full" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
-                <motion.path
-                  d="M0 90 L40 60 L70 76 L120 30 L160 64 L210 18 L250 62 L300 36 L350 70 L400 48 L400 100 L0 100 Z"
-                  fill="rgba(91,155,240,0.16)"
-                  stroke="#5b9bf0"
-                  strokeOpacity="0.7"
-                  strokeWidth="1.2"
-                  vectorEffect="non-scaling-stroke"
-                  initial={reduced ? false : { pathLength: 0, fillOpacity: 0 }}
-                  whileInView={{ pathLength: 1, fillOpacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 2.2, delay: 0.5, ease: "easeInOut" }}
-                />
-              </svg>
-              <p className="relative text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Practising since</p>
-              <p className="zag-heading relative mt-1 text-[clamp(38px,9vh,70px)] font-bold leading-none tracking-[0.04em] text-[#FCFCFC]">
+            <div className="px-[clamp(16px,2vw,28px)] pb-[clamp(12px,2.4vh,24px)] pt-[clamp(14px,3vh,28px)]">
+              <p className="text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Practising since</p>
+              <p className="zag-heading mt-1 text-[clamp(40px,9.5vh,76px)] leading-none tracking-[0.04em] text-[#2d2d2d]">
                 <CountUp to={1993} />
               </p>
+              {/* a dot travels along the years */}
+              <div className="relative mt-[clamp(10px,2.2vh,22px)] h-[14px]">
+                <div className="absolute inset-x-0 top-[6px] h-[2px] bg-[#2D2D2D]/15" />
+                <motion.div
+                  className="absolute left-0 top-[6px] h-[2px] w-full origin-left"
+                  style={{ background: "linear-gradient(90deg, #0150a9, #5b9bf0)" }}
+                  initial={reduced ? false : { scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 2.2, delay: 0.5, ease: EASE }}
+                />
+                <motion.span
+                  className="absolute top-0 h-[14px] w-[14px] -translate-x-1/2 rounded-full border-2 border-[#0052A5] bg-white"
+                  initial={reduced ? { left: "100%" } : { left: "0%" }}
+                  whileInView={{ left: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 2.2, delay: 0.5, ease: EASE }}
+                />
+              </div>
+              <div className="mt-2 flex justify-between text-[clamp(9px,1.4vh,11px)] font-bold uppercase tracking-[0.2em] text-[#6b7380]">
+                <span>1993</span>
+                <span>Today</span>
+              </div>
             </div>
             <div>
               {glance.map((row, i) => {
@@ -544,7 +499,7 @@ export function AboutRedesignDesktop() {
                 return (
                   <motion.div
                     key={row.label}
-                    className="group relative flex items-center gap-[clamp(10px,1.2vw,16px)] border-t border-[#2D2D2D]/15 px-[clamp(16px,2vw,28px)] py-[clamp(8px,1.9vh,17px)] transition-colors hover:bg-[#EEF2F7]"
+                    className="group relative flex items-center gap-[clamp(10px,1.2vw,16px)] border-t border-[#2D2D2D]/15 px-[clamp(16px,2vw,28px)] py-[clamp(8px,1.8vh,16px)] transition-colors hover:bg-[#EEF2F7]"
                     initial={reduced ? false : { opacity: 0, x: 24 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
