@@ -13,6 +13,9 @@ const EASE = [0.22, 1, 0.36, 1] as const
 // Hero video. Drop the new clip into /public/videos and put its path here (e.g. "/videos/about-hero.mp4").
 const HERO_VIDEO: string | null = null
 
+// Story video (right side of "Our story"). Put the Muse clip in /public/videos and set its path here (e.g. "/videos/about-story.mp4").
+const STORY_VIDEO: string | null = null
+
 const ctaLight =
   "inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[44px] px-7 text-[14px]"
 const ctaDark =
@@ -316,8 +319,8 @@ export function AboutRedesignDesktop() {
 
       {/* ═══ 2. OUR STORY ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="grid max-w-[1100px] grid-cols-[1.15fr_1fr] items-center gap-[clamp(32px,5vw,72px)]">
-          {/* LEFT: heading + description, with the home-page fading blue line */}
+        <div className="grid max-w-[1100px] grid-cols-[1.45fr_1fr] items-center gap-[clamp(40px,6vw,88px)]">
+          {/* LEFT: heading + description, same type sizes as the home page */}
           <div className="relative pl-5">
             <motion.div
               className="absolute left-0 top-0 w-[3px] rounded-full"
@@ -332,84 +335,93 @@ export function AboutRedesignDesktop() {
               transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
             />
             <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <p className={`mb-[clamp(6px,1.6vh,16px)] ${eyebrow}`}>Our story</p>
+              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Our story</p>
             </Reveal>
             <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-              <h2 className="zag-heading mb-[clamp(10px,2.6vh,28px)] text-[clamp(24px,5.2vh,36px)] font-bold uppercase leading-[1.08] tracking-[0.03em]">
-                From the <span className="text-[#0052A5]">Zagros</span> to the Pacific
+              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#2d2d2d]">
+                From the <span className="text-[#0052A5]">Zagros</span>
+                <br />
+                to the Pacific
               </h2>
             </Reveal>
-            <div className="space-y-[clamp(8px,1.9vh,20px)]">
+            <div className="space-y-4">
               {storyParas.map((t, i) => (
                 <Reveal key={i} delay={0.2 + i * 0.08} duration={0.65}>
-                  <p className={bodyText}>{t}</p>
+                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">{t}</p>
                 </Reveal>
               ))}
             </div>
-            <div className="mt-[clamp(12px,3vh,32px)] grid grid-cols-3 border-t border-[#2D2D2D]/70">
+            <div className="mt-6 grid grid-cols-3 border-t border-[#2D2D2D]/70">
               {storyFacts.map((f, i) => (
                 <motion.div
                   key={f.label}
-                  className={`pt-[clamp(8px,1.8vh,16px)] ${i > 0 ? "border-l border-[#2D2D2D]/25 pl-[clamp(12px,1.6vw,22px)]" : ""}`}
+                  className={`pt-3 ${i > 0 ? "border-l border-[#2D2D2D]/25 pl-4" : ""}`}
                   initial={reduced ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.6, delay: 0.5 + i * 0.1, ease: EASE }}
                 >
-                  <p className="text-[clamp(9px,1.4vh,11px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{f.label}</p>
-                  <p className="mt-1 text-[clamp(12px,1.95vh,15px)] leading-[1.35] tracking-[0.02em]">{f.value}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{f.label}</p>
+                  <p className="mt-1 text-[14px] leading-[1.35] tracking-[0.02em] text-[#3a3a3a]">{f.value}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          {/* RIGHT: real project photos from the principal's earlier work, mountains behind */}
-          <div className="relative h-[clamp(300px,64vh,540px)]">
-            <motion.div
-              className="absolute bottom-0 left-[16%] right-0 top-0 overflow-hidden rounded-[14px] border border-[#2D2D2D]"
-              style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}
-              initial={reduced ? false : { clipPath: "inset(100% 0 0 0)" }}
-              whileInView={{ clipPath: "inset(0% 0 0 0)" }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.3, ease: EASE }}
+          {/* RIGHT: video placeholder + P.Eng. seal */}
+          <motion.div
+            className="relative"
+            initial={reduced ? false : { opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
+          >
+            <div
+              className="relative aspect-[4/5] max-h-[min(66svh,560px)] w-full overflow-hidden rounded-[14px] border border-[#2D2D2D]"
+              style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)", background: "linear-gradient(180deg, #0B1226 0%, #161f43 60%, #0a3f86 100%)" }}
             >
-              <motion.div
-                className="absolute inset-0"
-                initial={reduced ? false : { scale: 1.18 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 2.4, ease: EASE }}
-              >
-                <Image
-                  src="/images/projects/residential-high-rise-construction-iran/01-hero.jpg"
-                  alt="Residential high-rise in Iran designed by the principal, with mountains behind"
-                  fill
-                  sizes="520px"
-                  className="object-cover"
-                />
-              </motion.div>
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1226]/85 to-transparent px-5 pb-4 pt-14 text-[#FCFCFC]">
-                <p className="text-[clamp(9px,1.4vh,11px)] font-bold uppercase tracking-[0.22em] text-[#5b9bf0]">Earlier work · Iran</p>
-                <p className="mt-1 text-[clamp(12px,1.95vh,15px)] tracking-[0.04em]">Residential high-rise, with the Zagros behind</p>
-              </div>
-            </motion.div>
-            <motion.div
-              className="absolute bottom-[7%] left-0 aspect-[4/3] w-[44%] overflow-hidden rounded-[12px] border-[5px] border-[#FCFCFC]"
-              style={{ boxShadow: "0 8px 26px rgba(0,0,0,0.38)" }}
-              initial={reduced ? false : { opacity: 0, x: -30, y: 20 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              {STORY_VIDEO ? (
+                <video className="absolute inset-0 h-full w-full object-cover" src={STORY_VIDEO} autoPlay muted loop playsInline />
+              ) : (
+                <>
+                  <RidgeArt className="absolute inset-x-0 bottom-0 h-[62%] w-full" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-[#FCFCFC]/85">
+                    <span className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-[#FCFCFC]/70">
+                      <span className="ml-[3px] h-0 w-0 border-y-[9px] border-l-[15px] border-y-transparent border-l-[#FCFCFC]" />
+                    </span>
+                    <span className="text-[11px] uppercase tracking-[0.26em]">Video coming soon</span>
+                  </div>
+                </>
+              )}
+            </div>
+            {/* P.Eng. seal, same mark as the home page */}
+            <motion.svg
+              viewBox="0 0 120 120"
+              role="img"
+              aria-label="Professional Engineer, signed and sealed"
+              className="absolute -bottom-[26px] -left-[30px] h-[104px] w-[104px] rounded-full bg-[#FCFCFC]"
+              style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.22)" }}
+              initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1, delay: 0.9, ease: EASE }}
+              transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.9 }}
             >
-              <Image
-                src="/images/projects/two-storey-vertical-extension-iran/01-hero.jpg"
-                alt="Steel frame under construction in Iran"
-                fill
-                sizes="240px"
-                className="object-cover"
-              />
-            </motion.div>
-          </div>
+              <defs>
+                <path id="about-peng-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
+                <path id="about-peng-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
+              </defs>
+              <g fill="none" stroke="#0150a9">
+                <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
+                <circle cx="60" cy="60" r="52" strokeWidth="1" />
+                <circle cx="60" cy="60" r="33" strokeWidth="1" />
+              </g>
+              <g fill="#0150a9" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
+                <text fontSize="8" letterSpacing="0.9"><textPath href="#about-peng-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
+                <text fontSize="8" letterSpacing="1.2"><textPath href="#about-peng-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
+                <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
+              </g>
+            </motion.svg>
+          </motion.div>
         </div>
       </section>
 
