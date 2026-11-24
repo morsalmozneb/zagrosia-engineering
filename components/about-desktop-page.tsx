@@ -10,7 +10,7 @@ const EASE = [0.0, 0.0, 0.2, 1] as const
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
-const team = [
+export const team = [
   {
     name: "SEYED HASSAN MOZNEB",
     image: "/images/Homayoun-team.jpg",
@@ -68,7 +68,7 @@ const team = [
   },
 ]
 
-const coreValues = [
+export const coreValues = [
   {
     title: "Engineering Excellence",
     description: "Every project is approached with technical rigor, sound engineering judgment, and a commitment to quality.",
@@ -101,7 +101,7 @@ const coreValues = [
   },
 ]
 
-const milestones = [
+export const milestones = [
   {
     year: "1989",
     title: "B.Sc. Civil Engineering",

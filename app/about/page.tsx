@@ -40,7 +40,7 @@ const jsonLd = {
   ],
 }
 
-import { AboutDesktopPage } from "@/components/about-desktop-page"
+import { AboutRedesignDesktop } from "@/components/about-redesign-desktop"
 import { AboutCompanyMilestonesSection } from "@/components/about-company-milestones-section"
 import { AboutMeetTeamSection } from "@/components/about-meet-team-section"
 import { AboutPageHeader } from "@/components/about-page-header"
@@ -73,7 +73,7 @@ export default function AboutPage() {
         <AboutWhereWeWorkSection />
       </div>
 
-      <AboutDesktopPage />
+      <AboutRedesignDesktop />
       <Footer />
     </main>
   )
