@@ -225,7 +225,7 @@ export function ProjectsSection() {
 
         {/* Stage: selected project big in front, neighbours smaller and tucked behind */}
         <div className="sidebar-content relative flex flex-1 flex-col justify-center pb-[clamp(10px,2.5vh,28px)] pt-[clamp(10px,2.5vh,28px)] zag-desktop-content-pad" style={{ zIndex: 2 }}>
-          <div className="relative mx-auto h-[clamp(300px,62vh,520px)] max-w-full" style={{ aspectRatio: "1.87 / 1" }}>
+          <div className="relative mx-auto h-[clamp(300px,62vh,520px)] w-full max-w-[1120px]">
             {[
               { role: "prev", idx: prevIndex },
               { role: "next", idx: nextIndex },
@@ -237,10 +237,10 @@ export function ProjectsSection() {
               const go = () => goTo(idx, role === "prev" ? -1 : 1)
               const pos =
                 role === "active"
-                  ? { left: "23.5%", top: 0, height: "100%", width: "53%", zIndex: 20 }
+                  ? { left: "22%", top: 0, height: "100%", width: "56%", zIndex: 20 }
                   : role === "prev"
-                    ? { left: 0, top: "13%", height: "74%", width: "46%", zIndex: 10 }
-                    : { right: 0, top: "13%", height: "74%", width: "46%", zIndex: 10 }
+                    ? { left: 0, top: "13%", height: "74%", width: "48%", zIndex: 10 }
+                    : { right: 0, top: "13%", height: "74%", width: "48%", zIndex: 10 }
               return (
                 <motion.article
                   key={`${role}-${idx}`}
@@ -278,7 +278,7 @@ export function ProjectsSection() {
                       </div>
                     </div>
                   ) : (
-                    <div className={`flex flex-1 flex-col pt-[clamp(6px,1.4vh,14px)] ${role === "prev" ? "pl-[clamp(14px,2vh,22px)] pr-[52%]" : "pl-[52%] pr-[clamp(14px,2vh,22px)]"}`}>
+                    <div className={`flex flex-1 flex-col pt-[clamp(6px,1.4vh,14px)] ${role === "prev" ? "pl-[clamp(14px,2vh,22px)] pr-[50%]" : "pl-[50%] pr-[clamp(14px,2vh,22px)]"}`}>
                       <h3 className="line-clamp-2 text-[clamp(13px,2.1vh,18px)] font-bold capitalize leading-[1.2]">{short}</h3>
                       <div className="mt-auto flex items-center gap-2 pb-[clamp(8px,1.8vh,18px)] text-[clamp(11px,1.8vh,15px)] text-[#3a5a96]">
                         <MapPin size={15} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
