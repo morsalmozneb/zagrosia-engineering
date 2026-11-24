@@ -11,7 +11,8 @@ import { coreValues, team } from "./about-desktop-page"
 const EASE = [0.22, 1, 0.36, 1] as const
 
 // Hero video. Drop the new clip into /public/videos and put its path here (e.g. "/videos/about-hero.mp4").
-const HERO_VIDEO: string | null = null
+const HERO_VIDEO: string | null = "/videos/about-hero.mp4"
+const HERO_POSTER = "/videos/about-hero-poster.jpg"
 
 // Story video (right side of "Our story"). Put the Muse clip in /public/videos and set its path here (e.g. "/videos/about-story.mp4").
 const STORY_VIDEO: string | null = null
@@ -277,7 +278,16 @@ export function AboutRedesignDesktop() {
       >
         <RidgeArt className="absolute inset-x-0 bottom-0 h-[78%] w-full" />
         {HERO_VIDEO && (
-          <video className="absolute inset-0 h-full w-full object-cover" src={HERO_VIDEO} autoPlay muted loop playsInline aria-hidden="true" />
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={HERO_VIDEO}
+            poster={HERO_POSTER}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          />
         )}
         <div
           className="absolute inset-0"
