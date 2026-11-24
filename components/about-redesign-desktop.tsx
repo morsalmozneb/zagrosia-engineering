@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import Image from "next/image"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { AnimatePresence, animate, motion, useInView, useReducedMotion } from "framer-motion"
+import { ArrowRight, Compass, Globe, MapPin, User } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { coreValues, team } from "./about-desktop-page"
@@ -148,7 +148,7 @@ const stations: Station[] = [
     place: "Coquitlam, British Columbia",
     bullets: [
       "Founded Zagrosia to bring his practice together under one name.",
-      "Works with a team of five across structural, civil, architectural and digital design.",
+      "Works alongside engineers, drafters and designers across structural, civil, architectural and digital work.",
       "Serves clients in British Columbia, Alberta and Saskatchewan.",
     ],
   },
@@ -197,12 +197,40 @@ const heroStats = [
 ]
 
 const glance = [
-  { label: "Founded by", value: "Seyed Hassan Mozneb, M.Sc., P.Eng." },
-  { label: "Based in", value: "Coquitlam, BC" },
-  { label: "Serving", value: "British Columbia · Alberta · Saskatchewan" },
-  { label: "Team", value: "Five people, four disciplines" },
-  { label: "Experience", value: "Iran and Canada" },
+  { icon: User, label: "Founded by", value: "Seyed Hassan Mozneb, M.Sc., P.Eng." },
+  { icon: MapPin, label: "Based in", value: "Coquitlam, BC" },
+  { icon: Compass, label: "Serving", value: "British Columbia · Alberta · Saskatchewan" },
+  { icon: Globe, label: "Experience", value: "Iran and Canada" },
 ]
+
+const storySteps = [
+  {
+    tag: "1993 · Beginnings",
+    text: (
+      <>
+        Seyed Hassan Mozneb began designing structures in <Mark>1993</Mark>. Over the next two decades he worked on refineries, a nuclear power plant and hundreds of homes in <Mark>Iran</Mark>, and ran two structural design firms of his own.
+      </>
+    ),
+  },
+  {
+    tag: "2019 · British Columbia",
+    text: (
+      <>
+        He then rebuilt his practice in British Columbia, studying Canadian construction at <Mark>BCIT</Mark> and structural engineering through <Mark>SEABC</Mark>, and has been designing and reviewing structures here since 2019.
+      </>
+    ),
+  },
+  {
+    tag: "Today · Zagrosia",
+    text: (
+      <>
+        Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.
+      </>
+    ),
+  },
+]
+
+const storyWords = ["From", "the", "Zagros", "to", "the", "Pacific"]
 
 const regions = [
   { code: "BC", name: "British Columbia", text: "Our home province. The team is based in Coquitlam, with projects from Metro Vancouver to the Interior." },
@@ -236,6 +264,51 @@ function RidgeArt({ className = "", drift = true }: { className?: string; drift?
         fill="rgba(8,12,24,0.78)"
       />
     </svg>
+  )
+}
+
+// ─── SMALL ANIMATED PIECES ───────────────────────────────────────────────────
+
+function Mark({ children }: { children: ReactNode }) {
+  const reduced = useReducedMotion()
+  return (
+    <motion.span
+      className="font-semibold text-[#0150a9]"
+      style={{
+        backgroundImage: "linear-gradient(rgba(91,155,240,0.28), rgba(91,155,240,0.28))",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 92%",
+        boxDecorationBreak: "clone",
+        WebkitBoxDecorationBreak: "clone",
+      }}
+      initial={reduced ? { backgroundSize: "100% 42%" } : { backgroundSize: "0% 42%" }}
+      whileInView={{ backgroundSize: "100% 42%" }}
+      viewport={{ once: true, amount: 0.8 }}
+      transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
+    >
+      {children}
+    </motion.span>
+  )
+}
+
+function CountUp({ to, from = 1900, className = "" }: { to: number; from?: number; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.6 })
+  const reduced = useReducedMotion()
+  const [n, setN] = useState(reduced ? to : from)
+  useEffect(() => {
+    if (reduced) {
+      setN(to)
+      return
+    }
+    if (!inView) return
+    const c = animate(from, to, { duration: 2.2, ease: [0.22, 1, 0.36, 1], onUpdate: (v) => setN(Math.round(v)) })
+    return () => c.stop()
+  }, [inView, reduced, from, to])
+  return (
+    <span ref={ref} className={className}>
+      {n}
+    </span>
   )
 }
 
@@ -311,58 +384,185 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 2. OUR STORY ═══ */}
-      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="grid max-w-[1100px] grid-cols-[1.25fr_1fr] gap-[clamp(32px,5vw,72px)]">
-          <div className="relative pl-5">
-            <motion.div
-              className="absolute bottom-0 left-0 top-[4px] w-[4px] rounded-full"
-              initial={reduced ? false : { scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
-              style={{ transformOrigin: "top", background: "linear-gradient(180deg, #0150a9 0%, rgba(1,80,169,0) 100%)" }}
-            />
+      <section
+        className={`sidebar-content zag-desktop-content-pad overflow-hidden ${sec}`}
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(1,80,169,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(1,80,169,0.045) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      >
+        {/* skyline that draws itself along the bottom */}
+        <svg className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] w-full" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+          <motion.path
+            d="M0 250 L120 190 L200 220 L330 120 L430 190 L560 70 L660 170 L780 100 L890 180 L1010 90 L1130 190 L1240 140 L1340 200 L1440 160"
+            fill="none"
+            stroke="#0052A5"
+            strokeOpacity="0.28"
+            strokeWidth="1.6"
+            vectorEffect="non-scaling-stroke"
+            initial={reduced ? false : { pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M0 285 L160 240 L300 270 L470 200 L620 260 L800 210 L960 265 L1120 220 L1300 268 L1440 235"
+            fill="none"
+            stroke="#5b9bf0"
+            strokeOpacity="0.3"
+            strokeWidth="1.2"
+            vectorEffect="non-scaling-stroke"
+            initial={reduced ? false : { pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 3.4, delay: 0.3, ease: "easeInOut" }}
+          />
+        </svg>
+
+        <div className="relative grid max-w-[1100px] grid-cols-[1.3fr_1fr] gap-[clamp(32px,5vw,72px)]">
+          {/* LEFT: story as a growing timeline */}
+          <div>
             <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <p className={`mb-[clamp(6px,1.6vh,16px)] ${eyebrow}`}>Our story</p>
+              <div className="mb-[clamp(6px,1.6vh,16px)] flex items-center gap-3">
+                <motion.span
+                  className="h-[2px] w-10 origin-left bg-[#0052A5]"
+                  initial={reduced ? false : { scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: EASE }}
+                />
+                <p className={eyebrow}>Our story</p>
+              </div>
             </Reveal>
-            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-              <h2 className="zag-heading mb-[clamp(10px,2.6vh,28px)] text-[clamp(24px,5.2vh,36px)] font-bold uppercase leading-[1.08] tracking-[0.03em]">
-                From the <span className="text-[#0052A5]">Zagros</span> to the Pacific
-              </h2>
-            </Reveal>
-            <div className="space-y-[clamp(8px,1.9vh,20px)]">
-              <Reveal delay={0.2} duration={0.65}>
-                <p className={bodyText}>
-                  Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, a nuclear power plant and hundreds of homes in Iran, and ran two structural design firms of his own.
-                </p>
-              </Reveal>
-              <Reveal delay={0.28} duration={0.65}>
-                <p className={bodyText}>
-                  He then rebuilt his practice in British Columbia, studying Canadian construction at BCIT and structural engineering through SEABC, and has been designing and reviewing structures here since 2019.
-                </p>
-              </Reveal>
-              <Reveal delay={0.34} duration={0.65}>
-                <p className={bodyText}>
-                  Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.
-                </p>
-              </Reveal>
+            <h2 className="zag-heading mb-[clamp(12px,3vh,30px)] flex flex-wrap text-[clamp(24px,5.2vh,38px)] font-bold uppercase leading-[1.1] tracking-[0.03em]">
+              {storyWords.map((w, i) => (
+                <span key={i} className="mr-[0.3em] inline-block overflow-hidden pb-[0.1em]">
+                  <motion.span
+                    className={`relative inline-block ${w === "Zagros" ? "text-[#0052A5]" : ""}`}
+                    initial={reduced ? false : { y: "115%", rotate: 4 }}
+                    whileInView={{ y: 0, rotate: 0 }}
+                    viewport={{ once: true, amount: 0.8 }}
+                    transition={{ duration: 0.75, delay: 0.1 + i * 0.09, ease: EASE }}
+                  >
+                    {w}
+                    {w === "Zagros" && (
+                      <motion.span
+                        className="absolute inset-x-0 bottom-[-2px] h-[3px] origin-left rounded-full bg-[#0052A5]"
+                        initial={reduced ? false : { scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.9, ease: EASE }}
+                      />
+                    )}
+                  </motion.span>
+                </span>
+              ))}
+            </h2>
+
+            <div className="relative pl-[clamp(34px,3.2vw,46px)]">
+              <div className="absolute bottom-[6px] left-[10px] top-[6px] w-[2px] bg-[#2D2D2D]/10" />
+              <motion.div
+                className="absolute bottom-[6px] left-[10px] top-[6px] w-[2px] origin-top"
+                style={{ background: "linear-gradient(180deg, #0150a9 0%, #5b9bf0 100%)" }}
+                initial={reduced ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 2.2, delay: 0.4, ease: "easeInOut" }}
+              />
+              <div className="space-y-[clamp(10px,2.2vh,22px)]">
+                {storySteps.map((step, i) => (
+                  <motion.div
+                    key={step.tag}
+                    className="relative"
+                    initial={reduced ? false : { opacity: 0, x: -22 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.7, delay: 0.35 + i * 0.35, ease: EASE }}
+                  >
+                    <motion.span
+                      className="absolute left-[calc(-1*clamp(34px,3.2vw,46px)+1px)] top-[1px] flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-[#0052A5] bg-[#FCFCFC]"
+                      initial={reduced ? false : { scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 16, delay: 0.5 + i * 0.35 }}
+                    >
+                      <motion.span
+                        className="h-[8px] w-[8px] rounded-full bg-[#0052A5]"
+                        animate={reduced ? undefined : { scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
+                        transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.6, ease: "easeInOut" }}
+                      />
+                    </motion.span>
+                    <p className="mb-1 text-[clamp(10px,1.55vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{step.tag}</p>
+                    <p className={bodyText}>{step.text}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="self-center border-t-2 border-[#2D2D2D]">
-            {glance.map((row, i) => (
-              <motion.div
-                key={row.label}
-                initial={reduced ? false : { opacity: 0, x: 16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.09, ease: EASE }}
-                className="border-b border-[#2D2D2D]/20 py-[clamp(8px,1.9vh,18px)]"
-              >
-                <p className="text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{row.label}</p>
-                <p className="mt-1 text-[clamp(14px,2.4vh,18px)] leading-[1.35] tracking-[0.02em]">{row.value}</p>
-              </motion.div>
-            ))}
-          </div>
+
+          {/* RIGHT: at-a-glance card */}
+          <motion.div
+            className="relative self-center overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white"
+            style={{ boxShadow: "0 8px 30px rgba(1,80,169,0.14)" }}
+            initial={reduced ? false : { opacity: 0, y: 28, rotateX: 8 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+          >
+            <motion.div
+              className="absolute inset-x-0 top-0 h-[4px] origin-left"
+              style={{ background: "linear-gradient(90deg, #0150a9, #5b9bf0)" }}
+              initial={reduced ? false : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.6, ease: EASE }}
+            />
+            <div className="relative overflow-hidden px-[clamp(16px,2vw,28px)] pb-[clamp(10px,2vh,20px)] pt-[clamp(14px,3vh,28px)]" style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 100%)" }}>
+              <svg className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] w-full" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
+                <motion.path
+                  d="M0 90 L40 60 L70 76 L120 30 L160 64 L210 18 L250 62 L300 36 L350 70 L400 48 L400 100 L0 100 Z"
+                  fill="rgba(91,155,240,0.16)"
+                  stroke="#5b9bf0"
+                  strokeOpacity="0.7"
+                  strokeWidth="1.2"
+                  vectorEffect="non-scaling-stroke"
+                  initial={reduced ? false : { pathLength: 0, fillOpacity: 0 }}
+                  whileInView={{ pathLength: 1, fillOpacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 2.2, delay: 0.5, ease: "easeInOut" }}
+                />
+              </svg>
+              <p className="relative text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Practising since</p>
+              <p className="zag-heading relative mt-1 text-[clamp(38px,9vh,70px)] font-bold leading-none tracking-[0.04em] text-[#FCFCFC]">
+                <CountUp to={1993} />
+              </p>
+            </div>
+            <div>
+              {glance.map((row, i) => {
+                const Icon = row.icon
+                return (
+                  <motion.div
+                    key={row.label}
+                    className="group relative flex items-center gap-[clamp(10px,1.2vw,16px)] border-t border-[#2D2D2D]/15 px-[clamp(16px,2vw,28px)] py-[clamp(8px,1.9vh,17px)] transition-colors hover:bg-[#EEF2F7]"
+                    initial={reduced ? false : { opacity: 0, x: 24 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.7 + i * 0.12, ease: EASE }}
+                  >
+                    <span className="absolute inset-y-0 left-0 w-[3px] origin-top scale-y-0 bg-[#0052A5] transition-transform duration-300 group-hover:scale-y-100" />
+                    <span className="flex h-[clamp(28px,4.6vh,38px)] w-[clamp(28px,4.6vh,38px)] flex-shrink-0 items-center justify-center rounded-full bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+                      <Icon size={17} strokeWidth={1.8} />
+                    </span>
+                    <span>
+                      <span className="block text-[clamp(9px,1.4vh,11px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{row.label}</span>
+                      <span className="mt-[2px] block text-[clamp(13px,2.15vh,17px)] leading-[1.3] tracking-[0.02em]">{row.value}</span>
+                    </span>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
         </div>
       </section>
 
