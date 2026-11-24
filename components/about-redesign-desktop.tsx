@@ -194,11 +194,6 @@ const memberInfo: Record<
   },
 }
 
-const heroStats = [
-  { value: "1993", label: "Practising since" },
-  { value: "799", label: "Homes designed in Shiraz" },
-  { value: "3", label: "Provinces served" },
-]
 
 const storyParas = [
   "Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, industrial facilities and hundreds of homes in Iran, and ran two structural design firms of his own.",
@@ -378,7 +373,7 @@ export function AboutRedesignDesktop() {
                   style={{ fontSize: "20px", letterSpacing: "0.14em" }}
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >M.Sc. STRUCTURAL</motion.p>
+                >M.Sc. STRUCTURAL · P.ENG</motion.p>
                 <motion.p
                   className="text-[#FCFCFC]"
                   style={{ fontSize: "16px", letterSpacing: "0.14em", marginTop: "clamp(18px,4.5vh,38px)" }}
@@ -398,16 +393,6 @@ export function AboutRedesignDesktop() {
                   </p>
                 </motion.div>
               </div>
-            </div>
-            <div className="hidden min-w-[210px] flex-col gap-5 pb-1 xl:flex">
-              {heroStats.map((s, i) => (
-                <Reveal key={s.label} delay={0.35 + i * 0.1} duration={0.6}>
-                  <div className="border-t border-[#FCFCFC]/50 pt-3">
-                    <p className="text-[26px] font-semibold leading-none tracking-[0.08em]">{s.value}</p>
-                    <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[#FCFCFC]/85">{s.label}</p>
-                  </div>
-                </Reveal>
-              ))}
             </div>
           </div>
         </div>
