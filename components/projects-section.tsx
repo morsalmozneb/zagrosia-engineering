@@ -249,7 +249,7 @@ export function ProjectsSection() {
             </motion.button>
 
             {/* Three cards, all the same size. The middle one is the selected project. */}
-            <div className="grid grid-cols-3 items-end gap-6">
+            <div className="grid grid-cols-3 items-stretch justify-center">
               {[
                 { role: "prev", idx: prevIndex },
                 { role: "active", idx: desktopIndex },
@@ -261,7 +261,7 @@ export function ProjectsSection() {
                 return (
                   <motion.article
                     key={`${role}-${idx}`}
-                    className="flex flex-col overflow-hidden rounded-[14px] bg-[#fcfcfc] text-[#2d2d2d]"
+                    className={`relative flex w-[38.46%] flex-shrink-0 flex-col overflow-hidden rounded-[14px] bg-[#fcfcfc] text-[#2d2d2d] ${role === "prev" ? "z-10 mr-[-7.69%]" : role === "next" ? "z-10 ml-[-7.69%]" : "z-20"}`}
                     style={{
                       cursor: active ? "default" : "pointer",
                       boxShadow: active
@@ -278,7 +278,7 @@ export function ProjectsSection() {
                     role={active ? undefined : "button"}
                     aria-label={active ? undefined : `View ${p.title}`}
                   >
-                    <div className={`relative w-full overflow-hidden ${active ? "h-[calc(clamp(110px,26vh,230px)+28px)]" : "h-[clamp(110px,26vh,230px)]"}`}>
+                    <div className="relative h-[clamp(110px,26vh,230px)] w-full overflow-hidden">
                       <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 30vw, 380px" className="object-cover" />
                     </div>
                     <div className="flex flex-1 flex-col px-5 pb-[clamp(10px,2vh,20px)] pt-[clamp(8px,1.6vh,16px)]">
