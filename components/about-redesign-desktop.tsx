@@ -201,7 +201,7 @@ const heroStats = [
 ]
 
 const storyParas = [
-  "Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, a nuclear power plant and hundreds of homes in Iran, and ran two structural design firms of his own.",
+  "Seyed Hassan Mozneb began designing structures in 1993. Over the next two decades he worked on refineries, industrial facilities and hundreds of homes in Iran, and ran two structural design firms of his own.",
   "He then rebuilt his practice in British Columbia, studying Canadian construction at BCIT and structural engineering through SEABC, and has been designing and reviewing structures here since 2019.",
   "Zagrosia Engineering Inc. is the firm he founded to bring that experience, together with a small team of engineers, drafters and designers, to clients across British Columbia, Alberta and Saskatchewan.",
 ]
@@ -415,7 +415,7 @@ export function AboutRedesignDesktop() {
 
       {/* ═══ 2. OUR STORY ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="grid max-w-[1100px] grid-cols-[1.1fr_1fr] items-center gap-[clamp(36px,5vw,72px)]">
+        <div className="grid max-w-[1320px] grid-cols-[1.9fr_0.8fr] items-center gap-[clamp(32px,4vw,64px)]">
           {/* LEFT: heading + description, same type sizes as the home page */}
           <div className="relative pl-5">
             <motion.div
