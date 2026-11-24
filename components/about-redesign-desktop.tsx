@@ -319,6 +319,7 @@ export function AboutRedesignDesktop() {
             poster={HERO_POSTER}
             autoPlay
             muted
+            loop
             playsInline
             preload="auto"
             aria-hidden="true"
