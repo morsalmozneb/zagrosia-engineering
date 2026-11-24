@@ -79,10 +79,10 @@ export function EngineeringSolutions() {
 
           {/* Vertical fading line — draws in from top */}
           <motion.div
-            className="absolute left-0 top-0 w-[3px]"
+            className="absolute left-0 top-0 w-[3px] rounded-full"
             style={{
               height: "100%",
-              background: "#2d2d2d",
+              background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
               transformOrigin: "top",
             }}
             initial={reducedMotion ? false : { scaleY: 0 }}
