@@ -190,7 +190,7 @@ export function ProjectsSection() {
       </div>
 
       {/* ── DESKTOP: header + 3-card slider ── */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:flex lg:min-h-[100svh] lg:flex-col">
         {/* Desktop building background image */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
           <Image src="/images/projects-building-top.jpg" alt="" fill className="object-cover object-top" aria-hidden="true" priority />
@@ -202,12 +202,12 @@ export function ProjectsSection() {
         />
         {/* Top header area */}
         <div className="relative" style={{ zIndex: 2 }}>
-          <div className="sidebar-content pb-2 pt-12 zag-desktop-content-pad">
+          <div className="sidebar-content pb-0 pt-[clamp(20px,5vh,48px)] zag-desktop-content-pad">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
               <h2 className="zag-heading text-[28px] leading-none text-white">PROJECTS</h2>
             </Reveal>
             <Reveal delay={0.2} duration={0.65}>
-              <p className="mt-4 leading-[1.6] tracking-[0.02em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>
+              <p className="mt-[clamp(6px,1.5vh,16px)] leading-[1.6] tracking-[0.02em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>
                 Structural engineering projects across Western Canada — seismic compliant, code-driven, precision-engineered.
               </p>
             </Reveal>
@@ -215,7 +215,7 @@ export function ProjectsSection() {
         </div>
 
         {/* 3-card slider */}
-        <div className="sidebar-content relative overflow-hidden pb-8 pt-6 zag-desktop-content-pad" style={{ zIndex: 2 }}>
+        <div className="sidebar-content relative flex flex-1 flex-col justify-center overflow-hidden pb-[clamp(12px,3vh,32px)] pt-[clamp(8px,2vh,24px)] zag-desktop-content-pad" style={{ zIndex: 2 }}>
 
           <div className="relative">
             {/* Left arrow */}
@@ -249,7 +249,7 @@ export function ProjectsSection() {
             </motion.button>
 
             {/* Three cards, all the same size. The middle one is the selected project. */}
-            <div className="grid grid-cols-3 items-stretch gap-6 pt-3">
+            <div className="grid grid-cols-3 items-stretch gap-6">
               {[
                 { role: "prev", idx: prevIndex },
                 { role: "active", idx: desktopIndex },
@@ -265,12 +265,12 @@ export function ProjectsSection() {
                     style={{
                       cursor: active ? "default" : "pointer",
                       boxShadow: active
-                        ? "0 0 0 2px #1f69d7, 0 24px 48px rgba(0,0,0,0.45)"
+                        ? "0 0 0 2px #1f69d7, 0 14px 30px rgba(0,0,0,0.4)"
                         : "0 10px 26px rgba(0,0,0,0.28)",
                     }}
                     initial={{ opacity: 0, x: direction * 28, filter: "blur(4px)" }}
-                    animate={{ opacity: active ? 1 : 0.7, x: 0, y: active ? -8 : 0, filter: "blur(0px)" }}
-                    whileHover={active ? undefined : { opacity: 0.95, y: -4 }}
+                    animate={{ opacity: active ? 1 : 0.7, x: 0, y: 0, filter: "blur(0px)" }}
+                    whileHover={active ? undefined : { opacity: 0.95 }}
                     transition={{ duration: 0.4, ease: EASE }}
                     onClick={active ? undefined : go}
                     onKeyDown={active ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go() } }}
@@ -278,18 +278,18 @@ export function ProjectsSection() {
                     role={active ? undefined : "button"}
                     aria-label={active ? undefined : `View ${p.title}`}
                   >
-                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    <div className="relative w-full overflow-hidden h-[clamp(110px,26vh,230px)]">
                       <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 30vw, 380px" className="object-cover" />
                     </div>
-                    <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
-                      <h3 className="line-clamp-2 min-h-[2.6em] text-[15px] font-semibold leading-[1.3] tracking-[0.06em] text-[#2d2d2d]">{p.title}</h3>
-                      <p className="mt-2 line-clamp-3 min-h-[4.5em] text-[13px] leading-[1.5] tracking-[0.01em] text-[#5a5a5a]">{p.description}</p>
-                      <div className="mt-3 flex max-h-[54px] flex-wrap gap-[6px] overflow-hidden">
+                    <div className="flex flex-1 flex-col px-5 pb-[clamp(10px,2vh,20px)] pt-[clamp(8px,1.6vh,16px)]">
+                      <h3 className="line-clamp-2 min-h-[2.6em] text-[clamp(13px,1.9vh,15px)] font-semibold leading-[1.3] tracking-[0.06em] text-[#2d2d2d]">{p.title}</h3>
+                      <p className="mt-[clamp(4px,1vh,8px)] line-clamp-2 min-h-[3em] text-[clamp(12px,1.7vh,13px)] leading-[1.5] tracking-[0.01em] text-[#5a5a5a]">{p.description}</p>
+                      <div className="mt-[clamp(6px,1.2vh,12px)] flex h-[26px] flex-nowrap gap-[6px] overflow-hidden">
                         {p.tags.map((tag) => (
-                          <span key={tag} className="rounded-[8px] border border-[#aab4c2] px-[8px] py-[4px] text-[12px] leading-none tracking-[0.06em] text-[#6b7380]">{tag}</span>
+                          <span key={tag} className="whitespace-nowrap rounded-[8px] border border-[#aab4c2] px-[8px] py-[5px] text-[12px] leading-none tracking-[0.06em] text-[#6b7380]">{tag}</span>
                         ))}
                       </div>
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+                      <div className="mt-auto flex items-center justify-between gap-3 pt-[clamp(8px,1.6vh,16px)]">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] tracking-[0.06em] text-[#6e7684]">
                           <MapPin size={13} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
                         </div>
@@ -303,7 +303,7 @@ export function ProjectsSection() {
           </div>{/* end relative cards wrapper */}
 
           {/* Dots */}
-          <div className="mt-6 flex justify-center gap-[8px]">
+          <div className="mt-[clamp(10px,2.2vh,24px)] flex justify-center gap-[8px]">
             {projects.map((_, index) => (
               <button
                 key={index}
@@ -315,7 +315,7 @@ export function ProjectsSection() {
           </div>
 
           {/* All Projects button */}
-          <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-5 flex justify-center pb-2">
+          <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-[clamp(8px,2vh,20px)] flex justify-center">
             <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
               All Projects
             </CtaButton>
