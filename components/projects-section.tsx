@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
-import { MapPin } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, MapPin } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import { motion } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
@@ -200,126 +201,124 @@ export function ProjectsSection() {
           className="absolute inset-0 pointer-events-none"
           style={{ zIndex: 1, background: "linear-gradient(180deg, rgba(16,34,56,0.49) 0%, rgba(16,34,56,1) 96%)" }}
         />
-        {/* Top header area */}
+        {/* Header: title + subtitle left, All Projects link right */}
         <div className="relative" style={{ zIndex: 2 }}>
-          <div className="sidebar-content pb-0 pt-[clamp(20px,5vh,48px)] zag-desktop-content-pad">
-            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className="zag-heading text-[28px] leading-none text-white">PROJECTS</h2>
-            </Reveal>
-            <Reveal delay={0.2} duration={0.65}>
-              <p className="mt-[clamp(6px,1.5vh,16px)] leading-[1.6] tracking-[0.02em] text-white/85 whitespace-nowrap" style={{ fontSize: "16px" }}>
-                Structural engineering projects across Western Canada — seismic compliant, code-driven, precision-engineered.
-              </p>
-            </Reveal>
+          <div className="sidebar-content flex items-end justify-between gap-6 pb-0 pt-[clamp(20px,5vh,48px)] zag-desktop-content-pad">
+            <div>
+              <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+                <h2 className="zag-heading text-[28px] leading-none text-white">PROJECTS</h2>
+              </Reveal>
+              <Reveal delay={0.2} duration={0.65}>
+                <p className="mt-[clamp(6px,1.4vh,14px)] leading-[1.6] tracking-[0.04em] text-white/90" style={{ fontSize: "16px" }}>
+                  Structural engineering projects across Western Canada.
+                </p>
+              </Reveal>
+            </div>
+            <Link
+              href="/projects"
+              className="mb-1 inline-flex items-center gap-2 border-b border-white pb-[3px] text-[16px] tracking-[0.04em] text-white transition-opacity hover:opacity-80"
+            >
+              All Projects <ArrowRight size={17} strokeWidth={1.8} />
+            </Link>
           </div>
         </div>
 
-        {/* 3-card slider */}
-        <div className="sidebar-content relative flex flex-1 flex-col justify-center overflow-hidden pb-[clamp(12px,3vh,32px)] pt-[clamp(8px,2vh,24px)] zag-desktop-content-pad" style={{ zIndex: 2 }}>
-
-          <div className="relative">
-            {/* Left arrow */}
-            <motion.button
-              onClick={() => goTo(prevIndex, -1)}
-              className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
-              style={{ left: "-62px", top: "50%" }}
-              aria-label="Previous project"
-              whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
-              whileTap={{ scale: 0.93 }}
-              transition={{ duration: 0.18 }}
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </motion.button>
-
-            {/* Right arrow */}
-            <motion.button
-              onClick={() => goTo(nextIndex, 1)}
-              className="absolute z-40 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
-              style={{ right: "-62px", top: "50%" }}
-              aria-label="Next project"
-              whileHover={{ scale: 1.12, backgroundColor: "rgba(255,255,255,0.22)" }}
-              whileTap={{ scale: 0.93 }}
-              transition={{ duration: 0.18 }}
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </motion.button>
-
-            {/* Three cards, all the same size. The middle one is the selected project. */}
-            <div className="flex items-stretch justify-center">
-              {[
-                { role: "prev", idx: prevIndex },
-                { role: "active", idx: desktopIndex },
-                { role: "next", idx: nextIndex },
-              ].map(({ role, idx }) => {
-                const p = projects[idx]
-                const active = role === "active"
-                const go = () => goTo(idx, role === "prev" ? -1 : 1)
-                return (
-                  <motion.article
-                    key={`${role}-${idx}`}
-                    className={`relative flex w-[38.46%] flex-shrink-0 flex-col overflow-hidden rounded-[14px] bg-[#fcfcfc] text-[#2d2d2d] ${role === "prev" ? "z-10 mr-[-7.69%]" : role === "next" ? "z-10 ml-[-7.69%]" : "z-20"}`}
-                    style={{
-                      cursor: active ? "default" : "pointer",
-                      boxShadow: active
-                        ? "0 0 0 2px #1f69d7, 0 14px 30px rgba(0,0,0,0.4)"
-                        : "0 10px 26px rgba(0,0,0,0.28)",
-                    }}
-                    initial={{ opacity: 0, x: direction * 28, filter: "blur(4px)" }}
-                    animate={{ opacity: active ? 1 : 0.7, x: 0, y: 0, filter: "blur(0px)" }}
-                    whileHover={active ? undefined : { opacity: 0.95 }}
-                    transition={{ duration: 0.4, ease: EASE }}
-                    onClick={active ? undefined : go}
-                    onKeyDown={active ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go() } }}
-                    tabIndex={active ? undefined : 0}
-                    role={active ? undefined : "button"}
-                    aria-label={active ? undefined : `View ${p.title}`}
-                  >
-                    <div className="relative h-[clamp(110px,26vh,230px)] w-full overflow-hidden">
-                      <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 30vw, 380px" className="object-cover" />
-                    </div>
-                    <div className="flex flex-1 flex-col px-5 pb-[clamp(10px,2vh,20px)] pt-[clamp(8px,1.6vh,16px)]">
-                      <h3 className="line-clamp-2 min-h-[2.6em] text-[clamp(13px,1.9vh,15px)] font-semibold leading-[1.3] tracking-[0.06em] text-[#2d2d2d]">{p.title}</h3>
-                      <p className="mt-[clamp(4px,1vh,8px)] line-clamp-2 min-h-[3em] text-[clamp(12px,1.7vh,13px)] leading-[1.5] tracking-[0.01em] text-[#5a5a5a]">{p.description}</p>
-                      <div className="mt-[clamp(6px,1.2vh,12px)] flex h-[26px] flex-nowrap gap-[6px] overflow-hidden">
-                        {p.tags.map((tag) => (
-                          <span key={tag} className="whitespace-nowrap rounded-[8px] border border-[#aab4c2] px-[8px] py-[5px] text-[12px] leading-none tracking-[0.06em] text-[#6b7380]">{tag}</span>
-                        ))}
-                      </div>
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-[clamp(8px,1.6vh,16px)]">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] tracking-[0.06em] text-[#6e7684]">
-                          <MapPin size={13} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
+        {/* Stage: selected project big in front, neighbours smaller and tucked behind */}
+        <div className="sidebar-content relative flex flex-1 flex-col justify-center pb-[clamp(10px,2.5vh,28px)] pt-[clamp(10px,2.5vh,28px)] zag-desktop-content-pad" style={{ zIndex: 2 }}>
+          <div className="relative mx-auto h-[clamp(290px,54vh,500px)] w-full max-w-[1060px]">
+            {[
+              { role: "prev", idx: prevIndex },
+              { role: "next", idx: nextIndex },
+              { role: "active", idx: desktopIndex },
+            ].map(({ role, idx }) => {
+              const p = projects[idx]
+              const active = role === "active"
+              const short = p.title.split(",")[0].toLowerCase()
+              const go = () => goTo(idx, role === "prev" ? -1 : 1)
+              const pos =
+                role === "active"
+                  ? { left: "23.5%", top: 0, height: "100%", width: "53%", zIndex: 20 }
+                  : role === "prev"
+                    ? { left: 0, top: "13%", height: "74%", width: "46%", zIndex: 10 }
+                    : { right: 0, top: "13%", height: "74%", width: "46%", zIndex: 10 }
+              return (
+                <motion.article
+                  key={`${role}-${idx}`}
+                  className={`absolute flex flex-col overflow-hidden rounded-[18px] ${active ? "bg-white text-[#132647]" : "bg-[#a9b6cb]/85 text-[#132647] backdrop-blur-sm"}`}
+                  style={{
+                    ...pos,
+                    cursor: active ? "default" : "pointer",
+                    boxShadow: active ? "0 22px 50px rgba(0,0,0,0.45)" : "0 12px 28px rgba(0,0,0,0.3)",
+                  }}
+                  initial={{ opacity: 0, x: direction * 24, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  onClick={active ? undefined : go}
+                  onKeyDown={active ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go() } }}
+                  tabIndex={active ? undefined : 0}
+                  role={active ? undefined : "button"}
+                  aria-label={active ? undefined : `View ${p.title}`}
+                >
+                  <div className={`relative w-full flex-shrink-0 overflow-hidden ${active ? "h-[52%]" : "h-[66%]"}`}>
+                    <Image src={p.image} alt={p.title} fill sizes="(max-width: 1280px) 40vw, 560px" className="object-cover" />
+                  </div>
+                  {active ? (
+                    <div className="flex flex-1 flex-col px-[clamp(16px,2.4vh,26px)] pb-[clamp(10px,2.2vh,22px)] pt-[clamp(8px,1.8vh,18px)]">
+                      <h3 className="line-clamp-2 text-[clamp(18px,3.2vh,28px)] font-bold capitalize leading-[1.15] tracking-[0.01em]">{short}</h3>
+                      <p className="mt-[clamp(4px,1vh,10px)] line-clamp-3 text-[clamp(12px,1.9vh,16px)] leading-[1.45] text-[#1d2a44]">{p.description}</p>
+                      <div className="mt-auto flex items-center justify-between gap-3 pt-2">
+                        <div className="flex min-w-0 items-center gap-2 text-[clamp(12px,1.9vh,16px)] text-[#3a64b8]">
+                          <MapPin size={16} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
                         </div>
-                        <CtaButton href="/projects" className="inline-flex flex-shrink-0 items-center justify-center whitespace-nowrap zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.08em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[36px] px-4 text-[12px]">Learn More</CtaButton>
+                        <Link href="/projects" className="inline-flex flex-shrink-0 items-center gap-1.5 border-b border-[#1f69d7] pb-[2px] text-[clamp(12px,1.9vh,16px)] text-[#1f69d7]">
+                          View project <ArrowRight size={15} strokeWidth={2} />
+                        </Link>
                       </div>
                     </div>
-                  </motion.article>
-                )
-              })}
-            </div>
-          </div>{/* end relative cards wrapper */}
-
-          {/* Dots */}
-          <div className="mt-[clamp(10px,2.2vh,24px)] flex justify-center gap-[8px]">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goTo(index, index > desktopIndex ? 1 : -1)}
-                className={`h-[10px] w-[10px] rounded-[10px] transition-colors ${index === desktopIndex ? "bg-[#1f69d7]" : "bg-white/40"}`}
-                aria-label={`Go to project ${index + 1}`}
-              />
-            ))}
+                  ) : (
+                    <div className="flex flex-1 flex-col px-[clamp(14px,2vh,22px)] pt-[clamp(6px,1.4vh,14px)]">
+                      <h3 className="line-clamp-2 text-[clamp(13px,2.1vh,18px)] font-bold capitalize leading-[1.2]">{short}</h3>
+                      <div className="mt-auto flex items-center gap-2 pb-[clamp(8px,1.8vh,18px)] text-[clamp(11px,1.8vh,15px)] text-[#3a5a96]">
+                        <MapPin size={15} strokeWidth={1.8} className="flex-shrink-0" /><span className="truncate">{p.location}</span>
+                      </div>
+                    </div>
+                  )}
+                </motion.article>
+              )
+            })}
           </div>
 
-          {/* All Projects button */}
-          <Reveal variant="scaleUp" delay={0.2} duration={0.5} className="mt-[clamp(8px,2vh,20px)] flex justify-center">
-            <CtaButton href="/projects" className="inline-flex items-center justify-center zag-cta rounded-[10px] border border-[#FCFCFC] text-[#FCFCFC] font-medium tracking-[0.1em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[40px] px-5 text-[12px] lg:h-[44px] lg:px-7 lg:text-[14px]">
-              All Projects
-            </CtaButton>
-          </Reveal>
+          {/* Arrows + dots */}
+          <div className="mt-[clamp(10px,2.6vh,28px)] flex items-center justify-center gap-6">
+            <motion.button
+              onClick={() => goTo(prevIndex, -1)}
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-full border border-white text-white"
+              aria-label="Previous project"
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.15)" }}
+              whileTap={{ scale: 0.93 }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </motion.button>
+            <div className="flex gap-[14px]">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goTo(index, index > desktopIndex ? 1 : -1)}
+                  className={`h-[10px] w-[10px] rounded-full transition-colors ${index === desktopIndex ? "bg-[#1f69d7]" : "bg-white/50"}`}
+                  aria-label={`Go to project ${index + 1}`}
+                />
+              ))}
+            </div>
+            <motion.button
+              onClick={() => goTo(nextIndex, 1)}
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-full border border-white text-white"
+              aria-label="Next project"
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.15)" }}
+              whileTap={{ scale: 0.93 }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </motion.button>
+          </div>
         </div>
       </div>
     </section>
