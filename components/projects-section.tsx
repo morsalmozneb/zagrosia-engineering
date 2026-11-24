@@ -270,9 +270,6 @@ export function ProjectsSection() {
                         <span className="absolute left-4 top-4 rounded-full bg-[#1f69d7] px-3 py-[5px] text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white shadow-md">
                           {tagList[0]}
                         </span>
-                        <span className="absolute right-4 top-4 rounded-full border border-white/40 bg-white/15 px-3 py-[5px] text-[11px] font-medium leading-none tracking-[0.14em] text-white backdrop-blur-md">
-                          {String(idx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-                        </span>
                       </>
                     ) : (
                       <span className="absolute left-3 top-3 rounded-full border border-white/40 bg-white/15 px-2.5 py-[4px] text-[10px] font-medium leading-none tracking-[0.14em] text-white backdrop-blur-md">
@@ -295,10 +292,7 @@ export function ProjectsSection() {
                           <span className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-full bg-[#e6eefc]"><MapPin size={15} strokeWidth={1.8} /></span>
                           <span className="truncate">{p.location}</span>
                         </div>
-                        <Link href="/projects" className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-[#1f69d7] py-[8px] pl-4 pr-3 text-[clamp(12px,1.8vh,15px)] font-medium text-white transition-colors hover:bg-[#0052A5]">
-                          View project
-                          <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white/20 transition-transform group-hover:translate-x-[2px]"><ArrowRight size={14} strokeWidth={2.2} /></span>
-                        </Link>
+                        <CtaButton href="/projects" className="inline-flex flex-shrink-0 items-center justify-center whitespace-nowrap zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.08em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[36px] px-4 text-[12px]">View project</CtaButton>
                       </div>
                     </div>
                   ) : (
@@ -319,7 +313,7 @@ export function ProjectsSection() {
           <div className="mt-[clamp(10px,2.6vh,28px)] flex items-center justify-center gap-6">
             <motion.button
               onClick={() => goTo(prevIndex, -1)}
-              className="flex h-[48px] w-[48px] items-center justify-center rounded-full border border-white text-white"
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
               aria-label="Previous project"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.15)" }}
               whileTap={{ scale: 0.93 }}
@@ -338,7 +332,7 @@ export function ProjectsSection() {
             </div>
             <motion.button
               onClick={() => goTo(nextIndex, 1)}
-              className="flex h-[48px] w-[48px] items-center justify-center rounded-full border border-white text-white"
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] border border-white/40 bg-white/10 text-white backdrop-blur-sm"
               aria-label="Next project"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.15)" }}
               whileTap={{ scale: 0.93 }}
