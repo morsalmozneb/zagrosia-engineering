@@ -283,71 +283,21 @@ function StoryVideo({ src, poster }: { src: string; poster: string }) {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 
-/* Separator under the principal's photo: draws itself like a measured beam, with
-   tick marks that rise in sequence and a blue light that keeps travelling along it. */
+/* Separator under the principal's photo: one clean line that draws itself once,
+   bright at the photo and fading out to the right, like the home page line. */
 function PrincipalRule() {
   const reduced = useReducedMotion()
-  const ticks = Array.from({ length: 61 })
-  const ease = [0.22, 1, 0.36, 1] as const
-  if (reduced) return <div className="h-px w-full bg-[#FCFCFC]/25" />
+  const line = "linear-gradient(90deg, rgba(252,252,252,0.9) 0%, rgba(252,252,252,0.45) 55%, rgba(252,252,252,0.12) 100%)"
+  if (reduced) return <div className="h-px w-full" style={{ background: line }} />
   return (
     <motion.div
-      className="relative h-px w-full"
-      initial="hidden"
-      whileInView="show"
+      className="h-px w-full origin-left"
+      style={{ background: line }}
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
       viewport={{ once: true, amount: 0.6 }}
-    >
-      {/* base line */}
-      <motion.div
-        className="absolute inset-0 origin-left bg-[#FCFCFC]/25"
-        variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1 } }}
-        transition={{ duration: 1.4, ease: "easeInOut" }}
-      />
-      {/* blue line that follows the draw */}
-      <motion.div
-        className="absolute inset-y-[-0.5px] left-0 right-0 h-[2px] origin-left"
-        style={{ background: "linear-gradient(90deg, #0150a9 0%, #5b9bf0 60%, rgba(91,155,240,0) 100%)" }}
-        variants={{ hidden: { scaleX: 0, opacity: 1 }, show: { scaleX: 1, opacity: [1, 1, 0] } }}
-        transition={{ duration: 1.8, ease: "easeInOut", opacity: { duration: 2.2, times: [0, 0.7, 1] } }}
-      />
-      {/* tick marks (ruler along the beam) */}
-      {!reduced && (
-        <div className="pointer-events-none absolute left-0 right-0 top-px flex justify-between">
-          {ticks.map((_, i) => {
-            const major = i % 10 === 0
-            const mid = i % 5 === 0
-            return (
-              <motion.span
-                key={i}
-                className="block w-px origin-top"
-                style={{ height: major ? 12 : mid ? 8 : 5, background: major ? "#5b9bf0" : "rgba(252,252,252,0.28)" }}
-                variants={{ hidden: { scaleY: 0, opacity: 0 }, show: { scaleY: 1, opacity: 1 } }}
-                transition={{ duration: 0.35, delay: 0.25 + i * 0.022, ease }}
-              />
-            )
-          })}
-        </div>
-      )}
-      {/* end nodes */}
-      {[0, 1].map((side) => (
-        <motion.span
-          key={side}
-          className="absolute top-1/2 h-[7px] w-[7px] -translate-y-1/2 rotate-45 bg-[#5b9bf0]"
-          style={side === 0 ? { left: -3 } : { right: -3 }}
-          variants={{ hidden: { scale: 0 }, show: { scale: 1 } }}
-          transition={{ type: "spring", stiffness: 260, damping: 16, delay: side === 0 ? 0.1 : 1.4 }}
-        />
-      ))}
-      {/* travelling light, loops after the line is drawn */}
-      {!reduced && (
-        <motion.div
-          className="absolute -top-px h-[3px] w-[16%] rounded-full"
-          style={{ background: "linear-gradient(90deg, rgba(91,155,240,0) 0%, #7fb0f5 50%, rgba(91,155,240,0) 100%)", filter: "blur(0.4px)" }}
-          variants={{ hidden: { left: "-16%", opacity: 0 }, show: { left: "100%", opacity: [0, 1, 1, 0] } }}
-          transition={{ duration: 2.6, delay: 1.7, ease: "easeInOut", repeat: Infinity, repeatDelay: 3.2 }}
-        />
-      )}
-    </motion.div>
+      transition={{ duration: 1.2, delay: 0.2, ease: "easeInOut" }}
+    />
   )
 }
 
