@@ -572,7 +572,7 @@ export function AboutRedesignDesktop() {
   const [stationIndex, setStationIndex] = useState(0)
   const [siteIndex, setSiteIndex] = useState(0)
   const [dir, setDir] = useState(1)
-  const [teamIndex, setTeamIndex] = useState(1)
+  const [teamIndex, setTeamIndex] = useState(0)
 
   const station = stations[stationIndex]
   const site = station.sites ? station.sites[siteIndex] ?? station.sites[0] : null
@@ -864,35 +864,31 @@ export function AboutRedesignDesktop() {
               <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="flex items-end gap-[clamp(6px,0.8vw,12px)]">
+            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(10px,2vh,22px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
                 return (
-                  <motion.button
+                  <button
                     key={m.name}
                     onClick={() => setTeamIndex(i)}
                     aria-pressed={active}
-                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
-                    animate={{ flexGrow: active ? 2.1 : 1 }}
-                    initial={false}
-                    transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
-                    style={{ flexBasis: 0 }}
+                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left transition-colors duration-500 ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
                   >
                     <motion.div
-                      className="relative w-full overflow-hidden bg-[#EEF2F7]"
-                      animate={{ height: active ? "clamp(230px,42vh,400px)" : "clamp(190px,35vh,340px)" }}
+                      className="relative aspect-square w-full overflow-hidden rounded-[22px] bg-[#EEF2F7]"
+                      animate={{ y: active ? -14 : 0 }}
                       initial={false}
-                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
-                      style={active ? { clipPath: "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%)" } : undefined}
+                      transition={{ type: "spring", stiffness: 180, damping: 20 }}
+                      style={{ boxShadow: active ? "0 14px 30px rgba(0,82,165,0.28)" : panelShadow }}
                     >
-                      <Image src={m.image} alt={m.name} fill sizes="480px" className={`object-cover object-top transition-transform duration-700 ${active ? "scale-100" : "scale-[1.04] group-hover:scale-100"}`} />
+                      <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
                     </motion.div>
-                    <p className={`mt-[clamp(8px,1.6vh,14px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
+                    <p className={`mt-[clamp(6px,1.2vh,12px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
                       {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
                     </p>
                     <p className="mt-1 text-[clamp(12px,1.8vh,14px)] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
-                  </motion.button>
+                  </button>
                 )
               })}
             </div>
