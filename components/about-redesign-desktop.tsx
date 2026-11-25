@@ -867,7 +867,7 @@ export function AboutRedesignDesktop() {
               <h2 className={`${sectionHeading} text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-5 items-start gap-[clamp(8px,1vw,16px)] pt-[clamp(20px,4vh,40px)]">
+            <div className="grid grid-cols-5 items-start gap-[clamp(8px,1vw,16px)] pt-[clamp(14px,3vh,28px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
@@ -876,23 +876,19 @@ export function AboutRedesignDesktop() {
                     key={m.name}
                     onClick={() => setTeamIndex(i)}
                     aria-pressed={active}
-                    className="relative min-w-0 rounded-[22px] p-[clamp(8px,1.2vh,12px)] text-left"
+                    className="relative min-w-0 text-left"
                     initial={false}
-                    animate={{
-                      y: active ? -26 : 0,
-                      backgroundColor: active ? "#FFFFFF" : "rgba(255,255,255,0)",
-                      boxShadow: active ? "0 22px 44px rgba(0,82,165,0.22), 0 2px 10px rgba(0,0,0,0.08)" : "0 0 0 rgba(0,0,0,0)",
-                    }}
-                    whileHover={active ? undefined : { y: -8 }}
+                    animate={{ y: active ? -22 : 0 }}
+                    whileHover={active ? undefined : { y: -6 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   >
-                    <motion.span
-                      className="absolute left-[22px] right-[22px] top-0 h-[3px] origin-left rounded-full bg-[#0052A5]"
+                    <motion.div
+                      className="relative aspect-square w-full overflow-hidden rounded-[22px] bg-[#EEF2F7]"
                       initial={false}
-                      animate={{ scaleX: active ? 1 : 0 }}
-                      transition={{ duration: 0.5, ease: EASE }}
-                    />
-                    <div className="relative aspect-square w-full overflow-hidden rounded-[16px] bg-[#EEF2F7]" style={{ maxWidth: "clamp(110px,24vh,230px)" }}>
+                      animate={{ maxWidth: active ? "clamp(140px,31vh,300px)" : "clamp(110px,24vh,234px)" }}
+                      transition={{ type: "spring", stiffness: 200, damping: 22 }}
+                      style={{ boxShadow: active ? "0 18px 36px rgba(0,82,165,0.25)" : "0 4px 14px rgba(0,0,0,0.12)" }}
+                    >
                       <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
                       {m.name === "SEYED HASSAN MOZNEB" && (
                         <svg viewBox="0 0 120 120" role="img" aria-label="Professional Engineer, signed and sealed" className="absolute right-[10px] top-[10px] h-[clamp(36px,4.6vh,46px)] w-[clamp(36px,4.6vh,46px)] rounded-full bg-[#FCFCFC]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}>
@@ -912,7 +908,7 @@ export function AboutRedesignDesktop() {
                           </g>
                         </svg>
                       )}
-                    </div>
+                    </motion.div>
                     <p className={`mt-[clamp(6px,1vh,10px)] text-[16px] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
                       {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
                     </p>
