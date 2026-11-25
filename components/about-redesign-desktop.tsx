@@ -857,7 +857,7 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 7. MEET OUR TEAM ═══ */}
-      <section className={`bg-[#F3F5F8] ${sec}`}>
+      <section className="relative flex flex-col justify-center bg-[#F3F5F8] py-[clamp(24px,5vh,64px)]">
         <div className="sidebar-content zag-desktop-content-pad">
           <div className="max-w-[1100px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
@@ -867,24 +867,32 @@ export function AboutRedesignDesktop() {
               <h2 className={`${sectionHeading} text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(52px,9vh,84px)]">
+            <div className="grid grid-cols-5 items-start gap-[clamp(8px,1vw,16px)] pt-[clamp(20px,4vh,40px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
                 return (
-                  <button
+                  <motion.button
                     key={m.name}
                     onClick={() => setTeamIndex(i)}
                     aria-pressed={active}
-                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left transition-colors duration-500 ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
+                    className="relative min-w-0 rounded-[22px] p-[clamp(8px,1.2vh,12px)] text-left"
+                    initial={false}
+                    animate={{
+                      y: active ? -26 : 0,
+                      backgroundColor: active ? "#FFFFFF" : "rgba(255,255,255,0)",
+                      boxShadow: active ? "0 22px 44px rgba(0,82,165,0.22), 0 2px 10px rgba(0,0,0,0.08)" : "0 0 0 rgba(0,0,0,0)",
+                    }}
+                    whileHover={active ? undefined : { y: -8 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   >
-                    <motion.div
-                      className="relative aspect-square w-full overflow-hidden rounded-[22px] bg-[#EEF2F7]"
-                      animate={{ y: active ? -60 : 0 }}
+                    <motion.span
+                      className="absolute left-[22px] right-[22px] top-0 h-[3px] origin-left rounded-full bg-[#0052A5]"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 180, damping: 20 }}
-                      style={{ boxShadow: active ? "0 34px 44px rgba(0,82,165,0.32)" : panelShadow }}
-                    >
+                      animate={{ scaleX: active ? 1 : 0 }}
+                      transition={{ duration: 0.5, ease: EASE }}
+                    />
+                    <div className="relative aspect-square w-full overflow-hidden rounded-[16px] bg-[#EEF2F7]" style={{ maxWidth: "clamp(110px,24vh,230px)" }}>
                       <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
                       {m.name === "SEYED HASSAN MOZNEB" && (
                         <svg viewBox="0 0 120 120" role="img" aria-label="Professional Engineer, signed and sealed" className="absolute right-[10px] top-[10px] h-[clamp(36px,4.6vh,46px)] w-[clamp(36px,4.6vh,46px)] rounded-full bg-[#FCFCFC]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}>
@@ -904,12 +912,12 @@ export function AboutRedesignDesktop() {
                           </g>
                         </svg>
                       )}
-                    </motion.div>
-                    <p className={`mt-[clamp(6px,1.2vh,12px)] text-[18px] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
+                    </div>
+                    <p className={`mt-[clamp(6px,1vh,10px)] text-[16px] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
                       {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
                     </p>
-                    <p className="mt-1 text-[14px] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
-                  </button>
+                    <p className="mt-[2px] text-[13px] leading-[1.35] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
+                  </motion.button>
                 )
               })}
             </div>
@@ -917,7 +925,7 @@ export function AboutRedesignDesktop() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={member.name}
-                className="relative mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)] pl-5"
+                className="relative mt-[clamp(6px,1.6vh,18px)] grid grid-cols-[1.6fr_1fr] gap-[clamp(32px,5vw,80px)] pl-5"
                 initial={reduced ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
@@ -928,11 +936,11 @@ export function AboutRedesignDesktop() {
                   style={{ background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)" }}
                 />
                 <div>
-                  <h3 className={`${sectionHeading} text-[#2D2D2D]`}>{info.studied.split(" · ")[0]}</h3>
+                  <h3 className="zag-heading text-[18px] uppercase leading-[1.2] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
                   {info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).length > 0 && (
                     <p className="mt-1 text-[16px] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).join(" · ")}</p>
                   )}
-                  <p className={`mt-3 max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
+                  <p className={`mt-2 max-w-[760px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
                 </div>
                 <div>
                   <p className={eyebrow}>Tools &amp; Expertise</p>
