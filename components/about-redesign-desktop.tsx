@@ -1171,20 +1171,7 @@ export function AboutRedesignDesktop() {
 
 
       {/* ═══ 8. CONTACT ═══ */}
-      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,7vh,90px)] text-[#FCFCFC]" style={{ background: "linear-gradient(160deg, #0B1226 0%, #0A1B3D 55%, #0B1226 100%)" }}>
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-100"
-          style={{
-            backgroundImage: "linear-gradient(rgba(91,155,240,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(91,155,240,0.08) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%)",
-            maskImage: "radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%)",
-          }}
-        />
-        <div aria-hidden className="pointer-events-none absolute -right-40 -top-24 h-[520px] w-[520px] rounded-full bg-[#0052A5]/45 blur-[130px]" />
-        <RidgeArt className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] w-full opacity-60" />
-
+      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,7vh,90px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
         <div className="sidebar-content zag-desktop-content-pad relative">
           <div className="grid max-w-[1100px] grid-cols-[0.9fr_1.1fr] items-center gap-[clamp(32px,5vw,80px)]">
             <div className="relative pl-5">
@@ -1254,13 +1241,11 @@ export function AboutRedesignDesktop() {
                 <div className="relative flex items-center justify-between gap-4">
                   <div>
                     <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.24em] text-white/75">
-                      <Mail className="h-4 w-4" /> Email the firm
+                      <Mail className="h-[14px] w-[14px]" /> Email the firm
                     </p>
-                    <p className="mt-3 text-[clamp(24px,2.7vw,38px)] leading-none tracking-[0.01em] text-white">info@zagrosia.ca</p>
+                    <p className="mt-3 text-[clamp(20px,2.1vw,28px)] leading-none tracking-[0.01em] text-white">info@zagrosia.ca</p>
                   </div>
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/15 transition-all duration-300 group-hover:bg-white group-hover:text-[#0052A5]">
-                    <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
+                  <ArrowUpRight className="h-[18px] w-[18px] shrink-0 text-white/80 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </div>
               </motion.a>
 
@@ -1283,12 +1268,10 @@ export function AboutRedesignDesktop() {
                   >
                     <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#5b9bf0] transition-transform duration-500 group-hover:scale-x-100" />
                     <div className="flex items-start justify-between">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0052A5]/70 text-white transition-colors duration-300 group-hover:bg-[#5b9bf0]">
-                        <c.icon className="h-[18px] w-[18px]" />
-                      </span>
-                      <ArrowUpRight className="h-5 w-5 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5b9bf0]" />
+                      <c.icon className="h-[18px] w-[18px] text-[#5b9bf0]" />
+                      <ArrowUpRight className="h-[18px] w-[18px] text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5b9bf0]" />
                     </div>
-                    <p className="mt-[clamp(10px,2vh,20px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">{c.label}</p>
+                    <p className="mt-[clamp(8px,1.6vh,14px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">{c.label}</p>
                     <p className="mt-1.5 text-[16px] leading-[1.3] tracking-[0.02em] text-white">{c.value}</p>
                   </motion.a>
                 ))}
