@@ -378,20 +378,131 @@ function ValuesReveal() {
   )
 }
 
+const stationKinds = ["Education", "Education", "Experience", "Experience", "Experience", "Certificate", "Certificate", "Experience", "Zagrosia"]
+const stationPhotos = [
+  "/images/company-milestone-3.jpg",
+  "/images/about-milestones-building.jpg",
+  "/images/company-milestone-2.jpg",
+  "/images/company-milestone-4.jpg",
+  "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg",
+  "/images/projects/scaffold-field-review-vancouver/01-hero.jpg",
+  "/images/projects/recreation-facility-roof-structure-review-langley/01-hero.jpg",
+  "/images/projects/parkade-structural-review-langley/01-hero.jpg",
+  "/images/company-milestone-1.jpg",
+]
+const YEAR_PAD = 7
+const yearTop = (i: number, n: number) => `${YEAR_PAD + ((i + 0.5) * (100 - YEAR_PAD * 2)) / n}%`
+const BANDS = 6
+
+/* Year digits roll like an odometer; direction follows the way you travel through the career. */
+function YearRoll({ text, dir, reduced }: { text: string; dir: number; reduced: boolean }) {
+  return (
+    <span className="inline-flex h-[1.4em] overflow-hidden leading-[1.4em]">
+      <AnimatePresence initial={false} mode="popLayout" custom={dir}>
+        {text.split("").map((c, i) => (
+          <motion.span
+            key={`${i}-${c}`}
+            custom={dir}
+            className="inline-block"
+            variants={{
+              enter: (d: number) => ({ y: d > 0 ? "110%" : "-110%", opacity: 0 }),
+              center: { y: "0%", opacity: 1 },
+              leave: (d: number) => ({ y: d > 0 ? "-110%" : "110%", opacity: 0 }),
+            }}
+            initial={reduced ? false : "enter"}
+            animate="center"
+            exit="leave"
+            transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : i * 0.05, ease: EASE }}
+          >
+            {c}
+          </motion.span>
+        ))}
+      </AnimatePresence>
+    </span>
+  )
+}
+
+/* New photo is laid down as six "floor slabs" that slide in from alternating sides, bottom floor first,
+   each led by a blue edge, while a blueprint grid flashes over the top and the photo settles. */
+function CareerPhoto({ src, alt, reduced }: { src: string; alt: string; reduced: boolean }) {
+  const [state, setState] = useState({ cur: src, prev: src, n: 0 })
+  useEffect(() => {
+    setState((s) => (s.cur === src ? s : { cur: src, prev: s.cur, n: s.n + 1 }))
+  }, [src])
+  const { cur, prev, n } = state
+  const animated = n > 0 && !reduced
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {n > 0 && <Image src={prev} alt="" fill sizes="900px" className="object-cover" />}
+      <motion.div
+        key={n}
+        className="absolute inset-0"
+        initial={animated ? { scale: 1.12 } : false}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease: EASE }}
+      >
+        {Array.from({ length: BANDS }).map((_, b) => {
+          const fromLeft = b % 2 === 0
+          const delay = (BANDS - 1 - b) * 0.09
+          return (
+            <motion.div
+              key={b}
+              className="absolute inset-x-0 overflow-hidden"
+              style={{ top: `${(b * 100) / BANDS}%`, height: `${100 / BANDS + 0.2}%` }}
+              initial={animated ? { clipPath: fromLeft ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)" } : false}
+              animate={{ clipPath: "inset(0 0% 0 0%)" }}
+              transition={{ duration: 0.75, delay, ease: EASE }}
+            >
+              <div className="absolute inset-x-0" style={{ top: `-${b * 100}%`, height: `${BANDS * 100}%` }}>
+                <Image src={cur} alt={alt} fill sizes="900px" className="object-cover" priority={n === 0} />
+              </div>
+              {animated && (
+                <motion.span
+                  className="absolute top-0 h-full w-[3px] bg-[#5b9bf0] shadow-[0_0_14px_#5b9bf0]"
+                  initial={{ left: fromLeft ? "0%" : "100%", opacity: 1 }}
+                  animate={{ left: fromLeft ? "100%" : "0%", opacity: [1, 1, 0] }}
+                  transition={{ duration: 0.75, delay, ease: EASE }}
+                />
+              )}
+            </motion.div>
+          )
+        })}
+      </motion.div>
+      {animated && (
+        <motion.div
+          key={`g${n}`}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(91,155,240,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(91,155,240,0.55) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.45, 0] }}
+          transition={{ duration: 1.1, ease: "easeInOut" }}
+        />
+      )}
+    </div>
+  )
+}
+
 export function AboutRedesignDesktop() {
   const reduced = useReducedMotion()
   const [stationIndex, setStationIndex] = useState(4)
   const [siteIndex, setSiteIndex] = useState(0)
+  const [dir, setDir] = useState(1)
   const [teamIndex, setTeamIndex] = useState(1)
 
   const station = stations[stationIndex]
   const site = station.sites ? station.sites[siteIndex] ?? station.sites[0] : null
-  const stationImage = site ? site.image : station.image
+  const stationImage = site?.image ?? station.image ?? stationPhotos[stationIndex]
   const member = team[teamIndex]
   const info = memberInfo[member.name]
   const principal = team[0]
 
   const pickStation = (i: number) => {
+    if (i === stationIndex) return
+    setDir(i > stationIndex ? 1 : -1)
     setStationIndex(i)
     setSiteIndex(0)
   }
@@ -721,110 +832,133 @@ export function AboutRedesignDesktop() {
         </div>
       </section>
 
-      {/* ═══ 4. CAREER PATH ═══ */}
+      {/* ═══ 5. CAREER PATH ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="max-w-[1100px]">
+        <div className="max-w-[1320px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
             <p className={`mb-[clamp(4px,1.2vh,12px)] ${eyebrow}`}>Experience before Zagrosia</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
+            <h2 className={`${sectionHeading} mb-[clamp(14px,3vh,32px)] text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
           </Reveal>
 
-          <div className="relative mb-[clamp(12px,3vh,32px)]">
-            <div className="absolute left-0 right-0 top-[9px] h-[2px] bg-[#2D2D2D]" />
-            <div className="relative grid" style={{ gridTemplateColumns: `repeat(${stations.length}, minmax(0, 1fr))` }}>
-              {stations.map((s, i) => {
-                const active = i === stationIndex
-                return (
-                  <button
-                    key={s.period + s.title}
-                    onClick={() => pickStation(i)}
-                    aria-label={`${s.period}: ${s.title}`}
-                    aria-current={active}
-                    className="group flex flex-col items-start gap-2 text-left"
-                  >
-                    <span
-                      className={`h-5 w-5 rounded-full border-2 transition-colors ${
-                        active ? "border-[#0052A5] bg-[#0052A5]" : "border-[#2D2D2D] bg-[#FCFCFC] group-hover:border-[#0052A5]"
-                      }`}
-                    />
-                    <span className={`text-[clamp(11px,1.7vh,13px)] font-semibold uppercase tracking-[0.14em] ${active ? "text-[#0052A5]" : "text-[#6b7380]"}`}>{s.label}</span>
-                  </button>
-                )
-              })}
+          <div className="grid h-[clamp(380px,62vh,600px)] grid-cols-[0.85fr_1.15fr] gap-[clamp(40px,4.4vw,64px)]">
+            {/* left: text */}
+            <div className="relative flex items-center">
+              <motion.span
+                className="absolute left-0 top-[6%] h-[88%] w-[3px] origin-top rounded-full"
+                style={{ background: "linear-gradient(180deg, #0052A5 0%, rgba(0,82,165,0) 100%)" }}
+                initial={reduced ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.1, ease: EASE }}
+              />
+              <motion.div
+                key={stationIndex}
+                className="pl-[clamp(18px,2vw,28px)]"
+                initial="hidden"
+                animate="show"
+                variants={{ show: { transition: { staggerChildren: reduced ? 0 : 0.09 } } }}
+              >
+                {[
+                  <p key="k" className={eyebrow}>{stationKinds[stationIndex]}</p>,
+                  <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#2D2D2D]`}>{station.title.toUpperCase()}</h3>,
+                  <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#0052A5]">{station.place}</p>,
+                  <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{station.bullets.slice(0, 3).join(" ")}</p>,
+                ].map((el, i) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.div
+                      variants={{ hidden: { y: "105%", opacity: 0 }, show: { y: "0%", opacity: 1 } }}
+                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                    >
+                      {el}
+                    </motion.div>
+                  </div>
+                ))}
+              </motion.div>
+              {/* connector to the active year */}
+              <motion.span
+                className="pointer-events-none absolute -right-[clamp(40px,4.4vw,64px)] z-10 h-[3px] w-[clamp(40px,4.4vw,64px)] -translate-y-1/2 rounded-full bg-[#0052A5]"
+                animate={{ top: yearTop(stationIndex, stations.length) }}
+                transition={{ type: "spring", stiffness: 140, damping: 20 }}
+              />
             </div>
-          </div>
 
-          <div className="grid h-[clamp(300px,56vh,500px)] grid-cols-[1.05fr_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
-            <div className="relative overflow-hidden bg-[#0B1226]">
-              <AnimatePresence mode="wait">
+            {/* right: photo card with years */}
+            <div className="relative overflow-hidden rounded-[22px] bg-[#0B1226]" style={{ boxShadow: panelShadow }}>
+              <CareerPhoto src={stationImage} alt={site ? site.name : station.place} reduced={!!reduced} />
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-[46%] bg-gradient-to-r from-[#0B1226]/90 via-[#0B1226]/55 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34%] bg-gradient-to-t from-[#0B1226]/85 to-transparent" />
+
+              {/* years */}
+              <div className="absolute inset-y-0 left-0 w-[clamp(120px,14vw,190px)]">
+                <motion.span
+                  className="absolute left-0 h-[3px] w-[clamp(14px,1.4vw,22px)] -translate-y-1/2 bg-[#0052A5]"
+                  animate={{ top: yearTop(stationIndex, stations.length) }}
+                  transition={{ type: "spring", stiffness: 140, damping: 20 }}
+                />
+                {stations.map((s, i) => {
+                  const active = i === stationIndex
+                  return (
+                    <button
+                      key={s.period + s.title}
+                      onClick={() => pickStation(i)}
+                      aria-label={`${s.label}: ${s.title}`}
+                      aria-current={active}
+                      className="group absolute left-[clamp(18px,1.8vw,28px)] flex -translate-y-1/2 items-center gap-3"
+                      style={{ top: yearTop(i, stations.length) }}
+                    >
+                      <span className={`h-px transition-all duration-500 ${active ? "w-0" : "w-[10px] bg-[#FCFCFC]/45 group-hover:w-[18px] group-hover:bg-[#7fb0f5]"}`} />
+                      <span className={`text-[clamp(13px,2vh,17px)] font-semibold tracking-[0.06em] transition-colors duration-300 ${active ? "text-transparent" : "text-[#FCFCFC]/60 group-hover:text-[#FCFCFC]"}`}>{s.label}</span>
+                    </button>
+                  )
+                })}
+                {/* the active chip glides between years */}
                 <motion.div
-                  key={`${stationIndex}-${stationImage ?? "art"}`}
-                  className="absolute inset-0"
-                  initial={reduced ? false : { opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: EASE }}
+                  className="pointer-events-none absolute left-[clamp(14px,1.4vw,22px)] flex -translate-y-1/2 items-center gap-2 rounded-[10px] bg-[#0052A5] px-[clamp(10px,1vw,14px)] py-[clamp(5px,0.9vh,9px)] text-[clamp(14px,2.2vh,19px)] font-bold tracking-[0.06em] text-white shadow-[0_6px_22px_rgba(0,82,165,0.55)]"
+                  animate={{ top: yearTop(stationIndex, stations.length) }}
+                  transition={{ type: "spring", stiffness: 140, damping: 20 }}
                 >
-                  {stationImage ? (
-                    <Image src={stationImage} alt={site ? site.name : station.place} fill sizes="560px" className="object-cover" />
-                  ) : (
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 60%, #0a3f86 100%)" }}>
-                      <RidgeArt className="absolute inset-x-0 bottom-0 h-[70%] w-full" drift={false} />
-                      <p className="zag-heading absolute left-[clamp(16px,2.4vw,32px)] top-[clamp(14px,3vh,32px)] text-[clamp(30px,6.4vh,52px)] font-bold leading-none tracking-[0.03em] text-[#FCFCFC]">{station.label}</p>
-                    </div>
-                  )}
+                  <span className="opacity-70">–</span>
+                  <YearRoll text={station.label} dir={dir} reduced={!!reduced} />
+                  <ArrowRight className="h-[1em] w-[1em] opacity-80" />
                 </motion.div>
-              </AnimatePresence>
-              {site && (
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1226]/95 to-transparent px-[clamp(16px,2.4vw,32px)] pb-[clamp(12px,2.4vh,24px)] pt-12 text-[#FCFCFC]">
-                  <p className="text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.2em] text-[#5b9bf0]">{site.place}</p>
-                  <p className="mt-1 text-[clamp(15px,2.6vh,20px)] font-semibold uppercase tracking-[0.05em]">{site.name}</p>
-                  <p className="mt-1 max-w-[460px] text-[clamp(12px,1.8vh,14px)] leading-[1.5] tracking-[0.01em] text-[#FCFCFC]/85">{site.note}</p>
+              </div>
+
+              {/* sites strip */}
+              {station.sites && (
+                <div className="absolute bottom-0 left-[clamp(120px,14vw,190px)] right-0 px-[clamp(16px,2vw,28px)] pb-[clamp(14px,2.4vh,24px)]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`${stationIndex}-${siteIndex}`}
+                      initial={reduced ? false : { opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.35, ease: EASE }}
+                      className="mb-[10px] text-[#FCFCFC]"
+                    >
+                      <p className="text-[clamp(11px,1.6vh,13px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">{site!.place}</p>
+                      <p className="mt-1 max-w-[520px] text-[clamp(13px,1.9vh,15px)] leading-[1.5] tracking-[0.01em] text-[#FCFCFC]/90">{site!.note}</p>
+                    </motion.div>
+                  </AnimatePresence>
+                  <div className="flex flex-wrap gap-[6px]">
+                    {station.sites.map((s, i) => (
+                      <button
+                        key={s.name}
+                        onClick={() => setSiteIndex(i)}
+                        aria-pressed={i === siteIndex}
+                        className={`rounded-[8px] border px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.1em] transition-colors ${
+                          i === siteIndex
+                            ? "border-[#0052A5] bg-[#0052A5] text-white"
+                            : "border-[#FCFCFC]/40 text-[#FCFCFC] hover:border-[#7fb0f5] hover:text-[#7fb0f5]"
+                        }`}
+                      >
+                        {s.name}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
-            </div>
-            <div className="flex flex-col justify-center overflow-hidden border-l border-[#2D2D2D] px-[clamp(20px,2.8vw,40px)] py-[clamp(12px,2.6vh,32px)]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={stationIndex}
-                  initial={reduced ? false : { opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.35, ease: EASE }}
-                >
-                  <p className="text-[clamp(10px,1.6vh,13px)] font-semibold uppercase tracking-[0.2em] text-[#0052A5]">{station.period}</p>
-                  <h3 className="zag-heading mt-2 text-[clamp(17px,3.4vh,26px)] font-bold uppercase leading-[1.15] tracking-[0.03em]">{station.title}</h3>
-                  <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.03em] text-[#6b7380]">{station.place}</p>
-                  <ul className="mt-[clamp(8px,1.8vh,20px)] space-y-[clamp(5px,1.1vh,12px)]">
-                    {station.bullets.map((b) => (
-                      <li key={b} className="flex gap-3 text-[clamp(12px,1.95vh,15.5px)] leading-[1.5] tracking-[0.01em] text-[#3a4252]">
-                        <span className="mt-[7px] h-[6px] w-[6px] flex-shrink-0 rounded-full bg-[#0052A5]" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                  {station.sites && (
-                    <div className="mt-[clamp(8px,1.8vh,20px)] flex flex-wrap gap-[6px]">
-                      {station.sites.map((s, i) => (
-                        <button
-                          key={s.name}
-                          onClick={() => setSiteIndex(i)}
-                          aria-pressed={i === siteIndex}
-                          className={`rounded-[8px] border px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.1em] transition-colors ${
-                            i === siteIndex
-                              ? "border-[#0052A5] bg-[#0052A5] text-white"
-                              : "border-[#2D2D2D]/30 text-[#2D2D2D] hover:border-[#0052A5] hover:text-[#0052A5]"
-                          }`}
-                        >
-                          {s.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
             </div>
           </div>
         </div>
