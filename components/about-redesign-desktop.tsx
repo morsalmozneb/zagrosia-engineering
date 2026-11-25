@@ -856,6 +856,79 @@ export function AboutRedesignDesktop() {
         <div className="absolute inset-x-0 bottom-0 h-[3px] bg-[#FCFCFC]" />
       </section>
 
+      {/* ═══ 7. MEET OUR TEAM ═══ */}
+      <section className={`bg-[#F3F5F8] ${sec}`}>
+        <div className="sidebar-content zag-desktop-content-pad">
+          <div className="max-w-[1320px]">
+            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
+              <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
+            </Reveal>
+
+            <div className="flex items-end gap-[clamp(6px,0.8vw,12px)]">
+              {team.map((m, i) => {
+                const active = i === teamIndex
+                const mi = memberInfo[m.name]
+                return (
+                  <motion.button
+                    key={m.name}
+                    onClick={() => setTeamIndex(i)}
+                    aria-pressed={active}
+                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
+                    animate={{ flexGrow: active ? 2.1 : 1 }}
+                    initial={false}
+                    transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                    style={{ flexBasis: 0 }}
+                  >
+                    <motion.div
+                      className="relative w-full overflow-hidden bg-[#EEF2F7]"
+                      animate={{ height: active ? "clamp(230px,42vh,400px)" : "clamp(190px,35vh,340px)" }}
+                      initial={false}
+                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                      style={active ? { clipPath: "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%)" } : undefined}
+                    >
+                      <Image src={m.image} alt={m.name} fill sizes="480px" className={`object-cover object-top transition-transform duration-700 ${active ? "scale-100" : "scale-[1.04] group-hover:scale-100"}`} />
+                    </motion.div>
+                    <p className={`mt-[clamp(8px,1.6vh,14px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
+                      {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </p>
+                    <p className="mt-1 text-[clamp(12px,1.8vh,14px)] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
+                  </motion.button>
+                )
+              })}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={member.name}
+                className="mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)]"
+                initial={reduced ? false : { opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4, ease: EASE }}
+              >
+                <div>
+                  <h3 className="zag-heading text-[clamp(18px,2.8vh,22px)] uppercase leading-[1.15] tracking-[0.04em] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
+                  {info.studied.includes(" · ") && (
+                    <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).join(" · ")}</p>
+                  )}
+                  <p className={`mt-[clamp(8px,1.6vh,16px)] max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
+                </div>
+                <div>
+                  <p className={eyebrow}>Specialties</p>
+                  <p className={`mt-[clamp(6px,1.2vh,12px)] ${bodyText} text-[#3a3a3a]`}>{info.chips.join("  ·  ")}</p>
+                  <div className="mt-[clamp(10px,2vh,22px)] flex flex-wrap gap-2">
+                    <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
+                    {member.linkedIn !== "#" && (
+                      <CtaButton href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={ctaSmall}>LinkedIn</CtaButton>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ 5. MISSION, VISION & VALUES ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
@@ -1051,78 +1124,6 @@ export function AboutRedesignDesktop() {
         </div>
       </section>
 
-      {/* ═══ 7. MEET OUR TEAM ═══ */}
-      <section className={`bg-[#F3F5F8] ${sec}`}>
-        <div className="sidebar-content zag-desktop-content-pad">
-          <div className="max-w-[1320px]">
-            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
-            </Reveal>
-
-            <div className="flex items-end gap-[clamp(6px,0.8vw,12px)]">
-              {team.map((m, i) => {
-                const active = i === teamIndex
-                const mi = memberInfo[m.name]
-                return (
-                  <motion.button
-                    key={m.name}
-                    onClick={() => setTeamIndex(i)}
-                    aria-pressed={active}
-                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
-                    animate={{ flexGrow: active ? 2.1 : 1 }}
-                    initial={false}
-                    transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
-                    style={{ flexBasis: 0 }}
-                  >
-                    <motion.div
-                      className="relative w-full overflow-hidden bg-[#EEF2F7]"
-                      animate={{ height: active ? "clamp(230px,42vh,400px)" : "clamp(190px,35vh,340px)" }}
-                      initial={false}
-                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
-                      style={active ? { clipPath: "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%)" } : undefined}
-                    >
-                      <Image src={m.image} alt={m.name} fill sizes="480px" className={`object-cover object-top transition-transform duration-700 ${active ? "scale-100" : "scale-[1.04] group-hover:scale-100"}`} />
-                    </motion.div>
-                    <p className={`mt-[clamp(8px,1.6vh,14px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
-                      {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
-                    </p>
-                    <p className="mt-1 text-[clamp(12px,1.8vh,14px)] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
-                  </motion.button>
-                )
-              })}
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={member.name}
-                className="mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)]"
-                initial={reduced ? false : { opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.4, ease: EASE }}
-              >
-                <div>
-                  <h3 className="zag-heading text-[clamp(18px,2.8vh,22px)] uppercase leading-[1.15] tracking-[0.04em] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
-                  {info.studied.includes(" · ") && (
-                    <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).join(" · ")}</p>
-                  )}
-                  <p className={`mt-[clamp(8px,1.6vh,16px)] max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
-                </div>
-                <div>
-                  <p className={eyebrow}>Specialties</p>
-                  <p className={`mt-[clamp(6px,1.2vh,12px)] ${bodyText} text-[#3a3a3a]`}>{info.chips.join("  ·  ")}</p>
-                  <div className="mt-[clamp(10px,2vh,22px)] flex flex-wrap gap-2">
-                    <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
-                    {member.linkedIn !== "#" && (
-                      <CtaButton href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={ctaSmall}>LinkedIn</CtaButton>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
