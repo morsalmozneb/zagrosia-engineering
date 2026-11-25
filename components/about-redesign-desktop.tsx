@@ -864,7 +864,7 @@ export function AboutRedesignDesktop() {
               <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(10px,2vh,22px)]">
+            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(30px,5vh,46px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
@@ -877,10 +877,10 @@ export function AboutRedesignDesktop() {
                   >
                     <motion.div
                       className="relative aspect-square w-full overflow-hidden rounded-[22px] bg-[#EEF2F7]"
-                      animate={{ y: active ? -14 : 0 }}
+                      animate={{ y: active ? -34 : 0 }}
                       initial={false}
                       transition={{ type: "spring", stiffness: 180, damping: 20 }}
-                      style={{ boxShadow: active ? "0 14px 30px rgba(0,82,165,0.28)" : panelShadow }}
+                      style={{ boxShadow: active ? "0 26px 40px rgba(0,82,165,0.3)" : panelShadow }}
                     >
                       <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
                     </motion.div>
