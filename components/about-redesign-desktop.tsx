@@ -569,7 +569,7 @@ function FoldSeparator() {
 
 export function AboutRedesignDesktop() {
   const reduced = useReducedMotion()
-  const [stationIndex, setStationIndex] = useState(4)
+  const [stationIndex, setStationIndex] = useState(0)
   const [siteIndex, setSiteIndex] = useState(0)
   const [dir, setDir] = useState(1)
   const [teamIndex, setTeamIndex] = useState(1)
