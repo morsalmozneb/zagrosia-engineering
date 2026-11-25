@@ -190,13 +190,13 @@ const memberInfo: Record<
     role: "Director of Operations & Business Development",
     studied: "B.IT Shiraz University · BCIT New Media Design & Web Development",
     bio: "Designs and builds Zagrosia's website and brand identity system, and runs the firm's operations and business development.",
-    chips: ["Figma", "Web development", "Brand systems", "Operations"],
+    chips: ["Web Development", "AI Systems", "Design Systems", "Digital Marketing"],
   },
   "FARNAZ GHOLAMI": {
     role: "Digital & Creative Director",
     studied: "B.Sc. University of Guilan · BCIT New Media Design & Web Development",
     bio: "Creates Zagrosia's visual and video content: brand collateral, motion graphics and short films, with a background in UI/UX and graphic design.",
-    chips: ["Figma", "Illustrator", "Premiere Pro", "After Effects"],
+    chips: ["Design Systems", "Motion Graphics & Video", "AI Content Creation", "Digital Marketing"],
   },
 }
 
@@ -910,7 +910,7 @@ export function AboutRedesignDesktop() {
                   <p className={`mt-[clamp(8px,1.6vh,16px)] max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
                 </div>
                 <div>
-                  <p className={eyebrow}>Specialties</p>
+                  <p className={eyebrow}>Tools &amp; Expertise</p>
                   <p className={`mt-[clamp(6px,1.2vh,12px)] ${bodyText} text-[#3a3a3a]`}>{info.chips.join("  ·  ")}</p>
                   <div className="mt-[clamp(10px,2vh,22px)] flex flex-wrap gap-2">
                     <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
