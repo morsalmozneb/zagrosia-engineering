@@ -859,7 +859,15 @@ export function AboutRedesignDesktop() {
       {/* ═══ 7. MEET OUR TEAM ═══ */}
       <section className="relative flex flex-col justify-center bg-[#F3F5F8] py-[clamp(24px,5vh,64px)]">
         <div className="sidebar-content zag-desktop-content-pad">
-          <div className="max-w-[1100px]">
+          <div className="relative max-w-[1100px] pl-5">
+            <motion.span
+              className="absolute left-0 top-0 h-full w-[3px] rounded-full"
+              style={{ background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)", transformOrigin: "top" }}
+              initial={reduced ? false : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+            />
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
               <p className={`mb-3 ${eyebrow}`}>The people behind Zagrosia</p>
             </Reveal>
@@ -903,16 +911,12 @@ export function AboutRedesignDesktop() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={member.name}
-                className="relative mt-[clamp(6px,1.6vh,18px)] grid grid-cols-[1.6fr_1fr] gap-[clamp(32px,5vw,80px)] pl-5"
+                className="relative mt-[clamp(6px,1.6vh,18px)] grid grid-cols-[1.6fr_1fr] gap-[clamp(32px,5vw,80px)]"
                 initial={reduced ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: EASE }}
               >
-                <span
-                  className="absolute left-0 top-0 h-full w-[3px] rounded-full"
-                  style={{ background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)" }}
-                />
                 <div>
                   <h3 className="zag-heading text-[18px] uppercase leading-[1.2] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
                   {info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).length > 0 && (
