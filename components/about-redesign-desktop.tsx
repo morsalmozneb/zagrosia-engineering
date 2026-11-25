@@ -1054,74 +1054,72 @@ export function AboutRedesignDesktop() {
       {/* ═══ 7. MEET OUR TEAM ═══ */}
       <section className={`bg-[#F3F5F8] ${sec}`}>
         <div className="sidebar-content zag-desktop-content-pad">
-          <div className="max-w-[1100px]">
+          <div className="max-w-[1320px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-[clamp(12px,3vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
+              <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid h-[clamp(290px,54vh,480px)] grid-cols-[clamp(230px,30vw,400px)_1fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
-              <div className="relative bg-[#EEF2F7]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={member.name}
-                    className="absolute inset-0"
-                    initial={reduced ? false : { opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.45, ease: EASE }}
-                  >
-                    <Image src={member.image} alt={member.name} fill sizes="400px" className="object-cover object-top" />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-              <div className="flex items-center overflow-hidden border-l border-[#2D2D2D] px-[clamp(20px,3.2vw,48px)] py-[clamp(10px,2.4vh,36px)]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={member.name}
-                    initial={reduced ? false : { opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.4, ease: EASE }}
-                  >
-                    <h3 className="zag-heading text-[clamp(18px,4vh,32px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">{member.name}</h3>
-                    <p className="mt-2 text-[clamp(10px,1.6vh,13px)] uppercase tracking-[0.2em] text-[#0052A5]">{info.role}</p>
-                    <p className="mt-2 text-[clamp(11px,1.6vh,13px)] tracking-[0.04em] text-[#6b7380]">{info.studied}</p>
-                    <p className="mt-[clamp(6px,1.4vh,16px)] text-[clamp(12px,2vh,16px)] leading-[1.55] tracking-[0.01em] text-[#3a4252]">{info.bio}</p>
-                    <div className="mt-[clamp(8px,1.6vh,18px)] flex flex-wrap gap-[6px]">
-                      {info.chips.map((chip) => (
-                        <span key={chip} className="rounded-[8px] border border-[#2D2D2D]/30 px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.12em] text-[#2D2D2D]">{chip}</span>
-                      ))}
-                    </div>
-                    <div className="mt-[clamp(8px,1.8vh,20px)] flex gap-2">
-                      {member.linkedIn !== "#" && (
-                        <CtaButton href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={ctaSmall}>LinkedIn</CtaButton>
-                      )}
-                      <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
-                      <CtaButton href={member.resume} target="_blank" rel="noopener noreferrer" className={ctaSmall}>Resume</CtaButton>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-
-            <div className="mt-[clamp(8px,1.8vh,20px)] grid grid-cols-5 gap-3">
+            <div className="flex items-end gap-[clamp(6px,0.8vw,12px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
+                const mi = memberInfo[m.name]
                 return (
-                  <button
+                  <motion.button
                     key={m.name}
                     onClick={() => setTeamIndex(i)}
                     aria-pressed={active}
-                    className={`flex flex-col gap-1 rounded-[10px] px-[clamp(10px,1.2vw,16px)] py-[clamp(8px,1.8vh,16px)] text-left transition-colors ${
-                      active ? "border-2 border-[#0052A5] bg-white" : "border border-[#2D2D2D]/25 bg-white/70 hover:bg-white"
-                    }`}
+                    className={`group min-w-0 border-b-2 pb-[clamp(8px,1.6vh,16px)] text-left ${active ? "border-[#0052A5]" : "border-[#2D2D2D]/20"}`}
+                    animate={{ flexGrow: active ? 2.1 : 1 }}
+                    initial={false}
+                    transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                    style={{ flexBasis: 0 }}
                   >
-                    <span className="text-[clamp(11px,1.7vh,13px)] font-semibold uppercase leading-[1.2] tracking-[0.05em]">{m.name}</span>
-                    <span className="text-[clamp(9px,1.4vh,11px)] uppercase leading-[1.3] tracking-[0.08em] text-[#6b7380]">{memberInfo[m.name].role}</span>
-                  </button>
+                    <motion.div
+                      className="relative w-full overflow-hidden bg-[#EEF2F7]"
+                      animate={{ height: active ? "clamp(230px,42vh,400px)" : "clamp(190px,35vh,340px)" }}
+                      initial={false}
+                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                      style={active ? { clipPath: "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%)" } : undefined}
+                    >
+                      <Image src={m.image} alt={m.name} fill sizes="480px" className={`object-cover object-top transition-transform duration-700 ${active ? "scale-100" : "scale-[1.04] group-hover:scale-100"}`} />
+                    </motion.div>
+                    <p className={`mt-[clamp(8px,1.6vh,14px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
+                      {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </p>
+                    <p className="mt-1 text-[clamp(12px,1.8vh,14px)] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
+                  </motion.button>
                 )
               })}
             </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={member.name}
+                className="mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)]"
+                initial={reduced ? false : { opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4, ease: EASE }}
+              >
+                <div>
+                  <h3 className="zag-heading text-[clamp(18px,2.8vh,22px)] uppercase leading-[1.15] tracking-[0.04em] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
+                  {info.studied.includes(" · ") && (
+                    <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).join(" · ")}</p>
+                  )}
+                  <p className={`mt-[clamp(8px,1.6vh,16px)] max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
+                </div>
+                <div>
+                  <p className={eyebrow}>Specialties</p>
+                  <p className={`mt-[clamp(6px,1.2vh,12px)] ${bodyText} text-[#3a3a3a]`}>{info.chips.join("  ·  ")}</p>
+                  <div className="mt-[clamp(10px,2vh,22px)] flex flex-wrap gap-2">
+                    <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
+                    {member.linkedIn !== "#" && (
+                      <CtaButton href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={ctaSmall}>LinkedIn</CtaButton>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </section>
