@@ -519,18 +519,18 @@ export function AboutRedesignDesktop() {
               </motion.div>
               <div className="self-center pb-[clamp(16px,3vh,32px)]">
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                  <p className="mb-[clamp(4px,1vh,10px)] text-[clamp(11px,1.6vh,13px)] font-semibold uppercase tracking-[0.22em] text-[#7fb0f5]">Our Principal &amp; Founder</p>
+                  <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Our Principal &amp; Founder</p>
                 </Reveal>
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                  <h2 className="whitespace-nowrap font-sans text-[clamp(28px,min(6.6vh,3.8vw),60px)] font-medium leading-[1.05] tracking-[-0.01em]">
-                    Seyed Hassan <span className="text-[#7fb0f5]">Mozneb</span>
+                  <h2 className="zag-heading whitespace-nowrap text-[28px] uppercase leading-[1.1] text-[#FCFCFC]">
+                    Seyed Hassan <span className="text-[#5b9bf0]">Mozneb</span>
                   </h2>
                 </Reveal>
                 <Reveal delay={0.16} duration={0.6}>
-                  <p className="mt-[clamp(10px,2.2vh,22px)] text-[clamp(13px,2vh,16px)] tracking-[0.01em] text-[#FCFCFC]/70">P.Eng., M.Sc. &nbsp;·&nbsp; Founder of Zagrosia</p>
+                  <p className="mt-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#FCFCFC]/65">P.Eng., M.Sc. &nbsp;·&nbsp; Founder of Zagrosia</p>
                 </Reveal>
                 <Reveal delay={0.22} duration={0.65}>
-                  <p className="mt-[clamp(8px,2vh,22px)] max-w-[680px] text-[clamp(14px,2.2vh,17px)] leading-[1.65] text-[#FCFCFC]/85">
+                  <p className="mt-5 max-w-[680px] text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/85">
                     Seyed Hassan Mozneb is a structural engineer who designs structures and supervises their construction, bringing first-hand site experience to every Zagrosia Engineering project. A registered Professional Engineer with an M.Sc. in Structural Engineering, he has worked on refineries, industrial facilities and hundreds of homes, and now leads our practice across British Columbia, Alberta and Saskatchewan in steel, concrete, wood and masonry.
                   </p>
                 </Reveal>
@@ -541,22 +541,22 @@ export function AboutRedesignDesktop() {
             <Reveal delay={0.25} duration={0.7}>
               <div className="grid grid-cols-[40%_1fr] pt-[clamp(14px,3.4vh,36px)]">
                 <div>
-                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(11px,1.7vh,14px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Education</h3>
+                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Education</h3>
                   <div className="space-y-[clamp(10px,2.2vh,22px)]">
                     {[
                       ["M.Sc. Structural Engineering", "Isfahan University of Technology"],
                       ["B.Sc. Civil Engineering", "Mashhad University"],
                     ].map(([t, u]) => (
                       <div key={t}>
-                        <p className="text-[clamp(18px,3vh,26px)] leading-tight text-[#FCFCFC]">{t}</p>
-                        <p className="mt-1 text-[clamp(14px,2.3vh,19px)] text-[#FCFCFC]/80">{u}</p>
+                        <p className="text-[18px] leading-tight text-[#FCFCFC]">{t}</p>
+                        <p className="mt-1 text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/80">{u}</p>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(11px,1.7vh,14px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Certifications</h3>
-                  <ul className="space-y-[clamp(10px,2.2vh,22px)] text-[clamp(17px,2.8vh,24px)] leading-tight text-[#FCFCFC]">
+                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Certifications</h3>
+                  <ul className="space-y-[clamp(10px,2.2vh,22px)] text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/85">
                     {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)"].map((item) => (
                       <li key={item}>{item}</li>
                     ))}
