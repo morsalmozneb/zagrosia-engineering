@@ -514,6 +514,59 @@ function CareerPhoto({ src, alt, reduced }: { src: string; alt: string; reduced:
   )
 }
 
+/* Section separator: a faceted blue ridge that folds flat and unfolds again, on a fading hairline. */
+const foldPts = [
+  { x: 130, y: 70 }, { x: 260, y: 46 }, { x: 440, y: 0 }, { x: 600, y: 40 }, { x: 740, y: 70 },
+]
+function foldD(k: number, a: number, b: number) {
+  const P = foldPts.map((p) => ({ x: p.x, y: +(70 - k * (70 - p.y)).toFixed(2) }))
+  const pts = [...P.slice(a, b + 1)]
+  const base = pts.map((p) => ({ x: p.x, y: 70 })).reverse()
+  const all = [...pts, ...base]
+  return "M" + all.map((p) => `${p.x} ${p.y}`).join(" L") + " Z"
+}
+function FoldSeparator() {
+  const reduced = useReducedMotion()
+  const facets = [
+    { a: 0, b: 1, fill: "#d3e5f8", delay: 0 },
+    { a: 1, b: 2, fill: "#a6cbf2", delay: 0.06 },
+    { a: 2, b: 3, fill: "#78aaf0", delay: 0.12 },
+    { a: 3, b: 4, fill: "#bcd7f5", delay: 0.18 },
+  ]
+  return (
+    <div className="sidebar-content zag-desktop-content-pad" aria-hidden="true">
+      <div className="max-w-[1320px] py-[clamp(8px,2vh,24px)]">
+        <svg viewBox="0 0 880 76" className="block h-[clamp(44px,8vh,84px)] w-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="foldLine" x1="0" x2="1">
+              <stop offset="0" stopColor="#0052A5" stopOpacity="0" />
+              <stop offset="0.5" stopColor="#0052A5" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#0052A5" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="foldBase" x1="0" x2="1">
+              <stop offset="0" stopColor="#0a4a96" stopOpacity="0" />
+              <stop offset="0.3" stopColor="#0a4a96" />
+              <stop offset="0.7" stopColor="#0a4a96" />
+              <stop offset="1" stopColor="#0a4a96" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="69" width="880" height="1.5" fill="url(#foldLine)" />
+          {facets.map((f, i) => (
+            <motion.path
+              key={i}
+              fill={f.fill}
+              initial={{ d: foldD(reduced ? 1 : 0.04, f.a, f.b) }}
+              animate={{ d: reduced ? foldD(1, f.a, f.b) : [foldD(1, f.a, f.b), foldD(0.05, f.a, f.b), foldD(1, f.a, f.b)] }}
+              transition={{ duration: 4.4, delay: f.delay, ease: "easeInOut", repeat: reduced ? 0 : Infinity, repeatDelay: 0.3 }}
+            />
+          ))}
+          <rect x="260" y="67" width="480" height="5" fill="url(#foldBase)" />
+        </svg>
+      </div>
+    </div>
+  )
+}
+
 export function AboutRedesignDesktop() {
   const reduced = useReducedMotion()
   const [stationIndex, setStationIndex] = useState(4)
@@ -859,6 +912,8 @@ export function AboutRedesignDesktop() {
           </div>
         </div>
       </section>
+
+      <FoldSeparator />
 
       {/* ═══ 5. CAREER PATH ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
