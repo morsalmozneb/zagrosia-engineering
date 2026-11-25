@@ -139,10 +139,10 @@ const stations: Station[] = [
       "Manages projects from concept to completion, within code, schedule and budget.",
     ],
     sites: [
-      { name: "Car elevator", place: "British Columbia", note: "A car elevator and its steel enclosure." },
-      { name: "Steel access bridge", place: "British Columbia", note: "A steel access bridge, designed and detailed." },
-      { name: "Beam & slab", place: "British Columbia", note: "Concrete beam and slab replacement." },
-      { name: "Helical piles", place: "British Columbia", note: "Helical piles and suspended slabs." },
+      { name: "Parkade review", place: "Langley, BC", note: "Structural review of a parkade: slabs, columns and soffits assessed on site and reported on.", image: "/images/projects/parkade-structural-review-langley/01-hero.jpg" },
+      { name: "Rooftop equipment", place: "Surrey, BC", note: "Review of rooftop equipment supports, anchors and vibration isolators.", image: "/images/projects/rooftop-equipment-foundations-review-surrey/01-hero.jpg" },
+      { name: "Retaining wall", place: "Maple Ridge, BC", note: "Structural assessment of a retaining wall and the slope behind it.", image: "/images/projects/retaining-wall-structural-assessment-maple-ridge/01-hero.jpg" },
+      { name: "Scaffold review", place: "Vancouver, BC", note: "Field review of an access scaffold and its platform levels.", image: "/images/projects/scaffold-field-review-vancouver/01-hero.jpg" },
     ],
   },
   {
@@ -154,6 +154,12 @@ const stations: Station[] = [
       "Founded Zagrosia to bring his practice together under one name.",
       "Works alongside engineers, drafters and designers across structural, civil, architectural and digital work.",
       "Serves clients in British Columbia, Alberta and Saskatchewan.",
+    ],
+    sites: [
+      { name: "Townhouse complex", place: "Surrey, BC", note: "Condition assessment of a townhouse complex: elevations, porches and grounds.", image: "/images/projects/townhouse-complex-condition-assessment-surrey/01-hero.jpg" },
+      { name: "Recreation roof", place: "Langley, BC", note: "Review of a recreation facility's roof structure, trusses and connections.", image: "/images/projects/recreation-facility-roof-structure-review-langley/01-hero.jpg" },
+      { name: "Warehouse", place: "Vancouver, BC", note: "Structural review of a warehouse, its racking aisles and roof framing.", image: "/images/projects/warehouse-structural-review-vancouver/01-hero.jpg" },
+      { name: "Building envelope", place: "Vancouver, BC", note: "Field review of a building envelope rehabilitation and decayed framing.", image: "/images/projects/building-envelope-rehabilitation-field-review-vancouver/01-hero.jpg" },
     ],
   },
 ]
@@ -380,15 +386,37 @@ function ValuesReveal() {
 
 const stationKinds = ["Education", "Education", "Experience", "Experience", "Experience", "Certificate", "Certificate", "Experience", "Zagrosia"]
 const stationPhotos = [
-  "/images/company-milestone-3.jpg",
-  "/images/about-milestones-building.jpg",
-  "/images/company-milestone-2.jpg",
-  "/images/company-milestone-4.jpg",
+  "/images/projects/residential-complex-construction-iran/01-hero.jpg",
+  "/images/projects/two-storey-vertical-extension-iran/01-hero.jpg",
+  "/images/projects/two-storey-vertical-extension-iran/02-frame-end-elevation.jpg",
+  "/images/projects/residential-high-rise-construction-iran/01-hero.jpg",
   "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg",
   "/images/projects/scaffold-field-review-vancouver/01-hero.jpg",
   "/images/projects/recreation-facility-roof-structure-review-langley/01-hero.jpg",
   "/images/projects/parkade-structural-review-langley/01-hero.jpg",
-  "/images/company-milestone-1.jpg",
+  "/images/projects/townhouse-complex-condition-assessment-surrey/01-hero.jpg",
+]
+const stationCaptions = [
+  "Residential complex, Iran",
+  "Two-storey steel-frame extension, Iran",
+  "Steel-frame extension, Iran",
+  "Residential high-rise, Iran",
+  "Concrete-frame towers, Iran",
+  "Scaffold field review, Vancouver",
+  "Recreation facility roof, Langley",
+  "Parkade review, Langley",
+  "Townhouse complex, Surrey",
+]
+const stationMore = [
+  "Mashhad gave him the fundamentals: how loads travel through concrete, steel and masonry down to the ground. That grounding still shapes the way he reads a drawing or a site today. The photo shows one of the residential complexes he later engineered.",
+  "Graduate work in Isfahan went deeper into structural analysis and design, and prepared him for professional practice. Structural frames like the one pictured became the everyday subject of his work.",
+  "In his first design role he worked inside a large engineering company on heavy industrial plants. The work combined design office and field: calculations and drawings on one side, site visits and technical reports on the other.",
+  "This was a long, hands-on leadership role on one of the country's most demanding sites. It meant coordinating crews, consultants and inspections while keeping every structure to strict safety standards.",
+  "Running his own firm meant carrying a project from first sketch to handover: design, bids, contracts, approvals and the site itself. The towers pictured are from this period. Choose a project below to see it.",
+  "On arriving in British Columbia he went back to school to learn local construction practice, codes and site safety first-hand. Every Canadian project since has built on this foundation.",
+  "The SEABC certificate tied his experience to Canadian structural practice and codes. He completed it while already working on live projects, applying each lesson straight away.",
+  "At i3 he leads structural design and field review for a wide range of buildings across the Lower Mainland. Choose a project below to see the kind of work it involves.",
+  "Zagrosia brings structural, civil, architectural and digital work together under one roof. Every project is led by Seyed and delivered with a small team who know the work well. Choose a project below to see recent work.",
 ]
 const YEAR_PAD = 7
 const yearTop = (i: number, n: number) => `${YEAR_PAD + ((i + 0.5) * (100 - YEAR_PAD * 2)) / n}%`
@@ -864,7 +892,8 @@ export function AboutRedesignDesktop() {
                   <p key="k" className={eyebrow}>{stationKinds[stationIndex]}</p>,
                   <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#2D2D2D]`}>{station.title.toUpperCase()}</h3>,
                   <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#0052A5]">{station.place}</p>,
-                  <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{station.bullets.slice(0, 3).join(" ")}</p>,
+                  <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{station.bullets.join(" ")}</p>,
+                  <p key="m" className={`mt-[clamp(8px,1.6vh,14px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{stationMore[stationIndex]}</p>,
                 ].map((el, i) => (
                   <div key={i} className="overflow-hidden">
                     <motion.div
@@ -925,6 +954,9 @@ export function AboutRedesignDesktop() {
                 </motion.div>
               </div>
 
+              {!station.sites && (
+                <p className="absolute bottom-[clamp(14px,2.4vh,24px)] right-[clamp(16px,2vw,28px)] rounded-[8px] bg-[#0B1226]/70 px-[10px] py-[6px] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.12em] text-[#FCFCFC]">{stationCaptions[stationIndex]}</p>
+              )}
               {/* sites strip */}
               {station.sites && (
                 <div className="absolute bottom-0 left-[clamp(120px,14vw,190px)] right-0 px-[clamp(16px,2vw,28px)] pb-[clamp(14px,2.4vh,24px)]">
