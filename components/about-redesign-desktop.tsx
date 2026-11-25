@@ -918,10 +918,7 @@ export function AboutRedesignDesktop() {
                 transition={{ duration: 0.4, ease: EASE }}
               >
                 <div>
-                  <h3 className="zag-heading text-[18px] uppercase leading-[1.2] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
-                  {info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).length > 0 && (
-                    <p className="mt-1 text-[16px] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).join(" · ")}</p>
-                  )}
+                  <h3 className="text-[18px] font-bold uppercase leading-[1.2] tracking-[0.04em] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
                   <p className={`mt-2 max-w-[760px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
                 </div>
                 <div>
