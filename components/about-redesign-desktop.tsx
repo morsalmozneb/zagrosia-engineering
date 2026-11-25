@@ -388,8 +388,8 @@ const stationKinds = ["Education", "Education", "Experience", "Experience", "Exp
 const stationPhotos = [
   "/images/projects/residential-complex-construction-iran/01-hero.jpg",
   "/images/projects/two-storey-vertical-extension-iran/01-hero.jpg",
-  "/images/projects/two-storey-vertical-extension-iran/02-frame-end-elevation.jpg",
-  "/images/projects/residential-high-rise-construction-iran/01-hero.jpg",
+  "/images/projects/residential-complex-construction-iran/05-steel-frame-erection.jpg",
+  "/images/projects/residential-complex-construction-iran/02-blocks-overview.jpg",
   "/images/projects/residential-concrete-frame-construction-iran/01-hero.jpg",
   "/images/projects/scaffold-field-review-vancouver/01-hero.jpg",
   "/images/projects/recreation-facility-roof-structure-review-langley/01-hero.jpg",
@@ -399,8 +399,8 @@ const stationPhotos = [
 const stationCaptions = [
   "Residential complex, Iran",
   "Two-storey steel-frame extension, Iran",
-  "Steel-frame extension, Iran",
-  "Residential high-rise, Iran",
+  "Steel-frame erection, Iran",
+  "Residential blocks, Iran",
   "Concrete-frame towers, Iran",
   "Scaffold field review, Vancouver",
   "Recreation facility roof, Langley",
