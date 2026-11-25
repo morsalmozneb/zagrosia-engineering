@@ -24,10 +24,10 @@ const ctaDark =
 const ctaSmall =
   "inline-flex flex-1 items-center justify-center whitespace-nowrap zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.08em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[36px] px-4 text-[12px]"
 
-const eyebrow = "text-[14px] font-bold uppercase tracking-[0.24em] text-[#0052A5]"
-const sectionHeading = "zag-heading text-[clamp(20px,3.6vh,28px)] leading-none tracking-[0.04em]"
+const eyebrow = "text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]"
+const sectionHeading = "zag-heading text-[28px] uppercase leading-[1.1]"
 const sec = "relative flex flex-col justify-center py-[clamp(48px,9vh,110px)]"
-const bodyText = "text-[clamp(13px,2.1vh,17px)] leading-[1.6] tracking-[0.01em]"
+const bodyText = "text-[16px] leading-[1.7] tracking-[0.02em]"
 const panelShadow = "0 4px 19.6px rgba(0,0,0,0.18)"
 
 // ─── DATA (from Seyed Hassan Mozneb's portfolio / resume and the team resumes) ───────────
@@ -859,12 +859,15 @@ export function AboutRedesignDesktop() {
       {/* ═══ 7. MEET OUR TEAM ═══ */}
       <section className={`bg-[#F3F5F8] ${sec}`}>
         <div className="sidebar-content zag-desktop-content-pad">
-          <div className="max-w-[1320px]">
+          <div className="max-w-[1100px]">
             <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>MEET OUR TEAM</h2>
+              <p className={`mb-3 ${eyebrow}`}>The people behind Zagrosia</p>
+            </Reveal>
+            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+              <h2 className={`${sectionHeading} text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(30px,5vh,46px)]">
+            <div className="grid grid-cols-5 gap-[clamp(10px,1.2vw,18px)] pt-[clamp(52px,9vh,84px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
@@ -877,10 +880,10 @@ export function AboutRedesignDesktop() {
                   >
                     <motion.div
                       className="relative aspect-square w-full overflow-hidden rounded-[22px] bg-[#EEF2F7]"
-                      animate={{ y: active ? -34 : 0 }}
+                      animate={{ y: active ? -60 : 0 }}
                       initial={false}
                       transition={{ type: "spring", stiffness: 180, damping: 20 }}
-                      style={{ boxShadow: active ? "0 26px 40px rgba(0,82,165,0.3)" : panelShadow }}
+                      style={{ boxShadow: active ? "0 34px 44px rgba(0,82,165,0.32)" : panelShadow }}
                     >
                       <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
                       {m.name === "SEYED HASSAN MOZNEB" && (
@@ -902,10 +905,10 @@ export function AboutRedesignDesktop() {
                         </svg>
                       )}
                     </motion.div>
-                    <p className={`mt-[clamp(6px,1.2vh,12px)] text-[clamp(14px,2.2vh,17px)] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
+                    <p className={`mt-[clamp(6px,1.2vh,12px)] text-[18px] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
                       {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
                     </p>
-                    <p className="mt-1 text-[clamp(12px,1.8vh,14px)] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
+                    <p className="mt-1 text-[14px] leading-[1.4] tracking-[0.02em] text-[#6b7380]">{mi.role}</p>
                   </button>
                 )
               })}
@@ -914,18 +917,22 @@ export function AboutRedesignDesktop() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={member.name}
-                className="mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)]"
+                className="relative mt-[clamp(14px,3vh,32px)] grid grid-cols-[1.5fr_1fr] gap-[clamp(32px,5vw,80px)] pl-5"
                 initial={reduced ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: EASE }}
               >
+                <span
+                  className="absolute left-0 top-0 h-full w-[3px] rounded-full"
+                  style={{ background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)" }}
+                />
                 <div>
-                  <h3 className="zag-heading text-[clamp(18px,2.8vh,22px)] uppercase leading-[1.15] tracking-[0.04em] text-[#2D2D2D]">{info.studied.split(" · ")[0]}</h3>
+                  <h3 className={`${sectionHeading} text-[#2D2D2D]`}>{info.studied.split(" · ")[0]}</h3>
                   {info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).length > 0 && (
-                    <p className="mt-1 text-[clamp(12px,1.9vh,15px)] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).join(" · ")}</p>
+                    <p className="mt-1 text-[16px] tracking-[0.02em] text-[#6b7380]">{info.studied.split(" · ").slice(1).filter((p) => !/BCIT|First in class/.test(p)).join(" · ")}</p>
                   )}
-                  <p className={`mt-[clamp(8px,1.6vh,16px)] max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
+                  <p className={`mt-3 max-w-[680px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
                 </div>
                 <div>
                   <p className={eyebrow}>Tools &amp; Expertise</p>
