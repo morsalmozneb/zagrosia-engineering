@@ -533,7 +533,7 @@ export function AboutRedesignDesktop() {
                 </Reveal>
                 <Reveal delay={0.22} duration={0.65}>
                   <p className="mt-[clamp(8px,2vh,22px)] max-w-[560px] text-[clamp(14px,2.3vh,18px)] leading-[1.6] text-[#FCFCFC]/85">
-                    He designs structures and supervises their construction, bringing first-hand site experience to Zagrosia&apos;s engineering practice.
+                    He designs structures and supervises their construction, bringing first-hand site experience to Zagrosia Engineering.
                   </p>
                 </Reveal>
                 <Reveal delay={0.3} duration={0.6}>
@@ -544,7 +544,7 @@ export function AboutRedesignDesktop() {
                       rel="noopener noreferrer"
                       className="inline-flex h-[clamp(36px,5.6vh,48px)] items-center gap-4 rounded-[6px] bg-[#F5F7FB] px-5 text-[clamp(13px,1.9vh,15px)] font-medium text-[#0B0E0A] transition-colors hover:bg-[#7fb0f5]"
                     >
-                      View résumé
+                      View Resume
                       <ArrowUpRight size={16} className="text-[#0150a9]" />
                     </CtaButton>
                     <CtaButton
@@ -559,38 +559,30 @@ export function AboutRedesignDesktop() {
               </div>
             </div>
 
-            {/* Row 2: education, certifications, codes and software */}
+            {/* Row 2: education and certifications */}
             <Reveal delay={0.25} duration={0.7}>
               <div className="grid grid-cols-[40%_1fr] pt-[clamp(14px,3.4vh,36px)]">
                 <div>
-                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Education</h3>
-                  <div className="space-y-[clamp(8px,1.8vh,18px)]">
+                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(11px,1.7vh,14px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Education</h3>
+                  <div className="space-y-[clamp(10px,2.2vh,22px)]">
                     {[
                       ["M.Sc. Structural Engineering", "Isfahan University of Technology"],
                       ["B.Sc. Civil Engineering", "Mashhad University"],
                     ].map(([t, u]) => (
                       <div key={t}>
-                        <p className="text-[clamp(14px,2.2vh,19px)] leading-tight text-[#FCFCFC]">{t}</p>
-                        <p className="mt-1 text-[clamp(12px,1.8vh,15px)] text-[#FCFCFC]/60">{u}</p>
+                        <p className="text-[clamp(18px,3vh,26px)] leading-tight text-[#FCFCFC]">{t}</p>
+                        <p className="mt-1 text-[clamp(14px,2.3vh,19px)] text-[#FCFCFC]/80">{u}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-[1.4fr_1fr] gap-[clamp(16px,3vw,40px)]">
-                  <div>
-                    <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Certifications</h3>
-                    <ul className="space-y-[clamp(6px,1.6vh,16px)] text-[clamp(13px,2vh,17px)] leading-tight text-[#FCFCFC]/80">
-                      {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)", "Construction Operation Certificate (BCIT)"].map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="mb-[clamp(6px,1.2vh,12px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Codes</h3>
-                    <p className="text-[clamp(12px,1.8vh,15px)] leading-[1.5] text-[#FCFCFC]/80">NBCC · CSA · ACI · AISC · ASCE</p>
-                    <h3 className="mb-[clamp(6px,1.2vh,12px)] mt-[clamp(10px,2.4vh,24px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Software</h3>
-                    <p className="text-[clamp(12px,1.8vh,15px)] leading-[1.5] text-[#FCFCFC]/80">SAP2000 · ETABS · SAFE · STAAD Pro · RISA-3D · Revit · Tekla</p>
-                  </div>
+                <div>
+                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(11px,1.7vh,14px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Certifications</h3>
+                  <ul className="space-y-[clamp(10px,2.2vh,22px)] text-[clamp(17px,2.8vh,24px)] leading-tight text-[#FCFCFC]">
+                    {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)"].map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </Reveal>
