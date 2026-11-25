@@ -904,62 +904,6 @@ export function AboutRedesignDesktop() {
           </div>
         </div>
       </section>
-
-      {/* ═══ 8. WHERE WE WORK ═══ */}
-      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="max-w-[1100px]">
-          <div className="flex items-end justify-between gap-8">
-            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} text-[#2D2D2D]`}>WHERE WE WORK</h2>
-            </Reveal>
-            <CtaButton href="/projects" className={ctaLight}>View Projects</CtaButton>
-          </div>
-          <div className="mt-[clamp(12px,3vh,40px)] grid grid-cols-3 gap-6">
-            {regions.map((r, i) => (
-              <motion.div
-                key={r.code}
-                initial={reduced ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: EASE }}
-                className={`flex min-h-[clamp(170px,34vh,280px)] flex-col rounded-[14px] border p-[clamp(16px,3vh,32px)] ${
-                  i === 0 ? "border-[#0052A5] bg-[#0B0E0A] text-[#FCFCFC]" : "border-[#2D2D2D] bg-white text-[#2D2D2D]"
-                }`}
-                style={{ boxShadow: panelShadow }}
-              >
-                <p className={`zag-heading text-[clamp(36px,8vh,64px)] font-bold leading-none tracking-[0.04em] ${i === 0 ? "text-[#5b9bf0]" : "text-[#0052A5]"}`}>{r.code}</p>
-                <h3 className="mt-[clamp(8px,2.2vh,24px)] text-[clamp(14px,2.5vh,21px)] font-bold uppercase tracking-[0.08em]">{r.name}</h3>
-                <p className={`mt-2 text-[clamp(12px,1.95vh,15px)] leading-[1.55] tracking-[0.01em] ${i === 0 ? "text-[#FCFCFC]/85" : "text-[#3a4252]"}`}>{r.text}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="mt-[clamp(10px,2vh,24px)] flex items-center justify-between gap-8 rounded-[14px] border border-[#2D2D2D]/25 bg-[#F3F5F8] px-[clamp(16px,2.4vw,32px)] py-[clamp(10px,2vh,24px)]"
-          >
-            <div>
-              <p className="text-[clamp(10px,1.5vh,12px)] font-bold uppercase tracking-[0.22em] text-[#0052A5]">Earlier experience, abroad</p>
-              <p className="mt-1 text-[clamp(12px,1.95vh,15px)] leading-[1.5] tracking-[0.01em] text-[#3a4252]">
-                Before Zagrosia, the principal designed and supervised structures across Iran.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-end gap-[6px]">
-              {earlierSites.map((s) => (
-                <span key={s} className="rounded-[8px] border border-[#2D2D2D]/30 bg-white px-[10px] py-[5px] text-[clamp(10px,1.5vh,12px)] uppercase tracking-[0.12em]">{s}</span>
-              ))}
-            </div>
-          </motion.div>
-
-          <div className="mt-[clamp(10px,2.4vh,32px)] flex gap-4">
-            <CtaButton href="/contact" className={ctaLight}>Work with Us</CtaButton>
-            <CtaButton href="/contact" className={ctaLight}>Get In Touch</CtaButton>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
