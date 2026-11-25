@@ -588,6 +588,17 @@ export function AboutRedesignDesktop() {
     setSiteIndex(0)
   }
 
+  const stationEls = (i: number) => {
+    const st = stations[i]
+    return [
+      <p key="k" className={eyebrow}>{stationKinds[i]}</p>,
+      <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#2D2D2D]`}>{st.title.toUpperCase()}</h3>,
+      <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#0052A5]">{st.place}</p>,
+      <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{st.bullets.join(" ")}</p>,
+      <p key="m" className={`mt-[clamp(8px,1.6vh,14px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{stationMore[i]}</p>,
+    ]
+  }
+
   return (
     <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
       {/* ═══ 1. HERO ═══ */}
@@ -1026,7 +1037,7 @@ export function AboutRedesignDesktop() {
             <h2 className={`${sectionHeading} mb-[clamp(14px,3vh,32px)] text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
           </Reveal>
 
-          <div className="grid h-[clamp(380px,62vh,600px)] grid-cols-[0.85fr_1.15fr] gap-[clamp(40px,4.4vw,64px)]">
+          <div className="grid min-h-[clamp(380px,62vh,600px)] grid-cols-[0.85fr_1.15fr] gap-[clamp(40px,4.4vw,64px)]">
             {/* left: text */}
             <div className="relative flex items-center">
               <motion.span
@@ -1037,30 +1048,32 @@ export function AboutRedesignDesktop() {
                 viewport={{ once: true }}
                 transition={{ duration: 1.1, ease: EASE }}
               />
-              <motion.div
-                key={stationIndex}
-                className="pl-[clamp(18px,2vw,28px)]"
-                initial="hidden"
-                animate="show"
-                variants={{ show: { transition: { staggerChildren: reduced ? 0 : 0.09 } } }}
-              >
-                {[
-                  <p key="k" className={eyebrow}>{stationKinds[stationIndex]}</p>,
-                  <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#2D2D2D]`}>{station.title.toUpperCase()}</h3>,
-                  <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#0052A5]">{station.place}</p>,
-                  <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{station.bullets.join(" ")}</p>,
-                  <p key="m" className={`mt-[clamp(8px,1.6vh,14px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{stationMore[stationIndex]}</p>,
-                ].map((el, i) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.div
-                      variants={{ hidden: { y: "105%", opacity: 0 }, show: { y: "0%", opacity: 1 } }}
-                      transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
-                    >
-                      {el}
-                    </motion.div>
+              <div className="grid w-full pl-[clamp(18px,2vw,28px)]">
+                {/* every station's text is laid in the same cell, hidden, so the card is always as tall as the longest one */}
+                {stations.map((_, i) => (
+                  <div key={`sizer-${i}`} aria-hidden="true" className="invisible col-start-1 row-start-1">
+                    {stationEls(i)}
                   </div>
                 ))}
-              </motion.div>
+                <motion.div
+                  key={stationIndex}
+                  className="col-start-1 row-start-1"
+                  initial="hidden"
+                  animate="show"
+                  variants={{ show: { transition: { staggerChildren: reduced ? 0 : 0.09 } } }}
+                >
+                  {stationEls(stationIndex).map((el, i) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.div
+                        variants={{ hidden: { y: "105%", opacity: 0 }, show: { y: "0%", opacity: 1 } }}
+                        transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                      >
+                        {el}
+                      </motion.div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
               {/* connector to the active year */}
               <motion.span
                 className="pointer-events-none absolute -right-[clamp(40px,4.4vw,64px)] z-10 h-[3px] w-[clamp(40px,4.4vw,64px)] -translate-y-1/2 rounded-full bg-[#0052A5]"
