@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { coreValues, team } from "./about-desktop-page"
@@ -503,66 +503,97 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 3. THE PRINCIPAL ═══ */}
-      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(48px,9vh,110px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,6vh,80px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
         <div className="sidebar-content zag-desktop-content-pad">
-          <div className="grid max-w-[1100px] grid-cols-[clamp(260px,32vw,430px)_1fr] items-end gap-[clamp(28px,4.5vw,64px)]">
-            <motion.div
-              className="relative h-[min(92svh,640px)] min-h-[440px]"
-              initial={reduced ? false : { opacity: 0, x: -24, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.85, delay: 0.1, ease: EASE }}
-            >
-              <Image src="/images/homayoun-pic.png" alt="Seyed Hassan Mozneb" fill className="object-contain object-bottom" />
-            </motion.div>
-            <div className="self-center py-[clamp(20px,4vh,48px)]">
-              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                <p className="mb-[clamp(6px,1.4vh,14px)] text-[clamp(11px,1.7vh,14px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">The principal</p>
-              </Reveal>
-              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                <h2 className="zag-heading text-[clamp(24px,5.4vh,40px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">Seyed Hassan Mozneb</h2>
-              </Reveal>
-              <Reveal delay={0.16} duration={0.6}>
-                <p className="mt-2 text-[clamp(10px,1.6vh,13px)] uppercase tracking-[0.24em] text-[#FCFCFC]/75">P.Eng. · M.Sc. · Founder of Zagrosia</p>
-              </Reveal>
-              <Reveal delay={0.22} duration={0.65}>
-                <p className={`mt-[clamp(8px,2vh,22px)] max-w-[560px] text-[#FCFCFC]/92 ${bodyText}`}>
-                  He has worked on both sides of the structure: designing it, and supervising it as it was built. From the reactor dome at Bushehr to six apartment developments in Shiraz, his career has moved between design office and construction site.
-                </p>
-              </Reveal>
-              <div className="mt-[clamp(10px,2.4vh,26px)] grid max-w-[600px] grid-cols-2 gap-[clamp(16px,3vw,40px)]">
-                <div>
-                  <h3 className="mb-2 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Education</h3>
-                  <ul className="space-y-[clamp(4px,0.9vh,8px)] text-[clamp(12px,1.9vh,15px)] leading-[1.4] tracking-[0.03em]">
-                    {["M.Sc. Structural Engineering, Isfahan University of Technology", "B.Sc. Civil Engineering, Mashhad University"].map((item) => (
-                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-[clamp(3px,0.8vh,8px)]">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="mb-2 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Certifications</h3>
-                  <ul className="space-y-[clamp(4px,0.9vh,8px)] text-[clamp(12px,1.9vh,15px)] leading-[1.4] tracking-[0.03em]">
-                    {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)", "Construction Operation Certificate (BCIT)"].map((item) => (
-                      <li key={item} className="border-b border-[#FCFCFC]/15 pb-[clamp(3px,0.8vh,8px)]">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-[clamp(10px,2.2vh,24px)] grid max-w-[600px] grid-cols-2 gap-[clamp(16px,3vw,40px)]">
-                <div>
-                  <h3 className="mb-1 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Codes</h3>
-                  <p className="text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.05em] text-[#FCFCFC]/90">NBCC · CSA · ACI · AISC · ASCE</p>
-                </div>
-                <div>
-                  <h3 className="mb-1 text-[clamp(10px,1.5vh,13px)] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Software</h3>
-                  <p className="text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.05em] text-[#FCFCFC]/90">SAP2000 · ETABS · SAFE · STAAD Pro · RISA-3D · Revit · Tekla</p>
-                </div>
-              </div>
-              <div className="mt-[clamp(12px,2.8vh,30px)] flex gap-4">
-                <CtaButton href={principal.resume} target="_blank" rel="noopener noreferrer" className={ctaDark}>View Resume</CtaButton>
-                <CtaButton href="/contact" className={ctaDark}>Contact</CtaButton>
+          <div className="max-w-[1180px]">
+            {/* Row 1: photo cut at the waist, sitting on the divider, with the introduction beside it */}
+            <div className="grid grid-cols-[40%_1fr] items-end border-b border-[#FCFCFC]/25">
+              <motion.div
+                className="ml-[5%] h-[clamp(250px,47vh,480px)] w-fit"
+                initial={reduced ? false : { opacity: 0, x: -24, filter: "blur(8px)" }}
+                whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.85, delay: 0.1, ease: EASE }}
+              >
+                <Image src="/images/seyed-hassan-principal.webp" alt="Seyed Hassan Mozneb, P.Eng." width={735} height={998} className="h-full w-auto" priority={false} />
+              </motion.div>
+              <div className="self-center pb-[clamp(16px,3vh,32px)]">
+                <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                  <p className="mb-[clamp(4px,1vh,10px)] text-[clamp(11px,1.6vh,13px)] font-semibold uppercase tracking-[0.22em] text-[#7fb0f5]">The principal</p>
+                </Reveal>
+                <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                  <h2 className="font-sans text-[clamp(34px,8vh,72px)] font-medium leading-[1.02] tracking-[-0.01em]">
+                    Seyed Hassan
+                    <br />
+                    <span className="text-[#7fb0f5]">Mozneb</span>
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.16} duration={0.6}>
+                  <p className="mt-[clamp(10px,2.2vh,22px)] text-[clamp(13px,2vh,16px)] tracking-[0.01em] text-[#FCFCFC]/70">P.Eng., M.Sc. &nbsp;·&nbsp; Founder of Zagrosia</p>
+                </Reveal>
+                <Reveal delay={0.22} duration={0.65}>
+                  <p className="mt-[clamp(8px,2vh,22px)] max-w-[560px] text-[clamp(14px,2.3vh,18px)] leading-[1.6] text-[#FCFCFC]/85">
+                    He designs structures and supervises their construction, bringing first-hand site experience to Zagrosia&apos;s engineering practice.
+                  </p>
+                </Reveal>
+                <Reveal delay={0.3} duration={0.6}>
+                  <div className="mt-[clamp(12px,3vh,32px)] flex items-center gap-7">
+                    <CtaButton
+                      href={principal.resume}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-[clamp(36px,5.6vh,48px)] items-center gap-4 rounded-[6px] bg-[#F5F7FB] px-5 text-[clamp(13px,1.9vh,15px)] font-medium text-[#0B0E0A] transition-colors hover:bg-[#7fb0f5]"
+                    >
+                      View résumé
+                      <ArrowUpRight size={16} className="text-[#0150a9]" />
+                    </CtaButton>
+                    <CtaButton
+                      href="/contact"
+                      className="inline-flex items-center gap-2 border-b border-[#5b9bf0]/70 pb-1 text-[clamp(13px,1.9vh,15px)] font-medium text-[#FCFCFC] transition-colors hover:text-[#7fb0f5]"
+                    >
+                      Contact
+                      <ArrowRight size={16} className="text-[#7fb0f5]" />
+                    </CtaButton>
+                  </div>
+                </Reveal>
               </div>
             </div>
+
+            {/* Row 2: education, certifications, codes and software */}
+            <Reveal delay={0.25} duration={0.7}>
+              <div className="grid grid-cols-[40%_1fr] pt-[clamp(14px,3.4vh,36px)]">
+                <div>
+                  <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Education</h3>
+                  <div className="space-y-[clamp(8px,1.8vh,18px)]">
+                    {[
+                      ["M.Sc. Structural Engineering", "Isfahan University of Technology"],
+                      ["B.Sc. Civil Engineering", "Mashhad University"],
+                    ].map(([t, u]) => (
+                      <div key={t}>
+                        <p className="text-[clamp(14px,2.2vh,19px)] leading-tight text-[#FCFCFC]">{t}</p>
+                        <p className="mt-1 text-[clamp(12px,1.8vh,15px)] text-[#FCFCFC]/60">{u}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid grid-cols-[1.4fr_1fr] gap-[clamp(16px,3vw,40px)]">
+                  <div>
+                    <h3 className="mb-[clamp(8px,1.8vh,16px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Certifications</h3>
+                    <ul className="space-y-[clamp(6px,1.6vh,16px)] text-[clamp(13px,2vh,17px)] leading-tight text-[#FCFCFC]/80">
+                      {["Professional Engineer (P.Eng.)", "Structural Engineering Certificate (SEABC)", "Construction Operation Certificate (BCIT)"].map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="mb-[clamp(6px,1.2vh,12px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Codes</h3>
+                    <p className="text-[clamp(12px,1.8vh,15px)] leading-[1.5] text-[#FCFCFC]/80">NBCC · CSA · ACI · AISC · ASCE</p>
+                    <h3 className="mb-[clamp(6px,1.2vh,12px)] mt-[clamp(10px,2.4vh,24px)] text-[clamp(10px,1.5vh,12px)] font-semibold uppercase tracking-[0.2em] text-[#7fb0f5]">Software</h3>
+                    <p className="text-[clamp(12px,1.8vh,15px)] leading-[1.5] text-[#FCFCFC]/80">SAP2000 · ETABS · SAFE · STAAD Pro · RISA-3D · Revit · Tekla</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-[3px] bg-[#FCFCFC]" />
