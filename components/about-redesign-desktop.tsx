@@ -343,8 +343,8 @@ function ValuesReveal() {
         {coreValues.map((v) => (
           <div key={v.title}>
             <span className="mb-[clamp(6px,1.4vh,12px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
-            <h4 className="text-[18px] font-bold leading-tight text-[#1B2434]">{v.title}</h4>
-            <p className="mt-2 text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.01em] text-[#5a6270]">{v.description}</p>
+            <h4 className="text-[16px] font-bold leading-[1.7] tracking-[0.02em] text-[#2d2d2d]">{v.title}</h4>
+            <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">{v.description}</p>
           </div>
         ))}
       </div>
@@ -776,45 +776,57 @@ export function AboutRedesignDesktop() {
       {/* ═══ 5. MISSION, VISION & VALUES ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
-          <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>
-              MISSION, VISION <span className="text-[#0052A5]">&amp; VALUES</span>
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-2">
-            {[
-              {
-                label: "Our mission",
-                text: "To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients' goals, and contribute to the resilience and sustainability of the built environment.",
-              },
-              {
-                label: "Our vision",
-                text: "To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.",
-              },
-            ].map((card, i) => (
-              <Reveal key={card.label} delay={0.12 + i * 0.1} duration={0.65}>
-                <div className={i === 0 ? "pr-[clamp(20px,3vw,44px)]" : "border-l border-[#2D2D2D]/20 pl-[clamp(20px,3vw,44px)]"}>
-                  <div className="mb-[clamp(8px,1.8vh,16px)] flex items-center gap-4">
-                    <span className="block h-[3px] w-6 rounded-full bg-[#0052A5]" />
-                    <p className="text-[18px] font-bold text-[#2D2D2D]">{card.label}</p>
-                  </div>
-                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#5a6270]">{card.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mb-[clamp(8px,1.6vh,16px)] mt-[clamp(18px,4.4vh,48px)] flex items-end justify-between">
-            <Reveal variant="fadeLeft" delay={0.05} duration={0.6}>
-              <h3 className="zag-heading text-[22px] text-[#2D2D2D]">Core values</h3>
+          <div className="relative pl-5">
+            <motion.div
+              className="absolute left-0 top-0 w-[3px] rounded-full"
+              style={{
+                height: "100%",
+                background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
+                transformOrigin: "top",
+              }}
+              initial={reduced ? false : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+            />
+            <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Our purpose</p>
             </Reveal>
-            <p className="flex items-center gap-2 text-[14px] text-[#6b7380]">
-              <ChevronsLeftRight size={16} className="text-[#0052A5]" /> Drag the line to reveal
-            </p>
-          </div>
+            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#2d2d2d]">
+                Mission, vision <span className="text-[#0052A5]">&amp; values</span>
+              </h2>
+            </Reveal>
+
+            <div className="grid grid-cols-2">
+              {[
+                {
+                  label: "Our mission",
+                  text: "To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients' goals, and contribute to the resilience and sustainability of the built environment.",
+                },
+                {
+                  label: "Our vision",
+                  text: "To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.",
+                },
+              ].map((card, i) => (
+                <Reveal key={card.label} delay={0.15 + i * 0.1} duration={0.65}>
+                  <div className={i === 0 ? "pr-[clamp(20px,3vw,44px)]" : "border-l border-[#2D2D2D]/20 pl-[clamp(20px,3vw,44px)]"}>
+                    <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{card.label}</p>
+                    <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">{card.text}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <div className="mb-3 mt-8 flex items-end justify-between">
+              <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Core values</p>
+              <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.24em] text-[#3a3a3a]/60">
+                <ChevronsLeftRight size={16} className="text-[#0052A5]" /> Drag the line to reveal
+              </p>
+            </div>
 
           <ValuesReveal />
+          </div>
         </div>
       </section>
 
