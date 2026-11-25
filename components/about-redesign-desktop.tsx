@@ -519,42 +519,20 @@ export function AboutRedesignDesktop() {
               </motion.div>
               <div className="self-center pb-[clamp(16px,3vh,32px)]">
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                  <p className="mb-[clamp(4px,1vh,10px)] text-[clamp(11px,1.6vh,13px)] font-semibold uppercase tracking-[0.22em] text-[#7fb0f5]">The principal</p>
+                  <p className="mb-[clamp(4px,1vh,10px)] text-[clamp(11px,1.6vh,13px)] font-semibold uppercase tracking-[0.22em] text-[#7fb0f5]">Our Principal &amp; Founder</p>
                 </Reveal>
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                  <h2 className="font-sans text-[clamp(34px,8vh,72px)] font-medium leading-[1.02] tracking-[-0.01em]">
-                    Seyed Hassan
-                    <br />
-                    <span className="text-[#7fb0f5]">Mozneb</span>
+                  <h2 className="whitespace-nowrap font-sans text-[clamp(28px,min(6.6vh,3.8vw),60px)] font-medium leading-[1.05] tracking-[-0.01em]">
+                    Seyed Hassan <span className="text-[#7fb0f5]">Mozneb</span>
                   </h2>
                 </Reveal>
                 <Reveal delay={0.16} duration={0.6}>
                   <p className="mt-[clamp(10px,2.2vh,22px)] text-[clamp(13px,2vh,16px)] tracking-[0.01em] text-[#FCFCFC]/70">P.Eng., M.Sc. &nbsp;·&nbsp; Founder of Zagrosia</p>
                 </Reveal>
                 <Reveal delay={0.22} duration={0.65}>
-                  <p className="mt-[clamp(8px,2vh,22px)] max-w-[560px] text-[clamp(14px,2.3vh,18px)] leading-[1.6] text-[#FCFCFC]/85">
-                    He designs structures and supervises their construction, bringing first-hand site experience to Zagrosia Engineering.
+                  <p className="mt-[clamp(8px,2vh,22px)] max-w-[680px] text-[clamp(14px,2.2vh,17px)] leading-[1.65] text-[#FCFCFC]/85">
+                    Seyed Hassan Mozneb is a structural engineer who designs structures and supervises their construction, bringing first-hand site experience to every Zagrosia Engineering project. A registered Professional Engineer with an M.Sc. in Structural Engineering, he has worked on refineries, industrial facilities and hundreds of homes, and now leads our practice across British Columbia, Alberta and Saskatchewan in steel, concrete, wood and masonry.
                   </p>
-                </Reveal>
-                <Reveal delay={0.3} duration={0.6}>
-                  <div className="mt-[clamp(12px,3vh,32px)] flex items-center gap-7">
-                    <CtaButton
-                      href={principal.resume}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-[clamp(36px,5.6vh,48px)] items-center gap-4 rounded-[6px] bg-[#F5F7FB] px-5 text-[clamp(13px,1.9vh,15px)] font-medium text-[#0B0E0A] transition-colors hover:bg-[#7fb0f5]"
-                    >
-                      View Resume
-                      <ArrowUpRight size={16} className="text-[#0150a9]" />
-                    </CtaButton>
-                    <CtaButton
-                      href="/contact"
-                      className="inline-flex items-center gap-2 border-b border-[#5b9bf0]/70 pb-1 text-[clamp(13px,1.9vh,15px)] font-medium text-[#FCFCFC] transition-colors hover:text-[#7fb0f5]"
-                    >
-                      Contact
-                      <ArrowRight size={16} className="text-[#7fb0f5]" />
-                    </CtaButton>
-                  </div>
                 </Reveal>
               </div>
             </div>
