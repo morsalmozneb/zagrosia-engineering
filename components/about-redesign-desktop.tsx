@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion"
-import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { AnimatePresence, animate, motion, useInView, useReducedMotion } from "framer-motion"
+import { ArrowRight, ArrowUpRight, ChevronsLeftRight } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { coreValues, team } from "./about-desktop-page"
@@ -301,14 +301,89 @@ function PrincipalRule() {
   )
 }
 
+/* Core values card: a photo covers the values; dragging the blue line to the right reveals them. */
+function ValuesReveal() {
+  const reduced = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.6 })
+  const [pos, setPos] = useState(reduced ? 55 : 14)
+  const touched = useRef(false)
+  const dragging = useRef(false)
+
+  useEffect(() => {
+    if (!inView || reduced) return
+    const up = animate(14, 30, { duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1], onUpdate: (v) => { if (!touched.current) setPos(v) } })
+    return () => up.stop()
+  }, [inView, reduced])
+
+  const setFromEvent = (clientX: number) => {
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    setPos(Math.min(96, Math.max(4, ((clientX - r.left) / r.width) * 100)))
+  }
+
+  return (
+    <div
+      ref={ref}
+      className="relative select-none overflow-hidden rounded-[14px] bg-[#EEF2F7] touch-pan-y"
+      style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.12)" }}
+      onPointerDown={(e) => {
+        dragging.current = true
+        touched.current = true
+        e.currentTarget.setPointerCapture(e.pointerId)
+        setFromEvent(e.clientX)
+      }}
+      onPointerMove={(e) => { if (dragging.current) setFromEvent(e.clientX) }}
+      onPointerUp={() => { dragging.current = false }}
+      onPointerCancel={() => { dragging.current = false }}
+    >
+      {/* values underneath */}
+      <div className="grid grid-cols-3 gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(14px,3.2vh,34px)] px-[clamp(20px,3vw,44px)] py-[clamp(16px,3.6vh,40px)]">
+        {coreValues.map((v) => (
+          <div key={v.title}>
+            <span className="mb-[clamp(6px,1.4vh,12px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
+            <h4 className="text-[18px] font-bold leading-tight text-[#1B2434]">{v.title}</h4>
+            <p className="mt-2 text-[clamp(12px,1.9vh,15px)] leading-[1.6] tracking-[0.01em] text-[#5a6270]">{v.description}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* photo that covers the values until the line is dragged */}
+      <div className="pointer-events-none absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
+        <Image src="/images/about-core-values-building.jpg" alt="" fill sizes="1100px" className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(11,14,10,0.35) 0%, rgba(11,14,10,0) 40%)" }} />
+      </div>
+
+      {/* draggable line */}
+      <div
+        role="slider"
+        tabIndex={0}
+        aria-label="Reveal core values"
+        aria-valuemin={4}
+        aria-valuemax={96}
+        aria-valuenow={Math.round(pos)}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") { touched.current = true; setPos((p) => Math.min(96, p + 4)) }
+          if (e.key === "ArrowLeft") { touched.current = true; setPos((p) => Math.max(4, p - 4)) }
+        }}
+        className="absolute inset-y-0 z-10 w-[3px] -translate-x-1/2 cursor-ew-resize bg-[#0052A5] outline-none"
+        style={{ left: `${pos}%` }}
+      >
+        <span className="absolute left-1/2 top-1/2 flex h-[44px] w-[44px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0052A5]" style={{ boxShadow: "0 4px 16px rgba(0,0,0,0.25)" }}>
+          <ChevronsLeftRight size={22} />
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export function AboutRedesignDesktop() {
   const reduced = useReducedMotion()
-  const [valueIndex, setValueIndex] = useState(2)
   const [stationIndex, setStationIndex] = useState(4)
   const [siteIndex, setSiteIndex] = useState(0)
   const [teamIndex, setTeamIndex] = useState(1)
 
-  const value = coreValues[valueIndex]
   const station = stations[stationIndex]
   const site = station.sites ? station.sites[siteIndex] ?? station.sites[0] : null
   const stationImage = site ? site.image : station.image
@@ -698,88 +773,48 @@ export function AboutRedesignDesktop() {
         </div>
       </section>
 
-      {/* ═══ 5. MISSION & VISION ═══ */}
-      <section className={`bg-[#F3F5F8] ${sec}`}>
-        <div className="sidebar-content zag-desktop-content-pad">
-          <div className="max-w-[1100px]">
-            <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-              <h2 className={`${sectionHeading} mb-[clamp(14px,3.6vh,40px)] text-[#2D2D2D]`}>MISSION &amp; VISION</h2>
-            </Reveal>
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                {
-                  label: "Our mission",
-                  text: "To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients' goals, and contribute to the resilience and sustainability of the built environment.",
-                },
-                {
-                  label: "Our vision",
-                  text: "To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.",
-                },
-              ].map((card, i) => (
-                <motion.div
-                  key={card.label}
-                  initial={reduced ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.65, delay: 0.15 + i * 0.12, ease: EASE }}
-                  className="rounded-[14px] p-px"
-                  style={{ background: "linear-gradient(135deg, rgba(45,45,45,1) 0%, rgba(45,45,45,0.56) 26%, rgba(147,147,147,0.22) 100%)" }}
-                >
-                  <div className="h-full min-h-[clamp(180px,38vh,280px)] rounded-[14px] bg-[#FCFCFC] p-[clamp(18px,3.4vh,32px)]" style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.34)" }}>
-                    <span className="mb-[clamp(10px,2vh,20px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
-                    <p className="mb-[clamp(8px,1.6vh,16px)] text-[clamp(14px,2.4vh,18px)] font-bold uppercase tracking-[0.26em]">{card.label}</p>
-                    <p className="text-[clamp(13px,2.15vh,17px)] leading-[1.6] tracking-[0.02em]">{card.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 6. CORE VALUES ═══ */}
+      {/* ═══ 5. MISSION, VISION & VALUES ═══ */}
       <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-[clamp(14px,3.6vh,40px)] text-[#2D2D2D]`}>CORE VALUES</h2>
+            <h2 className={`${sectionHeading} mb-[clamp(14px,3.4vh,36px)] text-[#2D2D2D]`}>
+              MISSION, VISION <span className="text-[#0052A5]">&amp; VALUES</span>
+            </h2>
           </Reveal>
-          <div className="grid grid-cols-[1fr_1.15fr] overflow-hidden rounded-[14px] border border-[#2D2D2D] bg-white" style={{ boxShadow: panelShadow }}>
-            <div role="tablist" aria-label="Core values" className="flex flex-col">
-              {coreValues.map((v, i) => {
-                const active = i === valueIndex
-                return (
-                  <button
-                    key={v.title}
-                    role="tab"
-                    aria-selected={active}
-                    onClick={() => setValueIndex(i)}
-                    className={`flex h-[clamp(44px,9vh,84px)] items-center gap-5 border-b border-[#2D2D2D]/15 px-[clamp(16px,2.2vw,28px)] text-left transition-colors last:border-b-0 ${
-                      active ? "bg-[#0B0E0A] text-[#FCFCFC]" : "text-[#2D2D2D] hover:bg-[#EEF2F7]"
-                    }`}
-                  >
-                    <span className={`text-[clamp(11px,1.7vh,13px)] tracking-[0.12em] ${active ? "text-[#5b9bf0]" : "text-[#6b7380]"}`}>{String(i + 1).padStart(2, "0")}</span>
-                    <span className="zag-heading flex-1 text-[clamp(13px,2.5vh,19px)] font-bold uppercase tracking-[0.04em]">{v.title}</span>
-                    <ArrowRight size={18} strokeWidth={1.8} className={`transition-opacity ${active ? "opacity-100" : "opacity-0"}`} />
-                  </button>
-                )
-              })}
-            </div>
-            <div className="relative flex items-center border-l border-[#2D2D2D] px-[clamp(20px,3.6vw,56px)] py-[clamp(14px,3vh,40px)]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={value.title}
-                  initial={reduced ? false : { opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4, ease: EASE }}
-                >
-                  <span className="mb-[clamp(10px,2.4vh,24px)] block h-[3px] w-12 rounded-full bg-[#0052A5]" />
-                  <h3 className="zag-heading text-[clamp(20px,4.4vh,34px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">{value.title}</h3>
-                  <p className="mt-[clamp(8px,2vh,24px)] text-[clamp(14px,2.4vh,19px)] leading-[1.6] tracking-[0.01em] text-[#3a4252]">{value.description}</p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+
+          <div className="grid grid-cols-2">
+            {[
+              {
+                label: "Our mission",
+                text: "To deliver innovative, practical, and code-compliant structural engineering solutions that protect public safety, support our clients' goals, and contribute to the resilience and sustainability of the built environment.",
+              },
+              {
+                label: "Our vision",
+                text: "To become a recognized leader in structural engineering by combining technical excellence, specialty engineering expertise, and emerging artificial intelligence technologies to transform how engineering knowledge is created, shared, and applied.",
+              },
+            ].map((card, i) => (
+              <Reveal key={card.label} delay={0.12 + i * 0.1} duration={0.65}>
+                <div className={i === 0 ? "pr-[clamp(20px,3vw,44px)]" : "border-l border-[#2D2D2D]/20 pl-[clamp(20px,3vw,44px)]"}>
+                  <div className="mb-[clamp(8px,1.8vh,16px)] flex items-center gap-4">
+                    <span className="block h-[3px] w-6 rounded-full bg-[#0052A5]" />
+                    <p className="text-[18px] font-bold text-[#2D2D2D]">{card.label}</p>
+                  </div>
+                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#5a6270]">{card.text}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
+
+          <div className="mb-[clamp(8px,1.6vh,16px)] mt-[clamp(18px,4.4vh,48px)] flex items-end justify-between">
+            <Reveal variant="fadeLeft" delay={0.05} duration={0.6}>
+              <h3 className="zag-heading text-[22px] text-[#2D2D2D]">Core values</h3>
+            </Reveal>
+            <p className="flex items-center gap-2 text-[14px] text-[#6b7380]">
+              <ChevronsLeftRight size={16} className="text-[#0052A5]" /> Drag the line to reveal
+            </p>
+          </div>
+
+          <ValuesReveal />
         </div>
       </section>
 
