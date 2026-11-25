@@ -509,7 +509,7 @@ export function AboutRedesignDesktop() {
             {/* Row 1: photo cut at the waist, sitting on the divider, with the introduction beside it */}
             <div className="grid grid-cols-[40%_1fr] items-end border-b border-[#FCFCFC]/25">
               <motion.div
-                className="ml-[5%] h-[clamp(250px,47vh,480px)] w-fit"
+                className="ml-[5%] h-[clamp(300px,60vh,640px)] w-fit"
                 initial={reduced ? false : { opacity: 0, x: -24, filter: "blur(8px)" }}
                 whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.1 }}
