@@ -25,6 +25,7 @@ const ctaSmall =
   "inline-flex flex-1 items-center justify-center whitespace-nowrap zag-cta rounded-[10px] border border-[#2D2D2D] text-[#2D2D2D] font-medium tracking-[0.08em] transition-colors hover:bg-[#0052A5] hover:border-[#0052A5] hover:text-white h-[36px] px-4 text-[12px]"
 
 const eyebrow = "text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]"
+const eyebrowDark = "text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]"
 const sectionHeading = "zag-heading text-[28px] uppercase leading-[1.1]"
 const sec = "relative flex flex-col justify-center py-[clamp(48px,9vh,110px)]"
 const bodyText = "text-[16px] leading-[1.7] tracking-[0.02em]"
@@ -345,7 +346,7 @@ function ValuesReveal() {
       onPointerCancel={() => { dragging.current = false }}
     >
       {/* values underneath */}
-      <div className="grid grid-cols-3 overflow-hidden rounded-[14px] bg-[#EEF2F7] gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(14px,3.2vh,34px)] px-[clamp(20px,3vw,44px)] py-[clamp(16px,3.6vh,40px)]">
+      <div className="grid grid-cols-3 overflow-hidden rounded-[14px] bg-white gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(14px,3.2vh,34px)] px-[clamp(20px,3vw,44px)] py-[clamp(16px,3.6vh,40px)]">
         {coreValues.map((v) => (
           <div key={v.title}>
             <span className="mb-[clamp(6px,1.4vh,12px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
@@ -535,7 +536,7 @@ function FoldSeparator() {
   ]
   return (
     <div className="sidebar-content zag-desktop-content-pad" aria-hidden="true">
-      <div className="max-w-[1320px] py-[clamp(8px,2vh,24px)]">
+      <div className="max-w-[1320px] pt-[clamp(8px,2vh,24px)]">
         <svg viewBox="0 0 880 76" className="block h-[clamp(44px,8vh,84px)] w-full" preserveAspectRatio="none">
           <defs>
             <linearGradient id="foldLine" x1="0" x2="1">
@@ -591,11 +592,11 @@ export function AboutRedesignDesktop() {
   const stationEls = (i: number) => {
     const st = stations[i]
     return [
-      <p key="k" className={eyebrow}>{stationKinds[i]}</p>,
-      <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#2D2D2D]`}>{st.title.toUpperCase()}</h3>,
-      <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#0052A5]">{st.place}</p>,
-      <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{st.bullets.join(" ")}</p>,
-      <p key="m" className={`mt-[clamp(8px,1.6vh,14px)] max-w-[520px] ${bodyText} text-[#3a3a3a]`}>{stationMore[i]}</p>,
+      <p key="k" className={eyebrowDark}>{stationKinds[i]}</p>,
+      <h3 key="t" className={`${sectionHeading} mt-[clamp(8px,1.6vh,16px)] !leading-[1.15] text-[#FCFCFC]`}>{st.title.toUpperCase()}</h3>,
+      <p key="p" className="mt-[clamp(8px,1.6vh,14px)] text-[clamp(13px,2.1vh,17px)] font-semibold leading-[1.4] tracking-[0.02em] text-[#5b9bf0]">{st.place}</p>,
+      <p key="b" className={`mt-[clamp(10px,2vh,20px)] max-w-[520px] ${bodyText} text-[#FCFCFC]/85`}>{st.bullets.join(" ")}</p>,
+      <p key="m" className={`mt-[clamp(8px,1.6vh,14px)] max-w-[520px] ${bodyText} text-[#FCFCFC]/85`}>{stationMore[i]}</p>,
     ]
   }
 
@@ -604,7 +605,7 @@ export function AboutRedesignDesktop() {
       {/* ═══ 1. HERO ═══ */}
       <section
         className="relative min-h-screen overflow-hidden text-[#FCFCFC]"
-        style={{ background: "linear-gradient(180deg, #0B1226 0%, #161f43 55%, #0a3f86 100%)" }}
+        style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}
       >
         <RidgeArt className="absolute inset-x-0 bottom-0 h-[78%] w-full" />
         {HERO_VIDEO && (
@@ -695,7 +696,8 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 2. OUR STORY ═══ */}
-      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+      <section className="relative flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+        <div className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="grid max-w-[1320px] grid-cols-[1.9fr_0.8fr] items-center gap-[clamp(32px,4vw,64px)]">
           {/* LEFT: heading + description, same type sizes as the home page */}
           <div className="relative pl-5">
@@ -703,7 +705,7 @@ export function AboutRedesignDesktop() {
               className="absolute left-0 top-0 w-[3px] rounded-full"
               style={{
                 height: "100%",
-                background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)",
+                background: "linear-gradient(to bottom, rgba(91,155,240,1) 0%, rgba(91,155,240,0.8) 30%, rgba(91,155,240,0.4) 65%, rgba(91,155,240,0) 100%)",
                 transformOrigin: "top",
               }}
               initial={reduced ? false : { scaleY: 0 }}
@@ -712,11 +714,11 @@ export function AboutRedesignDesktop() {
               transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
             />
             <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Our story</p>
+              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Our story</p>
             </Reveal>
             <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#2d2d2d]">
-                From the <span className="text-[#0052A5]">Zagros</span>
+              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#FCFCFC]">
+                From the <span className="text-[#5b9bf0]">Zagros</span>
                 <br />
                 to the Pacific
               </h2>
@@ -724,10 +726,10 @@ export function AboutRedesignDesktop() {
             <div className="space-y-4">
               {storyParas.map((t, i) => (
                 <Reveal key={i} delay={0.2 + i * 0.08} duration={0.65}>
-                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#3a3a3a]">
+                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/85">
                     {t.split(/(Seyed Hassan Mozneb|Zagrosia Engineering Inc\.)/).map((part, k) =>
                       part === "Seyed Hassan Mozneb" || part === "Zagrosia Engineering Inc." ? (
-                        <strong key={k} className="font-bold text-[#2D2D2D]">{part}</strong>
+                        <strong key={k} className="font-bold text-[#FCFCFC]">{part}</strong>
                       ) : (
                         part
                       ),
@@ -736,18 +738,18 @@ export function AboutRedesignDesktop() {
                 </Reveal>
               ))}
             </div>
-            <div className="mt-6 grid grid-cols-3 border-t border-[#2D2D2D]/70">
+            <div className="mt-6 grid grid-cols-3 border-t border-[#FCFCFC]/60">
               {storyFacts.map((f, i) => (
                 <motion.div
                   key={f.label}
-                  className={`pt-3 ${i > 0 ? "border-l border-[#2D2D2D]/25 pl-4" : ""}`}
+                  className={`pt-3 ${i > 0 ? "border-l border-[#FCFCFC]/25 pl-4" : ""}`}
                   initial={reduced ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.6, delay: 0.5 + i * 0.1, ease: EASE }}
                 >
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0052A5]">{f.label}</p>
-                  <p className="mt-1 text-[14px] leading-[1.35] tracking-[0.02em] text-[#3a3a3a]">{f.value}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#5b9bf0]">{f.label}</p>
+                  <p className="mt-1 text-[14px] leading-[1.35] tracking-[0.02em] text-[#FCFCFC]/85">{f.value}</p>
                 </motion.div>
               ))}
             </div>
@@ -768,6 +770,7 @@ export function AboutRedesignDesktop() {
               <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
             </div>
           </motion.div>
+        </div>
         </div>
       </section>
 
@@ -969,7 +972,8 @@ export function AboutRedesignDesktop() {
       </section>
 
       {/* ═══ 5. MISSION, VISION & VALUES ═══ */}
-      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+      <section className="relative flex flex-col justify-center" style={{ background: "#F3F5F8" }}>
+        <div className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1100px]">
           <div className="relative pl-5">
             <motion.div
@@ -1023,18 +1027,20 @@ export function AboutRedesignDesktop() {
           <ValuesReveal />
           </div>
         </div>
+        </div>
       </section>
 
-      <FoldSeparator />
+      <div className="bg-[#F3F5F8]"><FoldSeparator /></div>
 
       {/* ═══ 5. CAREER PATH ═══ */}
-      <section className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+      <section className="relative flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+        <div className={`sidebar-content zag-desktop-content-pad ${sec}`}>
         <div className="max-w-[1320px]">
           <Reveal variant="fadeLeft" delay={0.05} duration={0.7}>
-            <p className={`mb-[clamp(4px,1.2vh,12px)] ${eyebrow}`}>Experience before Zagrosia</p>
+            <p className={`mb-[clamp(4px,1.2vh,12px)] ${eyebrowDark}`}>Experience before Zagrosia</p>
           </Reveal>
           <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-            <h2 className={`${sectionHeading} mb-[clamp(14px,3vh,32px)] text-[#2D2D2D]`}>A CAREER IN STRUCTURES</h2>
+            <h2 className={`${sectionHeading} mb-[clamp(14px,3vh,32px)] text-[#FCFCFC]`}>A CAREER IN STRUCTURES</h2>
           </Reveal>
 
           <div className="grid min-h-[clamp(380px,62vh,600px)] grid-cols-[0.85fr_1.15fr] gap-[clamp(40px,4.4vw,64px)]">
@@ -1042,7 +1048,7 @@ export function AboutRedesignDesktop() {
             <div className="relative flex items-center">
               <motion.span
                 className="absolute left-0 top-[6%] h-[88%] w-[3px] origin-top rounded-full"
-                style={{ background: "linear-gradient(180deg, #0052A5 0%, rgba(0,82,165,0) 100%)" }}
+                style={{ background: "linear-gradient(180deg, #5b9bf0 0%, rgba(0,82,165,0) 100%)" }}
                 initial={reduced ? false : { scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true }}
@@ -1167,49 +1173,50 @@ export function AboutRedesignDesktop() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
 
       {/* ═══ 8. CONTACT ═══ */}
-      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,7vh,90px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,7vh,90px)] text-[#2D2D2D]" style={{ background: "#F3F5F8" }}>
         <div className="sidebar-content zag-desktop-content-pad relative">
           <div className="grid max-w-[1100px] grid-cols-[0.9fr_1.1fr] items-center gap-[clamp(32px,5vw,80px)]">
             <div className="relative pl-5">
               <motion.div
                 className="absolute left-0 top-0 w-[3px] rounded-full"
-                style={{ height: "100%", background: "linear-gradient(to bottom, rgba(91,155,240,1) 0%, rgba(91,155,240,0.8) 30%, rgba(91,155,240,0.4) 65%, rgba(91,155,240,0) 100%)", transformOrigin: "top" }}
+                style={{ height: "100%", background: "linear-gradient(to bottom, rgba(1,80,169,1) 0%, rgba(1,80,169,0.8) 30%, rgba(1,80,169,0.4) 65%, rgba(1,80,169,0) 100%)", transformOrigin: "top" }}
                 initial={reduced ? false : { scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
               />
               <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Get in touch</p>
+                <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Get in touch</p>
               </Reveal>
               <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                <h2 className={`${sectionHeading} text-[#FCFCFC]`}>
+                <h2 className={`${sectionHeading} text-[#2D2D2D]`}>
                   Start with a<br />
-                  <span className="text-[#5b9bf0]">conversation</span>
+                  <span className="text-[#0052A5]">conversation</span>
                 </h2>
               </Reveal>
               <Reveal delay={0.18} duration={0.6}>
-                <p className={`mt-4 max-w-[430px] ${bodyText} text-[#FCFCFC]/80`}>
+                <p className={`mt-4 max-w-[430px] ${bodyText} text-[#3a3a3a]`}>
                   Tell us about your project. We can help with structural design, assessments, rehabilitation and specialty reviews.
                 </p>
               </Reveal>
               <Reveal delay={0.24} duration={0.6}>
                 <div className="mt-6 flex items-center gap-5">
-                  <CtaButton href="/contact" className={ctaDark}>
+                  <CtaButton href="/contact" className={ctaLight}>
                     Start your project
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </CtaButton>
                 </div>
               </Reveal>
               <Reveal delay={0.3} duration={0.6}>
-                <div className="mt-6 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#FCFCFC]/65">
+                <div className="mt-6 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#3a3a3a]/70">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5b9bf0]/70" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#5b9bf0]" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0052A5]/70" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#0052A5]" />
                   </span>
                   Based in Coquitlam, BC
                 </div>
@@ -1258,21 +1265,21 @@ export function AboutRedesignDesktop() {
                     key={c.label}
                     href={c.href}
                     {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group relative block overflow-hidden rounded-[18px] border border-white/15 bg-white/[0.06] p-[clamp(16px,2.8vh,26px)] backdrop-blur-sm transition-colors duration-300 hover:border-[#5b9bf0] hover:bg-white/[0.12]"
-                    style={{ boxShadow: "0 18px 40px -16px rgba(0,0,0,0.6)" }}
+                    className="group relative block overflow-hidden rounded-[18px] border border-[#2D2D2D]/10 bg-white p-[clamp(16px,2.8vh,26px)] transition-colors duration-300 hover:border-[#0052A5]"
+                    style={{ boxShadow: "0 2px 4px rgba(11,18,38,0.06), 0 18px 36px -14px rgba(11,18,38,0.28)" }}
                     initial={reduced ? false : { opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: EASE }}
                     whileHover={reduced ? undefined : { y: -5 }}
                   >
-                    <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#5b9bf0] transition-transform duration-500 group-hover:scale-x-100" />
+                    <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#0052A5] transition-transform duration-500 group-hover:scale-x-100" />
                     <div className="flex items-start justify-between">
-                      <c.icon className="h-[18px] w-[18px] text-[#5b9bf0]" />
-                      <ArrowUpRight className="h-[18px] w-[18px] text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5b9bf0]" />
+                      <c.icon className="h-[18px] w-[18px] text-[#0052A5]" />
+                      <ArrowUpRight className="h-[18px] w-[18px] text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#0052A5]" />
                     </div>
-                    <p className="mt-[clamp(8px,1.6vh,14px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">{c.label}</p>
-                    <p className="mt-1.5 text-[16px] leading-[1.3] tracking-[0.02em] text-white">{c.value}</p>
+                    <p className="mt-[clamp(8px,1.6vh,14px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{c.label}</p>
+                    <p className="mt-1.5 text-[16px] leading-[1.3] tracking-[0.02em] text-[#2D2D2D]">{c.value}</p>
                   </motion.a>
                 ))}
               </div>
