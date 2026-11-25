@@ -320,13 +320,13 @@ function ValuesReveal() {
     const el = ref.current
     if (!el) return
     const r = el.getBoundingClientRect()
-    setPos(Math.min(96, Math.max(4, ((clientX - r.left) / r.width) * 100)))
+    setPos(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)))
   }
 
   return (
     <div
       ref={ref}
-      className="relative select-none overflow-hidden rounded-[14px] bg-[#EEF2F7] touch-pan-y"
+      className="relative select-none touch-pan-y rounded-[14px]"
       style={{ boxShadow: "0 4px 19.6px rgba(0,0,0,0.12)" }}
       onPointerDown={(e) => {
         dragging.current = true
@@ -339,7 +339,7 @@ function ValuesReveal() {
       onPointerCancel={() => { dragging.current = false }}
     >
       {/* values underneath */}
-      <div className="grid grid-cols-3 gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(14px,3.2vh,34px)] px-[clamp(20px,3vw,44px)] py-[clamp(16px,3.6vh,40px)]">
+      <div className="grid grid-cols-3 overflow-hidden rounded-[14px] bg-[#EEF2F7] gap-x-[clamp(20px,3vw,40px)] gap-y-[clamp(14px,3.2vh,34px)] px-[clamp(20px,3vw,44px)] py-[clamp(16px,3.6vh,40px)]">
         {coreValues.map((v) => (
           <div key={v.title}>
             <span className="mb-[clamp(6px,1.4vh,12px)] block h-[3px] w-10 rounded-full bg-[#0052A5]" />
@@ -350,7 +350,7 @@ function ValuesReveal() {
       </div>
 
       {/* photo that covers the values until the line is dragged */}
-      <div className="pointer-events-none absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[14px]" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
         <Image src="/images/about-core-values-building.jpg" alt="" fill sizes="1100px" className="object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(11,14,10,0.35) 0%, rgba(11,14,10,0) 40%)" }} />
       </div>
@@ -360,12 +360,12 @@ function ValuesReveal() {
         role="slider"
         tabIndex={0}
         aria-label="Reveal core values"
-        aria-valuemin={4}
-        aria-valuemax={96}
+        aria-valuemin={0}
+        aria-valuemax={100}
         aria-valuenow={Math.round(pos)}
         onKeyDown={(e) => {
-          if (e.key === "ArrowRight") { touched.current = true; setPos((p) => Math.min(96, p + 4)) }
-          if (e.key === "ArrowLeft") { touched.current = true; setPos((p) => Math.max(4, p - 4)) }
+          if (e.key === "ArrowRight") { touched.current = true; setPos((p) => Math.min(100, p + 5)) }
+          if (e.key === "ArrowLeft") { touched.current = true; setPos((p) => Math.max(0, p - 5)) }
         }}
         className="absolute inset-y-0 z-10 w-[3px] -translate-x-1/2 cursor-ew-resize bg-[#0052A5] outline-none"
         style={{ left: `${pos}%` }}
