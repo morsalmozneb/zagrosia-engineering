@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { AnimatePresence, animate, motion, useInView, useReducedMotion } from "framer-motion"
-import { ArrowRight, ArrowUpRight, ChevronsLeftRight } from "lucide-react"
+import { ArrowRight, ArrowUpRight, ChevronsLeftRight, Linkedin, MapPin, Mail, Phone } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { coreValues, team } from "./about-desktop-page"
@@ -767,33 +767,6 @@ export function AboutRedesignDesktop() {
             >
               <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
             </div>
-            {/* P.Eng. seal, same mark as the home page */}
-            <motion.svg
-              viewBox="0 0 120 120"
-              role="img"
-              aria-label="Professional Engineer, signed and sealed"
-              className="absolute -right-[6px] -top-[18px] h-[96px] w-[96px] rounded-full bg-[#FCFCFC]"
-              style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.22)" }}
-              initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.9 }}
-            >
-              <defs>
-                <path id="about-peng-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
-                <path id="about-peng-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
-              </defs>
-              <g fill="none" stroke="#0150a9">
-                <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
-                <circle cx="60" cy="60" r="52" strokeWidth="1" />
-                <circle cx="60" cy="60" r="33" strokeWidth="1" />
-              </g>
-              <g fill="#0150a9" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
-                <text fontSize="8" letterSpacing="0.9"><textPath href="#about-peng-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
-                <text fontSize="8" letterSpacing="1.2"><textPath href="#about-peng-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
-                <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
-              </g>
-            </motion.svg>
           </motion.div>
         </div>
       </section>
@@ -813,7 +786,34 @@ export function AboutRedesignDesktop() {
               >
                 <Image src="/images/seyed-hassan-principal.webp" alt="Seyed Hassan Mozneb, P.Eng." width={735} height={998} className="h-full w-auto" priority={false} />
               </motion.div>
-              <div className="self-center pb-[clamp(16px,3vh,32px)]">
+              <div className="relative self-center pb-[clamp(16px,3vh,32px)]">
+            {/* P.Eng. seal, same mark as the home page */}
+            <motion.svg
+              viewBox="0 0 120 120"
+              role="img"
+              aria-label="Professional Engineer, signed and sealed"
+              className="absolute right-0 top-[-6px] h-[clamp(84px,13vh,112px)] w-[clamp(84px,13vh,112px)] rounded-full bg-[#FCFCFC]"
+              style={{ boxShadow: "0 4px 18px rgba(0,0,0,0.55)" }}
+              initial={reduced ? false : { opacity: 0, scale: 0.5, rotate: -40 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.9 }}
+            >
+              <defs>
+                <path id="principal-peng-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
+                <path id="principal-peng-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
+              </defs>
+              <g fill="none" stroke="#0150a9">
+                <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
+                <circle cx="60" cy="60" r="52" strokeWidth="1" />
+                <circle cx="60" cy="60" r="33" strokeWidth="1" />
+              </g>
+              <g fill="#0150a9" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
+                <text fontSize="8" letterSpacing="0.9"><textPath href="#principal-peng-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
+                <text fontSize="8" letterSpacing="1.2"><textPath href="#principal-peng-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
+                <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
+              </g>
+            </motion.svg>
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
                   <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Our Principal &amp; Founder</p>
                 </Reveal>
@@ -1164,6 +1164,135 @@ export function AboutRedesignDesktop() {
                 </div>
               )}
             </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ═══ 8. CONTACT ═══ */}
+      <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,7vh,90px)] text-[#FCFCFC]" style={{ background: "linear-gradient(160deg, #0B1226 0%, #0A1B3D 55%, #0B1226 100%)" }}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-100"
+          style={{
+            backgroundImage: "linear-gradient(rgba(91,155,240,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(91,155,240,0.08) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%)",
+            maskImage: "radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%)",
+          }}
+        />
+        <div aria-hidden className="pointer-events-none absolute -right-40 -top-24 h-[520px] w-[520px] rounded-full bg-[#0052A5]/45 blur-[130px]" />
+        <RidgeArt className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] w-full opacity-60" />
+
+        <div className="sidebar-content zag-desktop-content-pad relative">
+          <div className="grid max-w-[1100px] grid-cols-[0.9fr_1.1fr] items-center gap-[clamp(32px,5vw,80px)]">
+            <div className="relative pl-5">
+              <motion.div
+                className="absolute left-0 top-0 w-[3px] rounded-full"
+                style={{ height: "100%", background: "linear-gradient(to bottom, rgba(91,155,240,1) 0%, rgba(91,155,240,0.8) 30%, rgba(91,155,240,0.4) 65%, rgba(91,155,240,0) 100%)", transformOrigin: "top" }}
+                initial={reduced ? false : { scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+              />
+              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Get in touch</p>
+              </Reveal>
+              <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+                <h2 className={`${sectionHeading} text-[#FCFCFC]`}>
+                  Start with a<br />
+                  <span className="text-[#5b9bf0]">conversation</span>
+                </h2>
+              </Reveal>
+              <Reveal delay={0.18} duration={0.6}>
+                <p className={`mt-4 max-w-[430px] ${bodyText} text-[#FCFCFC]/80`}>
+                  Tell us about your project. We can help with structural design, assessments, rehabilitation and specialty reviews.
+                </p>
+              </Reveal>
+              <Reveal delay={0.24} duration={0.6}>
+                <div className="mt-6 flex items-center gap-5">
+                  <CtaButton href="/contact" className={ctaDark}>
+                    Start your project
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </CtaButton>
+                </div>
+              </Reveal>
+              <Reveal delay={0.3} duration={0.6}>
+                <div className="mt-6 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#FCFCFC]/65">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5b9bf0]/70" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#5b9bf0]" />
+                  </span>
+                  Based in Coquitlam, BC
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="grid gap-[clamp(12px,2vh,20px)]">
+              {/* email: the big one */}
+              <motion.a
+                href="mailto:info@zagrosia.ca"
+                className="group relative block overflow-hidden rounded-[22px] p-[clamp(20px,3.6vh,36px)]"
+                style={{ background: "linear-gradient(135deg, #0052A5 0%, #0B3B80 100%)", boxShadow: "0 2px 4px rgba(0,0,0,0.25), 0 24px 50px -10px rgba(0,82,165,0.65)" }}
+                initial={reduced ? false : { opacity: 0, x: 60, scale: 0.96 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+                whileHover={reduced ? undefined : { y: -5 }}
+              >
+                {!reduced && (
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                    animate={{ x: ["0%", "480%"] }}
+                    transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3.8, ease: "easeInOut" }}
+                  />
+                )}
+                <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full border border-white/15" />
+                <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-white/10" />
+                <div className="relative flex items-center justify-between gap-4">
+                  <div>
+                    <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.24em] text-white/75">
+                      <Mail className="h-4 w-4" /> Email the firm
+                    </p>
+                    <p className="mt-3 text-[clamp(24px,2.7vw,38px)] leading-none tracking-[0.01em] text-white">info@zagrosia.ca</p>
+                  </div>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/15 transition-all duration-300 group-hover:bg-white group-hover:text-[#0052A5]">
+                    <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </div>
+              </motion.a>
+
+              <div className="grid grid-cols-2 gap-[clamp(12px,2vh,20px)]">
+                {[
+                  { icon: Phone, label: "Call the firm", value: "+1 (778) 317-1043", href: "tel:+17783171043", ext: false },
+                  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/zagrosia", href: "https://www.linkedin.com/in/zagrosia", ext: true },
+                ].map((c, i) => (
+                  <motion.a
+                    key={c.label}
+                    href={c.href}
+                    {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group relative block overflow-hidden rounded-[18px] border border-white/15 bg-white/[0.06] p-[clamp(16px,2.8vh,26px)] backdrop-blur-sm transition-colors duration-300 hover:border-[#5b9bf0] hover:bg-white/[0.12]"
+                    style={{ boxShadow: "0 18px 40px -16px rgba(0,0,0,0.6)" }}
+                    initial={reduced ? false : { opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: EASE }}
+                    whileHover={reduced ? undefined : { y: -5 }}
+                  >
+                    <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#5b9bf0] transition-transform duration-500 group-hover:scale-x-100" />
+                    <div className="flex items-start justify-between">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0052A5]/70 text-white transition-colors duration-300 group-hover:bg-[#5b9bf0]">
+                        <c.icon className="h-[18px] w-[18px]" />
+                      </span>
+                      <ArrowUpRight className="h-5 w-5 text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5b9bf0]" />
+                    </div>
+                    <p className="mt-[clamp(10px,2vh,20px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">{c.label}</p>
+                    <p className="mt-1.5 text-[16px] leading-[1.3] tracking-[0.02em] text-white">{c.value}</p>
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
