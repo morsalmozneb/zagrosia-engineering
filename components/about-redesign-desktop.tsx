@@ -1083,7 +1083,10 @@ export function AboutRedesignDesktop() {
             </div>
 
             {/* right: photo card with years */}
-            <div className="relative overflow-hidden rounded-[22px] bg-[#0B1226]" style={{ boxShadow: panelShadow }}>
+            <div className="relative">
+            <div aria-hidden className="pointer-events-none absolute -bottom-[14px] left-[18px] right-[-14px] top-[18px] rounded-[26px] bg-gradient-to-br from-[#0052A5]/25 to-[#0052A5]/5" />
+            <div aria-hidden className="pointer-events-none absolute inset-x-[6%] -bottom-[26px] h-[40px] rounded-[50%] bg-[#0B1226]/35 blur-[22px]" />
+            <div className="relative h-full overflow-hidden rounded-[22px] bg-[#0B1226] ring-1 ring-white/20" style={{ boxShadow: "0 2px 4px rgba(11,18,38,0.18), 0 14px 30px -6px rgba(11,18,38,0.38), 0 36px 70px -14px rgba(0,82,165,0.45)" }}>
               <CareerPhoto src={stationImage} alt={site ? site.name : station.place} reduced={!!reduced} />
               <div className="pointer-events-none absolute inset-y-0 left-0 w-[46%] bg-gradient-to-r from-[#0B1226]/90 via-[#0B1226]/55 to-transparent" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34%] bg-gradient-to-t from-[#0B1226]/85 to-transparent" />
@@ -1160,6 +1163,7 @@ export function AboutRedesignDesktop() {
                   </div>
                 </div>
               )}
+            </div>
             </div>
           </div>
         </div>
