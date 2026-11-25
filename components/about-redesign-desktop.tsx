@@ -172,7 +172,7 @@ const memberInfo: Record<
     role: "Principal & Senior Structural Engineer",
     studied: "M.Sc. Isfahan University of Technology · B.Sc. Mashhad University",
     bio: "Founder of Zagrosia and a Professional Engineer. He led structural design on refineries, petrochemical plants, industrial facilities and apartment developments in Iran, and ran two structural design firms of his own, before bringing his practice to British Columbia. He now designs and reviews structures in steel, concrete, wood and masonry, and guides every Zagrosia project from first concept to final review.",
-    chips: ["P.Eng.", "Steel", "Concrete", "Wood", "Masonry"],
+    chips: ["SAP2000", "ETABS", "SAFE", "STAAD Pro", "RISA-3D", "Revit Structure", "Tekla Structures", "AutoCAD 2D/3D", "Mathcad"],
   },
   "MEHDI MOZNEB": {
     role: "Civil & Structural Consultant",
@@ -867,7 +867,7 @@ export function AboutRedesignDesktop() {
               <h2 className={`${sectionHeading} text-[#2D2D2D]`}>MEET OUR TEAM</h2>
             </Reveal>
 
-            <div className="grid grid-cols-5 items-start gap-[clamp(8px,1vw,16px)] pt-[clamp(14px,3vh,28px)]">
+            <div className="grid grid-cols-5 items-start gap-[clamp(8px,1vw,16px)] pt-[clamp(38px,7vh,60px)]">
               {team.map((m, i) => {
                 const active = i === teamIndex
                 const mi = memberInfo[m.name]
@@ -890,24 +890,6 @@ export function AboutRedesignDesktop() {
                       style={{ boxShadow: active ? "0 18px 36px rgba(0,82,165,0.25)" : "0 4px 14px rgba(0,0,0,0.12)" }}
                     >
                       <Image src={m.image} alt={m.name} fill sizes="320px" className="object-cover" />
-                      {m.name === "SEYED HASSAN MOZNEB" && (
-                        <svg viewBox="0 0 120 120" role="img" aria-label="Professional Engineer, signed and sealed" className="absolute right-[10px] top-[10px] h-[clamp(36px,4.6vh,46px)] w-[clamp(36px,4.6vh,46px)] rounded-full bg-[#FCFCFC]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}>
-                          <defs>
-                            <path id="team-peng-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
-                            <path id="team-peng-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
-                          </defs>
-                          <g fill="none" stroke="#0150a9">
-                            <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
-                            <circle cx="60" cy="60" r="52" strokeWidth="1" />
-                            <circle cx="60" cy="60" r="33" strokeWidth="1" />
-                          </g>
-                          <g fill="#0150a9" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
-                            <text fontSize="8" letterSpacing="0.9"><textPath href="#team-peng-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
-                            <text fontSize="8" letterSpacing="1.2"><textPath href="#team-peng-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
-                            <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
-                          </g>
-                        </svg>
-                      )}
                     </motion.div>
                     <p className={`mt-[clamp(6px,1vh,10px)] text-[16px] font-semibold leading-[1.25] tracking-[0.02em] transition-colors ${active ? "text-[#0052A5]" : "text-[#2D2D2D]"}`}>
                       {m.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
@@ -939,7 +921,27 @@ export function AboutRedesignDesktop() {
                   <p className={`mt-2 max-w-[760px] ${bodyText} text-[#3a3a3a]`}>{info.bio}</p>
                 </div>
                 <div>
-                  <p className={eyebrow}>Tools &amp; Expertise</p>
+                  <div className="flex items-center justify-between gap-4">
+                    <p className={eyebrow}>Tools &amp; Expertise</p>
+                      {member.name === "SEYED HASSAN MOZNEB" && (
+                        <svg viewBox="0 0 120 120" role="img" aria-label="Professional Engineer, signed and sealed" className="h-[clamp(44px,6vh,56px)] w-[clamp(44px,6vh,56px)] flex-shrink-0 rounded-full bg-[#FCFCFC]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}>
+                          <defs>
+                            <path id="team-peng-top" d="M 23.6,81 A 42,42 0 1 1 96.4,81" />
+                            <path id="team-peng-bottom" d="M 18.4,84 A 48,48 0 0 0 101.6,84" />
+                          </defs>
+                          <g fill="none" stroke="#0150a9">
+                            <circle cx="60" cy="60" r="56" strokeWidth="2.6" />
+                            <circle cx="60" cy="60" r="52" strokeWidth="1" />
+                            <circle cx="60" cy="60" r="33" strokeWidth="1" />
+                          </g>
+                          <g fill="#0150a9" fontFamily="Inter, Arial, sans-serif" fontWeight="700">
+                            <text fontSize="8" letterSpacing="0.9"><textPath href="#team-peng-top" startOffset="50%" textAnchor="middle">PROFESSIONAL ENGINEER</textPath></text>
+                            <text fontSize="8" letterSpacing="1.2"><textPath href="#team-peng-bottom" startOffset="50%" textAnchor="middle">SIGNED &amp; SEALED</textPath></text>
+                            <text x="60" y="68" fontSize="20" textAnchor="middle" letterSpacing="0.4">P.ENG</text>
+                          </g>
+                        </svg>
+                      )}
+                  </div>
                   <p className={`mt-[clamp(6px,1.2vh,12px)] ${bodyText} text-[#3a3a3a]`}>{info.chips.join("  ·  ")}</p>
                   <div className="mt-[clamp(10px,2vh,22px)] flex flex-wrap gap-2">
                     <CtaButton href={member.email} className={ctaSmall}>Email</CtaButton>
