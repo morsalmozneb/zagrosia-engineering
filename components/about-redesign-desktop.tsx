@@ -190,7 +190,7 @@ const memberInfo: Record<
     role: "Director of Operations & Business Development",
     studied: "B.IT Shiraz University · BCIT New Media Design & Web Development",
     bio: "Designs and builds Zagrosia's website and brand identity system, and runs the firm's operations and business development.",
-    chips: ["Web Development", "AI Systems", "Design Systems", "Digital Marketing"],
+    chips: ["Web Development", "Web Security", "AI Systems", "Design Systems", "Digital Marketing"],
   },
   "FARNAZ GHOLAMI": {
     role: "Digital & Creative Director",
