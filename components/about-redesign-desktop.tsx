@@ -1215,27 +1215,51 @@ export function AboutRedesignDesktop() {
               </Reveal>
             </div>
 
-            <div className="flex items-center justify-center gap-[clamp(40px,6vw,88px)]">
+            <div className="relative flex items-start justify-center gap-[clamp(36px,5.5vw,80px)]">
+              {/* line that draws through the three tiles */}
+              <motion.span
+                aria-hidden
+                className="pointer-events-none absolute left-[12%] right-[12%] top-[clamp(30px,4.2vh,40px)] h-px origin-left"
+                style={{ background: "linear-gradient(90deg, rgba(0,82,165,0) 0%, rgba(0,82,165,0.45) 50%, rgba(0,82,165,0) 100%)" }}
+                initial={reduced ? false : { scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 1.1, delay: 0.2, ease: EASE }}
+              />
               {[
-                { icon: Mail, label: "Email", href: "mailto:info@zagrosia.ca", ext: false },
-                { icon: Phone, label: "Call", href: "tel:+17783171043", ext: false },
-                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/zagrosia", ext: true },
+                { icon: Mail, label: "Email", href: "mailto:info@zagrosia.ca", ext: false, hover: { y: [0, -6, 0], transition: { duration: 0.5 } } },
+                { icon: Phone, label: "Call", href: "tel:+17783171043", ext: false, hover: { rotate: [0, -16, 14, -9, 6, 0], transition: { duration: 0.6 } } },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/zagrosia", ext: true, hover: { scale: [1, 1.25, 1], transition: { duration: 0.45 } } },
               ].map((c, i) => (
                 <motion.a
                   key={c.label}
                   href={c.href}
                   aria-label={c.label}
-                  title={c.label}
                   {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="text-[#0052A5] transition-colors duration-300 hover:text-[#003d7d]"
-                  initial={reduced ? false : { opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="group relative flex flex-col items-center gap-3"
+                  initial={reduced ? false : { opacity: 0, y: 24, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.6, delay: 0.25 + i * 0.12, ease: EASE }}
-                  whileHover={reduced ? undefined : { y: -6, scale: 1.12 }}
-                  whileTap={reduced ? undefined : { scale: 0.95 }}
+                  transition={{ duration: 0.65, delay: 0.25 + i * 0.14, ease: EASE }}
                 >
-                  <c.icon className="h-[clamp(26px,3.2vh,34px)] w-[clamp(26px,3.2vh,34px)]" strokeWidth={1.6} />
+                  <motion.span
+                    className="relative flex h-[clamp(52px,7.4vh,68px)] w-[clamp(52px,7.4vh,68px)] items-center justify-center rounded-[14px] bg-[#E3ECF6] text-[#0052A5] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:bg-[#0052A5] group-hover:text-white group-hover:shadow-[0_14px_30px_rgba(0,82,165,0.35)]"
+                    animate={reduced ? undefined : { y: [0, -5, 0] }}
+                    transition={{ duration: 3.2, delay: i * 0.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {!reduced && (
+                      <motion.span
+                        aria-hidden
+                        className="absolute inset-0 rounded-[14px] border border-[#0052A5]"
+                        animate={{ scale: [1, 1.55], opacity: [0.5, 0] }}
+                        transition={{ duration: 2.4, delay: i * 0.6, repeat: Infinity, ease: "easeOut" }}
+                      />
+                    )}
+                    <motion.span className="flex" whileHover={reduced ? undefined : c.hover}>
+                      <c.icon className="h-[clamp(20px,2.8vh,26px)] w-[clamp(20px,2.8vh,26px)]" strokeWidth={1.8} />
+                    </motion.span>
+                  </motion.span>
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#0052A5]">{c.label}</span>
                 </motion.a>
               ))}
             </div>
