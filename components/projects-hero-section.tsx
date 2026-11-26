@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { animate, motion, useInView, useReducedMotion } from "framer-motion"
-import { ArrowUpRight, Award, Building2, MapPin } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { projects as realProjects } from "@/lib/projects-data"
@@ -132,113 +132,21 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   return <span ref={ref}>0{suffix}</span>
 }
 
-function BarsVisual() {
-  const hs = [28, 44, 36, 60, 78, 100]
-  return (
-    <div className="flex h-[58px] items-end gap-[5px]" aria-hidden>
-      {hs.map((h, i) => (
-        <motion.span
-          key={i}
-          className="w-[7px] rounded-t-[3px] bg-gradient-to-t from-[#0052A5]/35 to-[#0052A5]"
-          style={{ height: `${h}%`, transformOrigin: "bottom" }}
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.7, delay: 0.3 + i * 0.09, ease: EASE }}
-        />
-      ))}
-    </div>
-  )
-}
-
-function RingVisual() {
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden>
-      <circle cx="32" cy="32" r="24" stroke="#0052A5" strokeOpacity="0.14" strokeWidth="6" />
-      <motion.circle
-        cx="32"
-        cy="32"
-        r="24"
-        stroke="#0052A5"
-        strokeWidth="6"
-        strokeLinecap="round"
-        transform="rotate(-90 32 32)"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 0.82 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ duration: 1.5, delay: 0.3, ease: EASE }}
-      />
-      <circle cx="32" cy="32" r="4" fill="#0052A5" />
-    </svg>
-  )
-}
-
-function DotsVisual({ reduced }: { reduced: boolean | null }) {
-  return (
-    <div className="relative flex h-[58px] w-[78px] items-center justify-between" aria-hidden>
-      <span className="absolute left-[8px] right-[8px] top-1/2 h-px bg-[#0052A5]/25" />
-      {[0, 1, 2].map((i) => (
-        <span key={i} className="relative flex h-[16px] w-[16px] items-center justify-center">
-          {!reduced && (
-            <motion.span
-              className="absolute inset-0 rounded-full bg-[#0052A5]/40"
-              animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
-              transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.5, ease: "easeOut" }}
-            />
-          )}
-          <span className="relative h-[10px] w-[10px] rounded-full bg-[#0052A5] ring-[3px] ring-white" />
-        </span>
-      ))}
-    </div>
-  )
-}
-
-function StatCard({
-  icon,
-  to,
-  suffix,
-  label,
-  note,
-  visual,
-  delay,
-}: {
-  icon: React.ReactNode
-  to: number
-  suffix: string
-  label: string
-  note: string
-  visual: React.ReactNode
-  delay: number
-}) {
+function Stat({ to, suffix, label, delay }: { to: number; suffix: string; label: string; delay: number }) {
   return (
     <Reveal variant="fadeUp" delay={delay} duration={0.7}>
-      <div className="group relative h-full overflow-hidden rounded-[18px] bg-white p-[clamp(16px,1.6vw,24px)] ring-1 ring-[#0B1226]/[0.06] shadow-[0_2px_4px_rgba(11,18,38,0.06),0_14px_30px_-10px_rgba(11,18,38,0.22),0_30px_60px_-24px_rgba(0,82,165,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(11,18,38,0.08),0_20px_40px_-10px_rgba(11,18,38,0.28),0_40px_70px_-22px_rgba(0,82,165,0.5)]">
-        <motion.span
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-[4px] origin-left bg-gradient-to-r from-[#0052A5] to-[#5b9bf0]"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.9, delay: delay + 0.2, ease: "easeInOut" }}
-        />
-        <div className="flex items-start justify-between gap-4">
-          <span className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
-            {icon}
-          </span>
-          <span className="flex h-[64px] items-center">{visual}</span>
-        </div>
-        <p className="zag-heading mt-[clamp(10px,1.4vh,18px)] text-[clamp(34px,3.4vw,48px)] font-bold leading-none tracking-[0.01em] text-[#0B1226]">
+      <div className="border-l border-[#0052A5]/25 pl-[clamp(14px,1.6vw,22px)]">
+        <p className="zag-heading text-[clamp(26px,2.4vw,32px)] font-bold leading-none text-[#0B1226]">
           <CountUp to={to} suffix={suffix} />
         </p>
-        <p className="mt-[10px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{label}</p>
-        <p className="mt-[6px] text-[14px] leading-[1.5] tracking-[0.02em] text-[#2D2D2D]/70">{note}</p>
+        <p className="mt-[8px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{label}</p>
       </div>
     </Reveal>
   )
 }
 
 /* ── Mosaic card ── */
-function ProjectTile({ image, location, title, description, span, h, size, index, slug, badge, attribution }: Placed) {
+function ProjectTile({ image, location, title, description, span, h, size, slug, badge, attribution }: Placed) {
   const href = slug ? `/projects/${slug}` : "/projects"
   const titleSize =
     size === "lg" ? "text-[20px] leading-[1.15] tracking-[0.06em]" : "text-[16px] leading-[1.2] tracking-[0.06em]"
@@ -267,14 +175,6 @@ function ProjectTile({ image, location, title, description, span, h, size, index
           <div aria-hidden className="absolute inset-0 bg-[#0B1226]/0 transition-colors duration-300 group-hover:bg-[#0B1226]/45" />
 
           {badge ? <BadgePill badge={badge} attribution={attribution} className="absolute left-[16px] top-[16px] z-10" /> : null}
-
-          <span
-            aria-hidden
-            className="zag-heading absolute right-[18px] top-[10px] z-10 select-none text-[34px] font-bold leading-none tracking-[0.02em] text-transparent transition-all duration-300 group-hover:text-white/90"
-            style={{ WebkitTextStroke: "1px rgba(255,255,255,0.75)" }}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
 
           <div className="absolute inset-x-0 bottom-0 z-10 px-[20px] pb-[18px] text-white">
             <div className="mb-[10px] inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[8px] py-[3px] text-[12px] tracking-[0.08em] text-white shadow-[0_6px_16px_rgba(0,82,165,0.45)]">
@@ -551,7 +451,7 @@ export function ProjectsHeroSection() {
       </div>
 
       <div className="sidebar-content hidden lg:block">
-        <div className="pb-[98px] pt-[clamp(110px,16vh,148px)] zag-desktop-content-pad">
+        <div className="pb-[98px] pt-[148px] zag-desktop-content-pad">
           <div className="grid grid-cols-12 gap-x-[12px]">
             <div className="col-span-12">
               <div className="relative pl-5">
@@ -584,34 +484,10 @@ export function ProjectsHeroSection() {
                   </p>
                 </Reveal>
 
-                <div className="mt-[clamp(22px,3.4vh,38px)] grid grid-cols-3 gap-[clamp(14px,1.6vw,24px)] pr-[4px]">
-                  <StatCard
-                    delay={0.3}
-                    icon={<Building2 size={22} strokeWidth={1.8} />}
-                    to={200}
-                    suffix="+"
-                    label="Projects delivered"
-                    note="Field reviews and assessments."
-                    visual={<BarsVisual />}
-                  />
-                  <StatCard
-                    delay={0.4}
-                    icon={<Award size={22} strokeWidth={1.8} />}
-                    to={35}
-                    suffix="+"
-                    label="Years of experience"
-                    note="Of structural engineering practice."
-                    visual={<RingVisual />}
-                  />
-                  <StatCard
-                    delay={0.5}
-                    icon={<MapPin size={22} strokeWidth={1.8} />}
-                    to={3}
-                    suffix=""
-                    label="Provinces served"
-                    note="Engineering practice across Canada."
-                    visual={<DotsVisual reduced={reducedMotion} />}
-                  />
+                <div className="mt-[clamp(20px,3vh,32px)] grid max-w-[760px] grid-cols-3 gap-[clamp(14px,2vw,32px)]">
+                  <Stat delay={0.3} to={200} suffix="+" label="Projects delivered" />
+                  <Stat delay={0.4} to={35} suffix="+" label="Years of experience" />
+                  <Stat delay={0.5} to={3} suffix="" label="Provinces served" />
                 </div>
               </div>
             </div>
@@ -621,7 +497,6 @@ export function ProjectsHeroSection() {
                 <div className="flex items-center gap-4">
                   <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Project index</p>
                   <span className="h-px flex-1 bg-gradient-to-r from-[#0052A5]/40 to-transparent" />
-                  <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]/55">{projects.length} projects</p>
                 </div>
               </Reveal>
             </div>
