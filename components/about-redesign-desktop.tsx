@@ -625,6 +625,7 @@ export function AboutRedesignDesktop() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, rgba(8,14,26,0.35) 0%, rgba(8,14,26,0.1) 45%, rgba(8,14,26,0.75) 100%)" }}
         />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%]" style={{ background: "linear-gradient(180deg, rgba(11,14,10,0) 0%, rgba(11,14,10,0.7) 55%, #0B0E0A 100%)" }} />
         <div className="sidebar-content zag-desktop-content-pad relative z-10 pb-20 pt-[154px]">
           <div className="flex items-end justify-between gap-10">
             <div className="max-w-[700px]">
