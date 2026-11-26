@@ -1,7 +1,6 @@
 "use client"
 
 import { ServicesTabs } from "./services-tabs"
-import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
 import { Reveal } from "./scroll-reveal"
 
@@ -56,16 +55,6 @@ export function ServicesHeroSection() {
 
           <ServicesTabs />
         </div>
-
-        <Reveal variant="fadeBlur" delay={0.1} duration={0.85} className="-mx-6 overflow-visible" style={{ marginTop: "-4px" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/services-building-mobile.png"
-            alt="Teal glass building"
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
-          <div style={{ width: "360px", height: "2px", backgroundColor: "#000000" }} />
-        </Reveal>
       </div>
 
       {/* ── DESKTOP ── */}
@@ -117,21 +106,6 @@ export function ServicesHeroSection() {
 
           </div>
         </div>
-
-        {/* Building image — contained, aligned to the content edge, no overlap with the accordion */}
-        <Reveal variant="fadeBlur" delay={0.1} duration={0.9} className="pt-16 pb-[96px]">
-          <div style={{ marginLeft: "var(--desktop-grid-content-start)", width: "min(1000px, calc(100% - var(--desktop-grid-content-start)))" }}>
-            <Image
-              src="/images/services-building-cutout.png"
-              alt="Teal glass building"
-              width={1200}
-              height={800}
-              className="block h-auto w-full"
-              style={{ objectFit: "contain", objectPosition: "left bottom" }}
-            />
-            <div className="h-[3px] w-full bg-[#000000]" />
-          </div>
-        </Reveal>
       </div>
     </section>
   )

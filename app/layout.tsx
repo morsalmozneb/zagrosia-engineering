@@ -153,9 +153,6 @@ const jsonLd = {
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Strata Engineering Reports" } },
     ],
   },
-  sameAs: [
-    "https://www.linkedin.com/company/zagrosia-engineering",
-  ],
   keywords: "structural engineer BC, structural engineer Vancouver, P.Eng BC, seismic assessment Vancouver, structural engineering Alberta, structural engineer Saskatchewan, building rehabilitation BC, masonry engineering Vancouver, racking system engineer BC, permit structural drawings BC",
 }
 

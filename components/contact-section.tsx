@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
-import { Phone, Mail, Linkedin } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
@@ -29,12 +29,6 @@ const contactItems = [
     label: "Email",
     value: "info@zagrosia.ca",
     href: "mailto:info@zagrosia.ca",
-  },
-  {
-    icon: <Linkedin size={16} />,
-    label: "LinkedIn",
-    value: "linkedin.com/in/zagrosia",
-    href: "https://www.linkedin.com/in/zagrosia",
   },
 ]
 
