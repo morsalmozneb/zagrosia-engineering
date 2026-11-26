@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
-import { Phone, Mail } from "lucide-react"
+import { Phone, Mail, Linkedin } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
@@ -29,6 +29,12 @@ const contactItems = [
     label: "Email",
     value: "info@zagrosia.ca",
     href: "mailto:info@zagrosia.ca",
+  },
+  {
+    icon: <Linkedin size={16} />,
+    label: "LinkedIn",
+    value: "Coming soon",
+    href: "",
   },
 ]
 
@@ -238,7 +244,7 @@ export function ContactSection() {
           {contactItems.map((item, i) => (
             <motion.a
               key={item.label}
-              href={item.href}
+              href={item.href || undefined}
               className="group flex items-center gap-4 rounded-r-[14px] border-l-[3px] border-[#0052A5] bg-white px-4 py-4 shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(0,82,165,0.14)]"
               initial={reducedMotion ? false : { opacity: 0, y: 14, filter: "blur(4px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -315,7 +321,7 @@ export function ContactSection() {
               {contactItems.map((item, i) => (
                 <motion.a
                   key={item.label}
-                  href={item.href}
+                  href={item.href || undefined}
                   className="group flex items-center gap-4 rounded-r-[16px] border-l-[3px] border-[#0052A5] bg-white px-5 py-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(0,82,165,0.15)]"
                   initial={reducedMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}

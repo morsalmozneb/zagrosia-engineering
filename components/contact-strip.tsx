@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { ArrowRight, Mail, Phone } from "lucide-react"
+import { ArrowRight, Linkedin, Mail, Phone } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 
@@ -65,6 +65,7 @@ export function ContactStrip() {
             {[
               { icon: Mail, label: "Email", href: "mailto:info@zagrosia.ca", ext: false, hover: { y: [0, -6, 0], transition: { duration: 0.5 } } },
               { icon: Phone, label: "Call", href: "tel:+17783171043", ext: false, hover: { rotate: [0, -16, 14, -9, 6, 0], transition: { duration: 0.6 } } },
+              { icon: Linkedin, label: "LinkedIn", href: "", ext: false, hover: { scale: [1, 1.25, 1], transition: { duration: 0.45 } } },
             ].map((c, i) => (
               <motion.a
                 key={c.label}
