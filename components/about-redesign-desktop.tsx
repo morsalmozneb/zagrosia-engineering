@@ -696,85 +696,6 @@ export function AboutRedesignDesktop() {
         </div>
       </section>
 
-      {/* ═══ 2. OUR STORY ═══ */}
-      <section className="relative flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
-        <div className={`sidebar-content zag-desktop-content-pad ${sec}`}>
-        <div className="grid max-w-[1320px] grid-cols-[1.9fr_0.8fr] items-center gap-[clamp(32px,4vw,64px)]">
-          {/* LEFT: heading + description, same type sizes as the home page */}
-          <div className="relative pl-5">
-            <motion.div
-              className="absolute left-0 top-0 w-[3px] rounded-full"
-              style={{
-                height: "100%",
-                background: "linear-gradient(to bottom, rgba(91,155,240,1) 0%, rgba(91,155,240,0.8) 30%, rgba(91,155,240,0.4) 65%, rgba(91,155,240,0) 100%)",
-                transformOrigin: "top",
-              }}
-              initial={reduced ? false : { scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
-            />
-            <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Our story</p>
-            </Reveal>
-            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#FCFCFC]">
-                From the <span className="text-[#5b9bf0]">Zagros</span>
-                <br />
-                to the Pacific
-              </h2>
-            </Reveal>
-            <div className="space-y-4">
-              {storyParas.map((t, i) => (
-                <Reveal key={i} delay={0.2 + i * 0.08} duration={0.65}>
-                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/85">
-                    {t.split(/(Seyed Hassan Mozneb|Zagrosia Engineering Inc\.)/).map((part, k) =>
-                      part === "Seyed Hassan Mozneb" || part === "Zagrosia Engineering Inc." ? (
-                        <strong key={k} className="font-bold text-[#FCFCFC]">{part}</strong>
-                      ) : (
-                        part
-                      ),
-                    )}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-            <div className="mt-6 grid grid-cols-3 border-t border-[#FCFCFC]/60">
-              {storyFacts.map((f, i) => (
-                <motion.div
-                  key={f.label}
-                  className={`pt-3 ${i > 0 ? "border-l border-[#FCFCFC]/25 pl-4" : ""}`}
-                  initial={reduced ? false : { opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.6, delay: 0.5 + i * 0.1, ease: EASE }}
-                >
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#5b9bf0]">{f.label}</p>
-                  <p className="mt-1 text-[14px] leading-[1.35] tracking-[0.02em] text-[#FCFCFC]/85">{f.value}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT: video placeholder + P.Eng. seal */}
-          <motion.div
-            className="relative"
-            initial={reduced ? false : { opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-          >
-            <div
-              className="relative mx-auto aspect-square w-full"
-              style={{ maxWidth: "min(100%, 66svh)" }}
-            >
-              <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
-            </div>
-          </motion.div>
-        </div>
-        </div>
-      </section>
-
       {/* ═══ 3. THE PRINCIPAL ═══ */}
       <section className="relative flex flex-col justify-center overflow-hidden py-[clamp(28px,6vh,80px)] text-[#FCFCFC]" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
         <div className="sidebar-content zag-desktop-content-pad">
@@ -969,6 +890,85 @@ export function AboutRedesignDesktop() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+      </section>
+
+      {/* ═══ 2. OUR STORY ═══ */}
+      <section className="relative flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}>
+        <div className={`sidebar-content zag-desktop-content-pad ${sec}`}>
+        <div className="grid max-w-[1320px] grid-cols-[1.9fr_0.8fr] items-center gap-[clamp(32px,4vw,64px)]">
+          {/* LEFT: heading + description, same type sizes as the home page */}
+          <div className="relative pl-5">
+            <motion.div
+              className="absolute left-0 top-0 w-[3px] rounded-full"
+              style={{
+                height: "100%",
+                background: "linear-gradient(to bottom, rgba(91,155,240,1) 0%, rgba(91,155,240,0.8) 30%, rgba(91,155,240,0.4) 65%, rgba(91,155,240,0) 100%)",
+                transformOrigin: "top",
+              }}
+              initial={reduced ? false : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
+            />
+            <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#5b9bf0]">Our story</p>
+            </Reveal>
+            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+              <h2 className="zag-heading mb-5 text-[28px] uppercase leading-[1.1] text-[#FCFCFC]">
+                From the <span className="text-[#5b9bf0]">Zagros</span>
+                <br />
+                to the Pacific
+              </h2>
+            </Reveal>
+            <div className="space-y-4">
+              {storyParas.map((t, i) => (
+                <Reveal key={i} delay={0.2 + i * 0.08} duration={0.65}>
+                  <p className="text-[16px] leading-[1.7] tracking-[0.02em] text-[#FCFCFC]/85">
+                    {t.split(/(Seyed Hassan Mozneb|Zagrosia Engineering Inc\.)/).map((part, k) =>
+                      part === "Seyed Hassan Mozneb" || part === "Zagrosia Engineering Inc." ? (
+                        <strong key={k} className="font-bold text-[#FCFCFC]">{part}</strong>
+                      ) : (
+                        part
+                      ),
+                    )}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+            <div className="mt-6 grid grid-cols-3 border-t border-[#FCFCFC]/60">
+              {storyFacts.map((f, i) => (
+                <motion.div
+                  key={f.label}
+                  className={`pt-3 ${i > 0 ? "border-l border-[#FCFCFC]/25 pl-4" : ""}`}
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.6, delay: 0.5 + i * 0.1, ease: EASE }}
+                >
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#5b9bf0]">{f.label}</p>
+                  <p className="mt-1 text-[14px] leading-[1.35] tracking-[0.02em] text-[#FCFCFC]/85">{f.value}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT: video placeholder + P.Eng. seal */}
+          <motion.div
+            className="relative"
+            initial={reduced ? false : { opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
+          >
+            <div
+              className="relative mx-auto aspect-square w-full"
+              style={{ maxWidth: "min(100%, 66svh)" }}
+            >
+              <StoryVideo src={STORY_VIDEO} poster={STORY_POSTER} />
+            </div>
+          </motion.div>
+        </div>
         </div>
       </section>
 
