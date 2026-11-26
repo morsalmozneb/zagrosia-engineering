@@ -1,48 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useReducedMotion } from "framer-motion"
+import { animate, motion, useInView, useReducedMotion } from "framer-motion"
+import { ArrowUpRight, Award, Building2, MapPin } from "lucide-react"
 import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { projects as realProjects } from "@/lib/projects-data"
 
 const EASE = [0.0, 0.0, 0.2, 1] as const
 
-/* ── Icons ── */
-function FilterIcon() {
-  return (
-    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
-      <line x1="0" y1="3" x2="22" y2="3" stroke="#2D2D2D" strokeWidth="2.5" />
-      <circle cx="6" cy="3" r="2.5" fill="#FCFCFC" stroke="#2D2D2D" strokeWidth="2.5" />
-      <line x1="0" y1="13" x2="22" y2="13" stroke="#2D2D2D" strokeWidth="2.5" />
-      <circle cx="16" cy="13" r="2.5" fill="#FCFCFC" stroke="#2D2D2D" strokeWidth="2.5" />
-    </svg>
-  )
-}
-
-function ChevronDown({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="12" height="7" viewBox="0 0 12 7" fill="none"
-      className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-    >
-      <path d="M1 1l5 5 5-5" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-/* ── Filter data ── */
-const expertiseItems = ["Residential", "Commercial", "Industrial", "Community"]
-const servicesItems = [
-  "Structural Engineering",
-  "Seismic Assessment",
-  "Building Rehabilitation",
-  "Heavy Racking",
-  "Building Envelope",
-  "Specialty Reviews",
-]
+/* Same finish as the photo cards on the About and case-study pages */
+const PHOTO_SHADOW =
+  "0 2px 4px rgba(11,18,38,0.18), 0 14px 30px -6px rgba(11,18,38,0.5), 0 36px 70px -14px rgba(0,82,165,0.45)"
 
 /* ── Project data (edit projects in /lib/projects-data.ts) ── */
 const projects = realProjects.map((p) => ({
@@ -56,66 +27,60 @@ const projects = realProjects.map((p) => ({
   attribution: p.attribution,
 }))
 
-type DesktopProjectCard = {
-  id: number
-  image: string
-  location: string
-  title: string
-  description?: string
-  spanClassName: string
-  heightClassName: string
-  objectPositionClassName?: string
-  titleClassName?: string
-  descriptionWidthClassName?: string
-  slug?: string
-  badge?: string
-  attribution?: string
+/* ── Desktop mosaic ──
+   Every row has its own rhythm so the grid never reads as "three per row":
+   A feature pair, B trio, C offset pair, E even pair. Order: A, B, C, B, E, B, C, B … */
+type Size = "lg" | "md"
+type Slot = { span: string; h: string; size: Size }
+const ROWS: Record<string, Slot[]> = {
+  A: [
+    { span: "col-span-7", h: "h-[380px]", size: "lg" },
+    { span: "col-span-5", h: "h-[380px]", size: "lg" },
+  ],
+  B: [
+    { span: "col-span-4", h: "h-[300px]", size: "md" },
+    { span: "col-span-4", h: "h-[300px]", size: "md" },
+    { span: "col-span-4", h: "h-[300px]", size: "md" },
+  ],
+  C: [
+    { span: "col-span-5", h: "h-[330px]", size: "md" },
+    { span: "col-span-7", h: "h-[330px]", size: "lg" },
+  ],
+  E: [
+    { span: "col-span-6", h: "h-[340px]", size: "lg" },
+    { span: "col-span-6", h: "h-[340px]", size: "lg" },
+  ],
 }
+const ORDER = ["B", "C", "B", "E"]
 
-/* Row 1: two large cards with descriptions; following rows: 3 cards each; remainder fills the last row. */
-function buildDesktopRows(): DesktopProjectCard[][] {
-  const rows: DesktopProjectCard[][] = []
-  const [first, second, ...rest] = projects
-  rows.push([
-    {
-      ...first,
-      spanClassName: "col-span-7",
-      heightClassName: "h-[360px]",
-      objectPositionClassName: "object-center",
-      titleClassName: "text-[18px] leading-[1.14] tracking-[0.12em]",
-      descriptionWidthClassName: "max-w-[338px]",
-    },
-    {
-      ...second,
-      spanClassName: "col-span-5",
-      heightClassName: "h-[360px]",
-      objectPositionClassName: "object-center",
-      titleClassName: "text-[17px] leading-[1.16] tracking-[0.12em]",
-      descriptionWidthClassName: "max-w-[236px]",
-    },
-  ])
-  for (let i = 0; i < rest.length; i += 3) {
-    const chunk = rest.slice(i, i + 3)
-    const span = chunk.length === 3 ? "col-span-4" : chunk.length === 2 ? "col-span-6" : "col-span-12"
-    rows.push(
-      chunk.map((p) => ({
-        id: p.id,
-        image: p.image,
-        location: p.location,
-        title: p.title,
-        slug: p.slug,
-        badge: p.badge,
-        attribution: p.attribution,
-        spanClassName: span,
-        heightClassName: "h-[222px]",
-        objectPositionClassName: "object-center",
-      })),
-    )
+type Item = (typeof projects)[number]
+type Placed = Item & Slot & { index: number }
+
+function buildRows(): Placed[][] {
+  const rows: Placed[][] = []
+  let i = 0
+  let r = 0
+  while (i < projects.length) {
+    const key = r === 0 ? "A" : ORDER[(r - 1) % ORDER.length]
+    let slots = ROWS[key]
+    const chunk = projects.slice(i, i + slots.length)
+    if (chunk.length < slots.length) {
+      // last row with fewer cards: share the width evenly
+      const n = chunk.length
+      slots = Array.from({ length: n }, () => ({
+        span: n === 1 ? "col-span-12" : n === 2 ? "col-span-6" : "col-span-4",
+        h: "h-[330px]",
+        size: "lg" as Size,
+      }))
+    }
+    rows.push(chunk.map((p, k) => ({ ...p, ...slots[k], index: i + k })))
+    i += chunk.length
+    r++
   }
   return rows
 }
 
-const desktopProjectRows = buildDesktopRows()
+const desktopRows = buildRows()
 
 function LocationPin() {
   return (
@@ -132,29 +97,6 @@ function LocationPin() {
   )
 }
 
-function FilterChevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className={`transition-transform duration-200 ${open ? "rotate-0" : "-rotate-90"}`}
-    >
-      <path d="M2 4l4 4 4-4" stroke="#2D2D2D" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function CloseIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M2 2l10 10M12 2L2 12" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 function BadgePill({ badge, attribution, className = "" }: { badge: string; attribution?: string; className?: string }) {
   const style =
     attribution === "zagrosia"
@@ -167,67 +109,199 @@ function BadgePill({ badge, attribution, className = "" }: { badge: string; attr
   )
 }
 
-function DesktopProjectCardItem({
-  image,
-  location,
-  title,
-  description,
-  spanClassName,
-  heightClassName,
-  objectPositionClassName = "object-center",
-  titleClassName = "text-[13px] leading-[1.22] tracking-[0.10em]",
-  descriptionWidthClassName = "max-w-[340px]",
-  slug,
-  badge,
-  attribution,
-}: DesktopProjectCard) {
-  const cardHref = slug ? `/projects/${slug}` : "/projects"
+/* ── Stat cards ── */
+function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.6 })
+  const reduced = useReducedMotion()
+  useEffect(() => {
+    if (!inView || !ref.current) return
+    if (reduced) {
+      ref.current.textContent = `${to}${suffix}`
+      return
+    }
+    const c = animate(0, to, {
+      duration: 1.6,
+      ease: "easeOut",
+      onUpdate: (v) => {
+        if (ref.current) ref.current.textContent = `${Math.round(v)}${suffix}`
+      },
+    })
+    return () => c.stop()
+  }, [inView, reduced, to, suffix])
+  return <span ref={ref}>0{suffix}</span>
+}
 
+function BarsVisual() {
+  const hs = [28, 44, 36, 60, 78, 100]
   return (
-    <article
-      className={`${spanClassName} group zag-card-outline overflow-hidden rounded-[14px] shadow-[0_12px_28px_rgba(22,22,22,0.14)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(22,22,22,0.28)]`}
-    >
-      <Link href={cardHref} className="block cursor-pointer">
-        <div className={`zag-ticks relative ${heightClassName} overflow-hidden rounded-[14px] bg-[#303030]`}>
-          <Image src={image} alt={title.replace(/\n/g, " ")} fill className={`object-cover ${objectPositionClassName} transition-transform duration-500 group-hover:scale-[1.03]`} />
+    <div className="flex h-[58px] items-end gap-[5px]" aria-hidden>
+      {hs.map((h, i) => (
+        <motion.span
+          key={i}
+          className="w-[7px] rounded-t-[3px] bg-gradient-to-t from-[#0052A5]/35 to-[#0052A5]"
+          style={{ height: `${h}%`, transformOrigin: "bottom" }}
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.7, delay: 0.3 + i * 0.09, ease: EASE }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function RingVisual() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden>
+      <circle cx="32" cy="32" r="24" stroke="#0052A5" strokeOpacity="0.14" strokeWidth="6" />
+      <motion.circle
+        cx="32"
+        cy="32"
+        r="24"
+        stroke="#0052A5"
+        strokeWidth="6"
+        strokeLinecap="round"
+        transform="rotate(-90 32 32)"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 0.82 }}
+        viewport={{ once: true, amount: 0.8 }}
+        transition={{ duration: 1.5, delay: 0.3, ease: EASE }}
+      />
+      <circle cx="32" cy="32" r="4" fill="#0052A5" />
+    </svg>
+  )
+}
+
+function DotsVisual({ reduced }: { reduced: boolean | null }) {
+  return (
+    <div className="relative flex h-[58px] w-[78px] items-center justify-between" aria-hidden>
+      <span className="absolute left-[8px] right-[8px] top-1/2 h-px bg-[#0052A5]/25" />
+      {[0, 1, 2].map((i) => (
+        <span key={i} className="relative flex h-[16px] w-[16px] items-center justify-center">
+          {!reduced && (
+            <motion.span
+              className="absolute inset-0 rounded-full bg-[#0052A5]/40"
+              animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.5, ease: "easeOut" }}
+            />
+          )}
+          <span className="relative h-[10px] w-[10px] rounded-full bg-[#0052A5] ring-[3px] ring-white" />
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function StatCard({
+  icon,
+  to,
+  suffix,
+  label,
+  note,
+  visual,
+  delay,
+}: {
+  icon: React.ReactNode
+  to: number
+  suffix: string
+  label: string
+  note: string
+  visual: React.ReactNode
+  delay: number
+}) {
+  return (
+    <Reveal variant="fadeUp" delay={delay} duration={0.7}>
+      <div className="group relative h-full overflow-hidden rounded-[18px] bg-white p-[clamp(16px,1.6vw,24px)] ring-1 ring-[#0B1226]/[0.06] shadow-[0_2px_4px_rgba(11,18,38,0.06),0_14px_30px_-10px_rgba(11,18,38,0.22),0_30px_60px_-24px_rgba(0,82,165,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(11,18,38,0.08),0_20px_40px_-10px_rgba(11,18,38,0.28),0_40px_70px_-22px_rgba(0,82,165,0.5)]">
+        <motion.span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[4px] origin-left bg-gradient-to-r from-[#0052A5] to-[#5b9bf0]"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.9, delay: delay + 0.2, ease: "easeInOut" }}
+        />
+        <div className="flex items-start justify-between gap-4">
+          <span className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-[#0052A5]/10 text-[#0052A5] transition-colors duration-300 group-hover:bg-[#0052A5] group-hover:text-white">
+            {icon}
+          </span>
+          <span className="flex h-[64px] items-center">{visual}</span>
+        </div>
+        <p className="zag-heading mt-[clamp(10px,1.4vh,18px)] text-[clamp(34px,3.4vw,48px)] font-bold leading-none tracking-[0.01em] text-[#0B1226]">
+          <CountUp to={to} suffix={suffix} />
+        </p>
+        <p className="mt-[10px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{label}</p>
+        <p className="mt-[6px] text-[14px] leading-[1.5] tracking-[0.02em] text-[#2D2D2D]/70">{note}</p>
+      </div>
+    </Reveal>
+  )
+}
+
+/* ── Mosaic card ── */
+function ProjectTile({ image, location, title, description, span, h, size, index, slug, badge, attribution }: Placed) {
+  const href = slug ? `/projects/${slug}` : "/projects"
+  const titleSize =
+    size === "lg" ? "text-[20px] leading-[1.15] tracking-[0.06em]" : "text-[16px] leading-[1.2] tracking-[0.06em]"
+  return (
+    <article className={`${span} group`}>
+      <Link href={href} className="block cursor-pointer">
+        <div
+          className={`relative ${h} overflow-hidden rounded-[22px] bg-[#0B1226] ring-1 ring-white/20 transition-transform duration-500 group-hover:-translate-y-[6px]`}
+          style={{ boxShadow: PHOTO_SHADOW }}
+        >
+          <Image
+            src={image}
+            alt={title.replace(/\n/g, " ")}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.06]"
+          />
           <div
+            aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(48,48,48,0) 0%, rgba(48,48,48,0) 25%, rgba(48,48,48,0.3) 45%, rgba(48,48,48,0.75) 65%, rgba(48,48,48,0.95) 85%, rgba(48,48,48,1) 100%)",
+                "linear-gradient(180deg, rgba(11,18,38,0.45) 0%, rgba(11,18,38,0) 28%, rgba(11,18,38,0.55) 58%, rgba(11,18,38,0.96) 100%)",
             }}
           />
-          {badge ? <BadgePill badge={badge} attribution={attribution} className="absolute left-[14px] top-[14px] z-10" /> : null}
-          {/* Darker overlay on hover so description is readable */}
-          <div className="absolute inset-0 bg-[#1a1a1a]/0 transition-all duration-300 group-hover:bg-[#1a1a1a]/50" />
+          <div aria-hidden className="absolute inset-0 bg-[#0B1226]/0 transition-colors duration-300 group-hover:bg-[#0B1226]/45" />
 
-          <div className="absolute inset-x-0 bottom-0 px-[18px] pb-[14px] pt-2 text-white">
+          {badge ? <BadgePill badge={badge} attribution={attribution} className="absolute left-[16px] top-[16px] z-10" /> : null}
+
+          <span
+            aria-hidden
+            className="zag-heading absolute right-[18px] top-[10px] z-10 select-none text-[34px] font-bold leading-none tracking-[0.02em] text-transparent transition-all duration-300 group-hover:text-white/90"
+            style={{ WebkitTextStroke: "1px rgba(255,255,255,0.75)" }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <div className="absolute inset-x-0 bottom-0 z-10 px-[20px] pb-[18px] text-white">
+            <div className="mb-[10px] inline-flex items-center gap-[5px] rounded-[8px] bg-[#0052A5] px-[8px] py-[3px] text-[12px] tracking-[0.08em] text-white shadow-[0_6px_16px_rgba(0,82,165,0.45)]">
+              <LocationPin />
+              <span>{location}</span>
+            </div>
+            <h3 className={`zag-heading line-clamp-2 font-semibold uppercase text-white group-hover:line-clamp-none ${titleSize}`}>{title}</h3>
             {description ? (
-              <p
-                className={`mb-[8px] leading-[1.38] tracking-[0.12em] text-white/88 ${descriptionWidthClassName} max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-[120px] group-hover:opacity-100`}
-                style={{ fontSize: "14px" }}
-              >
+              <p className="line-clamp-3 max-h-0 overflow-hidden text-[14px] leading-[1.5] tracking-[0.02em] text-white/85 opacity-0 transition-all duration-300 group-hover:mt-[10px] group-hover:max-h-[90px] group-hover:opacity-100">
                 {description}
               </p>
             ) : null}
-            <div className="flex items-end justify-between gap-[12px]">
-              <div>
-                <div className="mb-[9px] inline-flex items-center gap-[4px] rounded-[8px] bg-[#0052A5] px-[7px] py-[2px] text-[12px] tracking-[0.10em] text-white backdrop-blur-[6px]">
-                  <LocationPin />
-                  <span>{location}</span>
-                </div>
-                <h3 className={`line-clamp-2 font-semibold text-white group-hover:line-clamp-none group-hover:whitespace-pre-line ${titleClassName}`}>
-                  {title}
-                </h3>
-              </div>
-              <span
-                className="inline-flex h-[30px] flex-shrink-0 translate-y-2 items-center rounded-[8px] border border-white/90 px-[14px] tracking-[0.14em] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#0052A5] hover:border-[#0052A5]"
-                style={{ fontSize: "12px" }}
-              >
-                Learn More
+            <div className="mt-[12px] flex items-center gap-[10px]">
+              <span className="h-px flex-1 origin-left bg-white/35" />
+              <span className="inline-flex items-center gap-[6px] text-[12px] font-bold uppercase tracking-[0.2em] text-white/80 transition-colors duration-300 group-hover:text-white">
+                View project
+                <span className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white/15 transition-all duration-300 group-hover:bg-[#0052A5] group-hover:shadow-[0_6px_16px_rgba(0,82,165,0.6)]">
+                  <ArrowUpRight size={14} strokeWidth={2.2} />
+                </span>
               </span>
             </div>
           </div>
+
+          <span
+            aria-hidden
+            className="absolute bottom-0 left-0 z-20 h-[4px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#0052A5] to-[#5b9bf0] transition-transform duration-500 group-hover:scale-x-100"
+          />
         </div>
       </Link>
     </article>
@@ -236,28 +310,14 @@ function DesktopProjectCardItem({
 
 export function ProjectsHeroSection() {
   const reducedMotion = useReducedMotion()
-  const [filterPanelOpen, setFilterPanelOpen] = useState(false)
-  const [expertiseOpen, setExpertiseOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const [selectedExpertise, setSelectedExpertise] = useState<string | null>(null)
-  const [selectedService, setSelectedService] = useState<string | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
-
-  function closeAll() {
-    setFilterPanelOpen(false)
-    setExpertiseOpen(false)
-    setServicesOpen(false)
-    setSelectedExpertise(null)
-    setSelectedService(null)
-  }
 
   return (
     <section className="bg-[#FCFCFC] text-[#2D2D2D]">
-      <div className="lg:hidden px-5 pb-14 pt-24">
-        {/* Label */}
+      <div className="lg:hidden px-5 pb-14 pt-24">        {/* Label */}
         <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
           <p className="mb-4 text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">
-            PORTFOLIO
+            OUR PORTFOLIO
           </p>
         </Reveal>
 
@@ -281,16 +341,16 @@ export function ProjectsHeroSection() {
               className="mb-5 text-[24px] font-black uppercase leading-[1.25] tracking-[0.12em]"
               style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
             >
-              <span className="text-[#2D2D2D]">SELECTED</span>
+              <span className="text-[#2D2D2D]">ENGINEERING</span>
               <br />
-              <span className="text-[#0052A5]">PROJECTS</span>
+              <span className="text-[#0052A5]">BUILT TO LAST</span>
             </h1>
           </Reveal>
 
           {/* Body */}
           <Reveal delay={0.2} duration={0.65}>
             <p className="mb-7 text-[12px] leading-[1.75] tracking-[0.08em] text-[#2D2D2D]">
-              Selected structural engineering projects and principal experience — from parkade, roof and building-envelope reviews to scaffold field reviews and concrete-frame residential design.
+              Zagrosia assignments and the principal’s earlier career: scaffold and building-envelope field reviews, parkade and rooftop assessments, retaining walls, townhouse and single-family structures, and warehouse reviews. Open any project for its scope, engineering focus and site photos.
             </p>
           </Reveal>
 
@@ -299,83 +359,19 @@ export function ProjectsHeroSection() {
             <div className="mb-8 flex items-start">
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">200+</p>
-                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Projects</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Projects Delivered</p>
               </div>
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">35+</p>
-                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Experience</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Years of Experience</p>
               </div>
               <div className="flex-1">
                 <p className="text-[26px] font-black leading-none tracking-[0.02em] text-[#2D2D2D]">3</p>
-                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Provinces</p>
+                <p className="mt-1 text-[12px] tracking-[0.1em] text-[#2D2D2D]">Provinces Served</p>
               </div>
             </div>
           </Reveal>
         </div>{/* end vertical line wrapper */}
-
-        {/* Filter toggle */}
-        <button
-          className="mb-5 flex items-center gap-[8px]"
-          onClick={() => setFilterPanelOpen(!filterPanelOpen)}
-          aria-label="Toggle filters"
-        >
-          <FilterIcon />
-          <span className="text-[12px] font-medium tracking-[0.1em] text-[#2D2D2D]">FILTER</span>
-        </button>
-
-        {filterPanelOpen && (
-          <div className="mb-8 overflow-hidden rounded-[10px] border border-[#DEDEDE]">
-            <div>
-              <button
-                className="flex w-full items-center justify-between px-4 py-3 text-left"
-                onClick={() => { setExpertiseOpen(!expertiseOpen); setServicesOpen(false) }}
-              >
-                <span className="text-[12px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Expertise</span>
-                <ChevronDown open={expertiseOpen} />
-              </button>
-              {expertiseOpen && (
-                <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
-                  {expertiseItems.map((item) => (
-                    <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
-                      <span className="text-[12px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="border-t border-[#DEDEDE]">
-              <button
-                className="flex w-full items-center justify-between px-4 py-3 text-left"
-                onClick={() => { setServicesOpen(!servicesOpen); setExpertiseOpen(false) }}
-              >
-                <span className="text-[12px] font-semibold tracking-[0.10em] text-[#2D2D2D]">Services</span>
-                <ChevronDown open={servicesOpen} />
-              </button>
-              {servicesOpen && (
-                <div className="border-t border-[#DEDEDE] bg-[#FAFAFA]">
-                  {servicesItems.map((item) => (
-                    <div key={item} className="border-b border-[#EFEFEF] px-4 py-[10px] last:border-b-0">
-                      <span className="text-[12px] tracking-[0.08em] text-[#2D2D2D]">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="border-t border-[#DEDEDE]">
-              <button
-                className="flex w-full items-center justify-between px-4 py-3 text-left"
-                onClick={closeAll}
-              >
-                <span className="text-[12px] tracking-[0.10em] text-[#2D2D2D]">Clear Filters</span>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                  <path d="M1 1l8 8M9 1l-8 8" stroke="#2D2D2D" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
 
         {/*
           4-card converging stack with prev + active + next×2:
@@ -555,171 +551,93 @@ export function ProjectsHeroSection() {
       </div>
 
       <div className="sidebar-content hidden lg:block">
-        <div className="pb-[98px] pt-[148px] zag-desktop-content-pad">
+        <div className="pb-[98px] pt-[clamp(110px,16vh,148px)] zag-desktop-content-pad">
           <div className="grid grid-cols-12 gap-x-[12px]">
             <div className="col-span-12">
               <div className="relative pl-5">
                 <motion.div
-                  className="absolute left-0 top-[4px] bottom-0 w-[4px]"
+                  className="absolute left-0 top-[4px] bottom-0 w-[3px]"
                   initial={reducedMotion ? false : { scaleY: 0 }}
                   whileInView={{ scaleY: 1 }}
                   viewport={{ once: false, amount: 0.05 }}
                   transition={{ duration: 0.9, ease: "easeInOut" }}
                   style={{
                     transformOrigin: "top",
-                    background: "linear-gradient(180deg, #0B0E0A 0%, rgba(150,150,150,0) 100%)",
+                    background: "linear-gradient(180deg, rgba(1,80,169,1) 0%, rgba(1,80,169,0.55) 55%, rgba(1,80,169,0) 100%)",
                   }}
                 />
 
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                  <p className="mb-[20px] text-[20px] font-bold uppercase tracking-[0.26em] text-[#2D2D2D]">
-                    PORTFOLIO
-                  </p>
+                  <p className="mb-[14px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Our portfolio</p>
                 </Reveal>
 
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                  <h1
-                    className="text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]"
-                    style={{ fontFamily: "'Momo Trust Sans', 'Inter', sans-serif" }}
-                  >
-                    <span className="mb-[8px] block text-[#2D2D2D]">SELECTED</span>
-                    <span className="block text-[#0052A5]">PROJECTS</span>
+                  <h1 className="zag-heading whitespace-nowrap text-[clamp(26px,2.9vw,40px)] font-bold uppercase leading-[1.1]">
+                    <span className="text-[#2D2D2D]">Engineering </span>
+                    <span className="text-[#0052A5]">built to last</span>
                   </h1>
                 </Reveal>
 
                 <Reveal delay={0.2} duration={0.65}>
-                  <p className="mt-[22px] leading-[1.5] tracking-[0.01em] text-[#2D2D2D]" style={{ fontSize: "17px" }}>
-                    Selected Zagrosia assignments and the principal&apos;s professional experience.<br />
-                    Open any project for its scope and engineering details.
+                  <p className="mt-[18px] max-w-[820px] text-[16px] leading-[1.7] tracking-[0.02em] text-[#2D2D2D]">
+                    Zagrosia assignments and the principal&apos;s earlier career, from scaffold and building-envelope field reviews to parkade and rooftop assessments, retaining walls, townhouses, single-family homes and warehouses. Open any project to see its scope, the engineering focus behind it and the photos from site.
                   </p>
                 </Reveal>
 
-                <Reveal delay={0.3} duration={0.65}>
-                  <div className="mt-[42px] flex items-start gap-[170px]">
-                    <div>
-                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">200+</p>
-                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Projects</p>
-                    </div>
-                    <div>
-                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">35+</p>
-                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Experience</p>
-                    </div>
-                    <div>
-                      <p className="text-[32px] font-semibold leading-none tracking-[0.05em] text-[#2D2D2D]">3</p>
-                      <p className="mt-[14px] text-[24px] tracking-[0.18em] text-[#2D2D2D]">Province</p>
-                    </div>
-                  </div>
-                </Reveal>
-
-              </div>
-            </div>
-
-            <div className="col-span-12 mt-[60px]">
-              <button
-                className="inline-flex items-center gap-[10px] cursor-pointer"
-                aria-label="Filters"
-                onClick={() => {
-                  const nextOpen = !filterPanelOpen
-                  setFilterPanelOpen(nextOpen)
-                  if (!nextOpen) {
-                    setExpertiseOpen(false)
-                    setServicesOpen(false)
-                  }
-                }}
-              >
-                <FilterIcon />
-                <span className="text-[14px] font-semibold tracking-[0.18em] text-[#2D2D2D]">FILTER</span>
-              </button>
-            </div>
-
-            {filterPanelOpen ? (
-              <div className="col-span-12 mt-[10px]">
-                <div className="w-full overflow-hidden rounded-[14px] border border-[#2D2D2D]/10 bg-[#FCFCFC]/95 shadow-[0_12px_30px_rgba(45,45,45,0.18)] backdrop-blur-[10px]">
-                  <div className="px-[16px] py-[12px]">
-                    <button
-                      className="flex w-full cursor-pointer items-center justify-between text-left text-[16px] font-semibold tracking-[0.14em] text-[#2D2D2D]"
-                      onClick={() => {
-                        setExpertiseOpen(!expertiseOpen)
-                        setServicesOpen(false)
-                      }}
-                    >
-                      <span>
-                        Expertise
-                        {selectedExpertise ? <span className="ml-3 text-[#2D2D2D]/55">{selectedExpertise}</span> : null}
-                      </span>
-                      <FilterChevron open={expertiseOpen} />
-                    </button>
-                    <div className="mt-[10px] h-px bg-[#2D2D2D]/32" />
-                    {expertiseOpen ? (
-                      <div className="space-y-[8px] pt-[10px] text-[12px] tracking-[0.1em] text-[#2D2D2D]/86">
-                        {expertiseItems.map((item) => (
-                          <button
-                            key={item}
-                            className={`block text-left transition-colors hover:text-[#0052A5] hover:font-semibold ${selectedExpertise === item ? "font-semibold text-[#0052A5]" : ""}`}
-                            onClick={() => setSelectedExpertise(selectedExpertise === item ? null : item)}
-                          >
-                            {item}
-                          </button>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div className="px-[16px] py-[12px]">
-                    <button
-                      className="flex w-full cursor-pointer items-center justify-between text-left text-[16px] font-semibold tracking-[0.14em] text-[#2D2D2D]"
-                      onClick={() => {
-                        setServicesOpen(!servicesOpen)
-                        setExpertiseOpen(false)
-                      }}
-                    >
-                      <span>
-                        Services
-                        {selectedService ? <span className="ml-3 text-[#2D2D2D]/55">{selectedService}</span> : null}
-                      </span>
-                      <FilterChevron open={servicesOpen} />
-                    </button>
-                    <div className="mt-[10px] h-px bg-[#2D2D2D]/32" />
-                    {servicesOpen ? (
-                      <div className="space-y-[8px] pt-[10px] text-[12px] tracking-[0.1em] text-[#2D2D2D]/86">
-                        {servicesItems.map((item) => (
-                          <button
-                            key={item}
-                            className={`block text-left transition-colors hover:text-[#0052A5] hover:font-semibold ${selectedService === item ? "font-semibold text-[#0052A5]" : ""}`}
-                            onClick={() => setSelectedService(selectedService === item ? null : item)}
-                          >
-                            {item}
-                          </button>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div className="px-[16px] py-[12px]">
-                    <button
-                      className="flex w-full cursor-pointer items-center justify-between text-left text-[16px] tracking-[0.14em] text-[#2D2D2D]"
-                      onClick={closeAll}
-                    >
-                      <span>Clear The Filter</span>
-                      <CloseIcon />
-                    </button>
-                  </div>
+                <div className="mt-[clamp(22px,3.4vh,38px)] grid grid-cols-3 gap-[clamp(14px,1.6vw,24px)] pr-[4px]">
+                  <StatCard
+                    delay={0.3}
+                    icon={<Building2 size={22} strokeWidth={1.8} />}
+                    to={200}
+                    suffix="+"
+                    label="Projects delivered"
+                    note="Field reviews and assessments."
+                    visual={<BarsVisual />}
+                  />
+                  <StatCard
+                    delay={0.4}
+                    icon={<Award size={22} strokeWidth={1.8} />}
+                    to={35}
+                    suffix="+"
+                    label="Years of experience"
+                    note="Of structural engineering practice."
+                    visual={<RingVisual />}
+                  />
+                  <StatCard
+                    delay={0.5}
+                    icon={<MapPin size={22} strokeWidth={1.8} />}
+                    to={3}
+                    suffix=""
+                    label="Provinces served"
+                    note="Engineering practice across Canada."
+                    visual={<DotsVisual reduced={reducedMotion} />}
+                  />
                 </div>
               </div>
-            ) : null}
+            </div>
 
-            <div className="col-span-12 mt-[14px] space-y-[12px]">
-              {desktopProjectRows.map((row, rowIndex) => (
+            <div className="col-span-12 mt-[clamp(40px,7vh,72px)]">
+              <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+                <div className="flex items-center gap-4">
+                  <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">Project index</p>
+                  <span className="h-px flex-1 bg-gradient-to-r from-[#0052A5]/40 to-transparent" />
+                  <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]/55">{projects.length} projects</p>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="col-span-12 mt-[28px] space-y-[28px]">
+              {desktopRows.map((row, rowIndex) => (
                 <motion.div
                   key={rowIndex}
-                  initial={reducedMotion ? false : { opacity: 0, y: 24, filter: "blur(6px)" }}
+                  initial={reducedMotion ? false : { opacity: 0, y: 28, filter: "blur(6px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: false, amount: 0.05 }}
-                  transition={{ duration: 0.65, delay: 0.05 + rowIndex * 0.08, ease: EASE }}
-                  className="grid grid-cols-12 gap-[12px]"
+                  viewport={{ once: true, amount: 0.08 }}
+                  transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
+                  className="grid grid-cols-12 gap-[28px]"
                 >
                   {row.map((project) => (
-                    <DesktopProjectCardItem key={project.id} {...project} />
+                    <ProjectTile key={project.id} {...project} />
                   ))}
                 </motion.div>
               ))}
