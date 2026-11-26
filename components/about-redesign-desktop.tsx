@@ -1213,77 +1213,31 @@ export function AboutRedesignDesktop() {
                   </CtaButton>
                 </div>
               </Reveal>
-              <Reveal delay={0.3} duration={0.6}>
-                <div className="mt-6 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.24em] text-[#3a3a3a]/70">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0052A5]/70" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#0052A5]" />
-                  </span>
-                  Based in Coquitlam, BC
-                </div>
-              </Reveal>
             </div>
 
-            <div className="grid gap-[clamp(12px,2vh,20px)]">
-              {/* email: the big one */}
-              <motion.a
-                href="mailto:info@zagrosia.ca"
-                className="group relative block overflow-hidden rounded-[22px] p-[clamp(20px,3.6vh,36px)]"
-                style={{ background: "linear-gradient(135deg, #0052A5 0%, #0B3B80 100%)", boxShadow: "0 2px 4px rgba(0,0,0,0.25), 0 24px 50px -10px rgba(0,82,165,0.65)" }}
-                initial={reduced ? false : { opacity: 0, x: 60, scale: 0.96 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-                whileHover={reduced ? undefined : { y: -5 }}
-              >
-                {!reduced && (
-                  <motion.span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                    animate={{ x: ["0%", "480%"] }}
-                    transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3.8, ease: "easeInOut" }}
-                  />
-                )}
-                <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full border border-white/15" />
-                <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-white/10" />
-                <div className="relative flex items-center justify-between gap-4">
-                  <div>
-                    <p className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.24em] text-white/75">
-                      <Mail className="h-[14px] w-[14px]" /> Email the firm
-                    </p>
-                    <p className="mt-3 text-[clamp(20px,2.1vw,28px)] leading-none tracking-[0.01em] text-white">info@zagrosia.ca</p>
-                  </div>
-                  <ArrowUpRight className="h-[18px] w-[18px] shrink-0 text-white/80 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </div>
-              </motion.a>
-
-              <div className="grid grid-cols-2 gap-[clamp(12px,2vh,20px)]">
-                {[
-                  { icon: Phone, label: "Call the firm", value: "+1 (778) 317-1043", href: "tel:+17783171043", ext: false },
-                  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/zagrosia", href: "https://www.linkedin.com/in/zagrosia", ext: true },
-                ].map((c, i) => (
-                  <motion.a
-                    key={c.label}
-                    href={c.href}
-                    {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group relative block overflow-hidden rounded-[18px] border border-[#2D2D2D]/10 bg-white p-[clamp(16px,2.8vh,26px)] transition-colors duration-300 hover:border-[#0052A5]"
-                    style={{ boxShadow: "0 2px 4px rgba(11,18,38,0.06), 0 18px 36px -14px rgba(11,18,38,0.28)" }}
-                    initial={reduced ? false : { opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: EASE }}
-                    whileHover={reduced ? undefined : { y: -5 }}
-                  >
-                    <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#0052A5] transition-transform duration-500 group-hover:scale-x-100" />
-                    <div className="flex items-start justify-between">
-                      <c.icon className="h-[18px] w-[18px] text-[#0052A5]" />
-                      <ArrowUpRight className="h-[18px] w-[18px] text-white/50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#0052A5]" />
-                    </div>
-                    <p className="mt-[clamp(8px,1.6vh,14px)] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{c.label}</p>
-                    <p className="mt-1.5 text-[16px] leading-[1.3] tracking-[0.02em] text-[#2D2D2D]">{c.value}</p>
-                  </motion.a>
-                ))}
-              </div>
+            <div className="flex items-center justify-center gap-[clamp(40px,6vw,88px)]">
+              {[
+                { icon: Mail, label: "Email", href: "mailto:info@zagrosia.ca", ext: false },
+                { icon: Phone, label: "Call", href: "tel:+17783171043", ext: false },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/zagrosia", ext: true },
+              ].map((c, i) => (
+                <motion.a
+                  key={c.label}
+                  href={c.href}
+                  aria-label={c.label}
+                  title={c.label}
+                  {...(c.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="text-[#0052A5] transition-colors duration-300 hover:text-[#003d7d]"
+                  initial={reduced ? false : { opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.6, delay: 0.25 + i * 0.12, ease: EASE }}
+                  whileHover={reduced ? undefined : { y: -6, scale: 1.12 }}
+                  whileTap={reduced ? undefined : { scale: 0.95 }}
+                >
+                  <c.icon className="h-[clamp(26px,3.2vh,34px)] w-[clamp(26px,3.2vh,34px)]" strokeWidth={1.6} />
+                </motion.a>
+              ))}
             </div>
           </div>
         </div>
