@@ -11,10 +11,6 @@ import { ContactStrip } from "./contact-strip"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-// Hero video. Drop the new clip into /public/videos and put its path here (e.g. "/videos/about-hero.mp4").
-const HERO_VIDEO: string | null = "/videos/about-hero.mp4"
-const HERO_POSTER = "/videos/about-hero-poster.jpg"
-
 const STORY_VIDEO = "/videos/about-story"
 const STORY_POSTER = "/videos/about-story-poster.png"
 
@@ -225,27 +221,32 @@ const earlierSites = ["Shiraz", "Bushehr", "Abadan", "Bandar-Emam", "Arak", "Boj
 
 // ─── ART ─────────────────────────────────────────────────────────────────────
 
-function RidgeArt({ className = "", drift = true }: { className?: string; drift?: boolean }) {
+function RidgeArt({ className = "", part = "light", drift = true }: { className?: string; part?: "light" | "dark"; drift?: boolean }) {
   const reduced = useReducedMotion()
   const move = (px: number, dur: number) =>
     drift && !reduced ? { animate: { x: [0, px, 0] }, transition: { duration: dur, repeat: Infinity, ease: "easeInOut" as const } } : {}
   return (
     <svg className={className} viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <motion.path
-        {...move(-26, 22)}
-        d="M-60 380 L120 300 L220 340 L360 220 L470 300 L600 180 L720 280 L860 200 L980 290 L1120 210 L1260 300 L1360 250 L1500 300 L1500 600 L-60 600 Z"
-        fill="rgba(91,155,240,0.2)"
-      />
-      <motion.path
-        {...move(20, 28)}
-        d="M-60 450 L140 360 L260 420 L400 310 L540 400 L690 290 L820 390 L960 330 L1100 410 L1240 340 L1500 420 L1500 600 L-60 600 Z"
-        fill="rgba(1,80,169,0.5)"
-      />
-      <motion.path
-        {...move(-14, 34)}
-        d="M-60 520 L180 450 L320 500 L480 420 L640 500 L800 440 L960 510 L1120 450 L1280 505 L1500 460 L1500 600 L-60 600 Z"
-        fill="rgba(8,12,24,0.78)"
-      />
+      {part === "light" ? (
+        <>
+          <motion.path
+            {...move(-26, 22)}
+            d="M-60 380 L120 300 L220 340 L360 220 L470 300 L600 180 L720 280 L860 200 L980 290 L1120 210 L1260 300 L1360 250 L1500 300 L1500 600 L-60 600 Z"
+            fill="rgba(0,82,165,0.07)"
+          />
+          <motion.path
+            {...move(20, 28)}
+            d="M-60 450 L140 360 L260 420 L400 310 L540 400 L690 290 L820 390 L960 330 L1100 410 L1240 340 L1500 420 L1500 600 L-60 600 Z"
+            fill="rgba(0,82,165,0.15)"
+          />
+        </>
+      ) : (
+        <motion.path
+          {...move(-14, 34)}
+          d="M-60 520 L180 450 L320 500 L480 420 L640 500 L800 440 L960 510 L1120 450 L1280 505 L1500 460 L1500 600 L-60 600 Z"
+          fill="#0B0E0A"
+        />
+      )}
     </svg>
   )
 }
@@ -603,95 +604,59 @@ export function AboutRedesignDesktop() {
 
   return (
     <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
-      {/* ═══ 1. HERO ═══ */}
-      <section
-        className="relative min-h-screen overflow-hidden text-[#FCFCFC]"
-        style={{ background: "linear-gradient(180deg, #0B0E0A 0%, #07080A 100%)" }}
-      >
-        <RidgeArt className="absolute inset-x-0 bottom-0 h-[78%] w-full" />
-        {HERO_VIDEO && (
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            src={HERO_VIDEO}
-            poster={HERO_POSTER}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-          />
-        )}
+      {/* ═══ 1. HERO ═══ same structure as the Services / Projects / Contact page headers */}
+      <section className="relative flex min-h-[clamp(600px,96vh,860px)] flex-col overflow-hidden bg-[#FCFCFC] text-[#2D2D2D]">
         <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(180deg, rgba(8,14,26,0.35) 0%, rgba(8,14,26,0.1) 45%, rgba(8,14,26,0.75) 100%)" }}
-        />
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%]" style={{ background: "linear-gradient(180deg, rgba(11,14,10,0) 0%, rgba(11,14,10,0.7) 55%, #0B0E0A 100%)" }} />
-        <div className="sidebar-content zag-desktop-content-pad relative z-10 pb-20 pt-[154px]">
-          <div className="flex items-end justify-between gap-10">
-            <div className="max-w-[700px]">
-              <h1 className="font-sans font-bold tracking-tight">
-                <motion.span
-                  className="block text-[#FCFCFC]"
-                  style={{ fontSize: "52px", lineHeight: 1.02 }}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                >ABOUT</motion.span>
-                <span style={{ display: "block", overflow: "hidden", marginTop: "2px" }}>
-                  <motion.span
-                    className="block text-[#0150a9]"
-                    style={{ fontSize: "52px", lineHeight: 1.01 }}
-                    initial={{ y: "105%" }}
-                    animate={{ y: "0%" }}
-                    transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  >ZAGROSIA</motion.span>
-                </span>
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[52%]"
+          style={{ WebkitMaskImage: "linear-gradient(90deg, transparent 0%, transparent 52%, #000 80%)", maskImage: "linear-gradient(90deg, transparent 0%, transparent 52%, #000 80%)" }}
+        >
+          <RidgeArt part="light" className="h-full w-full" />
+        </div>
+        <RidgeArt part="dark" className="pointer-events-none absolute inset-x-0 -bottom-px h-[36%] w-full" />
+        <div className="sidebar-content zag-desktop-content-pad relative z-10 pt-[148px]">
+          <div className="relative pl-5">
+            <motion.div
+              className="absolute bottom-0 left-0 top-[4px] w-[3px]"
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ duration: 0.9, ease: "easeInOut" }}
+              style={{
+                transformOrigin: "top",
+                background: "linear-gradient(180deg, rgba(1,80,169,1) 0%, rgba(1,80,169,0.55) 55%, rgba(1,80,169,0) 100%)",
+              }}
+            />
+
+            <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
+              <p className={`mb-[14px] ${eyebrow}`}>Built like a mountain range</p>
+            </Reveal>
+
+            <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
+              <h1 className="zag-heading mb-5 text-[40px] font-bold uppercase leading-[1.05] tracking-[0.03em]">
+                <span className="mb-[8px] block text-[#2D2D2D]">About</span>
+                <span className="block text-[#0052A5]">Zagrosia</span>
               </h1>
-              <motion.p
-                className="mt-6 font-light text-[#FCFCFC]"
-                style={{ fontSize: "28px", letterSpacing: "0.2em" }}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >BUILT LIKE A MOUNTAIN RANGE</motion.p>
-              <div className="relative mt-10 pl-8">
-                <motion.div
-                  className="pointer-events-none absolute left-0 top-0 w-[6px] rounded-full"
-                  style={{
-                    height: "calc(100% - 48px)",
-                    background: "linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0.6) 55%, rgba(252,252,252,0) 100%)",
-                    transformOrigin: "top",
-                  }}
-                  initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
-                  transition={{ duration: 1.1, delay: 0.5, ease: "easeInOut" }}
-                />
-                <motion.p
-                  className="text-[#FCFCFC]"
-                  style={{ fontSize: "20px", letterSpacing: "0.14em" }}
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >M.Sc. STRUCTURAL · P.ENG</motion.p>
-                <motion.p
-                  className="text-[#FCFCFC]"
-                  style={{ fontSize: "16px", letterSpacing: "0.14em", marginTop: "clamp(18px,4.5vh,38px)" }}
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                >BC · AB · SK</motion.p>
-                <motion.div
-                  style={{ marginTop: "clamp(22px,6vh,76px)" }}
-                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <p className="font-mono text-[#FCFCFC]" style={{ fontSize: "17px", lineHeight: 1.65, letterSpacing: "0.02em" }}>
-                    Structural Design · Seismic Expertise · Steel · Concrete · Wood
-                  </p>
-                  <p className="font-sans text-[#FCFCFC]/80" style={{ fontSize: "17px", lineHeight: 1.6, letterSpacing: "0.03em", marginTop: "10px" }}>
-                    Named for the Zagros Mountains: a range built by pressure, held by structure.
-                  </p>
-                </motion.div>
-              </div>
+            </Reveal>
+
+            <Reveal delay={0.2} duration={0.65}>
+              <p className={`max-w-[640px] text-[#2D2D2D] ${bodyText}`}>
+                Named for the Zagros Mountains: a range built by pressure, held by structure. Zagrosia brings structural design and seismic expertise to steel, concrete and wood projects.
+              </p>
+            </Reveal>
+
+            <div className="mt-[clamp(22px,4vh,40px)] grid max-w-[720px] grid-cols-3 gap-[clamp(14px,2vw,32px)]">
+              {[
+                { v: "M.Sc.", l: "Structural engineering" },
+                { v: "P.Eng", l: "Professional engineer" },
+                { v: "BC · AB · SK", l: "Provinces served" },
+              ].map((f, i) => (
+                <Reveal key={f.v} variant="fadeUp" delay={0.3 + i * 0.1} duration={0.7}>
+                  <div className="border-l border-[#0052A5]/25 pl-[clamp(14px,1.6vw,22px)]">
+                    <p className="zag-heading text-[clamp(22px,2vw,28px)] font-bold leading-none text-[#0B1226]">{f.v}</p>
+                    <p className="mt-[8px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{f.l}</p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
