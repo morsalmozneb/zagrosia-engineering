@@ -117,7 +117,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
       const height = size.y * k
 
       const st = { yaw: 0.55, elev: 0.46, vYaw: 0, zoom: 1, zt: 1, dragging: false, lx: 0, ly: 0, last: -1e9 }
-      const target = new THREE.Vector3(0, height * 0.36, 0)
+      const target = new THREE.Vector3(0, height * 0.1, 0)
       let dist = 24
       const place = () => {
         const ce = Math.cos(st.elev)
@@ -132,7 +132,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         renderer.setSize(w, h, false)
         camera.aspect = w / h
         const th = Math.tan((camera.fov * Math.PI) / 360)
-        dist = Math.max(5.0 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 2.2) / th)
+        dist = Math.max(5.0 / (th * Math.min(camera.aspect, 1.8)), (0.8 * Math.sqrt(50 + (height / 2) ** 2)) / th)
         camera.updateProjectionMatrix()
       }
       resize()
