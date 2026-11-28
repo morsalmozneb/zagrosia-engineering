@@ -147,7 +147,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         renderer.setSize(w, h, false)
         camera.aspect = w / h
         const th = Math.tan((camera.fov * Math.PI) / 360)
-        dist = Math.max(6.0 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 3.1) / th)
+        dist = Math.max(5.0 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 2.2) / th)
         camera.updateProjectionMatrix()
       }
       resize()
@@ -262,8 +262,8 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
   )
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <div ref={stageRef} className="relative h-[clamp(300px,48vh,520px)] w-full" />
-      <div className="mt-[6px] flex items-center gap-5">
+      <div ref={stageRef} className="relative -mt-8 h-[clamp(430px,80vh,780px)] w-full" />
+      <div className="relative -mt-[70px] flex items-center gap-5">
         <div role="group" aria-label="Model style" className="flex items-center gap-1 rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] p-[4px]">
           {seg(
             "blueprint",
@@ -286,7 +286,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
           Reset view
         </button>
       </div>
-      <p className="mt-[10px] text-[13px] text-[#2D2D2D]/60">Drag to rotate.</p>
+      <p className="mt-[6px] text-[13px] text-[#2D2D2D]/60">Drag to rotate.</p>
     </div>
   )
 }
