@@ -8,7 +8,7 @@ import { Reveal } from "./scroll-reveal"
 import { CtaButton } from "@/components/cta-button"
 import { coreValues, team } from "./about-desktop-page"
 import { ContactStrip } from "./contact-strip"
-import { BlueprintMountain } from "./blueprint-mountain"
+import { BlueprintModel } from "./blueprint-model"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -608,7 +608,7 @@ export function AboutRedesignDesktop() {
               </div>
             </div>
             <Reveal variant="fadeUp" delay={0.2} duration={0.9} className="col-span-7">
-              <BlueprintMountain className="h-[clamp(300px,54vh,540px)] w-full" />
+              <BlueprintModel className="h-[clamp(300px,54vh,540px)] w-full" />
             </Reveal>
           </div>
 
