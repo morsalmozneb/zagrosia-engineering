@@ -608,7 +608,7 @@ export function AboutRedesignDesktop() {
               </div>
             </div>
             <Reveal variant="fadeUp" delay={0.2} duration={0.9} className="col-span-7">
-              <BlueprintModel className="h-[clamp(300px,54vh,540px)] w-full" />
+              <BlueprintModel className="-mt-10 h-[clamp(360px,67vh,660px)] w-full" />
             </Reveal>
           </div>
 

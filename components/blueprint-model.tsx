@@ -127,8 +127,8 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
       root.add(edges)
       const height = size.y * k
 
-      const st = { yaw: 0.55, elev: 0.55, vYaw: 0, dragging: false, lx: 0, ly: 0, last: -1e9 }
-      const target = new THREE.Vector3(0, height * 0.38, 0)
+      const st = { yaw: 0.55, elev: 0.46, vYaw: 0, dragging: false, lx: 0, ly: 0, last: -1e9 }
+      const target = new THREE.Vector3(0, height * 0.33, 0)
       let dist = 24
       const place = () => {
         const ce = Math.cos(st.elev)
@@ -142,7 +142,7 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
         renderer.setSize(w, h, false)
         camera.aspect = w / h
         const th = Math.tan((camera.fov * Math.PI) / 360)
-        dist = Math.max(7.6 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 3.2) / th)
+        dist = Math.max(6.6 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 2.2) / th)
         camera.updateProjectionMatrix()
       }
       resize()
