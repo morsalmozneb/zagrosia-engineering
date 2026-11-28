@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { useReducedMotion } from "framer-motion"
 
 /* Interactive 3D model of the Zagrosia mountain city (a GLB file), shown as a light blueprint hologram.
@@ -8,18 +8,12 @@ import { useReducedMotion } from "framer-motion"
 
 const MODEL_URL = "/models/zagrosia-city.glb"
 
-type Look = "blueprint" | "solid"
-type Ctl = { setLook: (l: Look) => void; reset: () => void }
+type Ctl = { zoomBy: (f: number) => void; reset: () => void }
 
 export function BlueprintModel({ className = "" }: { className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null)
   const ctl = useRef<Ctl | null>(null)
-  const [look, setLookState] = useState<Look>("blueprint")
   const reduced = useReducedMotion()
-  const pick = useCallback((l: Look) => {
-    setLookState(l)
-    ctl.current?.setLook(l)
-  }, [])
 
   useEffect(() => {
     const wrap = stageRef.current
@@ -58,29 +52,19 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         }`
       const frag = `
         varying vec3 vN; varying vec3 vV; varying float vY;
-        uniform float uSolid;
         void main(){
           vec3 n = normalize(vN);
-          float lit = 0.62 + 0.38 * clamp(dot(n, normalize(vec3(-0.4, 0.8, 0.5))), 0.0, 1.0);
           float c = abs(fract(vY * 38.0) - 0.5);
           float contour = 1.0 - smoothstep(0.0, 0.05, c);
-          vec3 col;
-          if (uSolid < 0.5) {
-            // blueprint: solid soft blue, lit from the upper left
-            float l = clamp(dot(n, normalize(vec3(-0.45, 0.85, 0.5))), 0.0, 1.0);
-            col = mix(vec3(0.25, 0.40, 0.68), vec3(0.57, 0.72, 0.93), 0.25 + 0.75 * l);
-            col = mix(col, vec3(0.16, 0.30, 0.56), contour * 0.22);
-          } else {
-            // solid: white clay with fine ink contours
-            col = vec3(1.0) * lit;
-            col = mix(col, vec3(0.13, 0.19, 0.27), contour * 0.30);
-          }
+          // solid soft blue, lit from the upper left, with faint contour lines
+          float l = clamp(dot(n, normalize(vec3(-0.45, 0.85, 0.5))), 0.0, 1.0);
+          vec3 col = mix(vec3(0.25, 0.40, 0.68), vec3(0.57, 0.72, 0.93), 0.25 + 0.75 * l);
+          col = mix(col, vec3(0.16, 0.30, 0.56), contour * 0.22);
           gl_FragColor = vec4(col, 1.0);
         }`
       const mat = new THREE.ShaderMaterial({
         vertexShader: vert,
         fragmentShader: frag,
-        uniforms: { uSolid: { value: 0 } },
         transparent: false,
         depthWrite: true,
         polygonOffset: true,
@@ -132,12 +116,13 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
       root.add(edges)
       const height = size.y * k
 
-      const st = { yaw: 0.55, elev: 0.46, vYaw: 0, dragging: false, lx: 0, ly: 0, last: -1e9 }
+      const st = { yaw: 0.55, elev: 0.46, vYaw: 0, zoom: 1, zt: 1, dragging: false, lx: 0, ly: 0, last: -1e9 }
       const target = new THREE.Vector3(0, height * 0.36, 0)
       let dist = 24
       const place = () => {
         const ce = Math.cos(st.elev)
-        camera.position.set(target.x + dist * ce * Math.sin(st.yaw), target.y + dist * Math.sin(st.elev), target.z + dist * ce * Math.cos(st.yaw))
+        const d = dist / st.zoom
+        camera.position.set(target.x + d * ce * Math.sin(st.yaw), target.y + d * Math.sin(st.elev), target.z + d * ce * Math.cos(st.yaw))
         camera.lookAt(target)
       }
       const resize = () => {
@@ -167,7 +152,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         canvas.style.cursor = "grabbing"
       }
       const move = (e: PointerEvent) => {
-        if (!st.dragging) return
+        if (!st.dragging || pts.size > 1) return
         const dx = e.clientX - st.lx
         const dy = e.clientY - st.ly
         st.lx = e.clientX
@@ -185,6 +170,40 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
           canvas.releasePointerCapture(e.pointerId)
         } catch {}
       }
+      // zoom: trackpad pinch / Ctrl or ⌘ + scroll (plain scroll still scrolls the page), two-finger pinch on touch screens
+      const wheel = (e: WheelEvent) => {
+        if (!e.ctrlKey && !e.metaKey) return
+        e.preventDefault()
+        st.zt = Math.min(2.4, Math.max(0.85, st.zt * Math.exp(-e.deltaY * 0.012)))
+      }
+      const pts = new Map<number, { x: number; y: number }>()
+      let pinch0 = 0
+      let zt0 = 1
+      const ptrDown = (e: PointerEvent) => {
+        pts.set(e.pointerId, { x: e.clientX, y: e.clientY })
+        if (pts.size === 2) {
+          const [a, b] = [...pts.values()]
+          pinch0 = Math.hypot(a.x - b.x, a.y - b.y)
+          zt0 = st.zt
+          st.dragging = false
+        }
+      }
+      const ptrMove = (e: PointerEvent) => {
+        if (!pts.has(e.pointerId)) return
+        pts.set(e.pointerId, { x: e.clientX, y: e.clientY })
+        if (pts.size === 2 && pinch0 > 0) {
+          const [a, b] = [...pts.values()]
+          st.zt = Math.min(2.4, Math.max(0.85, (zt0 * Math.hypot(a.x - b.x, a.y - b.y)) / pinch0))
+        }
+      }
+      const ptrUp = (e: PointerEvent) => {
+        pts.delete(e.pointerId)
+      }
+      canvas.addEventListener("wheel", wheel, { passive: false })
+      canvas.addEventListener("pointerdown", ptrDown)
+      canvas.addEventListener("pointermove", ptrMove)
+      canvas.addEventListener("pointerup", ptrUp)
+      canvas.addEventListener("pointercancel", ptrUp)
       canvas.addEventListener("pointerdown", down)
       canvas.addEventListener("pointermove", move)
       canvas.addEventListener("pointerup", up)
@@ -202,6 +221,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
           st.vYaw *= 0.93
           if (!reduced && now - st.last > 2200) st.yaw += 0.0035 * dt * 60
         }
+        st.zoom += (st.zt - st.zoom) * Math.min(1, dt * 9)
         place()
         renderer.render(scene, camera)
       }
@@ -211,15 +231,14 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
       canvas.style.opacity = "1"
       ;(window as unknown as { __bc?: typeof st }).__bc = st
       ctl.current = {
-        setLook: (l) => {
-          mat.uniforms.uSolid.value = l === "solid" ? 1 : 0
-          edgeMat.color.set(l === "solid" ? 0x223044 : 0x1f4a8a)
-          edgeMat.opacity = l === "solid" ? 0.55 : 0.32
+        zoomBy: (f) => {
+          st.zt = Math.min(2.4, Math.max(0.85, st.zt * f))
         },
         reset: () => {
           st.yaw = 0.55
           st.elev = 0.46
           st.vYaw = 0
+          st.zt = 1
           st.last = performance.now()
         },
       }
@@ -228,6 +247,11 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         cancelAnimationFrame(raf)
         ro.disconnect()
         io.disconnect()
+        canvas.removeEventListener("wheel", wheel)
+        canvas.removeEventListener("pointerdown", ptrDown)
+        canvas.removeEventListener("pointermove", ptrMove)
+        canvas.removeEventListener("pointerup", ptrUp)
+        canvas.removeEventListener("pointercancel", ptrUp)
         canvas.removeEventListener("pointerdown", down)
         canvas.removeEventListener("pointermove", move)
         canvas.removeEventListener("pointerup", up)
@@ -247,46 +271,29 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
     }
   }, [reduced])
 
-  const seg = (l: Look, label: string, icon: React.ReactNode) => (
-    <button
-      type="button"
-      onClick={() => pick(l)}
-      aria-pressed={look === l}
-      className={`flex items-center gap-2 rounded-full px-[18px] py-[9px] text-[14px] font-semibold transition-colors ${
-        look === l ? "bg-[#1E4A94] text-white shadow-[0_2px_8px_rgba(30,74,148,0.35)]" : "text-[#1E4A94] hover:bg-[#1E4A94]/8"
-      }`}
-    >
-      {icon}
-      {label}
-    </button>
-  )
+  const btn = "flex h-[38px] w-[38px] items-center justify-center rounded-full text-[#1E4A94] transition-colors hover:bg-[#1E4A94]/10"
   return (
     <div className={`flex flex-col items-center ${className}`}>
       <div ref={stageRef} className="relative -mt-8 h-[clamp(430px,80vh,780px)] w-full" />
       <div className="relative -mt-[70px] flex items-center gap-5">
-        <div role="group" aria-label="Model style" className="flex items-center gap-1 rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] p-[4px]">
-          {seg(
-            "blueprint",
-            "Blueprint",
-            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-              <rect x="2" y="2" width="12" height="12" rx="1.5" />
-              <path d="M8 2v12M2 8h12" />
-            </svg>,
-          )}
-          {seg(
-            "solid",
-            "Solid",
-            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden>
-              <path d="M8 1.8 13.6 5v6L8 14.2 2.4 11V5z" />
-              <path d="M2.4 5 8 8.2 13.6 5M8 8.2v6" />
-            </svg>,
-          )}
+        <div role="group" aria-label="Zoom" className="flex items-center gap-1 rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] p-[4px]">
+          <button type="button" aria-label="Zoom out" onClick={() => ctl.current?.zoomBy(1 / 1.3)} className={btn}>
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+              <path d="M3.5 8h9" />
+            </svg>
+          </button>
+          <span className="h-[18px] w-px bg-[#1E4A94]/15" aria-hidden />
+          <button type="button" aria-label="Zoom in" onClick={() => ctl.current?.zoomBy(1.3)} className={btn}>
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+              <path d="M3.5 8h9M8 3.5v9" />
+            </svg>
+          </button>
         </div>
-        <button type="button" onClick={() => ctl.current?.reset()} className="text-[14px] font-semibold text-[#1E4A94] transition-opacity hover:opacity-70">
+        <button type="button" onClick={() => ctl.current?.reset()} className="rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] px-4 py-[11px] text-[14px] font-semibold leading-none text-[#1E4A94] transition-opacity hover:opacity-70">
           Reset view
         </button>
       </div>
-      <p className="mt-[6px] text-[13px] text-[#2D2D2D]/60">Drag to rotate.</p>
+      <p className="mt-[6px] text-[13px] text-[#2D2D2D]/60">Drag to rotate. Pinch or use + / − to zoom.</p>
     </div>
   )
 }
