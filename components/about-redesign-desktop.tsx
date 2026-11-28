@@ -577,8 +577,8 @@ export function AboutRedesignDesktop() {
     <div className="hidden bg-[#FCFCFC] text-[#2D2D2D] lg:block">
       {/* ═══ 1. HERO ═══ white page header like Services / Projects / Contact, with an interactive blueprint model */}
       <section className="relative flex min-h-[clamp(600px,100vh,880px)] flex-col bg-[#FCFCFC] text-[#2D2D2D]">
-        <div className="sidebar-content zag-desktop-content-pad relative z-10 flex flex-1 flex-col pb-[clamp(20px,3.5vh,40px)] pt-[124px]">
-          <div className="grid flex-1 grid-cols-12 items-center gap-x-8">
+        <div className="sidebar-content zag-desktop-content-pad relative z-10 flex flex-1 flex-col pb-[clamp(20px,3.5vh,40px)] pt-[clamp(96px,15vh,124px)]">
+          <div className="grid flex-1 grid-cols-12 items-center gap-x-10">
             <div className="col-span-5">
               <div className="relative pl-5">
                 <motion.div
@@ -592,39 +592,40 @@ export function AboutRedesignDesktop() {
                   }}
                 />
                 <Reveal variant="fadeUp" delay={0.05} duration={0.6}>
-                  <p className={`mb-[14px] ${eyebrow}`}>Built like a mountain range</p>
+                  <p className={`mb-[14px] ${eyebrow}`}>About Zagrosia</p>
                 </Reveal>
                 <Reveal variant="fadeLeft" delay={0.1} duration={0.7}>
-                  <h1 className="zag-heading mb-5 whitespace-nowrap text-[clamp(26px,2.7vw,38px)] font-bold uppercase leading-[1.05] tracking-[0.03em]">
-                    <span className="text-[#2D2D2D]">About </span>
-                    <span className="text-[#0052A5]">Zagrosia</span>
+                  <h1 className="zag-heading mb-5 text-[clamp(26px,2.7vw,38px)] font-bold uppercase leading-[1.1] tracking-[0.03em]">
+                    <span className="block text-[#2D2D2D]">Built like a</span>
+                    <span className="block text-[#0052A5]">Mountain range</span>
                   </h1>
                 </Reveal>
                 <Reveal delay={0.2} duration={0.65}>
                   <p className={`max-w-[460px] text-[#2D2D2D] ${bodyText}`}>
-                    Named for the Zagros Mountains: a range built by pressure and held by structure. Zagrosia brings structural design and seismic expertise to steel, concrete and wood projects.
+                    Named for the Zagros Mountains, a range built by pressure and held by structure. We bring structural design and seismic expertise to steel, concrete and wood projects.
                   </p>
                 </Reveal>
               </div>
-            </div>
-            <Reveal variant="fadeUp" delay={0.2} duration={0.9} className="col-span-7">
-              <BlueprintModel className="-mt-10 h-[clamp(360px,67vh,660px)] w-full" />
-            </Reveal>
-          </div>
 
-          <div className="mt-[clamp(12px,3vh,32px)] grid grid-cols-3 border-y border-[#0B1226]/10">
-            {[
-              { v: "M.Sc.", l: "Structural engineering" },
-              { v: "P.Eng", l: "Professional engineer" },
-              { v: "BC · AB · SK", l: "Provinces served" },
-            ].map((f, i) => (
-              <Reveal key={f.v} variant="fadeUp" delay={0.3 + i * 0.1} duration={0.7}>
-                <div className={`py-[clamp(14px,2.4vh,26px)] ${i > 0 ? "border-l border-[#0B1226]/10 pl-[clamp(16px,2vw,32px)]" : ""}`}>
-                  <p className="zag-heading text-[clamp(22px,2vw,28px)] font-bold leading-none text-[#0B1226]">{f.v}</p>
-                  <p className="mt-[8px] text-[12px] font-bold uppercase tracking-[0.24em] text-[#0052A5]">{f.l}</p>
-                </div>
-              </Reveal>
-            ))}
+              <div className="mt-[clamp(18px,3.4vh,34px)] grid grid-cols-[1fr_1fr_1.3fr] border-y border-[#0B1226]/10">
+                {[
+                  { v: "M.Sc.", l: "Structural engineering" },
+                  { v: "P.Eng.", l: "Professional engineer" },
+                  { v: "BC · AB · SK", l: "Provinces served" },
+                ].map((f, i) => (
+                  <Reveal key={f.v} variant="fadeUp" delay={0.3 + i * 0.1} duration={0.7}>
+                    <div className={`py-[clamp(12px,2vh,20px)] ${i > 0 ? "border-l border-[#0B1226]/10 pl-[clamp(10px,1.1vw,18px)]" : ""}`}>
+                      <p className="zag-heading whitespace-nowrap text-[clamp(15px,1.35vw,20px)] font-bold leading-none text-[#0B1226]">{f.v}</p>
+                      <p className="mt-[8px] text-[10.5px] font-bold uppercase leading-[1.5] tracking-[0.16em] text-[#0052A5]">{f.l}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            <Reveal variant="fadeUp" delay={0.2} duration={0.9} className="col-span-7">
+              <BlueprintModel className="mx-auto w-full max-w-[720px]" />
+            </Reveal>
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useReducedMotion } from "framer-motion"
 
 /* Interactive 3D model of the Zagrosia mountain city (a GLB file), shown as a light blueprint hologram.
@@ -8,10 +8,18 @@ import { useReducedMotion } from "framer-motion"
 
 const MODEL_URL = "/models/zagrosia-city.glb"
 
-export function BlueprintModel({ className = "", look = "hologram" }: { className?: string; look?: "hologram" | "blueprint" }) {
-  const wrapRef = useRef<HTMLDivElement>(null)
+type Look = "blueprint" | "solid"
+type Ctl = { setLook: (l: Look) => void; reset: () => void }
+
+export function BlueprintModel({ className = "" }: { className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null)
+  const ctl = useRef<Ctl | null>(null)
+  const [look, setLookState] = useState<Look>("blueprint")
   const reduced = useReducedMotion()
+  const pick = useCallback((l: Look) => {
+    setLookState(l)
+    ctl.current?.setLook(l)
+  }, [])
 
   useEffect(() => {
     const wrap = stageRef.current
@@ -39,8 +47,7 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
       const root = new THREE.Group()
       scene.add(root)
 
-      const holo = look === "hologram"
-      const vert = `
+            const vert = `
         varying vec3 vN; varying vec3 vV; varying float vY;
         void main(){
           vec4 mv = modelViewMatrix * vec4(position,1.0);
@@ -51,39 +58,37 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
         }`
       const frag = `
         varying vec3 vN; varying vec3 vV; varying float vY;
-        uniform float uHolo;
+        uniform float uSolid;
         void main(){
           vec3 n = normalize(vN);
-          float fres = pow(1.0 - abs(dot(n, normalize(vV))), 2.2);
           float lit = 0.62 + 0.38 * clamp(dot(n, normalize(vec3(-0.4, 0.8, 0.5))), 0.0, 1.0);
           float c = abs(fract(vY * 38.0) - 0.5);
           float contour = 1.0 - smoothstep(0.0, 0.05, c);
-          vec3 ink = vec3(0.13, 0.19, 0.27);
-          vec3 blue = vec3(0.0, 0.32, 0.65);
-          if (uHolo > 0.5) {
-            vec3 base = mix(vec3(0.80, 0.88, 0.98), vec3(0.30, 0.56, 0.90), fres);
-            vec3 col = base * (0.80 + 0.2 * lit);
-            col = mix(col, blue, contour * 0.55);
-            float a = 0.42 + 0.30 * fres + 0.22 * contour;
-            gl_FragColor = vec4(col, a);
+          vec3 col;
+          if (uSolid < 0.5) {
+            // blueprint: solid soft blue, lit from the upper left
+            float l = clamp(dot(n, normalize(vec3(-0.45, 0.85, 0.5))), 0.0, 1.0);
+            col = mix(vec3(0.25, 0.40, 0.68), vec3(0.57, 0.72, 0.93), 0.25 + 0.75 * l);
+            col = mix(col, vec3(0.16, 0.30, 0.56), contour * 0.22);
           } else {
-            vec3 col = vec3(1.0) * lit;
-            col = mix(col, ink, contour * 0.30);
-            gl_FragColor = vec4(col, 1.0);
+            // solid: white clay with fine ink contours
+            col = vec3(1.0) * lit;
+            col = mix(col, vec3(0.13, 0.19, 0.27), contour * 0.30);
           }
+          gl_FragColor = vec4(col, 1.0);
         }`
       const mat = new THREE.ShaderMaterial({
         vertexShader: vert,
         fragmentShader: frag,
-        uniforms: { uHolo: { value: holo ? 1 : 0 } },
-        transparent: holo,
+        uniforms: { uSolid: { value: 0 } },
+        transparent: false,
         depthWrite: true,
         polygonOffset: true,
         polygonOffsetFactor: 1,
         polygonOffsetUnits: 1,
         side: THREE.DoubleSide,
       })
-      const edgeMat = new THREE.LineBasicMaterial({ color: holo ? 0x2f6fc0 : 0x223044, transparent: true, opacity: holo ? 0.5 : 0.55 })
+      const edgeMat = new THREE.LineBasicMaterial({ color: 0x1f4a8a, transparent: true, opacity: 0.32 })
 
       const { MeshoptDecoder } = await import("three/examples/jsm/libs/meshopt_decoder.module.js")
       const loader = new GLTFLoader()
@@ -128,7 +133,7 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
       const height = size.y * k
 
       const st = { yaw: 0.55, elev: 0.46, vYaw: 0, dragging: false, lx: 0, ly: 0, last: -1e9 }
-      const target = new THREE.Vector3(0, height * 0.33, 0)
+      const target = new THREE.Vector3(0, height * 0.36, 0)
       let dist = 24
       const place = () => {
         const ce = Math.cos(st.elev)
@@ -142,7 +147,7 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
         renderer.setSize(w, h, false)
         camera.aspect = w / h
         const th = Math.tan((camera.fov * Math.PI) / 360)
-        dist = Math.max(6.6 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 2.2) / th)
+        dist = Math.max(6.0 / (th * Math.min(camera.aspect, 1.8)), (height * 0.5 + 3.1) / th)
         camera.updateProjectionMatrix()
       }
       resize()
@@ -205,6 +210,19 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
       renderer.render(scene, camera)
       canvas.style.opacity = "1"
       ;(window as unknown as { __bc?: typeof st }).__bc = st
+      ctl.current = {
+        setLook: (l) => {
+          mat.uniforms.uSolid.value = l === "solid" ? 1 : 0
+          edgeMat.color.set(l === "solid" ? 0x223044 : 0x1f4a8a)
+          edgeMat.opacity = l === "solid" ? 0.55 : 0.32
+        },
+        reset: () => {
+          st.yaw = 0.55
+          st.elev = 0.46
+          st.vYaw = 0
+          st.last = performance.now()
+        },
+      }
 
       cleanup = () => {
         cancelAnimationFrame(raf)
@@ -227,14 +245,48 @@ export function BlueprintModel({ className = "", look = "hologram" }: { classNam
       disposed = true
       cleanup()
     }
-  }, [reduced, look])
+  }, [reduced])
 
+  const seg = (l: Look, label: string, icon: React.ReactNode) => (
+    <button
+      type="button"
+      onClick={() => pick(l)}
+      aria-pressed={look === l}
+      className={`flex items-center gap-2 rounded-full px-[18px] py-[9px] text-[14px] font-semibold transition-colors ${
+        look === l ? "bg-[#1E4A94] text-white shadow-[0_2px_8px_rgba(30,74,148,0.35)]" : "text-[#1E4A94] hover:bg-[#1E4A94]/8"
+      }`}
+    >
+      {icon}
+      {label}
+    </button>
+  )
   return (
-    <div ref={wrapRef} className={`relative ${className}`}>
-      <div ref={stageRef} className="absolute inset-x-0 top-0 bottom-8" />
-      <p className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 text-[12px] font-bold uppercase tracking-[0.24em] text-[#2D2D2D]/45">
-        <span aria-hidden>‹ </span>Drag to rotate<span aria-hidden> ›</span>
-      </p>
+    <div className={`flex flex-col items-center ${className}`}>
+      <div ref={stageRef} className="relative h-[clamp(300px,48vh,520px)] w-full" />
+      <div className="mt-[6px] flex items-center gap-5">
+        <div role="group" aria-label="Model style" className="flex items-center gap-1 rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] p-[4px]">
+          {seg(
+            "blueprint",
+            "Blueprint",
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <rect x="2" y="2" width="12" height="12" rx="1.5" />
+              <path d="M8 2v12M2 8h12" />
+            </svg>,
+          )}
+          {seg(
+            "solid",
+            "Solid",
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden>
+              <path d="M8 1.8 13.6 5v6L8 14.2 2.4 11V5z" />
+              <path d="M2.4 5 8 8.2 13.6 5M8 8.2v6" />
+            </svg>,
+          )}
+        </div>
+        <button type="button" onClick={() => ctl.current?.reset()} className="text-[14px] font-semibold text-[#1E4A94] transition-opacity hover:opacity-70">
+          Reset view
+        </button>
+      </div>
+      <p className="mt-[10px] text-[13px] text-[#2D2D2D]/60">Drag to rotate.</p>
     </div>
   )
 }
