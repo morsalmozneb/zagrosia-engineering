@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react"
 import { useReducedMotion } from "framer-motion"
 
-/* Interactive 3D model of the Zagrosia mountain city (a GLB file), shown as a light blueprint hologram.
-   Drag to turn it around. The look is drawn in code, so the file itself carries no colours. */
+/* Interactive 3D model of the Zagrosia mountain city (a GLB file). The model keeps its own colours and textures;
+   the lights are plain white so nothing is tinted. Drag to turn it, zoom with the buttons, pinch or Ctrl/⌘ + scroll. */
 
 const MODEL_URL = "/models/zagrosia-city.glb"
 
@@ -20,6 +20,13 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
     if (!wrap) return
     let disposed = false
     let cleanup = () => {}
+
+    // start downloading the model right away, in parallel with the 3D library
+    const bufP: Promise<ArrayBuffer> = fetch(MODEL_URL).then((r) => {
+      if (!r.ok) throw new Error("model " + r.status)
+      return r.arrayBuffer()
+    })
+    bufP.catch(() => {})
 
     ;(async () => {
       const THREE = await import("three")
@@ -41,79 +48,41 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
       const root = new THREE.Group()
       scene.add(root)
 
-            const vert = `
-        varying vec3 vN; varying vec3 vV; varying float vY;
-        void main(){
-          vec4 mv = modelViewMatrix * vec4(position,1.0);
-          vN = normalize(normalMatrix * normal);
-          vV = normalize(-mv.xyz);
-          vY = position.y;
-          gl_Position = projectionMatrix * mv;
-        }`
-      const frag = `
-        varying vec3 vN; varying vec3 vV; varying float vY;
-        void main(){
-          vec3 n = normalize(vN);
-          float c = abs(fract(vY * 38.0) - 0.5);
-          float contour = 1.0 - smoothstep(0.0, 0.05, c);
-          // solid soft blue, lit from the upper left, with faint contour lines
-          float l = clamp(dot(n, normalize(vec3(-0.45, 0.85, 0.5))), 0.0, 1.0);
-          vec3 col = mix(vec3(0.25, 0.40, 0.68), vec3(0.57, 0.72, 0.93), 0.25 + 0.75 * l);
-          col = mix(col, vec3(0.16, 0.30, 0.56), contour * 0.22);
-          gl_FragColor = vec4(col, 1.0);
-        }`
-      const mat = new THREE.ShaderMaterial({
-        vertexShader: vert,
-        fragmentShader: frag,
-        transparent: false,
-        depthWrite: true,
-        polygonOffset: true,
-        polygonOffsetFactor: 1,
-        polygonOffsetUnits: 1,
-        side: THREE.DoubleSide,
-      })
-      const edgeMat = new THREE.LineBasicMaterial({ color: 0x1f4a8a, transparent: true, opacity: 0.32 })
+      // plain white lights so the model's own colours show unchanged
+      scene.add(new THREE.AmbientLight(0xffffff, 1.0))
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xdedede, 1.0))
+      const sun = new THREE.DirectionalLight(0xffffff, 1.7)
+      sun.position.set(-6, 10, 7)
+      scene.add(sun)
 
       const { MeshoptDecoder } = await import("three/examples/jsm/libs/meshopt_decoder.module.js")
       const loader = new GLTFLoader()
       loader.setMeshoptDecoder(MeshoptDecoder)
-      const gltf = await loader.loadAsync(MODEL_URL)
+      const buf = await bufP
       if (disposed) return
-      gltf.scene.updateMatrixWorld(true)
-      let g: import("three").BufferGeometry | null = null
-      gltf.scene.traverse((o) => {
+      const gltf = await loader.parseAsync(buf, "")
+      if (disposed) return
+      const model = gltf.scene
+      model.traverse((o) => {
         const m = o as import("three").Mesh
-        if (!g && m.isMesh) {
-          g = m.geometry.clone()
-          // quantized (int16) positions must become floats before any transform
-          const pa = g.getAttribute("position")
-          const f = new Float32Array(pa.count * 3)
-          for (let i = 0; i < pa.count; i++) {
-            f[i * 3] = pa.getX(i)
-            f[i * 3 + 1] = pa.getY(i)
-            f[i * 3 + 2] = pa.getZ(i)
-          }
-          g.setAttribute("position", new THREE.BufferAttribute(f, 3))
-          g.applyMatrix4(m.matrixWorld)
+        if (!m.isMesh) return
+        m.frustumCulled = false
+        const mats = Array.isArray(m.material) ? m.material : [m.material]
+        for (const mt of mats as import("three").MeshStandardMaterial[]) {
+          // no environment map here, so keep it non-metallic or it would render dark; colours stay the file's own
+          mt.metalness = 0
+          mt.needsUpdate = true
         }
       })
-      if (!g) return
-      const geom = g as import("three").BufferGeometry
-      g = geom
-      geom.computeBoundingBox()
-      const bb = geom.boundingBox!
+      const box0 = new THREE.Box3().setFromObject(model)
       const size = new THREE.Vector3()
-      bb.getSize(size)
+      box0.getSize(size)
       const k = 10 / Math.max(size.x, size.z)
       const cen = new THREE.Vector3()
-      bb.getCenter(cen)
-      geom.translate(-cen.x, -bb.min.y, -cen.z)
-      geom.scale(k, k, k)
-      geom.computeVertexNormals()
-      const mesh = new THREE.Mesh(geom, mat)
-      root.add(mesh)
-      const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geom, 34), edgeMat)
-      root.add(edges)
+      box0.getCenter(cen)
+      model.scale.setScalar(k)
+      model.position.set(-cen.x * k, -box0.min.y * k, -cen.z * k)
+      root.add(model)
       const height = size.y * k
 
       const st = { yaw: 0.55, elev: 0.46, vYaw: 0, zoom: 1, zt: 1, dragging: false, lx: 0, ly: 0, last: -1e9 }
@@ -229,6 +198,7 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
       place()
       renderer.render(scene, camera)
       canvas.style.opacity = "1"
+      wrap.querySelector("[data-loading]")?.setAttribute("hidden", "")
       ;(window as unknown as { __bc?: typeof st }).__bc = st
       ctl.current = {
         zoomBy: (f) => {
@@ -256,10 +226,6 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
         canvas.removeEventListener("pointermove", move)
         canvas.removeEventListener("pointerup", up)
         canvas.removeEventListener("pointercancel", up)
-        geom.dispose()
-        edges.geometry.dispose()
-        mat.dispose()
-        edgeMat.dispose()
         renderer.dispose()
         canvas.remove()
       }
@@ -274,7 +240,11 @@ export function BlueprintModel({ className = "" }: { className?: string }) {
   const btn = "flex h-[38px] w-[38px] items-center justify-center rounded-full text-[#1E4A94] transition-colors hover:bg-[#1E4A94]/10"
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <div ref={stageRef} className="relative -mt-8 h-[clamp(430px,80vh,780px)] w-full" />
+      <div ref={stageRef} className="relative -mt-8 h-[clamp(430px,80vh,780px)] w-full">
+        <span data-loading className="absolute inset-0 flex items-center justify-center text-[13px] text-[#2D2D2D]/50">
+          Loading model…
+        </span>
+      </div>
       <div className="relative -mt-[70px] flex items-center gap-5">
         <div role="group" aria-label="Zoom" className="flex items-center gap-1 rounded-full border border-[#1E4A94]/15 bg-[#EEF3FA] p-[4px]">
           <button type="button" aria-label="Zoom out" onClick={() => ctl.current?.zoomBy(1 / 1.3)} className={btn}>

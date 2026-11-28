@@ -19,3 +19,8 @@
   to = "https://portal.zagrosia.ca/portal/:splat"
   status = 200
   force = true
+
+[[headers]]
+  for = "/models/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
